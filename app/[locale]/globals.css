@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+.react-international-phone-input  {
+  height: 48px !important;
+  width: 100%;
+}
+
+.react-international-phone-country-selector-button{
+  height: 48px !important;
+}
+
+.react-international-phone-country-selector-button__button-content {
+  margin-left: 8px;
+  margin-right: 8px;
+
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

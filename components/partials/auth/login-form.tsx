@@ -60,7 +60,7 @@ const LoginForm = () => {
 
           })
         } else {
-          router.push('/dashboard/analytics');
+          router.push('#');
           toast.success("Successfully logged in");
         }
       } catch (err: any) {
@@ -70,7 +70,7 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mt-5 2xl:mt-7 space-y-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="mt-2 2xl:mt-4 space-y-4">
       <div className="space-y-2">
         <Label htmlFor="email" className=" font-medium text-default-600">
           Email{" "}
@@ -126,11 +126,7 @@ const LoginForm = () => {
         </div>
       )}
 
-      <div className="flex justify-between">
-        <div className="flex gap-2 items-center">
-          <Checkbox id="checkbox" defaultChecked />
-          <Label htmlFor="checkbox">Keep Me Signed In</Label>
-        </div>
+      <div className="flex justify-end">
         <Link
           href="/forgot-password"
           className="text-sm text-default-800 dark:text-default-400 leading-6 font-medium"

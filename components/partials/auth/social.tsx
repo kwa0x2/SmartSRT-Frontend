@@ -1,49 +1,39 @@
 import { signIn } from "@/lib/auth";
 import Image from "next/image";
 
-const Social = ({ locale }: { locale: string }) => {
-  return (
-    <>
-      <ul className="flex">
-        <li className="flex-1">
-          <a
-            href="#"
-            className="inline-flex h-10 w-10 p-2 bg-[#1C9CEB] text-white text-2xl flex-col items-center justify-center rounded-full"
-          >
-            <Image width={300} height={300} className="w-full h-full" src="/images/icon/tw.svg" alt="" />
-          </a>
-        </li>
-        <li className="flex-1">
-          <a
-            href="#"
-            className="inline-flex h-10 w-10 p-2 bg-[#395599] text-white text-2xl flex-col items-center justify-center rounded-full"
-          >
-            <Image width={300} height={300} className="w-full h-full" src="/images/icon/fb.svg" alt="" />
-          </a>
-        </li>
-        <li className="flex-1">
-          <a
-            href="#"
-            className="inline-flex h-10 w-10 p-2 bg-[#0A63BC] text-white text-2xl flex-col items-center justify-center rounded-full"
-          >
-            <Image width={300} height={300} className="w-full h-full" src="/images/icon/in.svg" alt="" />
-          </a>
-        </li>
-        <li className="flex-1">
-          <form
-            action={async () => {
-              "use server";
-              await signIn("google", { redirectTo: `/${locale}/dashboard/analytics` });
-            }}
-          >
-            <button type="submit" className="inline-flex h-10 w-10 p-2 bg-[#EA4335] text-white text-2xl flex-col items-center justify-center rounded-full">
-              <Image width={300} height={300} className="w-full h-full" src="/images/icon/gp.svg" alt="" />
-            </button>
-          </form>
-        </li>
+const Social = ({ locale, status }: { locale: string, status: string }) => {
+  const actionText = status === "up" ? "Sign up" : "Sign in";
 
-      </ul>
-    </>
+  return (
+    <div className="flex flex-col items-center justify-center space-y-4">
+      {/* Google Sign-In or Sign-Up */}
+      <button className="flex items-center gap-4 bg-gray-100 p-2 px-6 rounded-lg shadow-sm">
+        <Image
+          width={40}
+          height={40}
+          className="w-8 h-8"
+          src="/images/icon/google.svg"
+          alt="Google Logo"
+        />
+        <span className="text-sm font-medium text-gray-700 hover:underline">
+          {actionText} with Google
+        </span>
+      </button>
+
+      {/* GitHub Sign-In or Sign-Up */}
+      <button className="flex items-center gap-4 bg-gray-100 p-2 px-6 rounded-lg shadow-sm">
+        <Image
+          width={40}
+          height={40}
+          className="w-8 h-8"
+          src="/images/icon/github.svg"
+          alt="GitHub Logo"
+        />
+        <span className="text-sm font-medium text-gray-700 hover:underline">
+          {actionText} with GitHub
+        </span>
+      </button>
+    </div>
   );
 };
 

@@ -1,11 +1,27 @@
+"use client";
 import { Link } from "@/i18n/routing";
-import LoginForm from "@/components/partials/auth/login-form";
+import RegForm from "@/components/partials/auth/reg-form";
 import Social from "@/components/partials/auth/social";
 import Image from "next/image";
-import Copyright from "@/components/partials/auth/copyright";
 import Logo from "@/components/logo";
+import Copyright from "@/components/partials/auth/copyright";
+import { useState } from "react";
+import OtpForm from "@/components/partials/auth/otp-form";
 
-const Login2 = () => {
+// image import
+
+const Register2 = () => {
+  const [showOtpForm, setShowOtpForm] = useState(false);
+
+  const handleRegisterSubmit = () => {
+    setShowOtpForm(true); // Kayıt tamamlanınca OTP formunu göster
+  };
+
+  const handleOtpSubmit = (otpData: { phone: string; otp: string }) => {
+    console.log("OTP Verification Successful:", otpData);
+    // Doğrulama sonrası işlemler yapılabilir
+  };
+
   return (
     <>
       <div className="flex w-full items-center overflow-hidden min-h-dvh h-dvh basis-full">
@@ -19,27 +35,33 @@ const Login2 = () => {
                   </Link>
                 </div>
                 <div className="text-center 2xl:mb-5 mb-4">
-                  <h4 className="font-medium">Sign in</h4>
+                  <h4 className="font-medium">Sign up</h4>
                   <div className="text-default-500 text-base">
-                    Sign in to your account to start using AutoSRT
+                    Create an account to start using AutoSRT
                   </div>
                 </div>
-                <div className="max-w-[242px] mx-auto mt-2 w-full">
-                  <Social locale="en" status="in"/>
-                </div>
-                <div className="relative border-b-[#000000] mt-2 border-opacity-[30%] border-b pt-6">
-                  <div className="absolute inline-block bg-default-50 dark:bg-default-100 left-1/2 top-1/2 transform -translate-x-1/2 px-4 min-w-max text-sm text-default-500 font-normal">
-                    Or continue with
-                  </div>
-                </div>
-                <LoginForm />
+                {!showOtpForm ? (
+                  <>
+                    <div className="max-w-[242px] mx-auto mt-2 w-full">
+                      <Social locale="en" status="up" />
+                    </div>
+                    <div className="relative border-b-[#000000] mt-2 border-opacity-[30%] border-b pt-6">
+                      <div className="absolute inline-block bg-default-50 dark:bg-default-100 left-1/2 top-1/2 transform -translate-x-1/2 px-4 min-w-max text-sm text-default-500 font-normal">
+                        Or continue with
+                      </div>
+                    </div>
+                    <RegForm onRegisterSubmit={handleRegisterSubmit} />
+                  </>
+                ) : (
+                  <OtpForm onOtpSubmit={handleOtpSubmit} />
+                )}{" "}
                 <div className="md:max-w-[345px] mt-6 mx-auto font-normal text-default-500 md:mt-6 text-sm">
-                  Don’t have an account?{" "}
+                  Already Registered?{" "}
                   <Link
-                    href="/register"
+                    href="/login"
                     className="text-default-900 font-medium hover:underline"
                   >
-                    Sign up
+                    Sign in
                   </Link>
                 </div>
               </div>
@@ -79,4 +101,4 @@ const Login2 = () => {
   );
 };
 
-export default Login2;
+export default Register2;

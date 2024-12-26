@@ -36,7 +36,7 @@ export default async function RootLayout({
       <body className={`${inter.className} autosrt-app`}>
         <NextIntlClientProvider messages={messages} locale={locale}>
           <AuthProvider>
-            <ThemeProvider attribute="class" defaultTheme="system">
+            {/* <ThemeProvider attribute="class" defaultTheme="dark"> */}
               <MountedProvider>
                 <DirectionProvider direction={direction}>
                   {children}
@@ -44,7 +44,7 @@ export default async function RootLayout({
               </MountedProvider>
               <Toaster />
               <SonnerToaster />
-            </ThemeProvider>
+            {/* </ThemeProvider> */}
           </AuthProvider>
         </NextIntlClientProvider>
       </body>
