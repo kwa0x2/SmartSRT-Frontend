@@ -1,16 +1,13 @@
 'use server'
-import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
-import {signIn} from "@/lib/auth";
-export const loginUser = async (data: any) => {
-  try {
-    const response = await signIn("credentials", {
-      email: data.email,
-      password: data.password,
-      redirect: false,
+import { signIn } from "@/lib/auth";
+
+export const loginAction = async (id: string, name: string, email: string, phone: string, avatar: string) => {
+    await signIn("credentials", {
+      id,
+      name,
+      email,
+      phone,
+      avatar,
+      redirectTo: "/en/home",
     });
-    return response;
-  } catch (error) {
-    throw new Error(error as string);
-  }
 };

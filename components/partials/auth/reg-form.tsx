@@ -4,104 +4,96 @@ import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { cn } from "@/lib/utils";
-import React from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { registerSchema, RegisterStepOneData } from "@/schemas/register.schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 
-type RegInputs = {
-  name: string;
-  email: string;
-  password: string;
-};
+interface RegFormProps {
+  onSubmit: (data: RegisterStepOneData) => void;
+}
 
-const RegForm = ({ onRegisterSubmit }: { onRegisterSubmit: () => void }) => {
+const RegForm = ({ onSubmit }: RegFormProps) => {
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<RegInputs>();
-  const [passwordType, setPasswordType] = React.useState("password");
+    formState: { errors, isSubmitting },
+  } = useForm<RegisterStepOneData>({
+    resolver: zodResolver(registerSchema.pick({ 
+      name: true, 
+      email: true, 
+      password: true 
+    }))
+  });
 
-  const onSubmit: SubmitHandler<RegInputs> = (data) => {
-    console.log("Registration Data:", data);
-    onRegisterSubmit(); // Kayıt işlemi tamamlandıktan sonra OTP formunu göster
-  };
 
-  const togglePasswordType = () => {
-    if (passwordType === "text") {
-      setPasswordType("password");
-    } else if (passwordType === "password") {
-      setPasswordType("text");
-    }
-  };
-
-  return (
+    return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-2 2xl:mt-4 space-y-4">
+      {/* Name Field */}
       <div className="space-y-2">
         <Label htmlFor="name">Name</Label>
         <Input
           id="name"
           placeholder="John Doe"
-          {...register("name", { required: "Name is required" })}
+          {...register("name")}
           size="lg"
         />
         {errors.name && (
-          <div className=" text-destructive mt-2 text-sm">
-            {errors.name.message}
-          </div>
+          <p className="text-destructive text-sm">{errors.name.message}</p>
         )}
       </div>
+
+      {/* Email Field */}
       <div className="space-y-2">
         <Label htmlFor="email">Email</Label>
         <Input
           id="email"
           type="email"
-          placeholder="autosrt@nettasec.com"
-          {...register("email", { required: "Email is required" })}
+          placeholder="example@email.com"
+          {...register("email")}
           size="lg"
-          className={cn("", {
-            "border-destructive ": errors.email,
-          })}
         />
         {errors.email && (
-          <div className=" text-destructive mt-2 text-sm">
-            {errors.email.message}
-          </div>
-        )}{" "}
+          <p className="text-destructive text-sm">{errors.email.message}</p>
+        )}
       </div>
+
+      {/* Password Field */}
       <div className="space-y-2">
         <Label htmlFor="password">Password</Label>
         <div className="relative">
           <Input
             id="password"
-            type={passwordType}
-            placeholder="autosrt"
-            {...register("password", { required: "Password is required" })}
+            type={passwordVisible ? "text" : "password"}
+            placeholder="••••••••"
+            {...register("password")}
             size="lg"
           />
-          {errors.password && (
-            <div className=" text-destructive mt-2 text-sm">
-              {errors.password.message}
-            </div>
-          )}
-
-          <div
-            className="absolute top-1/2 -translate-y-1/2 ltr:right-4 rtl:left-4 cursor-pointer"
-            onClick={togglePasswordType}
+          <button
+            type="button"
+            className="absolute top-1/2 -translate-y-1/2 right-4"
+            onClick={() => setPasswordVisible(!passwordVisible)}
           >
-            {passwordType === "password" ? (
-              <Icon icon="heroicons:eye" className="w-5 h-5 text-default-400" />
-            ) : (
-              <Icon
-                icon="heroicons:eye-slash"
-                className="w-5 h-5 text-default-400"
-              />
-            )}
-          </div>
+            <Icon
+              icon={passwordVisible ? "heroicons:eye-slash" : "heroicons:eye"}
+              className="w-5 h-5 text-default-400"
+            />
+          </button>
         </div>
+        {errors.password && (
+          <p className="text-destructive text-sm">{errors.password.message}</p>
+        )}
       </div>
 
-      <Button type="submit" fullWidth>
+      {/* Submit Button */}
+      <Button 
+        type="submit" 
+        fullWidth 
+        disabled={isSubmitting}
+        className="mt-6"
+      >
         Continue
       </Button>
     </form>

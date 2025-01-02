@@ -1,9 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import {
   InputOTP,
   InputOTPGroup,
@@ -12,79 +11,163 @@ import {
 } from "@/components/ui/input-otp";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { REGEXP_ONLY_DIGITS } from "input-otp";
+import {
+  registerSchema,
+  RegisterStepTwoData,
+} from "@/schemas/register.schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { sendOtp } from "@/app/api/services/sinch.service";
+import { parsePhoneNumber, CountryCode } from 'libphonenumber-js';
+import { toast } from "sonner";
 
-type OTPInputs = {
-  phone: string;
-  otp: string;
-};
+interface OtpFormProps {
+  onSubmit: (data: RegisterStepTwoData) => void;
+}
 
-const OtpForm = ({
-  onOtpSubmit,
-}: {
-  onOtpSubmit: (data: OTPInputs) => void;
-}) => {
+const OtpForm = ({ onSubmit }: OtpFormProps) => {
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [otpValue, setOtpValue] = useState("");
+  const [isCodeSent, setIsCodeSent] = useState(false);
+  const [timer, setTimer] = useState(30);
+  const [phoneError, setPhoneError] = useState<string>("");
+  const [canResend, setCanResend] = useState(true);
+
   const {
-    register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<OTPInputs>();
-  const [phone, setPhone] = useState("");
+    formState: { errors, isSubmitting },
+    setValue
+  } = useForm<RegisterStepTwoData>({
+    resolver: zodResolver(
+      registerSchema.pick({
+        phone_number: true,
+        otp: true,
+      })
+    )
+  });
 
-  const onSubmit: SubmitHandler<OTPInputs> = (data) => {
-    console.log("OTP Form Data:", data);
-    onOtpSubmit(data); // Form verilerini üst bileşene ilet
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+
+    if (isCodeSent && timer > 0) {
+      interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
+    } else if (timer === 0) {
+      setCanResend(true);
+      setTimer(30);
+    }
+
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isCodeSent, timer]);
+
+  const validatePhoneNumber = (phone: string, country?: string): boolean => {
+    try {
+      if (!phone) {
+        setPhoneError("Telefon numarası gereklidir");
+        return false;
+      }
+
+      const parsedNumber = parsePhoneNumber(phone, country as CountryCode);
+      
+      if (!parsedNumber || !parsedNumber.isValid()) {
+        setPhoneError("Geçerli bir telefon numarası giriniz");
+        return false;
+      }
+
+      const nationalNumber = parsedNumber.nationalNumber;
+      if (!nationalNumber || nationalNumber.toString().length < 5) {
+        setPhoneError("Telefon numarasını tam giriniz");
+        return false;
+      }
+
+      setPhoneError("");
+      return true;
+    } catch (error) {
+      setPhoneError("Geçerli bir telefon numarası giriniz");
+      return false;
+    }
+  };
+
+  useEffect(() => {
+    setValue('otp', otpValue);
+  }, [otpValue, setValue]);
+
+  useEffect(() => {
+    setValue('phone_number', phoneNumber);
+  }, [phoneNumber, setValue]);
+
+  const handleSendCode = async () => {
+    if (!validatePhoneNumber(phoneNumber)) {
+      return;
+    }
+    
+    try {
+      await sendOtp({ phone_number: phoneNumber });
+      setIsCodeSent(true);
+      setCanResend(false);
+      setTimer(30);
+    } catch (error: any) {
+      toast.error(error.response.data.message);
+    }
   };
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mt-2 2xl:mt-4 space-y-6 w-full max-w-md mx-auto"
+      className="space-y-6 w-full max-w-md mx-auto"
     >
-      {/* Phone Number Input with Send Code Button */}
-      <div className="flex flex-col items-center space-y-2">
-        <Label htmlFor="phone" className="self-start text-sm font-medium">
-          Phone Number
-        </Label>
-        <div className="flex w-full items-center space-x-2">
+      {/* Phone Input */}
+      <div className="space-y-2">
+        <Label htmlFor="phone">Phone Number</Label>
+        <div className="flex space-x-2">
           <PhoneInput
             className="flex-1"
             defaultCountry="tr"
-            value={phone}
-            onChange={(phone) => setPhone(phone)}
+            value={phoneNumber}
+            onChange={(phone) => {
+              setPhoneNumber(phone);
+            }}
           />
-          <Button type="button" className="h-10 px-4 text-sm font-medium">
-            Send Code
+          <Button
+            type="button"
+            onClick={handleSendCode}
+            disabled={!canResend || !phoneNumber}
+          >
+            {!canResend ? `Resend (${timer}s)` : "Send Code"}
           </Button>
         </div>
-
-        {errors.phone && (
-          <p className="text-red-500 self-start text-xs">
-            {errors.phone.message}
-          </p>
-        )}
+        {phoneError && <p className="text-destructive text-sm">{phoneError}</p>}
       </div>
 
-      {/* OTP Input Fields */}
+      {/* OTP Input */}
       <div className="space-y-4 flex flex-col items-center">
-        <Label htmlFor="otp" className="text-sm font-medium">
-          Please enter the 6-digit code
-        </Label>
-        <InputOTP maxLength={6} className="flex justify-center space-x-4">
-          <InputOTPGroup>
-            <InputOTPSlot index={0} />
-            <InputOTPSlot index={1} />
-            <InputOTPSlot index={2} />
-          </InputOTPGroup>
-          <InputOTPSeparator className="text-xl font-bold">-</InputOTPSeparator>
-          <InputOTPGroup>
-            <InputOTPSlot index={3} />
-            <InputOTPSlot index={4} />
-            <InputOTPSlot index={5} />
-          </InputOTPGroup>
-        </InputOTP>
+        <Label htmlFor="otp">Verification Code</Label>
+        <div className="flex justify-center w-full">
+          <InputOTP
+            value={otpValue}
+            onChange={(otp) => {
+              setOtpValue(otp);
+            }}
+            maxLength={4}
+            pattern={REGEXP_ONLY_DIGITS}
+            disabled={!isCodeSent}
+          >
+            <InputOTPGroup>
+              <InputOTPSlot index={0} />
+              <InputOTPSlot index={1} />
+            </InputOTPGroup>
+            <InputOTPSeparator>-</InputOTPSeparator>
+            <InputOTPGroup>
+              <InputOTPSlot index={2} />
+              <InputOTPSlot index={3} />
+            </InputOTPGroup>
+          </InputOTP>
+        </div>
+
         {errors.otp && (
-          <p className="text-red-500 text-xs">{errors.otp.message}</p>
+          <p className="text-destructive text-sm">{errors.otp.message}</p>
         )}
       </div>
 
@@ -92,9 +175,9 @@ const OtpForm = ({
       <Button
         type="submit"
         fullWidth
-        className="max-w-md h-10 text-sm font-medium"
+        disabled={isSubmitting || !isCodeSent || otpValue.length !== 4}
       >
-        Create an account
+        Create Account
       </Button>
     </form>
   );
