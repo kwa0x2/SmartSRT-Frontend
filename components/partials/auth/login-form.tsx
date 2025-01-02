@@ -1,70 +1,55 @@
 "use client";
 import React from 'react'
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link } from '@/i18n/routing';
 import { Icon } from "@/components/ui/icon";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from "zod";
 import { cn } from "@/lib/utils"
 import { Loader2 } from 'lucide-react';
-import { loginUser } from '@/action/auth-action';
+import { loginAction } from '@/action/auth-action';
 import { toast } from "sonner"
-import { useRouter } from '@/components/navigation';
+import { LoginFormData, loginSchema } from '@/schemas/login.schema';
+import { credentialsSignIn } from '@/app/api/services/auth.service';
 
-const schema = z.object({
-  email: z.string().email({ message: "Your email is invalid." }),
-  password: z.string().min(4),
-});
 const LoginForm = () => {
   const [isPending, startTransition] = React.useTransition();
-  const router = useRouter();
   const [passwordType, setPasswordType] = React.useState("password");
 
 
   const togglePasswordType = () => {
-    if (passwordType === "text") {
-      setPasswordType("password");
-    } else if (passwordType === "password") {
-      setPasswordType("text");
-    }
+    setPasswordType(prev => prev === "password" ? "text" : "password");
   };
+
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
-  } = useForm({
-    resolver: zodResolver(schema),
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
     mode: "all",
     defaultValues: {
-      email: "autosrt@nettasec.net",
-      password: "password",
+      email: "",
+      password: "",
     },
   });
-  const [isVisible, setIsVisible] = React.useState(false);
+  
 
-  const toggleVisibility = () => setIsVisible(!isVisible);
-
-  const onSubmit = (data: z.infer<typeof schema>) => {
+  const onSubmit = (data: LoginFormData) => {
     startTransition(async () => {
       try {
-        const response = await loginUser(data);
-
-        if (!!response.error) {
-          toast("Event has been created", {
-            description: "Sunday, December 03, 2023 at 9:00 AM",
-
-          })
-        } else {
-          router.push('#');
-          toast.success("Successfully logged in");
-        }
+        const result: any = await credentialsSignIn(data);
+        if (result.status === 200) {
+          loginAction(result.data.ID, result.data.Name, result.data.Email, result.data.PhoneNumber, result.data.AvatarURL);
+        } 
       } catch (err: any) {
-        toast.error(err.message);
+        if (err.response.status === 401) {
+          toast.error(err.response.data.message);
+        } else {
+          toast.error("An error occurred while logging in. Please try again or contact support.");
+        }
       }
     });
   };
@@ -80,6 +65,7 @@ const LoginForm = () => {
           {...register("email")}
           type="email"
           id="email"
+          placeholder="example@email.com"
           className={cn("", {
             "border-destructive ": errors.email,
           })}
@@ -101,8 +87,8 @@ const LoginForm = () => {
             {...register("password")}
             type={passwordType}
             id="password"
+            placeholder="••••••••"
             className="peer  "
-            placeholder=" "
           />
 
           <div
