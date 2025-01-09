@@ -5,7 +5,7 @@ import Image from "next/image";
 import Copyright from "@/components/partials/auth/copyright";
 import Logo from "@/components/logo";
 
-const Login2 = () => {
+const LoginPage = () => {
   return (
     <>
       <div className="flex w-full items-center overflow-hidden min-h-dvh h-dvh basis-full">
@@ -36,7 +36,7 @@ const Login2 = () => {
                 <div className="md:max-w-[345px] mt-6 mx-auto font-normal text-default-500 md:mt-6 text-sm">
                   Don’t have an account?{" "}
                   <Link
-                    href="/register"
+                    href="/auth/register"
                     className="text-default-900 font-medium hover:underline"
                   >
                     Sign up
@@ -79,4 +79,4 @@ const Login2 = () => {
   );
 };
 
-export default Login2;
+export default LoginPage;

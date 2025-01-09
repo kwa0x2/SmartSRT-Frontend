@@ -9,11 +9,11 @@ import Copyright from "@/components/partials/auth/copyright";
 import { useState } from "react";
 import OtpForm from "@/components/partials/auth/otp-form";
 import { RegisterFormData, RegisterStepOneData, RegisterStepTwoData } from "@/schemas/register.schema";
-import { credentialsSignUp } from "@/app/api/services/auth.service";
+import { createUser, IsEmailExists } from "@/app/api/services/auth.service";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
-const Register = () => {
+const RegisterPage = () => {
   const [step, setStep] = useState<1 | 2>(1);
   const [formData, setFormData] = useState<RegisterFormData>({
     name: "",
@@ -21,10 +21,20 @@ const Register = () => {
     password: "",
     phone_number: "",
     otp: "",
+    auth_with: "credentials",
   });
   const router = useRouter();
 
-  const handleStepOne = (data: RegisterStepOneData) => {
+  const handleStepOne = async (data: RegisterStepOneData) => {
+    const res: any = await IsEmailExists(data.email);
+    if (res.status !== 200) {
+      toast.error("an error occurred");
+      return;
+    }
+    if (res.data.exists) {
+      toast.error("Email already exists");
+      return;
+    }
     setFormData((prev) => ({ ...prev, ...data }));
     setStep(2);
   };
@@ -32,14 +42,15 @@ const Register = () => {
   const handleStepTwo = async (data: RegisterStepTwoData) => {
     try {
       const finalData: RegisterFormData = { ...formData, ...data };
-      await credentialsSignUp(finalData);
+      await createUser(finalData);
       
       toast.success("Account created successfully. Please sign in.");
-      router.push('/en/login');
+      router.push('/en/auth/login');
     } catch (error: any) {
       toast.error(error.response.data.message);
     }
   };
+
 
   return (
     <div className="flex w-full items-center overflow-hidden min-h-dvh h-dvh basis-full">
@@ -72,16 +83,26 @@ const Register = () => {
                       Or continue with
                     </div>
                   </div>
-                  <RegForm onSubmit={handleStepOne} />
+                  <RegForm 
+                    onSubmit={handleStepOne} 
+                    initialData={{
+                      name: formData.name,
+                      email: formData.email,
+                      password: formData.password
+                    }} 
+                  />
                 </>
               ) : (
-                <OtpForm onSubmit={handleStepTwo} />
+                <OtpForm 
+                  onSubmit={handleStepTwo} 
+                  onBack={() => setStep(1)}
+                />
               )}
 
               {/* Sign in Link */}
               <div className="md:max-w-[345px] mt-6 mx-auto text-sm text-default-500">
                 Already Registered?{" "}
-                <Link href="/login" className="text-default-900 font-medium hover:underline">
+                <Link href="/auth/login" className="text-default-900 font-medium hover:underline">
                   Sign in
                 </Link>
               </div>
@@ -121,4 +142,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default RegisterPage;

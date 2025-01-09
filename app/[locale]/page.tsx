@@ -5,7 +5,7 @@ export default function Home() {
   const router = useRouter();
 
   const handleRedirect = () => {
-    router.push("/en/login");
+    router.push("/en/auth/login");
   };
 
   return (

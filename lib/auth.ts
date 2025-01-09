@@ -38,7 +38,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       const existingUser = await getLoggedInUserServer();
       console.log("existingUser", existingUser);
       if (!existingUser.Email) {
-        cookies().delete(process.env.COOKIE_NAME as string);
+        cookies().delete("sid");
         await signOut();
       }
 

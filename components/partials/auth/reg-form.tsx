@@ -11,9 +11,14 @@ import { useForm } from "react-hook-form";
 
 interface RegFormProps {
   onSubmit: (data: RegisterStepOneData) => void;
+  initialData?: {
+    name: string;
+    email: string;
+    password: string;
+  };
 }
 
-const RegForm = ({ onSubmit }: RegFormProps) => {
+const RegForm = ({ onSubmit, initialData }: RegFormProps) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const {
@@ -25,7 +30,8 @@ const RegForm = ({ onSubmit }: RegFormProps) => {
       name: true, 
       email: true, 
       password: true 
-    }))
+    })),
+    defaultValues: initialData
   });
 
 
