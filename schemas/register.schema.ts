@@ -6,7 +6,8 @@ export const registerSchema = z.object({
   password: z.string().min(8, "Password must be at least 8 characters"),
   phone_number: z.string().min(10, "Please enter a valid phone number"),
   avatar_url: z.string().optional(),
-  otp: z.string().length(4, "OTP code must be 4 digits")
+  otp: z.string().length(4, "OTP code must be 4 digits"),
+  auth_with: z.string(),
 })
 
 export type RegisterFormData = z.infer<typeof registerSchema>
