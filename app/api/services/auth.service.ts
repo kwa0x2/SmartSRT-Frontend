@@ -1,33 +1,39 @@
 import { RegisterFormData } from "@/schemas/register.schema";
 import axios from "../axios";
 import { LoginFormData } from "@/schemas/login.schema";
-import { getMyCookie } from "@/lib/get-my-cookie";
 
-export const createUser = async (data: RegisterFormData) => {
-  return await axios.post("/auth/create", data);
-};
-export const credentialsSignIn = async (data: LoginFormData) => {
-  return await axios.post("/auth/credentials/sign-in", data);
+export const credentialsLogin = async (data: LoginFormData) => {
+  return await axios.post("/auth/credentials/login", data);
 };
 
-export const getLoggedInUserServer = async () => {
-  const query = await fetch(`http://localhost:9000/api/v1/auth/check`, {
-    headers: {
-      Cookie: `${getMyCookie()}`,
-    },
-  });
-  const response = await query.json();
-  return response;
+export const register = async (data: RegisterFormData) => {
+  return await axios.post("/auth/register", data);
 };
 
-export const getLoggedInUser = async () => {
-  return await axios.get(`/auth/check`);
+export const logout = async () => {
+  return await axios.get("/auth/logout");
 };
 
-export const IsEmailExists = async (email: string) => {
-  return await axios.post(`/auth/email-exists`, { email });
+export const otpSend = async (data: { phone_number: string }) => {
+  return await axios.post("/auth/otp/send", data);
+};
+
+export const forgotPassword = async (email: string) => {
+  return await axios.post(`/auth/password/forgot`, { email });
 }
 
-export const IsPhoneExists = async (phone_number: string) => {
-  return await axios.post(`/auth/phone-exists`, { phone_number });
+export const resetPassword = async (jwt: string, password: string) => {
+  return await axios.put(
+    `/auth/password/reset`, 
+    { password }, 
+    {
+      headers: {
+        Authorization: `${jwt}`
+      }
+    }
+  );
 }
+
+
+
+

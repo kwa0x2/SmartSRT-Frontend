@@ -15,10 +15,10 @@ import { useState, useEffect } from "react";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { registerSchema, RegisterStepTwoData } from "@/schemas/register.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { sendOtp } from "@/app/api/services/otp.service";
+import { otpSend } from "@/app/api/services/auth.service";
 import { parsePhoneNumber, CountryCode } from "libphonenumber-js";
 import { toast } from "sonner";
-import { IsPhoneExists } from "@/app/api/services/auth.service";
+import { CheckPhoneExists } from "@/app/api/services/user.service";
 import { ArrowLeft } from "lucide-react";
 
 interface OtpFormProps {
@@ -102,23 +102,29 @@ const OtpForm = ({ onSubmit, onBack }: OtpFormProps) => {
     if (!validatePhoneNumber(phoneNumber)) {
       return;
     }
-    const res: any = await IsPhoneExists(phoneNumber);
-    if (res.status !== 200) {
-      toast.error("an error occurred");
-      return;
-    }
-    if (res.data.exists) {
-      toast.error("Phone number already exists");
-      return;
-    }
 
     try {
-      await sendOtp({ phone_number: phoneNumber });
-      setIsCodeSent(true);
-      setCanResend(false);
-      setTimer(60);
+      const res: any = await CheckPhoneExists(phoneNumber);
+      if (res.status === 200) {
+        try {
+          await otpSend({ phone_number: phoneNumber });
+          setIsCodeSent(true);
+          setCanResend(false);
+          setTimer(60);
+        } catch (error: any) {
+          toast.error(error.response.data.message);
+        }
+      }
     } catch (error: any) {
-      toast.error(error.response.data.message);
+      if (error.response.status === 302) {
+        toast.error(
+          `An account with this phone number already exists. Please try a different phone number`
+        );
+      } else {
+        toast.error(
+          `An error occurred while logging in. Please try again or contact support.`
+        );
+      }
     }
   };
 

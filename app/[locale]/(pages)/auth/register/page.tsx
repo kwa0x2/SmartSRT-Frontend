@@ -5,13 +5,14 @@ import RegForm from "@/components/partials/auth/reg-form";
 import Social from "@/components/partials/auth/social";
 import Image from "next/image";
 import Logo from "@/components/logo";
-import Copyright from "@/components/partials/auth/copyright";
+import Copyright from "@/components/copyright";
 import { useState } from "react";
 import OtpForm from "@/components/partials/auth/otp-form";
 import { RegisterFormData, RegisterStepOneData, RegisterStepTwoData } from "@/schemas/register.schema";
-import { createUser, IsEmailExists } from "@/app/api/services/auth.service";
+import { CheckEmailExists } from "@/app/api/services/user.service";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { register } from "@/app/api/services/auth.service";
 
 const RegisterPage = () => {
   const [step, setStep] = useState<1 | 2>(1);
@@ -21,30 +22,32 @@ const RegisterPage = () => {
     password: "",
     phone_number: "",
     otp: "",
-    auth_with: "credentials",
+    auth_type: "credentials",
   });
   const router = useRouter();
 
   const handleStepOne = async (data: RegisterStepOneData) => {
-    const res: any = await IsEmailExists(data.email);
-    if (res.status !== 200) {
-      toast.error("an error occurred");
-      return;
-    }
-    if (res.data.exists) {
-      toast.error("Email already exists");
-      return;
-    }
-    setFormData((prev) => ({ ...prev, ...data }));
-    setStep(2);
+    try {
+      const res = await CheckEmailExists(data.email);
+      if (res.status === 200) {
+        setFormData((prev) => ({ ...prev, ...data }));
+        setStep(2);
+      }
+    } catch (error: any) {
+      if (error.response.status === 302) {
+        toast.error(`An account with this email already exists. Please try a different email`);
+      }else {
+        toast.error(`An error occurred while logging in. Please try again or contact support.`);
+      }
+    } 
   };
 
   const handleStepTwo = async (data: RegisterStepTwoData) => {
     try {
       const finalData: RegisterFormData = { ...formData, ...data };
-      await createUser(finalData);
-      
-      toast.success("Account created successfully. Please sign in.");
+      await register(finalData);
+
+      toast.success("Account created successfully. Please login.");
       router.push('/en/auth/login');
     } catch (error: any) {
       toast.error(error.response.data.message);
@@ -66,7 +69,7 @@ const RegisterPage = () => {
 
               {/* Header */}
               <div className="text-center mb-4 2xl:mb-5">
-                <h4 className="font-medium text-2xl text-default-900">Sign up</h4>
+                <h4 className="font-medium text-2xl text-default-900">Register</h4>
                 <div className="text-default-500 text-base">
                   Create an account to start using AutoSRT
                 </div>
@@ -99,11 +102,11 @@ const RegisterPage = () => {
                 />
               )}
 
-              {/* Sign in Link */}
+              {/* Login Link */}
               <div className="md:max-w-[345px] mt-6 mx-auto text-sm text-default-500">
                 Already Registered?{" "}
                 <Link href="/auth/login" className="text-default-900 font-medium hover:underline">
-                  Sign in
+                Login
                 </Link>
               </div>
             </div>

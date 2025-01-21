@@ -26,16 +26,17 @@ const RegForm = ({ onSubmit, initialData }: RegFormProps) => {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<RegisterStepOneData>({
-    resolver: zodResolver(registerSchema.pick({ 
-      name: true, 
-      email: true, 
-      password: true 
-    })),
-    defaultValues: initialData
+    resolver: zodResolver(
+      registerSchema.pick({
+        name: true,
+        email: true,
+        password: true,
+      })
+    ),
+    defaultValues: initialData,
   });
 
-
-    return (
+  return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-2 2xl:mt-4 space-y-4">
       {/* Name Field */}
       <div className="space-y-2">
@@ -94,12 +95,7 @@ const RegForm = ({ onSubmit, initialData }: RegFormProps) => {
       </div>
 
       {/* Submit Button */}
-      <Button 
-        type="submit" 
-        fullWidth 
-        disabled={isSubmitting}
-        className="mt-6"
-      >
+      <Button type="submit" fullWidth disabled={isSubmitting} className="mt-6">
         Continue
       </Button>
     </form>
