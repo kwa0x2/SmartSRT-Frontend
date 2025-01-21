@@ -1,58 +1,66 @@
 "use client";
 
 import { Link } from "@/i18n/routing";
-import RegForm from "@/components/partials/auth/reg-form";
-import Social from "@/components/partials/auth/social";
 import Image from "next/image";
 import Logo from "@/components/logo";
-import Copyright from "@/components/partials/auth/copyright";
+import Copyright from "@/components/copyright";
 import { useState } from "react";
 import OtpForm from "@/components/partials/auth/otp-form";
 import {
   RegisterFormData,
   RegisterStepTwoData,
 } from "@/schemas/register.schema";
-import { createUser } from "@/app/api/services/auth.service";
+import { register } from "@/app/api/services/auth.service";
 import { toast } from "sonner";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
+import Cookies from "js-cookie";
 
 interface JWTClaims {
   name: string;
   email: string;
   avatar_url: string;
-  auth_with: string;
+  auth_type: string;
 }
 
 const OtpPage = () => {
-  const [formData, setFormData] = useState<RegisterFormData>({
+  const router = useRouter();
+  const [formData] = useState<RegisterFormData>({
     name: "",
     email: "",
     avatar_url: "",
     password: "",
     phone_number: "",
     otp: "",
-    auth_with: "",
+    auth_type: "",
   });
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const token = searchParams?.get("auth");
-  if (token == null) return <div>Token not found</div>;
-  const decoded = jwtDecode<JWTClaims>(token);
 
   const handleStepTwo = async (data: RegisterStepTwoData) => {
-    try {
-      formData.name = decoded.name;
-      formData.email = decoded.email;
-      formData.avatar_url = decoded.avatar_url;
-      formData.auth_with = decoded.auth_with;
-      const finalData: RegisterFormData = { ...formData, ...data };
-      await createUser(finalData);
+    const token = Cookies.get('register_token');
+    
+    if (!token) {
+      toast.error("Registration session expired. Please try again later or contact support.");
+      router.push('/en/auth/register');
+      return;
+    }
 
-      toast.success("Account created successfully. Please sign in.");
+    try {
+      const decoded = jwtDecode<JWTClaims>(token);      
+      const finalData: RegisterFormData = {
+        ...formData,
+        ...data,
+        name: decoded.name,
+        email: decoded.email,
+        avatar_url: decoded.avatar_url,
+        auth_type: decoded.auth_type,
+      };
+
+      await register(finalData);
+      Cookies.remove('register_token');
+      toast.success("Account created successfully. Please login.");
       router.push("/en/auth/login");
     } catch (error: any) {
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || "Registration failed. Please try again later or contact support.");
     }
   };
 
@@ -73,21 +81,21 @@ const OtpPage = () => {
               {/* Header */}
               <div className="text-center mb-4 2xl:mb-5">
                 <h4 className="font-medium text-2xl text-default-900">
-                  Sign up
+                Register
                 </h4>
                 <div className="text-default-500 text-base">
                   Create an account to start using AutoSRT
                 </div>
               </div>
               <OtpForm onSubmit={handleStepTwo} />
-              {/* Sign in Link */}
+              {/* Login Link */}
               <div className="md:max-w-[345px] mt-6 mx-auto text-sm text-default-500">
                 Already Registered?{" "}
                 <Link
                   href="/auth/login"
                   className="text-default-900 font-medium hover:underline"
                 >
-                  Sign in
+                  Login
                 </Link>
               </div>
             </div>

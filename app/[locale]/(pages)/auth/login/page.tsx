@@ -1,11 +1,34 @@
+ "use client"
 import { Link } from "@/i18n/routing";
 import LoginForm from "@/components/partials/auth/login-form";
 import Social from "@/components/partials/auth/social";
 import Image from "next/image";
-import Copyright from "@/components/partials/auth/copyright";
+import Copyright from "@/components/copyright";
 import Logo from "@/components/logo";
+import { toast } from "sonner";
+import { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+
+const errorMessages = {
+  invalid_state: "Invalid or expired state parameter. Please retry the Google authentication process.",
+  server_error: "An error occurred. Please try again later or contact support.",
+  exists_github: "An account with this email already exists. Please log in using Github.",
+  exists_credentials: "An account with this email already exists. Please log in using Credentials.",
+} as const;
 
 const LoginPage = () => {
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (!searchParams) return;
+    
+    const code = searchParams.get('error');
+    if (code && errorMessages[code as keyof typeof errorMessages]) {
+      toast.error(errorMessages[code as keyof typeof errorMessages]);
+
+    }
+  }, []);
+  
   return (
     <>
       <div className="flex w-full items-center overflow-hidden min-h-dvh h-dvh basis-full">
@@ -19,9 +42,9 @@ const LoginPage = () => {
                   </Link>
                 </div>
                 <div className="text-center 2xl:mb-5 mb-4">
-                  <h4 className="font-medium">Sign in</h4>
+                  <h4 className="font-medium">Login</h4>
                   <div className="text-default-500 text-base">
-                    Sign in to your account to start using AutoSRT
+                    Login to your account to start using AutoSRT
                   </div>
                 </div>
                 <div className="max-w-[242px] mx-auto mt-2 w-full">
@@ -39,7 +62,7 @@ const LoginPage = () => {
                     href="/auth/register"
                     className="text-default-900 font-medium hover:underline"
                   >
-                    Sign up
+                    Register
                   </Link>
                 </div>
               </div>

@@ -2,20 +2,20 @@
 import Image from "next/image";
 
 const Social = ({ locale, status }: { locale: string; status: string }) => {
-  const actionText = status === "up" ? "Sign up" : "Sign in";
+  const actionText = status === "up" ? "Register" : "Login";
 
-  const handleGoogleSignIn = () => {
-    window.location.href = `http://localhost:9000/api/v1/auth/oauth/google/sign-in`;
+  const handleGoogleLogin = () => {
+    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/google/login`;
   };
 
-  const handleGithubSignIn = () => {
-    window.location.href = `http://localhost:9000/api/v1/auth/oauth/github/sign-in`;
+  const handleGithubLogin = () => {
+    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/google/login`;
   };
 
   return (
     <div className="flex flex-col items-center justify-center space-y-4">
       <button
-        onClick={handleGoogleSignIn}
+        onClick={handleGoogleLogin}
         className="flex items-center gap-4 bg-gray-100 p-2 px-6 rounded-lg shadow-sm"
       >
         <Image
@@ -31,7 +31,7 @@ const Social = ({ locale, status }: { locale: string; status: string }) => {
       </button>
 
       <button
-        onClick={handleGithubSignIn}
+        onClick={handleGithubLogin}
         className="flex items-center gap-4 bg-gray-100 p-2 px-6 rounded-lg shadow-sm"
       >
         <Image

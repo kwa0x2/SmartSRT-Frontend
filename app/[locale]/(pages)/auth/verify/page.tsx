@@ -6,7 +6,7 @@ import { useTheme } from "next-themes";
 import LoadingSVG from "@/public/images/loading.svg";
 import { loginAction } from "@/action/auth-action";
 import { useEffect } from "react";
-import { getLoggedInUser } from "@/app/api/services/auth.service";
+import { getLoggedInUser } from "@/app/api/services/user.service";
 
 const VerifyPage = () => {
   const { theme } = useTheme();

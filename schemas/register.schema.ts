@@ -7,7 +7,7 @@ export const registerSchema = z.object({
   phone_number: z.string().min(10, "Please enter a valid phone number"),
   avatar_url: z.string().optional(),
   otp: z.string().length(4, "OTP code must be 4 digits"),
-  auth_with: z.string(),
+  auth_type: z.string(),
 })
 
 export type RegisterFormData = z.infer<typeof registerSchema>

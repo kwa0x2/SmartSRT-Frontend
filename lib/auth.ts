@@ -1,4 +1,4 @@
-import { getLoggedInUserServer } from "@/app/api/services/auth.service";
+import { getLoggedInUserServer } from "@/app/api/services/user.service";
 import NextAuth, { User as NextAuthUser } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { cookies } from "next/headers";
