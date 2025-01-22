@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/providers/theme-provider";
 import MountedProvider from "@/providers/mounted.provider";
 import { Toaster } from '@/components/ui/toaster'
 import { Toaster as SonnerToaster } from "@/components/ui/sonner"
+import { notFound } from "next/navigation";
 const inter = Inter({ subsets: ["latin"] });
 // language 
 import { getLangDir } from 'rtl-detect';
@@ -13,6 +14,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import DirectionProvider from "@/providers/direction-provider";
 import AuthProvider from "@/providers/auth.provider";
+import { locales } from "@/config";
 
 export const metadata: Metadata = {
   title: "AutoSRT",
@@ -30,6 +32,11 @@ export default async function RootLayout({
 
   const messages = await getMessages(); 
   const direction = getLangDir(locale);
+
+  // Desteklenmeyen locale'ler için 404
+  if (!locales.includes(locale as any)) { 
+    notFound();
+  }
 
   return (
     <html lang={locale} dir={direction}>

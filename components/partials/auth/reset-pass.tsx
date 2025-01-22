@@ -13,15 +13,16 @@ import { Icon } from "@/components/ui/icon";
 import { resetPassword } from "@/app/api/services/auth.service";
 import { useRouter } from "next/navigation";
 import {
-  NewPasswordFormData,
-  newPasswordSchema,
+  ResetPasswordFormData,
+  resetPasswordSchema,
 } from "@/schemas/password.schema";
+import Cookies from "js-cookie";
 
-interface NewPasswordProps {
+interface ResetPasswordProps {
   auth: string;
 }
 
-const NewPassword = ({ auth }: NewPasswordProps) => {
+const ResetPassword = ({ auth }: ResetPasswordProps) => {
   const router = useRouter();
   const [isPending, startTransition] = React.useTransition();
   const [passwordType, setPasswordType] = React.useState({
@@ -40,18 +41,18 @@ const NewPassword = ({ auth }: NewPasswordProps) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<NewPasswordFormData>({
-    resolver: zodResolver(newPasswordSchema),
+  } = useForm<ResetPasswordFormData>({
+    resolver: zodResolver(resetPasswordSchema),
   });
 
-  const onSubmit = (data: NewPasswordFormData) => {
+  const onSubmit = (data: ResetPasswordFormData) => {
     startTransition(async () => {
       try {
-        console.log("Auth Token:", auth);
-        console.log("Form Data:", data);
-        const response = await resetPassword(auth, data.password);
-        console.log(response);
+        const authToken = Cookies.get('token');
+        
+        const response = await resetPassword(authToken || "", data.password);
         if (response.status === 200) {
+          Cookies.remove('token');
           toast.success("Password has been reset successfully");
           router.push("/en/auth/login");
         }
@@ -139,4 +140,4 @@ const NewPassword = ({ auth }: NewPasswordProps) => {
   );
 };
 
-export default NewPassword;
+export default ResetPassword;

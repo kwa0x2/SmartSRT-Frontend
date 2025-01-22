@@ -7,7 +7,7 @@ export const forgotSchema = z.object({
 export type ForgotFormData = z.infer<typeof forgotSchema>;
 
 
-export const newPasswordSchema = z
+export const resetPasswordSchema = z
   .object({
     password: z.string().min(8, "Password must be at least 8 characters"),
     confirmPassword: z.string(),
@@ -17,4 +17,4 @@ export const newPasswordSchema = z
     path: ["confirmPassword"],
   });
 
-  export type NewPasswordFormData = z.infer<typeof newPasswordSchema>;
+  export type ResetPasswordFormData = z.infer<typeof resetPasswordSchema>;
