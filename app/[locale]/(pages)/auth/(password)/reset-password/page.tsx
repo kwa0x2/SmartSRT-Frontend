@@ -1,15 +1,23 @@
 "use client";
 import { Link } from "@/i18n/routing";
-import NewPassword from "@/components/partials/auth/new-pass";
+import ResetPassword from "@/components/partials/auth/reset-pass";
 import Image from "next/image";
 import Copyright from "@/components/copyright";
 import Logo from "@/components/logo";
-import { useSearchParams } from "next/navigation";
+import UnauthorizedError from "@/components/partials/error/401";
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 const NewPasswordPage = () => {
-  const searchParams = useSearchParams();
-  const jwt = searchParams?.get("auth");
-  if (jwt == null) return <div>jwt not found</div>;
+  const [token, setToken] = useState<string | undefined>();
+
+  useEffect(() => {
+    const authToken = Cookies.get('token');
+    setToken(authToken);
+  }, []);
+
+  if (!token) return <UnauthorizedError />;
+
   return (
     <div className="flex w-full items-center overflow-hidden min-h-dvh h-dvh basis-full">
       <div className="overflow-y-auto flex flex-wrap w-full h-dvh">
@@ -28,7 +36,7 @@ const NewPasswordPage = () => {
                 </div>
               </div>
 
-              <NewPassword auth={jwt} />
+              <ResetPassword auth={token} />
               
               <div className="md:max-w-[345px] mx-auto font-normal text-default-500 mt-6 text-sm">
                 Remember Password?{" "}

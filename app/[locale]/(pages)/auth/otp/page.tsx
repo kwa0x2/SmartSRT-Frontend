@@ -36,7 +36,7 @@ const OtpPage = () => {
   });
 
   const handleStepTwo = async (data: RegisterStepTwoData) => {
-    const token = Cookies.get('register_token');
+    const token = Cookies.get('token');
     
     if (!token) {
       toast.error("Registration session expired. Please try again later or contact support.");
@@ -56,7 +56,7 @@ const OtpPage = () => {
       };
 
       await register(finalData);
-      Cookies.remove('register_token');
+      Cookies.remove('token');
       toast.success("Account created successfully. Please login.");
       router.push("/en/auth/login");
     } catch (error: any) {
