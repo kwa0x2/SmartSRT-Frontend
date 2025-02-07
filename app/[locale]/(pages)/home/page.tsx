@@ -1,10 +1,15 @@
 "use client";
 
-const TestHomePage = () => {
+import Header from "@/components/home/header/header";
+import Hero from "@/components/home/hero/hero";
 
+const TestHomePage = () => {
   return (
-    <div>
-      <h1>Home</h1>
+    <div className="min-h-screen bg-background">
+      <Header />
+      <main>
+        <Hero />
+      </main>
     </div>
   );
 };
