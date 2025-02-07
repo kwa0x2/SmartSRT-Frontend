@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import "./theme.css"
 import { ThemeProvider } from "@/providers/theme-provider";
@@ -8,6 +8,11 @@ import { Toaster } from '@/components/ui/toaster'
 import { Toaster as SonnerToaster } from "@/components/ui/sonner"
 import { notFound } from "next/navigation";
 const inter = Inter({ subsets: ["latin"] });
+const spaceGrotesk = Space_Grotesk({ 
+  subsets: ["latin"],
+  weight: ["500"],
+  display: "swap",
+});
 // language 
 import { getLangDir } from 'rtl-detect';
 import { NextIntlClientProvider } from 'next-intl';
@@ -40,7 +45,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} dir={direction}>
-      <body className={`${inter.className} autosrt-app`}>
+      <body className={`${spaceGrotesk.className} autosrt-app`}>
         <NextIntlClientProvider messages={messages} locale={locale}>
           <AuthProvider>
             {/* <ThemeProvider attribute="class" defaultTheme="dark"> */}
