@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button";
+import Navigation from "./navigation";
+import AuthButtons from "./auth-buttons";
 import { Link } from "@/i18n/routing";
 import Image from "next/image";
-import Navigation from "./navigation";
 
 const Header = () => {
   return (
@@ -25,18 +25,7 @@ const Header = () => {
           <Navigation />
 
           {/* Right Buttons */}
-          <div className="flex items-center space-x-6 uppercase">
-            <Link href="/auth/login" className="font-bold text-sm tracking-wide">
-              Login
-            </Link>
-            <Button
-              size="sm"
-              className="bg-black text-white hover:bg-black/90 text-sm  tracking-wide font-medium h-7 !px-3 rounded-full"
-              asChild
-            >
-              <Link href="/auth/register">TRY FOR FREE</Link>
-            </Button>
-          </div>
+          <AuthButtons />
         </div>
       </div>
     </header>
