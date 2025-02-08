@@ -21,20 +21,20 @@ const LanguageSelector = () => {
   }, []);
 
   return (
-    <div className="flex gap-2 items-center">
-      <Globe className="h-4 w-4" />
+    <div className="flex gap-2 items-center text-xs md:text-sm">
+      <Globe className="h-3 w-3 md:h-4 md:w-4" />
       <DropdownMenu modal={false}>
         <DropdownMenuTrigger asChild>
-          <button className="flex items-center text-sm">
+          <button className="flex items-center">
             {currentLocale}
-            <ChevronDown className="h-4 w-4 ml-1 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+            <ChevronDown className="h-3 w-3 md:h-4 md:w-4 ml-1 transition-transform duration-200 group-data-[state=open]:rotate-180" />
           </button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[120px]">
-          <DropdownMenuItem className="cursor-pointer">
+          <DropdownMenuItem className="cursor-pointer text-xs md:text-sm">
             English
           </DropdownMenuItem>
-          <DropdownMenuItem className="cursor-pointer">
+          <DropdownMenuItem className="cursor-pointer text-xs md:text-sm">
             Turkish
           </DropdownMenuItem>
         </DropdownMenuContent>

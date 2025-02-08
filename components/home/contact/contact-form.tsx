@@ -25,18 +25,18 @@ const ContactForm = () => {
   };
 
   return (
-    <Card className="p-8">
+    <Card className="pt-6 pb-4 px-3  md:p-8">
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           <FormInput
-            id="firstName"
+            id="first_name"
             label="First Name"
             placeholder="Enter your first name"
             register={register}
             error={errors.first_name}
           />
           <FormInput
-            id="lastName"
+            id="last_name"
             label="Last Name"
             placeholder="Enter your last name"
             register={register}
@@ -63,7 +63,7 @@ const ContactForm = () => {
 
         <Button
           type="submit"
-          className="w-full bg-black uppercase hover:bg-black/90"
+          className="w-full bg-black uppercase hover:bg-black/90 text-sm md:text-base h-9 md:h-11 px-4 md:px-8"
         >
           Send Message
         </Button>
