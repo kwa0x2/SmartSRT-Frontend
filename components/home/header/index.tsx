@@ -1,12 +1,13 @@
 import Navigation from "./navigation";
 import AuthButtons from "./auth-buttons";
+import MobileMenu from "./mobile-menu";
 import Image from "next/image";
 import { Link as ScrollLink } from "react-scroll";
 
 const Header = () => {
   return (
-    <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-sm border-b">
-      <div className="px-64 mx-auto">
+    <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-sm">
+      <div className="px-4 md:px-64 mx-auto">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
@@ -28,11 +29,18 @@ const Header = () => {
             </ScrollLink>
           </div>
 
-          {/* Center Navigation */}
+          {/* Center Navigation - Desktop */}
           <Navigation />
 
-          {/* Right Buttons */}
-          <AuthButtons />
+          {/* Right Buttons - Desktop */}
+          <div className="hidden md:block">
+            <AuthButtons />
+          </div>
+
+          {/* Mobile Menu */}
+          <div className="md:hidden">
+            <MobileMenu />
+          </div>
         </div>
       </div>
     </header>

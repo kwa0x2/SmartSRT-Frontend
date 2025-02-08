@@ -2,12 +2,12 @@ import HeroContent from "./hero-content";
 
 const Hero = () => {
   return (
-    <section id="hero" className="py-64 min-w-screen">
-      <div className="px-64 mx-auto">
+    <section id="hero" className="py-40 md:py-32 lg:py-64 min-w-screen">
+      <div className="px-4 md:px-8 lg:px-64 mx-auto">
         <HeroContent />
       </div>
     </section>
   );
 };
 
-export default Hero; 
+export default Hero;    

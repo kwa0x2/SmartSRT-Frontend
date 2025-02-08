@@ -3,7 +3,7 @@ import { Link as ScrollLink } from "react-scroll";
 
 const FooterTop = () => {
   return (
-    <div className="flex items-center justify-between py-8">
+    <div className="flex flex-col md:flex-row items-center justify-between py-6 md:py-8 gap-4 md:gap-0">
       {/* Logo */}
       <ScrollLink
         to="hero"
@@ -18,12 +18,12 @@ const FooterTop = () => {
           alt="AutoSRT Logo"
           width={200}
           height={100}
-          className="w-32"
+          className="w-24 md:w-32 pb-4 md:pb-0"
         />
       </ScrollLink>
 
       {/* Slogan */}
-      <div className="text-lg font-bold tracking-tight">
+      <div className="text-base md:text-lg font-bold tracking-tight text-center md:text-left">
         Smart SRT Creation for Short Videos
       </div>
     </div>
