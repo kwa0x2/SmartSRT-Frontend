@@ -16,10 +16,10 @@ const HeroContent = () => {
       <div>
         <Button
           size="lg"
-          className="bg-black text-white hover:bg-black/90 text-base font-medium h-11 !px-5 rounded-full"
+          className="bg-black text-white hover:bg-black/90 text-base font-medium uppercase h-11 !px-5 rounded-full"
           asChild
         >
-          <Link href="/auth/register">GET STARTED FREE</Link>
+          <Link href="/auth/register">Get Started Free</Link>
         </Button>
       </div>
     </div>

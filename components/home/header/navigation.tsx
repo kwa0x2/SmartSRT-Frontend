@@ -17,24 +17,26 @@ const Navigation = () => {
         <NavigationMenuItem>
           <Link href="" legacyBehavior passHref>
             <NavigationMenuLink className={cn(navigationMenuTriggerStyle, "")}>
-              PRICING
+              Pricing
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <Link href="" legacyBehavior passHref>
+            <NavigationMenuLink className={cn(navigationMenuTriggerStyle, "")}>
+              API 
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <Link href="" legacyBehavior passHref>
             <NavigationMenuLink className={cn(navigationMenuTriggerStyle, "")}>
-              API
+              Contact Us
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="" legacyBehavior passHref>
-            <NavigationMenuLink className={cn(navigationMenuTriggerStyle, "")}>
-              CONTACT US
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
+
       </NavigationMenuList>
     </NavigationMenu>
   )
