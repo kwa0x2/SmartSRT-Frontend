@@ -20,13 +20,13 @@ const ApiContent = () => {
           className="bg-black text-white hover:bg-black/90 text-base font-medium h-11 !px-5 rounded-full"
           asChild
         >
-          <Link href="/docs">DOCUMENTS</Link>
+          <Link href="/docs">Get Started</Link>
         </Button>
         <Link
           href="/pricing"
           className="font-bold text-sm tracking-wide"
         >
-          PRICING
+          Documents
         </Link>
       </div>
     </div>

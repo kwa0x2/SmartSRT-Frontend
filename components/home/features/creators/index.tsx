@@ -5,7 +5,7 @@ import ProcessSteps from "./process-steps";
 
 const Creators = () => {
   return (
-    <section className=" pb-72">
+    <section className="pb-60">
       <div className="px-64 mx-auto">
         <div className="grid grid-cols-2 gap-20 items-center">
           {/* Sol İçerik */}
@@ -29,10 +29,7 @@ const Creators = () => {
               >
                 <Link href="/auth/register">Get Started Free</Link>
               </Button>
-              <Link
-                href="/pricing"
-                className="font-bold text-sm tracking-wide"
-              >
+              <Link href="/pricing" className="font-bold text-sm tracking-wide">
                 Pricing
               </Link>
             </div>
@@ -52,4 +49,4 @@ const Creators = () => {
   );
 };
 
-export default Creators; 
+export default Creators;
