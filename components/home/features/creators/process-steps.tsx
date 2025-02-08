@@ -8,7 +8,7 @@ const ProcessSteps = () => {
       <ProcessStepItem
         icon={<FileVideo className="w-7 h-7 text-blue-500" />}
         title="Upload Short Video"
-        description="Support for MP4, MOV up to 10 minutes"
+        description="Support for MP4, MOV up to 3 minutes"
         iconBgColor="bg-blue-500/10"
         iconColor="text-blue-500"
       />
