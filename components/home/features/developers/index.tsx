@@ -3,7 +3,7 @@ import CodeExamples from "./code-examples";
 
 const Developers = () => {
   return (
-    <section className="pt-20 pb-40">
+    <section className="pt-20 pb-60">
       <div className="px-64 mx-auto">
         <div className="grid grid-cols-2 gap-20">
           {/* Left Content */}
