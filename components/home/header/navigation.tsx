@@ -1,45 +1,57 @@
 import * as React from "react"
-import { Link } from "@/i18n/routing"
 import { cn } from "@/lib/utils"
+import { Link as ScrollLink } from "react-scroll";
 import {
   NavigationMenu,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
-  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 
 const Navigation = () => {
   return (
     <NavigationMenu>
       <NavigationMenuList className="hidden md:flex space-x-6 text-sm uppercase tracking-wide font-bold">
-        
         <NavigationMenuItem>
-          <Link href="" legacyBehavior passHref>
-            <NavigationMenuLink className={cn(navigationMenuTriggerStyle, "")}>
-              Pricing
-            </NavigationMenuLink>
-          </Link>
+          <ScrollLink
+            to="pricing"
+            spy={true}
+            smooth={true}
+            offset={-100}
+            duration={500}
+            className="cursor-pointer"
+          >
+            Pricing
+          </ScrollLink>
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-          <Link href="" legacyBehavior passHref>
-            <NavigationMenuLink className={cn(navigationMenuTriggerStyle, "")}>
-              API 
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="" legacyBehavior passHref>
-            <NavigationMenuLink className={cn(navigationMenuTriggerStyle, "")}>
-              Contact Us
-            </NavigationMenuLink>
-          </Link>
+          <ScrollLink
+            to="developers"
+            spy={true}
+            smooth={true}
+            offset={-100}
+            duration={500}
+            className="cursor-pointer"
+          >
+            API
+          </ScrollLink>
         </NavigationMenuItem>
 
+        <NavigationMenuItem>
+          <ScrollLink
+            to="contact"
+            spy={true}
+            smooth={true}
+            offset={-100}
+            duration={500}
+            className="cursor-pointer"
+          >
+            Contact Us
+          </ScrollLink>
+        </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
   )
 }
 
-export default Navigation 
+export default Navigation; 

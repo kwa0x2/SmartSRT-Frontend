@@ -13,7 +13,7 @@ const PricingCard = ({ plan }: PricingCardProps) => {
     <Card className="p-8 flex flex-col">
       <div className="flex-1">
         <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
-        <p className="text-gray-600 text-sm mb-6">{plan.description}</p>
+        <p className="text-black text-sm mb-6">{plan.description}</p>
 
         <div className="mb-8 mt-10">
           <div className="flex items-end gap-1">

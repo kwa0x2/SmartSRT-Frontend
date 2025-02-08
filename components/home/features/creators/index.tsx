@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "@/i18n/routing";
 import ProcessSteps from "./process-steps";
+import { Link as ScrollLink } from "react-scroll";
 
 const Creators = () => {
   return (
@@ -29,9 +30,16 @@ const Creators = () => {
               >
                 <Link href="/auth/register">Get Started Free</Link>
               </Button>
-              <Link href="/pricing" className="font-bold text-sm tracking-wide">
+              <ScrollLink
+                to="pricing"
+                spy={true}
+                smooth={true}
+                offset={-100}
+                duration={500}
+                className="font-bold text-sm tracking-wide cursor-pointer"
+              >
                 Pricing
-              </Link>
+              </ScrollLink>
             </div>
           </div>
 
