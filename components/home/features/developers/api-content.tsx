@@ -5,7 +5,7 @@ const ApiContent = () => {
   return (
     <div className="flex flex-col justify-center">
       <h2 className="text-lg font-semibold text-neutral-400 uppercase tracking-wider">
-        DEVELOPERS
+        Developers
       </h2>
       <h3 className="text-5xl font-bold leading-tight lg:leading-[1.15]">
         Fast and easy-to-use API
