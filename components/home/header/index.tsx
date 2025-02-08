@@ -1,7 +1,7 @@
 import Navigation from "./navigation";
 import AuthButtons from "./auth-buttons";
-import { Link } from "@/i18n/routing";
 import Image from "next/image";
+import { Link as ScrollLink } from "react-scroll";
 
 const Header = () => {
   return (
@@ -10,7 +10,14 @@ const Header = () => {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
-            <Link href="/" className="text-xl font-extrabold">
+            <ScrollLink
+              to="hero"
+              spy={true}
+              smooth={true}
+              offset={-100}
+              duration={500}
+              className="text-xl font-extrabold cursor-pointer"
+            >
               <Image
                 src="/images/logo/black.png"
                 alt=""
@@ -18,7 +25,7 @@ const Header = () => {
                 height={100}
                 className="w-28"
               />
-            </Link>
+            </ScrollLink>
           </div>
 
           {/* Center Navigation */}

@@ -568,13 +568,13 @@ html[dir=rtl] .react-select .select__loading-indicator {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #4b5563;
+  background: #6b7280;
   border-radius: 4px;
 
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #6b7280;
+  background: #5b606b;
 }
 
 ::-webkit-scrollbar-corner {
