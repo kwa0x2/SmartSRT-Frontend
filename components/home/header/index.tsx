@@ -6,7 +6,7 @@ import { Link as ScrollLink } from "react-scroll";
 
 const Header = () => {
   return (
-    <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-sm">
+    <header className="sticky top-0 w-full z-50 bg-background/80 backdrop-blur-sm">
       <div className="px-4 md:px-64 mx-auto">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
