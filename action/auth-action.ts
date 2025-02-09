@@ -1,5 +1,5 @@
 'use server'
-import { signIn } from "@/lib/auth";
+import { signIn, signOut } from "@/lib/auth";
 
 export const loginAction = async (id: string, name: string, email: string, phone: string, avatar: string) => {
     await signIn("credentials", {
@@ -11,3 +11,7 @@ export const loginAction = async (id: string, name: string, email: string, phone
       redirectTo: "/en/home",
     });
 };
+
+export async function logoutAction() {
+  await signOut();
+}
