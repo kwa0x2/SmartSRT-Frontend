@@ -10,7 +10,7 @@ const buttonVariants = cva(
   {
     variants: {
       color: {
-        default: "bg-default text-default-foreground hover:bg-default/90 hover:ring-default dark:disabled:bg-default-500",
+        default: "bg-black text-default-foreground hover:bg-black/90 hover:ring-default dark:disabled:bg-black/60",
         primary: "bg-primary text-primary-foreground hover:bg-primary/90  hover:ring-primary",
         secondary: "bg-secondary text-secondary-foreground  hover:ring-secondary",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90 hover:ring-destructive",
@@ -20,7 +20,7 @@ const buttonVariants = cva(
       },
       variant: {
         default: "",
-        outline: "border  border-default text-default bg-transparent hover:bg-default hover:text-default-foreground hover:ring-0 hover:ring-transparent",
+        outline: "border  border-default text-default bg-transparent hover:bg-black hover:text-default-foreground hover:ring-0 hover:ring-transparent",
         soft: "text-default bg-default/10 hover:bg-default  hover:text-default-foreground",
         ghost: "text-default bg-transparent hover:bg-default  hover:text-default-foreground hover:ring-0 hover:ring-transparent hover:ring-offset-0",
         shadow: "shadow-md"
