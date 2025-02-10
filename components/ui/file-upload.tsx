@@ -28,7 +28,7 @@ const secondaryVariant = {
 export const FileUpload = ({
   onChange,
 }: {
-  onChange?: (file: File | null) => void;
+    onChange?: (file: File | null) => void;
 }) => {
   const [file, setFile] = useState<File | null>(null);
   const [duration, setDuration] = useState<number>(0);
@@ -92,10 +92,10 @@ export const FileUpload = ({
           accept=".mp4,.mov"
         />
         <div className="flex flex-col items-center justify-center">
-          <p className="relative z-20 font-sans font-bold text-black text-xl">
+          <p className="relative z-20 font-sans font-bold text-black text-base md:text-xl">
             Upload video
           </p>
-          <p className="relative z-20 font-sans font-normal text-black text-lg mt-2">
+          <p className="relative z-20 font-sans font-normal text-black text-sm md:text-lg mt-2 text-center">
             Drag or drop your video here or click to upload
           </p>
           <div className="relative w-full mt-10 max-w-xl mx-auto">
@@ -103,16 +103,16 @@ export const FileUpload = ({
               <motion.div
                 layoutId="file-upload"
                 className={cn(
-                  "relative overflow-hidden z-40 bg-black flex flex-col items-start justify-start md:h-24 p-4 mt-4 w-full mx-auto rounded-md",
+                  "relative overflow-hidden z-40 bg-black flex flex-col items-start justify-start p-3 md:p-4 mt-4 w-full mx-auto rounded-md",
                   "shadow-sm"
                 )}
               >
-                <div className="flex justify-between w-full items-center">
+                <div className="flex justify-between w-full items-center gap-2">
                   <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     layout
-                    className="text-base text-white truncate max-w-xs"
+                    className="text-sm md:text-base text-white truncate max-w-[180px] md:max-w-xs"
                   >
                     {file.name}
                   </motion.p>
@@ -121,18 +121,18 @@ export const FileUpload = ({
                       e.stopPropagation();
                       handleDelete();
                     }}
-                    className="text-white hover:text-red-500 transition-colors"
+                    className="text-white hover:text-red-500 transition-colors flex-shrink-0"
                   >
-                    <IconTrash size={20} />
+                    <IconTrash size={18} className="md:w-5 md:h-5" />
                   </button>
                 </div>
 
-                <div className="flex text-sm md:flex-row flex-col items-start md:items-center w-full mt-2 justify-between text-white">
+                <div className="flex flex-col md:flex-row items-start md:items-center w-full mt-2 md:mt-3 space-y-2 md:space-y-0 md:justify-between text-white">
                   <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     layout
-                    className="px-1 py-0.5 rounded-md bg-black"
+                    className="text-xs md:text-sm px-1.5 py-0.5 rounded-md bg-black/50"
                   >
                     Duration: {formatDuration(duration)}
                   </motion.p>
@@ -140,7 +140,7 @@ export const FileUpload = ({
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     layout
-                    className="rounded-lg px-2 py-1 w-fit flex-shrink-0 text-sm bg-black text-white shadow-input"
+                    className="text-xs md:text-sm rounded-lg px-2 py-1 w-fit flex-shrink-0 bg-black/50 text-white shadow-input"
                   >
                     {(file.size / (1024 * 1024)).toFixed(2)} MB
                   </motion.p>
@@ -157,9 +157,10 @@ export const FileUpload = ({
                     damping: 20,
                   }}
                   className={cn(
-                    "relative group-hover/file:shadow-2xl z-40 bg-black flex items-center justify-center h-32 mt-4 w-full max-w-[8rem] mx-auto rounded-md",
+                    "relative group-hover/file:shadow-2xl z-40 bg-black flex items-center justify-center h-32 mt-4 w-full max-w-[8rem] mx-auto rounded-md cursor-pointer",
                     "shadow-[0px_10px_50px_rgba(0,0,0,0.1)]"
                   )}
+                  onClick={() => fileInputRef.current?.click()}
                 >
                   {isDragActive ? (
                     <motion.p
@@ -171,7 +172,10 @@ export const FileUpload = ({
                       <IconUpload className="h-4 w-4 text-white" />
                     </motion.p>
                   ) : (
-                    <IconUpload className="h-4 w-4 text-white" />
+                    <motion.div className="text-white flex flex-col items-center gap-2">
+                      <IconUpload className="h-4 w-4 text-white" />
+                      <span className="text-xs text-center">Click or drag file</span>
+                    </motion.div>
                   )}
                 </motion.div>
 

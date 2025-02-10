@@ -43,16 +43,16 @@ export function SubtitleForm({ file }: SubtitleFormProps) {
   };
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 mt-6">
-      <div className="flex items-center justify-between">
-        <div>
+    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 md:space-y-6">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-6">
+        <div className="w-full md:w-auto">
           <Select
             value={String(form.watch("words_per_line"))}
             onValueChange={(value) =>
               form.setValue("words_per_line", Number(value))
             }
           >
-            <SelectTrigger className="w-[180px] ">
+            <SelectTrigger className="w-full md:w-[180px] border-2">
               <SelectValue placeholder="Words per line" />
             </SelectTrigger>
             <SelectContent>
@@ -65,13 +65,14 @@ export function SubtitleForm({ file }: SubtitleFormProps) {
           </Select>
         </div>
 
-        <div className="flex items-center gap-6">
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-6">
           <div className="flex items-center gap-2">
             <Checkbox
               checked={form.watch("punctuation")}
               onCheckedChange={(checked) =>
                 form.setValue("punctuation", checked as boolean)
               }
+              className="border-2 border-gray-300 data-[state=checked]:border-none"
             />
             <label className="text-sm">Include punctuation</label>
             <TooltipProvider delayDuration={250}>
@@ -95,10 +96,9 @@ export function SubtitleForm({ file }: SubtitleFormProps) {
               onCheckedChange={(checked) =>
                 form.setValue("consider_punctuation", checked as boolean)
               }
+              className="border-2 border-gray-300 data-[state=checked]:border-none"
             />
-            <label className="text-sm">
-              Consider punctuation in line breaks
-            </label>
+            <label className="text-sm">Consider punctuation in line breaks</label>
             <TooltipProvider delayDuration={250}>
               <Tooltip>
                 <TooltipTrigger>
@@ -117,9 +117,9 @@ export function SubtitleForm({ file }: SubtitleFormProps) {
         </div>
       </div>
 
-      <Button
-        className="w-full mt-6 md:mt-8 bg-black disabled:bg-black uppercase hover:bg-black/90 h-9 md:h-11 text-sm md:text-base"
-        type="submit"
+      <Button 
+        type="submit" 
+        className="w-full mt-6 md:mt-8 bg-black uppercase hover:bg-black/90 h-9 md:h-11 text-sm md:text-base"
         disabled={!file}
       >
         Generate SRT File

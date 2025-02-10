@@ -11,11 +11,13 @@ export function FileUploadDemo() {
   };
 
   return (
-    <>
-      <div className="w-full max-w-4xl mx-auto min-h-96 border border-dashed border-black rounded-lg p-6">
+    <div className="w-full space-y-4 md:space-y-6 px-4 md:px-0">
+      <div className="w-full max-w-4xl mx-auto min-h-[300px] md:min-h-96 border border-dashed border-black rounded-lg p-4 md:p-6">
         <FileUpload onChange={handleFileUpload} />
       </div>
-      <SubtitleForm file={file} />
-    </>
+      <div className="w-full max-w-4xl mx-auto">
+        <SubtitleForm file={file} />
+      </div>
+    </div>
   );
 }
