@@ -4,7 +4,11 @@ import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Link } from "@/i18n/routing";
 
-const SubscriptionInfo = () => {
+interface SubscriptionInfoProps {
+  hideManageButton?: boolean;
+}
+
+const SubscriptionInfo = ({ hideManageButton = false }: SubscriptionInfoProps) => {
   return (
     <Card className="space-y-4 md:space-y-6">
       <h3 className="text-base md:text-lg font-semibold">Current Plan</h3>
@@ -16,12 +20,14 @@ const SubscriptionInfo = () => {
           </p>
         </div>
 
-        <Link
-          className="font-bold text-xs md:text-sm tracking-wide cursor-pointer"
-          href={""}
-        >
-          Manage Subscription
-        </Link>
+        {!hideManageButton && (
+          <Link
+            className="font-bold text-xs md:text-sm tracking-wide cursor-pointer"
+            href={"/app/subscription"}
+          >
+            Manage Subscription
+          </Link>
+        )}
       </div>
 
       <div className="space-y-2">

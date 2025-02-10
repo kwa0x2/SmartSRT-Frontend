@@ -6,9 +6,15 @@ import { PricingPlan } from "./pricing-data";
 
 interface PricingCardProps {
   plan: PricingPlan;
+  isSubscriptionPage?: boolean;
 }
 
-const PricingCard = ({ plan }: PricingCardProps) => {
+const PricingCard = ({ plan, isSubscriptionPage = false }: PricingCardProps) => {
+  const isFreePlan = plan.name === "Free";
+  const buttonText = isSubscriptionPage 
+    ? isFreePlan ? "SUBSCRIBED" : "SUBSCRIBE"
+    : "GET STARTED";
+
   return (
     <Card className="py-6 px-3 md:p-8 flex flex-col">
       <div className="flex-1">
@@ -35,10 +41,17 @@ const PricingCard = ({ plan }: PricingCardProps) => {
       </div>
 
       <Button
-        className="w-full mt-6 md:mt-8 bg-black uppercase hover:bg-black/90 h-9 md:h-11 text-sm md:text-base"
-        asChild
+        className="w-full mt-6 md:mt-8 bg-black uppercase hover:bg-black/90 h-9 md:h-11 text-sm md:text-base disabled:opacity-70"
+        asChild={!isSubscriptionPage || !isFreePlan}
+        disabled={isSubscriptionPage && isFreePlan}
       >
-        <Link href="/auth/register">Get Started</Link>
+        {isSubscriptionPage && !isFreePlan ? (
+          <Link href="/app/checkout">
+            {buttonText}
+          </Link>
+        ) : (
+          buttonText
+        )}
       </Button>
     </Card>
   );
