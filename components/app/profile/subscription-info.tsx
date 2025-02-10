@@ -6,30 +6,30 @@ import { Link } from "@/i18n/routing";
 
 const SubscriptionInfo = () => {
   return (
-    <Card>
-      <h3 className="text-lg font-semibold pb-4">Current Plan</h3>
-      <div className="flex items-center justify-between pb-5">
+    <Card className="space-y-4 md:space-y-6">
+      <h3 className="text-base md:text-lg font-semibold">Current Plan</h3>
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-0">
         <div>
-          <p className="font-medium">Free Plan</p>
-          <p className="text-sm text-muted-foreground">
+          <p className="font-medium text-sm md:text-base">Free Plan</p>
+          <p className="text-xs md:text-sm text-muted-foreground">
             10 minutes upload limit per month
           </p>
         </div>
 
         <Link
-          className="font-bold text-sm tracking-wide cursor-pointer"
+          className="font-bold text-xs md:text-sm tracking-wide cursor-pointer"
           href={""}
         >
           Manage Subscription
         </Link>
       </div>
 
-      <div>
-        <div className="flex justify-between text-sm pb-2">
+      <div className="space-y-2">
+        <div className="flex justify-between text-xs md:text-sm">
           <span>Monthly Usage</span>
           <span>4/10 minutes</span>
         </div>
-        <Progress value={40} className="h-3" />
+        <Progress value={40} className="h-2 md:h-3" />
       </div>
     </Card>
   );
