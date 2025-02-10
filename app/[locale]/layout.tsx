@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import "./theme.css"
-import { ThemeProvider } from "@/providers/theme-provider";
 import MountedProvider from "@/providers/mounted.provider";
 import { Toaster } from '@/components/ui/toaster'
 import { Toaster as SonnerToaster } from "@/components/ui/sonner"
 import { notFound } from "next/navigation";
-const inter = Inter({ subsets: ["latin"] });
 const spaceGrotesk = Space_Grotesk({ 
   subsets: ["latin"],
   weight: ["500"],
