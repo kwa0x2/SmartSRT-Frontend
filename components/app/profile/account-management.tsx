@@ -17,26 +17,26 @@ import {
 
 const AccountManagement = () => {
   return (
-    <Card>
-      <h3 className="text-lg font-semibold pb-4">Account Management</h3>
+    <Card className=" space-y-4 md:space-y-6">
+      <h3 className="text-base md:text-lg font-semibold">Account Management</h3>
 
-      <div>
-        <div className="flex items-center justify-between pb-10">
+      <div className="space-y-6 md:space-y-8">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 md:gap-0">
           <div>
-            <p className="font-medium">Change Password</p>
+            <p className="font-medium text-sm md:text-base">Change Password</p>
           </div>
           <Link
-            className="font-bold text-sm tracking-wide cursor-pointer"
+            className="font-bold text-xs md:text-sm tracking-wide cursor-pointer"
             href={""}
           >
             Update
           </Link>
         </div>
 
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 md:gap-0">
           <div>
-            <p className="font-medium text-destructive">Delete Account</p>
-            <p className="text-sm text-muted-foreground">
+            <p className="font-medium text-sm md:text-base text-destructive">Delete Account</p>
+            <p className="text-xs md:text-sm text-muted-foreground">
               This action cannot be undone
             </p>
           </div>
@@ -45,24 +45,23 @@ const AccountManagement = () => {
               <Button
                 variant="outline"
                 color="destructive"
-                className="uppercase"
+                className="uppercase text-xs md:text-sm"
+                size="sm"
               >
                 Delete Account
               </Button>
             </AlertDialogTrigger>
-            <AlertDialogContent>
+            <AlertDialogContent className="max-w-[90%] md:max-w-lg">
               <AlertDialogHeader>
                 <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                <AlertDialogDescription className="text-black">
+                <AlertDialogDescription>
                   This action cannot be undone. This will permanently delete
                   your account and all associated data.
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
-                <AlertDialogCancel className="bg-black hover:bg-black text-white hover:ring-default hover:ring-2">
-                  Cancel
-                </AlertDialogCancel>
-                <AlertDialogAction className="bg-destructive hover:bg-destructive/90 hover:ring-destructive/90">
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction className="bg-destructive hover:bg-destructive/90">
                   Delete Account
                 </AlertDialogAction>
               </AlertDialogFooter>
