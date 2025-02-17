@@ -313,7 +313,7 @@ const HistoryFileList = () => {
                 <Search className="w-5 h-5 absolute top-1/2 -translate-y-1/2 ltr:left-2 rtl:right-2 text-default-400" />
                 <Input 
                   placeholder="Search SRT files" 
-                  className="ltr:pl-7 rtl:pr-8 text-sm border border-black/30"
+                  className="ltr:pl-7 rtl:pr-8 text-sm border border-black/30 text-black"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
