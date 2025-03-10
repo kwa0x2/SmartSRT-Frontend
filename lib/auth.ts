@@ -2,6 +2,7 @@ import { getLoggedInUserServer } from "@/app/api/services/user.service";
 import NextAuth, { User as NextAuthUser } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { cookies } from "next/headers";
+import { authType, userRole } from "./type";
 
 interface User extends NextAuthUser {
   id: string;
@@ -9,6 +10,9 @@ interface User extends NextAuthUser {
   email: string;
   phone: string;
   image: string;
+  auth_type: authType;
+  role: userRole;
+  error: string
 }
 
 declare module "next-auth" {
@@ -17,6 +21,9 @@ declare module "next-auth" {
   }
   interface User {
     phone: string;
+    auth_type: authType;
+    role: userRole;
+    error: string
   }
 }
 
@@ -28,23 +35,45 @@ declare module "next-auth/jwt" {
 }
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
-  session: { 
-    strategy: "jwt",
-    maxAge: 24 * 60 * 60, // 24 hour
+  events: {
+    signOut() {
+      const cookieStore = cookies();
+  
+      cookieStore.delete("sid");
+      cookieStore.delete("next-auth.session-token");
+    }
   },
   callbacks: {
+    async session({ token, session }) {
+      if (session.user) {
+        session.user.phone = token.phone as string;
+        session.user.image = token.picture as string;
+        session.user.auth_type = token.auth_type as authType;
+        session.user.role = token.role as userRole
+        session.user.error = token.error as userRole
+
+      }
+      return session;
+    },
     async jwt({ token, user }) {
       if(user){
         token.phone = user.phone;
+        token.auth_type = user.auth_type;
+        token.role = user.role
+        token.error = user.error
       }
+      
       if (!token.sub) return token;
 
       const existingUser = await getLoggedInUserServer();
-      console.log("existingUser", existingUser);
       if (!existingUser.Email) {
-        cookies().delete("sid");
-        await signOut();
+        return {
+          ...token,
+          error: "invalid-version",
+        }
+        // return null;
       }
+
 
       if (existingUser && existingUser.PhoneNumber && existingUser.AvatarURL) {
         token.phone = existingUser.PhoneNumber;
@@ -53,12 +82,10 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 
       return token;
     },
-    async session({ token, session }) {
-      if (session.user) {
-        session.user.phone = token.phone as string;
-      }
-      return session;
-    },
+  },
+  session: { 
+    strategy: "jwt",
+    maxAge: 24 * 60 * 60, // 24 hour
   },
   providers: [
     Credentials({
@@ -69,6 +96,9 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
           email: credentials.email as string,
           phone: credentials.phone as string,
           image: credentials.avatar as string,
+          auth_type: credentials.auth_type as authType,
+          role: credentials.role as userRole,
+          error: '' as string
         };
       },
     }),

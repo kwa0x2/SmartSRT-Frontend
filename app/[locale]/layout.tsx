@@ -1,23 +1,24 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import "./theme.css"
+import "./theme.css";
 import MountedProvider from "@/providers/mounted.provider";
-import { Toaster } from '@/components/ui/toaster'
-import { Toaster as SonnerToaster } from "@/components/ui/sonner"
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 import { notFound } from "next/navigation";
-const spaceGrotesk = Space_Grotesk({ 
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   weight: ["500"],
   display: "swap",
 });
-// language 
-import { getLangDir } from 'rtl-detect';
-import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+// language
+import { getLangDir } from "rtl-detect";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
 import DirectionProvider from "@/providers/direction-provider";
 import AuthProvider from "@/providers/auth.provider";
 import { locales } from "@/config";
+
 
 export const metadata: Metadata = {
   title: "AutoSRT",
@@ -31,13 +32,13 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }>) {
-  const { locale } = await params; 
+  const { locale } = await params;
 
-  const messages = await getMessages(); 
+  const messages = await getMessages();
   const direction = getLangDir(locale);
 
   // Desteklenmeyen locale'ler için 404
-  if (!locales.includes(locale as any)) { 
+  if (!locales.includes(locale as any)) {
     notFound();
   }
 
@@ -47,13 +48,13 @@ export default async function RootLayout({
         <NextIntlClientProvider messages={messages} locale={locale}>
           <AuthProvider>
             {/* <ThemeProvider attribute="class" defaultTheme="dark"> */}
-              <MountedProvider>
-                <DirectionProvider direction={direction}>
-                  {children}
-                </DirectionProvider>
-              </MountedProvider>
-              <Toaster />
-              <SonnerToaster />
+            <MountedProvider>
+              <DirectionProvider direction={direction}>
+                {children}
+              </DirectionProvider>
+            </MountedProvider>
+            <Toaster />
+            <SonnerToaster />
             {/* </ThemeProvider> */}
           </AuthProvider>
         </NextIntlClientProvider>

@@ -16,7 +16,7 @@ const Social = ({ locale, status }: { locale: string; status: string }) => {
     <div className="flex flex-col items-center justify-center space-y-4">
       <button
         onClick={handleGoogleLogin}
-        className="flex items-center gap-4 bg-gray-100 p-2 px-6 rounded-lg shadow-sm"
+        className="flex items-center gap-4  p-2 px-6 rounded-lg"
       >
         <Image
           width={40}
@@ -25,14 +25,14 @@ const Social = ({ locale, status }: { locale: string; status: string }) => {
           src="/images/icon/google.svg"
           alt="Google Logo"
         />
-        <span className="text-sm font-medium text-gray-700 hover:underline">
+        <span className="text-sm font-medium hover:underline">
           {actionText} with Google
         </span>
       </button>
 
       <button
         onClick={handleGithubLogin}
-        className="flex items-center gap-4 bg-gray-100 p-2 px-6 rounded-lg shadow-sm"
+        className="flex items-center gap-4 p-2 px-6 rounded-lg"
       >
         <Image
           width={40}
@@ -41,7 +41,7 @@ const Social = ({ locale, status }: { locale: string; status: string }) => {
           src="/images/icon/github.svg"
           alt="GitHub Logo"
         />
-        <span className="text-sm font-medium text-gray-700 hover:underline">
+        <span className="text-sm font-medium hover:underline">
           {actionText} with GitHub
         </span>
       </button>

@@ -6,6 +6,7 @@ import React from 'react'
 
 const MountedProvider = ({ children }: { children: React.ReactNode }) => {
   const mounted = useMounted()
+  
   if (!mounted) return <Loader />
   return children
 }

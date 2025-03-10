@@ -1,5 +1,6 @@
 import createNextIntlPlugin from "next-intl/plugin";
 import nextra from "nextra";
+import { hostname } from "os";
 
 /** @type {import('next').NextConfig} */
 
@@ -31,6 +32,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "i.pravatar.cc",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.discordapp.com",
       },
     ],
   },

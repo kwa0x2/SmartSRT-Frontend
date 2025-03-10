@@ -3,6 +3,7 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
+import { useAccountManagement } from "@/hooks/use-account-management";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,22 +17,26 @@ import {
 } from "@/components/ui/alert-dialog";
 
 const AccountManagement = () => {
+  const { canChangePassword, passwordResetUrl } = useAccountManagement();
+
   return (
-    <Card className=" space-y-4 md:space-y-6">
+    <Card className="space-y-4 md:space-y-6">
       <h3 className="text-base md:text-lg font-semibold">Account Management</h3>
 
       <div className="space-y-6 md:space-y-8">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 md:gap-0">
-          <div>
-            <p className="font-medium text-sm md:text-base">Change Password</p>
+        {canChangePassword && (
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 md:gap-0">
+            <div>
+              <p className="font-medium text-sm md:text-base">Change Password</p>
+            </div>
+            <Link
+              className="font-bold text-xs md:text-sm tracking-wide cursor-pointer"
+              href={passwordResetUrl}
+            >
+              Update
+            </Link>
           </div>
-          <Link
-            className="font-bold text-xs md:text-sm tracking-wide cursor-pointer"
-            href={""}
-          >
-            Update
-          </Link>
-        </div>
+        )}
 
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 md:gap-0">
           <div>

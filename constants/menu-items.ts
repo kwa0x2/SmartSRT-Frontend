@@ -17,5 +17,3 @@ export const MENU_ITEMS = [
   
 ] as const;
 
-export const DEFAULT_AVATAR =
-  "https://lh3.googleusercontent.com/a/ACg8ocI2EzfeHarKZE6D66j_aOil3QLyMuKkjrAWewSYdKlEglqTe6s=s96-c";

@@ -37,7 +37,6 @@ export const FileUpload = ({
   const handleFileChange = async (newFiles: File[]) => {
     if (newFiles.length > 0) {
       const videoFile = newFiles[0];
-      // Video süresini al
       const video = document.createElement('video');
       video.preload = 'metadata';
       

@@ -1,37 +1,50 @@
-import createMiddleware from 'next-intl/middleware';
-import { NextRequest, NextResponse } from 'next/server';
-import { locales } from '@/config';
-import { auth } from '@/lib/auth';
+import { NextResponse } from "next/server";
+import { auth } from "@/lib/auth";
+import { apiAuthPrefix, publicRoutes } from "@/config/routes";
+import { routing } from "./i18n/routing";
 
-export default async function middleware(request: NextRequest) {
-  const session = await auth();
+export default auth((req): any => {
+  const { nextUrl } = req;
+  const pathname = nextUrl.pathname;
   
-  if (request.nextUrl.pathname.startsWith('/api')) {
-    const response = NextResponse.next();
-    
-    if (session) {
-      const sid = request.cookies.get(process.env.COOKIE_NAME as string);
-      if (sid) {
-        response.headers.set('Cookie', `${process.env.COOKIE_NAME}=${sid.value}`);
-      }
-    }
-    
-    return response;
+  const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
+  const isPublicRoute = publicRoutes.includes(pathname);
+  
+  if (isApiAuthRoute || isPublicRoute) return null;
+
+  const hasSidCookie = req.cookies.has("sid");
+  const hasAuthJsToken = req.cookies.has("authjs.session-token");
+  const isLoggedIn = !!req.auth;
+
+  let locale = req.cookies.get("NEXT_LOCALE")?.value;
+  if (!locale || !routing.locales.includes(locale as any)) {
+    locale = routing.defaultLocale;
   }
 
-  // i18n middleware
-  const defaultLocale = request.headers.get('autosrt-locale') || 'en';
-  const handleI18nRouting = createMiddleware({
-    locales,
-    defaultLocale
-  });
-  
-  const response = handleI18nRouting(request);
-  response.headers.set('autosrt-locale', defaultLocale);
+  if (!hasSidCookie || !hasAuthJsToken || !isLoggedIn) {
+    return NextResponse.redirect(new URL(`/${locale}/`, nextUrl));
+  }
 
-  return response;
-}
+  const hasLocale = routing.locales.some(
+    (loc) => pathname.startsWith(`/${loc}/`) || pathname === `/${loc}`
+  );
+
+  if (!hasLocale) {
+    const newPathname = pathname.startsWith('/') ? pathname : `/${pathname}`;
+    return NextResponse.redirect(
+      new URL(`/${locale}${newPathname}`, req.url)
+    );
+  }
+
+  const currentLocale = pathname.split('/')[1];
+  if (currentLocale !== locale && routing.locales.includes(currentLocale as any)) {
+    const newPathname = pathname.replace(`/${currentLocale}/`, `/${locale}/`);
+    return NextResponse.redirect(new URL(newPathname, req.url));
+  }
+
+  return null;
+});
 
 export const config = {
-  matcher: ['/', '/(ar|en)/:path*', '/api/:path*']
+  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 };

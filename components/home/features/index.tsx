@@ -1,11 +1,15 @@
 import Creators from "./creators";
 import Developers from "./developers";
 
-const Features = () => {
+interface FeaturesProps {
+  isAuthenticated: boolean
+}
+
+const Features = ({isAuthenticated}: FeaturesProps) => {
   return (
     <>
-      <Creators />
-      <Developers />
+      <Creators isAuthenticated={isAuthenticated}/>
+      <Developers isAuthenticated={isAuthenticated}/>
     </>
   );
 };

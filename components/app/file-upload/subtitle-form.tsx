@@ -67,17 +67,19 @@ export function SubtitleForm({ file }: SubtitleFormProps) {
 
         <div className="flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-6">
           <div className="flex items-center gap-2">
-            <Checkbox
-              checked={form.watch("punctuation")}
-              onCheckedChange={(checked) =>
-                form.setValue("punctuation", checked as boolean)
-              }
-              className="border-2 border-gray-300 data-[state=checked]:border-none"
-            />
-            <label className="text-sm">Include punctuation</label>
+            <div className="flex items-center gap-2">
+              <Checkbox
+                checked={form.watch("punctuation")}
+                onCheckedChange={(checked) =>
+                  form.setValue("punctuation", checked as boolean)
+                }
+                className="border-2 border-gray-300 data-[state=checked]:border-none"
+              />
+              <label className="text-sm">Include punctuation</label>
+            </div>
             <TooltipProvider delayDuration={250}>
               <Tooltip>
-                <TooltipTrigger>
+                <TooltipTrigger className="flex items-center">
                   <Info className="h-4 w-4 text-muted-foreground" />
                 </TooltipTrigger>
                 <TooltipContent>
@@ -91,17 +93,19 @@ export function SubtitleForm({ file }: SubtitleFormProps) {
           </div>
 
           <div className="flex items-center gap-2">
-            <Checkbox
-              checked={form.watch("consider_punctuation")}
-              onCheckedChange={(checked) =>
-                form.setValue("consider_punctuation", checked as boolean)
-              }
-              className="border-2 border-gray-300 data-[state=checked]:border-none"
-            />
-            <label className="text-sm">Consider punctuation in line breaks</label>
+            <div className="flex items-center gap-2">
+              <Checkbox
+                checked={form.watch("consider_punctuation")}
+                onCheckedChange={(checked) =>
+                  form.setValue("consider_punctuation", checked as boolean)
+                }
+                className="border-2 border-gray-300 data-[state=checked]:border-none"
+              />
+              <label className="text-sm">Consider punctuation in line breaks</label>
+            </div>
             <TooltipProvider delayDuration={250}>
               <Tooltip>
-                <TooltipTrigger>
+                <TooltipTrigger className="flex items-center">
                   <Info className="h-4 w-4 text-muted-foreground" />
                 </TooltipTrigger>
                 <TooltipContent>

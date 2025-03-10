@@ -1,7 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
 
-const HeroContent = () => {
+interface HeroContentProps {
+  isAuthenticated: boolean
+}
+
+
+const HeroContent = ({isAuthenticated}: HeroContentProps) => {
   return (
     <div className="flex flex-col items-center text-center">
       <h1 className="text-4xl md:text-5xl lg:text-[60px] font-bold tracking-tight lg:leading-[1.15] px-4">
@@ -19,7 +24,11 @@ const HeroContent = () => {
           className="bg-black text-white hover:bg-black/90 text-sm md:text-base font-medium uppercase h-9 md:h-11 px-4 md:!px-5 rounded-full"
           asChild
         >
-          <Link href="/auth/register">Get Started Free</Link>
+          {isAuthenticated ? (
+            <Link href="/app">Go to App</Link>
+          ) : (
+            <Link href="/auth/register">Get Started Free</Link>
+          )}
         </Button>
       </div>
     </div>
