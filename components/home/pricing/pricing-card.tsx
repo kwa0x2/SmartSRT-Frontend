@@ -3,17 +3,41 @@ import { Card } from "@/components/ui/card";
 import { Link } from "@/i18n/routing";
 import { Check } from "lucide-react";
 import { PricingPlan } from "./pricing-data";
+import { usePricing } from "@/hooks/use-pricing";
+import { APP_ROUTES } from "@/constants/routes";
 
 interface PricingCardProps {
   plan: PricingPlan;
-  isSubscriptionPage?: boolean;
 }
 
-const PricingCard = ({ plan, isSubscriptionPage = false }: PricingCardProps) => {
-  const isFreePlan = plan.name === "Free";
-  const buttonText = isSubscriptionPage 
-    ? isFreePlan ? "SUBSCRIBED" : "SUBSCRIBE"
-    : "GET STARTED";
+const PricingCard = ({ plan }: PricingCardProps) => {
+  const { isAuthenticated, isCurrentPlan, canUpgrade } = usePricing();
+  
+  const getButtonConfig = () => {
+    if (!isAuthenticated) {
+      return {
+        text: "GET STARTED",
+        disabled: false,
+        link: APP_ROUTES.AUTH.REGISTER
+      };
+    }
+
+    if (isCurrentPlan(plan.name)) {
+      return {
+        text: "CURRENT PLAN",
+        disabled: true,
+        link: null
+      };
+    }
+
+    return {
+      text: canUpgrade() ? "UPGRADE" : "CHANGE PLAN",
+      disabled: false,
+      link: APP_ROUTES.CHECKOUT
+    };
+  };
+
+  const buttonConfig = getButtonConfig();
 
   return (
     <Card className="py-6 px-3 md:p-8 flex flex-col">
@@ -42,15 +66,13 @@ const PricingCard = ({ plan, isSubscriptionPage = false }: PricingCardProps) => 
 
       <Button
         className="w-full mt-6 md:mt-8 bg-black uppercase hover:bg-black/90 h-9 md:h-11 text-sm md:text-base disabled:opacity-70"
-        asChild={!isSubscriptionPage || !isFreePlan}
-        disabled={isSubscriptionPage && isFreePlan}
+        asChild={!buttonConfig.disabled && !!buttonConfig.link}
+        disabled={buttonConfig.disabled}
       >
-        {isSubscriptionPage && !isFreePlan ? (
-          <Link href="/app/checkout">
-            {buttonText}
-          </Link>
+        {buttonConfig.link ? (
+          <Link href={buttonConfig.link}>{buttonConfig.text}</Link>
         ) : (
-          buttonText
+          buttonConfig.text
         )}
       </Button>
     </Card>

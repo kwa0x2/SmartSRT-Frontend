@@ -7,6 +7,7 @@ import LoadingSVG from "@/public/images/loading.svg";
 import { loginAction } from "@/action/auth-action";
 import { useEffect } from "react";
 import { getLoggedInUser } from "@/app/api/services/user.service";
+import { toast } from "sonner";
 
 const VerifyPage = () => {
   const { theme } = useTheme();
@@ -14,12 +15,35 @@ const VerifyPage = () => {
   const fetchData = async () => {
     try {
       const result: any = await getLoggedInUser();
-      console.log(result);
+      // if (res.error) setError(true);  // If user data is successfully retrieved, proceed with login action
       if (result.status === 200) {
-        loginAction(result.data.ID, result.data.Name, result.data.Email, result.data.PhoneNumber, result.data.AvatarURL);
-      } 
+        const loginResult = await loginAction(
+          result.data.ID,
+          result.data.Name,
+          result.data.Email,
+          result.data.PhoneNumber,
+          result.data.AvatarURL,
+          result.data.AuthType,
+          result.data.Role,
+        );
+        if (loginResult) {
+          window.location.href = "/app";
+        } else {
+          // setError(true);
+          toast.error(
+            "An error occurred. Please try again later or contact support."
+          );
+        }
+      }
     } catch (error: any) {
-      console.error(error);
+      // setError(true);
+      if (error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error(
+          "An error occurred. Please try again later or contact support."
+        );
+      }
     }
   };
 
@@ -48,12 +72,7 @@ const VerifyPage = () => {
             You'll be redirected shortly.
           </div>
           <div className="mt-6 flex justify-center">
-            <Image
-              src={LoadingSVG}
-              alt="loading"
-              width={48}
-              height={48}
-            />
+            <Image src={LoadingSVG} alt="loading" width={48} height={48} />
           </div>
         </div>
       </div>

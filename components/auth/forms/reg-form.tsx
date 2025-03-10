@@ -6,8 +6,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { registerSchema, RegisterStepOneData } from "@/schemas/register.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
+import { cn } from "@/lib/utils";
+import { Loader2 } from "lucide-react";
 
 interface RegFormProps {
   onSubmit: (data: RegisterStepOneData) => void;
@@ -19,12 +21,14 @@ interface RegFormProps {
 }
 
 const RegForm = ({ onSubmit, initialData }: RegFormProps) => {
-  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [passwordVisible, setPasswordVisible] = React.useState(false);
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
+    watch,
   } = useForm<RegisterStepOneData>({
     resolver: zodResolver(
       registerSchema.pick({
@@ -33,41 +37,62 @@ const RegForm = ({ onSubmit, initialData }: RegFormProps) => {
         password: true,
       })
     ),
+    mode: "onChange",
     defaultValues: initialData,
   });
 
+  const watchFields = watch(["name", "email", "password"]);
+
+  const handleFormSubmit = async (data: RegisterStepOneData) => {
+    setIsSubmitting(true);
+    try {
+      await onSubmit(data);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mt-2 2xl:mt-4 space-y-4">
-      {/* Name Field */}
+    <form onSubmit={handleSubmit(handleFormSubmit)} className="mt-2 2xl:mt-4 space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="name">Name</Label>
+        <Label htmlFor="name">Full Name</Label>
         <Input
           id="name"
           placeholder="John Doe"
+          disabled={isSubmitting}
           {...register("name")}
           size="lg"
+          autoComplete="name"
+          className={cn("text-black", {
+            "border-destructive": errors.email,
+            "border-success": !errors.email && watchFields[0],
+          })}
         />
         {errors.name && (
           <p className="text-destructive text-sm">{errors.name.message}</p>
         )}
       </div>
 
-      {/* Email Field */}
       <div className="space-y-2">
         <Label htmlFor="email">Email</Label>
         <Input
           id="email"
           type="email"
           placeholder="example@email.com"
+          disabled={isSubmitting}
           {...register("email")}
           size="lg"
+          autoComplete="email"
+          className={cn("text-black", {
+            "border-destructive": errors.email,
+            "border-success": !errors.email && watchFields[0],
+          })}
         />
         {errors.email && (
           <p className="text-destructive text-sm">{errors.email.message}</p>
         )}
       </div>
 
-      {/* Password Field */}
       <div className="space-y-2">
         <Label htmlFor="password">Password</Label>
         <div className="relative">
@@ -75,17 +100,24 @@ const RegForm = ({ onSubmit, initialData }: RegFormProps) => {
             id="password"
             type={passwordVisible ? "text" : "password"}
             placeholder="••••••••"
+            disabled={isSubmitting}
             {...register("password")}
             size="lg"
+            autoComplete="new-password"
+            className={cn("text-black", {
+              "border-destructive": errors.email,
+              "border-success": !errors.email && watchFields[0],
+            })}
           />
           <button
             type="button"
-            className="absolute top-1/2 -translate-y-1/2 right-4"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors"
             onClick={() => setPasswordVisible(!passwordVisible)}
+            tabIndex={-1}
           >
             <Icon
               icon={passwordVisible ? "heroicons:eye-slash" : "heroicons:eye"}
-              className="w-5 h-5 text-default-400"
+              className="w-5 h-5"
             />
           </button>
         </div>
@@ -94,9 +126,20 @@ const RegForm = ({ onSubmit, initialData }: RegFormProps) => {
         )}
       </div>
 
-      {/* Submit Button */}
-      <Button type="submit" fullWidth disabled={isSubmitting} className="mt-6">
-        Continue
+      <Button 
+        type="submit" 
+        fullWidth 
+        disabled={isSubmitting}
+        className="mt-6"
+      >
+        {isSubmitting ? (
+          <>
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            Creating Account...
+          </>
+        ) : (
+          "Continue"
+        )}
       </Button>
     </form>
   );

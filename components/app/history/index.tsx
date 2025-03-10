@@ -3,9 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { UploadCloud, Search, LayoutGrid, List } from "lucide-react";
+import { Search, LayoutGrid, List } from "lucide-react";
 import React from "react";
-import { Label } from "@/components/ui/label";
 import SingleFileCard from "./single-file-card";
 import ListFileCard from "./list-file-card";
 
@@ -269,11 +268,11 @@ const HistoryFileList = () => {
       <Card className="">
         <CardHeader className="mb-4 border-none">
           <div className="flex flex-wrap justify-between gap-4">
-            <div className="flex-1">
-              <div className="text-lg font-medium text-default-900 whitespace-nowrap">
+            <div className="flex-1 space-y-1">
+              <div className="text-xl md:text-2xl font-bold  whitespace-nowrap">
                 SRT Files History
               </div> 
-              <div className="text-xs lg:text-sm font-medium text-default-600 whitespace-nowrap">
+              <div className="text-sm md:text-base text-muted-foreground whitespace-nowrap">
                 {totalFiles} files, {totalMinutes} minutes total
               </div>
             </div>

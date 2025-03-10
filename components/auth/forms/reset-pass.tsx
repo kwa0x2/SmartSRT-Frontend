@@ -4,14 +4,13 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Icon } from "@/components/ui/icon";
 import { resetPassword } from "@/app/api/services/auth.service";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/routing";
 import {
   ResetPasswordFormData,
   resetPasswordSchema,
@@ -19,42 +18,50 @@ import {
 import Cookies from "js-cookie";
 
 interface ResetPasswordProps {
-  auth: string;
+  authToken: string;
 }
 
-const ResetPassword = ({ auth }: ResetPasswordProps) => {
+const ResetPassword = ({ authToken }: ResetPasswordProps) => {
   const router = useRouter();
   const [isPending, startTransition] = React.useTransition();
-  const [passwordType, setPasswordType] = React.useState({
-    password: "password",
-    confirmPassword: "password",
+  const [passwordVisibility, setPasswordVisibility] = React.useState({
+    password: false,
+    confirmPassword: false,
   });
-
-  const togglePasswordType = (field: "password" | "confirmPassword") => {
-    setPasswordType((prev) => ({
-      ...prev,
-      [field]: prev[field] === "password" ? "text" : "password",
-    }));
-  };
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    watch,
   } = useForm<ResetPasswordFormData>({
     resolver: zodResolver(resetPasswordSchema),
+    mode: "onChange",
+    defaultValues: {
+      password: "",
+      confirmPassword: "",
+    },
   });
+
+  const watchFields = watch(["password", "confirmPassword"]);
+
+  const togglePasswordVisibility = (field: keyof typeof passwordVisibility) => {
+    setPasswordVisibility(prev => ({
+      ...prev,
+      [field]: !prev[field],
+    }));
+  };
 
   const onSubmit = (data: ResetPasswordFormData) => {
     startTransition(async () => {
       try {
-        const authToken = Cookies.get('token');
+        if (!authToken) throw new Error("Authentication token not found");
         
-        const response = await resetPassword(authToken || "", data.password);
+        const response = await resetPassword(authToken, data.password);
         if (response.status === 200) {
           Cookies.remove('token');
           toast.success("Password has been reset successfully");
-          router.push("/en/auth/login");
+          router.push("/auth/login");
         }
       } catch (err: any) {
         toast.error(err.response?.data?.message || "Something went wrong");
@@ -69,27 +76,27 @@ const ResetPassword = ({ auth }: ResetPasswordProps) => {
         <div className="relative">
           <Input
             id="password"
-            type={passwordType.password}
+            type={passwordVisibility.password ? "text" : "password"}
             placeholder="Enter new password"
             disabled={isPending}
             {...register("password")}
-            className={cn("h-[48px] text-sm text-default-900", {
+            className={cn("text-black text-sm", {
               "border-destructive": errors.password,
+              "border-success": !errors.password && watchFields[0],
             })}
+            autoComplete="new-password"
           />
-          <div
-            className="absolute top-1/2 -translate-y-1/2 ltr:right-4 rtl:left-4 cursor-pointer"
-            onClick={() => togglePasswordType("password")}
+          <button
+            type="button"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors"
+            onClick={() => togglePasswordVisibility("password")}
+            tabIndex={-1}
           >
-            {passwordType.password === "password" ? (
-              <Icon icon="heroicons:eye" className="w-5 h-5 text-default-400" />
-            ) : (
-              <Icon
-                icon="heroicons:eye-slash"
-                className="w-5 h-5 text-default-400"
-              />
-            )}
-          </div>
+            <Icon
+              icon={passwordVisibility.password ? "heroicons:eye-slash" : "heroicons:eye"}
+              className="w-5 h-5"
+            />
+          </button>
         </div>
         {errors.password && (
           <div className="text-destructive text-sm">
@@ -103,27 +110,27 @@ const ResetPassword = ({ auth }: ResetPasswordProps) => {
         <div className="relative">
           <Input
             id="confirmPassword"
-            type={passwordType.confirmPassword}
+            type={passwordVisibility.confirmPassword ? "text" : "password"}
             placeholder="Confirm new password"
             disabled={isPending}
             {...register("confirmPassword")}
-            className={cn("h-[48px] text-sm text-default-900", {
+            className={cn("text-black text-sm", {
               "border-destructive": errors.confirmPassword,
+              "border-success": !errors.confirmPassword && watchFields[1],
             })}
+            autoComplete="new-password"
           />
-          <div
-            className="absolute top-1/2 -translate-y-1/2 ltr:right-4 rtl:left-4 cursor-pointer"
-            onClick={() => togglePasswordType("confirmPassword")}
+          <button
+            type="button"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors"
+            onClick={() => togglePasswordVisibility("confirmPassword")}
+            tabIndex={-1}
           >
-            {passwordType.confirmPassword === "password" ? (
-              <Icon icon="heroicons:eye" className="w-5 h-5 text-default-400" />
-            ) : (
-              <Icon
-                icon="heroicons:eye-slash"
-                className="w-5 h-5 text-default-400"
-              />
-            )}
-          </div>
+            <Icon
+              icon={passwordVisibility.confirmPassword ? "heroicons:eye-slash" : "heroicons:eye"}
+              className="w-5 h-5"
+            />
+          </button>
         </div>
         {errors.confirmPassword && (
           <div className="text-destructive text-sm">
@@ -132,9 +139,20 @@ const ResetPassword = ({ auth }: ResetPasswordProps) => {
         )}
       </div>
 
-      <Button type="submit" fullWidth disabled={isPending}>
-        {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-        {isPending ? "Updating..." : "Update Password"}
+      <Button 
+        type="submit" 
+        fullWidth 
+        disabled={isPending}
+        className="mt-6"
+      >
+        {isPending ? (
+          <>
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            Updating Password...
+          </>
+        ) : (
+          "Update Password"
+        )}
       </Button>
     </form>
   );

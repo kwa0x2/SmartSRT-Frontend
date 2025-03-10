@@ -4,7 +4,11 @@ import { Link as ScrollLink } from "react-scroll";
 import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
 
-const MobileMenu = () => {
+interface MobileMenuProps {
+  isAuthenticated: boolean
+}
+
+const MobileMenu = ({isAuthenticated}: MobileMenuProps) => {
   return (
     <Sheet>
       <SheetTrigger className="md:hidden">

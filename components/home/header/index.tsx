@@ -4,7 +4,11 @@ import MobileMenu from "./mobile-menu";
 import Image from "next/image";
 import { Link as ScrollLink } from "react-scroll";
 
-const Header = () => {
+interface HeaderProps {
+  isAuthenticated: boolean
+}
+
+const Header = ({isAuthenticated}: HeaderProps) => {
   return (
     <header className="sticky top-0 w-full z-50 bg-background/80 backdrop-blur-sm">
       <div className="px-4 md:px-64 mx-auto">
@@ -34,12 +38,12 @@ const Header = () => {
 
           {/* Right Buttons - Desktop */}
           <div className="hidden md:block">
-            <AuthButtons />
+            <AuthButtons isAuthenticated={isAuthenticated}/>
           </div>
 
           {/* Mobile Menu */}
           <div className="md:hidden">
-            <MobileMenu />
+            <MobileMenu  isAuthenticated={isAuthenticated}/>
           </div>
         </div>
       </div>

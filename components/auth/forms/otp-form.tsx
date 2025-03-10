@@ -19,7 +19,8 @@ import { otpSend } from "@/app/api/services/auth.service";
 import { parsePhoneNumber, CountryCode } from "libphonenumber-js";
 import { toast } from "sonner";
 import { CheckPhoneExists } from "@/app/api/services/user.service";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface OtpFormProps {
   onSubmit: (data: RegisterStepTwoData) => void;
@@ -33,6 +34,7 @@ const OtpForm = ({ onSubmit, onBack }: OtpFormProps) => {
   const [timer, setTimer] = useState(60);
   const [phoneError, setPhoneError] = useState<string>("");
   const [canResend, setCanResend] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     handleSubmit,
@@ -62,6 +64,11 @@ const OtpForm = ({ onSubmit, onBack }: OtpFormProps) => {
     };
   }, [isCodeSent, timer]);
 
+  useEffect(() => {
+    setValue("otp", otpValue);
+    setValue("phone_number", phoneNumber);
+  }, [otpValue, phoneNumber, setValue]);
+
   const validatePhoneNumber = (phone: string, country?: string): boolean => {
     try {
       if (!phone) {
@@ -70,15 +77,8 @@ const OtpForm = ({ onSubmit, onBack }: OtpFormProps) => {
       }
 
       const parsedNumber = parsePhoneNumber(phone, country as CountryCode);
-
-      if (!parsedNumber || !parsedNumber.isValid()) {
+      if (!parsedNumber?.isValid()) {
         setPhoneError("Please enter a valid phone number");
-        return false;
-      }
-
-      const nationalNumber = parsedNumber.nationalNumber;
-      if (!nationalNumber || nationalNumber.toString().length < 5) {
-        setPhoneError("Please enter the complete phone number");
         return false;
       }
 
@@ -90,41 +90,27 @@ const OtpForm = ({ onSubmit, onBack }: OtpFormProps) => {
     }
   };
 
-  useEffect(() => {
-    setValue("otp", otpValue);
-  }, [otpValue, setValue]);
-
-  useEffect(() => {
-    setValue("phone_number", phoneNumber);
-  }, [phoneNumber, setValue]);
-
   const handleSendCode = async () => {
-    if (!validatePhoneNumber(phoneNumber)) {
-      return;
-    }
-
+    if (!validatePhoneNumber(phoneNumber)) return;
+    
+    setIsLoading(true);
     try {
-      const res: any = await CheckPhoneExists(phoneNumber);
+      const res = await CheckPhoneExists(phoneNumber);
       if (res.status === 200) {
-        try {
-          await otpSend({ phone_number: phoneNumber });
-          setIsCodeSent(true);
-          setCanResend(false);
-          setTimer(60);
-        } catch (error: any) {
-          toast.error(error.response.data.message);
-        }
+        await otpSend({ phone_number: phoneNumber });
+        setIsCodeSent(true);
+        setCanResend(false);
+        setTimer(60);
+        toast.success("Verification code sent successfully");
       }
     } catch (error: any) {
-      if (error.response.status === 302) {
-        toast.error(
-          `An account with this phone number already exists. Please try a different phone number`
-        );
+      if (error.response?.status === 302) {
+        toast.error("This phone number is already registered");
       } else {
-        toast.error(
-          `An error occurred while logging in. Please try again or contact support.`
-        );
+        toast.error("Failed to send verification code. Please try again");
       }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -133,7 +119,6 @@ const OtpForm = ({ onSubmit, onBack }: OtpFormProps) => {
       onSubmit={handleSubmit(onSubmit)}
       className="space-y-6 w-full max-w-md mx-auto"
     >
-      {/* Phone Input */}
       <div className="space-y-2">
         <Label htmlFor="phone">Phone Number</Label>
         <div className="flex space-x-2">
@@ -141,33 +126,38 @@ const OtpForm = ({ onSubmit, onBack }: OtpFormProps) => {
             className="flex-1"
             defaultCountry="tr"
             value={phoneNumber}
-            onChange={(phone) => {
-              setPhoneNumber(phone);
-            }}
+            onChange={setPhoneNumber}
+            disabled={isLoading || isSubmitting}
           />
           <Button
             type="button"
             onClick={handleSendCode}
-            disabled={!canResend || !phoneNumber}
+            disabled={!canResend || !phoneNumber || isLoading || isSubmitting}
+            className={cn("min-w-[120px]", {
+              "opacity-50 cursor-not-allowed": !canResend || isLoading
+            })}
           >
-            {!canResend ? `Resend (${timer}s)` : "Send Code"}
+            {isLoading ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : !canResend ? (
+              `Resend (${timer}s)`
+            ) : (
+              "Send Code"
+            )}
           </Button>
         </div>
         {phoneError && <p className="text-destructive text-sm">{phoneError}</p>}
       </div>
 
-      {/* OTP Input */}
-      <div className="space-y-4 flex flex-col items-center">
+      <div className="space-y-4">
         <Label htmlFor="otp">Verification Code</Label>
-        <div className="flex justify-center w-full">
+        <div className="flex justify-center">
           <InputOTP
             value={otpValue}
-            onChange={(otp) => {
-              setOtpValue(otp);
-            }}
+            onChange={setOtpValue}
             maxLength={4}
             pattern={REGEXP_ONLY_DIGITS}
-            disabled={!isCodeSent}
+            disabled={!isCodeSent || isSubmitting}
           >
             <InputOTPGroup>
               <InputOTPSlot index={0} />
@@ -181,17 +171,18 @@ const OtpForm = ({ onSubmit, onBack }: OtpFormProps) => {
           </InputOTP>
         </div>
         {errors.otp && (
-          <p className="text-destructive text-sm">{errors.otp.message}</p>
+          <p className="text-destructive text-sm text-center">{errors.otp.message}</p>
         )}
       </div>
 
-      {/* Buttons */}
-      <div className="mt-8 flex justify-between items-center gap-4 max-w-md mx-auto">
+      <div className="flex justify-between items-center gap-4">
         {onBack && (
           <Button
             type="button"
             onClick={onBack}
+            variant="outline"
             className="flex items-center gap-2"
+            disabled={isSubmitting}
           >
             <ArrowLeft className="h-4 w-4" />
             Back
@@ -200,10 +191,17 @@ const OtpForm = ({ onSubmit, onBack }: OtpFormProps) => {
 
         <Button
           type="submit"
-          fullWidth
-          disabled={isSubmitting || !isCodeSent || otpValue.length !== 4}
+          className={cn("flex-1", { "w-full": !onBack })}
+          disabled={isSubmitting}
         >
-          Create Account
+          {isSubmitting ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Creating Account...
+            </>
+          ) : (
+            "Create Account"
+          )}
         </Button>
       </div>
     </form>
