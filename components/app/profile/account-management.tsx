@@ -15,9 +15,34 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { startTransition } from "react";
+import { forgotPassword } from "@/app/api/services/auth.service";
+import { toast } from "sonner";
+import { useAuth } from "@/hooks/use-auth";
 
 const AccountManagement = () => {
   const { canChangePassword, passwordResetUrl } = useAccountManagement();
+  const { session } = useAuth();
+
+  const onChange = () => {
+    startTransition(async () => {
+      try {
+        if (!session?.user.email) {
+          toast.error("Failed to send new password setup email");
+        } else {
+          await forgotPassword(session.user.email);
+          toast.success(
+            "New password setup email sent successfully. Please check your inbox."
+          );
+        }
+      } catch (err: any) {
+        toast.error(
+          err.response?.data?.message ||
+            "Failed to send new password setup email"
+        );
+      }
+    });
+  };
 
   return (
     <Card className="space-y-4 md:space-y-6">
@@ -27,20 +52,22 @@ const AccountManagement = () => {
         {canChangePassword && (
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 md:gap-0">
             <div>
-              <p className="font-medium text-sm md:text-base">Change Password</p>
+              <p className="font-medium text-sm md:text-base">
+                Change Password
+              </p>
             </div>
-            <Link
-              className="font-bold text-xs md:text-sm tracking-wide cursor-pointer"
-              href={passwordResetUrl}
-            >
+
+            <button className=" text-black text-xs md:text-sm tracking-wide font-bold" onClick={onChange}>
               Update
-            </Link>
+            </button>
           </div>
         )}
 
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 md:gap-0">
           <div>
-            <p className="font-medium text-sm md:text-base text-destructive">Delete Account</p>
+            <p className="font-medium text-sm md:text-base text-destructive">
+              Delete Account
+            </p>
             <p className="text-xs md:text-sm text-muted-foreground">
               This action cannot be undone
             </p>
@@ -78,4 +105,4 @@ const AccountManagement = () => {
   );
 };
 
-export default AccountManagement; 
+export default AccountManagement;

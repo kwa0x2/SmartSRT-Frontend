@@ -4,23 +4,23 @@ import { cn } from "@/lib/utils";
 import { InputColor } from "@/lib/type";
 
 export const inputVariants = cva(
-  " w-full  bg-background  rounded py-2 px-3 h-9  text-sm font-normal  outline-none focus:outline-none  file:border-0 file:bg-transparent file:text-sm file:font-medium read-only:bg-default-200 disabled:cursor-not-allowed disabled:opacity-50  transition-all duration-300 ",
+  " w-full bg-white rounded py-2 px-3 h-9 text-sm font-normal outline-none focus:outline-none focus:bg-white file:border-0 file:bg-transparent file:text-sm file:font-medium  disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-300 [&:-webkit-autofill]:shadow-[inset_0_0_0px_1000px_rgb(255,255,255)] [&:-webkit-autofill]:!bg-white [&:-webkit-autofill:hover]:!bg-white [&:-webkit-autofill:focus]:!bg-white [&:-webkit-autofill:active]:!bg-white",
   {
     variants: {
       color: {
         default:
-          " text-default-500 focus:outline-none focus:border-default dark:focus:border-default-500 disabled:bg-default-200  dark:disabled:bg-default-500  placeholder:text-accent-foreground/50",
+          " text-default-500  placeholder:text-accent-foreground/50",
         primary:
-          "border-primary/50 text-primary focus:border-primary disabled:bg-primary/30 disabled:placeholder:text-primary  placeholder:text-primary/70",
+          "border-primary/50 text-primary focus:border-primary disabled:placeholder:text-primary  placeholder:text-primary/70",
         secondary:
-          "border-default-300 text-default-700  focus:border-secondary  disabled:bg-secondary/30 disabled:placeholder:text-secondary  placeholder:text-default-600",
-        info: "border-info/50 text-info focus:border-info  disabled:bg-info/30 disabled:placeholder:text-info  placeholder:text-info/70",
+          "border-default-300 text-default-700    disabled:placeholder:text-secondary  placeholder:text-default-600",
+        info: "border-info/50 text-info  disabled:placeholder:text-info  placeholder:text-info/70",
         warning:
-          "border-warning/50 text-warning  focus:border-warning disabled:bg-warning/30 disabled:placeholder:text-info  placeholder:text-warning/70",
+          "border-warning/50 text-warning    disabled:placeholder:text-info  placeholder:text-warning/70",
         success:
-          "border-success/50 text-success focus:border-success   disabled:bg-success/30 disabled:placeholder:text-info  placeholder:text-success/70",
+          "border-success/50 text-success    disabled:placeholder:text-info  placeholder:text-success/70",
         destructive:
-          "border-destructive/50 text-destructive focus:border-destructive  disabled:bg-destructive/30 disabled:placeholder:text-destructive  placeholder:text-destructive/70",
+          "border-destructive/50 text-destructive   disabled:placeholder:text-destructive  placeholder:text-destructive/70",
       },
 
       size: {

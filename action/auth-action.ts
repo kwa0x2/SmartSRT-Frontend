@@ -1,6 +1,7 @@
 "use server";
 import { signIn, signOut } from "@/lib/auth";
 import { cookies } from "next/headers";
+import { logout, logoutServer } from "@/app/api/services/auth.service";
 
 export const loginAction = async (
   id: string,
@@ -36,9 +37,17 @@ export const loginAction = async (
 };
 
 export async function logoutAction() {
-  const cookieStore = cookies();
-
-  cookieStore.delete("sid");
-
-  return await signOut({redirect: false});
+  try {
+    await logoutServer();
+    
+    const cookieStore = cookies();
+    cookieStore.delete("sid");
+    
+    return await signOut({ redirect: false });
+  } catch (error) {
+    console.error("Logout action error:", error);
+    const cookieStore = cookies();
+    cookieStore.delete("sid");
+    return await signOut({ redirect: false });
+  }
 }

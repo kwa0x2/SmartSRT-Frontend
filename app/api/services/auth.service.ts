@@ -1,6 +1,7 @@
 import { RegisterFormData } from "@/schemas/register.schema";
 import axios from "../axios";
 import { LoginFormData } from "@/schemas/login.schema";
+import { getMyCookie } from "@/hooks/get-my-cookie";
 
 export const credentialsLogin = async (data: LoginFormData) => {
   return await axios.post("/auth/credentials/login", data);
@@ -13,6 +14,16 @@ export const register = async (data: RegisterFormData) => {
 export const logout = async () => {
   return await axios.get("/auth/logout");
 };
+
+export const logoutServer = async () => {
+  const query = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, {
+    headers: {
+      Cookie: `${getMyCookie()}`,
+    },
+  });
+  const response = await query.json();
+  return response; 
+} 
 
 export const otpSend = async (data: { phone_number: string }) => {
   return await axios.post("/auth/otp/send", data);

@@ -10,27 +10,27 @@ const NewPasswordPage = () => {
   const [token, setToken] = useState<string | undefined>();
 
   useEffect(() => {
-    // const authToken = Cookies.get('token');
-    // setToken(authToken);
+    const authToken = Cookies.get("token");
+    setToken(authToken);
   }, []);
 
-  // if (!token) return <UnauthorizedError />;
+  if (!token) return <UnauthorizedError />;
 
   return (
     <div className="flex w-full items-center overflow-hidden min-h-dvh h-dvh basis-full">
       <div className="overflow-y-auto flex flex-wrap w-full h-dvh">
         <AuthLayout
-          title="Reset Your Password"
+          title="Set Your New Password"
           subtitle="Please enter your new password below"
         >
-          <ResetPassword authToken={"ASdas"} />
+          <ResetPassword authToken={token} />
           <div className="md:max-w-[345px] mx-auto font-normal text-default-500 mt-6 text-sm">
-            Remember Password?{" "}
+            Don't want to update it?{" "}
             <Link
               href="/auth/login"
               className="text-default-900 font-medium hover:underline"
             >
-              Login
+              Go to login
             </Link>
           </div>
         </AuthLayout>

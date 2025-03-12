@@ -40,10 +40,17 @@ const LoginForm = () => {
       try {
         const result = await credentialsLogin(data);
         if (result.status === 200) {
-          const { ID, Name, Email, PhoneNumber, AvatarURL, AuthType, Role } = result.data;
-          
+          const { ID, Name, Email, PhoneNumber, AvatarURL, AuthType, Role } =
+            result.data;
+
           const loginResult = await loginAction(
-            ID, Name, Email, PhoneNumber, AvatarURL, AuthType, Role
+            ID,
+            Name,
+            Email,
+            PhoneNumber,
+            AvatarURL,
+            AuthType,
+            Role
           );
 
           if (loginResult) {
@@ -70,9 +77,7 @@ const LoginForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-2 2xl:mt-4 space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="email">
-          Email
-        </Label>
+        <Label htmlFor="email">Email</Label>
         <Input
           size="lg"
           disabled={isPending}
@@ -92,9 +97,7 @@ const LoginForm = () => {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="password">
-          Password
-        </Label>
+        <Label htmlFor="password">Password</Label>
         <div className="relative">
           <Input
             size="lg"
@@ -107,7 +110,8 @@ const LoginForm = () => {
             className={cn("text-black", {
               "border-destructive": errors.password,
               "border-success": !errors.password && watchFields[1],
-            })}          />
+            })}
+          />
           <button
             type="button"
             className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors"
@@ -125,7 +129,6 @@ const LoginForm = () => {
         )}
       </div>
 
-
       <div className="flex justify-end">
         <Link
           href="/auth/forgot-password"
@@ -135,12 +138,7 @@ const LoginForm = () => {
         </Link>
       </div>
 
-      <Button 
-        type="submit" 
-        fullWidth 
-        disabled={isPending}
-        className="mt-6"
-      >
+      <Button type="submit" fullWidth disabled={isPending} className="mt-6">
         {isPending ? (
           <>
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
