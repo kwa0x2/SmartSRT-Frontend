@@ -1,6 +1,5 @@
 import ForgotPass from "@/components/auth/forms/forgot-form";
 import AuthLayout from "@/components/auth/auth-layout";
-import AuthBackground from "@/components/auth/auth-background";
 import { Link } from "@/i18n/routing";
 
 const ForgotPassword = () => {
