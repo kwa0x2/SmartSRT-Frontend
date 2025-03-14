@@ -1,18 +1,12 @@
-"use client";
 import ResetPassword from "@/components/auth/forms/reset-pass";
 import AuthLayout from "@/components/auth/auth-layout";
 import UnauthorizedError from "@/components/partials/error/401";
 import { Link } from "@/i18n/routing";
-import { useEffect, useState } from "react";
-import Cookies from "js-cookie";
+import { cookies } from "next/headers";
 
 const NewPasswordPage = () => {
-  const [token, setToken] = useState<string | undefined>();
-
-  useEffect(() => {
-    const authToken = Cookies.get("token");
-    setToken(authToken);
-  }, []);
+  const cookieStore = cookies();
+  const token = cookieStore.get("token")?.value;
 
   if (!token) return <UnauthorizedError />;
 

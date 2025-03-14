@@ -59,7 +59,6 @@ const ResetPassword = ({ authToken }: ResetPasswordProps) => {
         
         const response = await resetPassword(authToken, data.password);
         if (response.status === 200) {
-          Cookies.remove('token');
           toast.success("Password has been reset successfully");
           router.push("/auth/login");
         }
