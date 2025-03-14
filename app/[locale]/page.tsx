@@ -5,14 +5,11 @@ import Hero from "@/components/home/hero";
 import Features from "@/components/home/features";
 import Pricing from "@/components/home/pricing";
 import Contact from "@/components/home/contact";
-import { usePricing } from "@/hooks/use-pricing";
 import { useEffect, useState } from "react";
 import Loader from "@/components/loader";
-import { usePathname } from "next/navigation";
 import { toast } from "sonner";
 
 export default function Home() {
-  const { isAuthenticated, currentPlan } = usePricing();
   const [isLoading, setIsLoading] = useState(true);
   const [authStatus, setAuthStatus] = useState(false);
 
@@ -43,7 +40,7 @@ export default function Home() {
     <Layout isAuthenticated={authStatus}>
       <Hero isAuthenticated={authStatus} />
       <Features isAuthenticated={authStatus} />
-      <Pricing isAuthStyle={authStatus} currentPlan={currentPlan} />
+      <Pricing/>
       <Contact />
     </Layout>
   );

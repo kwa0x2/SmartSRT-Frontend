@@ -1,10 +1,6 @@
-"use client";
+'use client'
 
 import { Link } from "@/i18n/routing";
-import Image from "next/image";
-import Logo from "@/components/logo";
-import Copyright from "@/components/copyright";
-import { useState } from "react";
 import OtpForm from "@/components/auth/forms/otp-form";
 import {
   RegisterFormData,
@@ -17,6 +13,10 @@ import { jwtDecode } from "jwt-decode";
 import Cookies from "js-cookie";
 import AuthLayout from "@/components/auth/auth-layout";
 import { authType } from "@/lib/type";
+import UnauthorizedError from "@/components/partials/error/401";
+import { useEffect, useState } from "react";
+import Loader from "@/components/loader";
+import { getMyAuthToken } from "@/hooks/get-my-cookie-server";
 
 interface JWTClaims {
   name: string;
@@ -27,33 +27,35 @@ interface JWTClaims {
 
 const OtpPage = () => {
   const router = useRouter();
-  const [formData] = useState<RegisterFormData>({
-    name: "",
-    email: "",
-    avatar_url: "",
-    password: "",
-    phone_number: "",
-    otp: "",
-    auth_type: 'credentials',
-  });
+  const [token, setToken] = useState<string | undefined>();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchToken = async () => {
+      const token = await getMyAuthToken();
+      setIsLoading(false)
+      setToken(token);
+    };
+    fetchToken();
+  }, []);
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  if (!token) {
+    return <UnauthorizedError />;
+  }
 
   const handleStepTwo = async (data: RegisterStepTwoData) => {
-    const token = Cookies.get('token');
-    
-    if (!token) {
-      toast.error("Registration session expired. Please try again later or contact support.");
-      router.push('/auth/register');
-      return;
-    }
-
     try {
       const decoded = jwtDecode<JWTClaims>(token);      
       const finalData: RegisterFormData = {
-        ...formData,
         ...data,
         name: decoded.name,
         email: decoded.email,
         avatar_url: decoded.avatar_url,
+        password: "",
         auth_type: decoded.auth_type,
       };
 

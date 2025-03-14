@@ -1,20 +1,24 @@
-import { useAuth } from "./use-auth";
+import { useSession } from "next-auth/react";
 
 export const usePricing = () => {
-  const { isAuthenticated, session } = useAuth();
-  
+  const { data: session, status } = useSession();
+  const isLoading = status === "loading";
+  const isAuthenticated = !!session?.user;
+  const currentPlan = session?.user?.role || "";
+
   const isCurrentPlan = (planName: string) => {
-    return session?.user?.role?.toLowerCase() === planName.toLowerCase();
+    return currentPlan.toLowerCase() === planName.toLowerCase();
   };
 
   const canUpgrade = () => {
-    return session?.user?.role === 'free';
+    return currentPlan.toLowerCase() === "free";
   };
 
   return {
     isAuthenticated,
-    currentPlan: session?.user?.role || "",
+    currentPlan,
     isCurrentPlan,
-    canUpgrade
+    canUpgrade,
+    isLoading
   };
 }; 

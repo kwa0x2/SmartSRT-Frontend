@@ -66,30 +66,15 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 
       try {
         const existingUser = await getLoggedInUserServer();
-        
-        if (!existingUser.Email) {
+        if (!existingUser.Email) {    
           return {
             ...token,
-            error: "invalid-version",
+            error: "invalid-session",
           };
         }
 
 
         if (existingUser && existingUser.PhoneNumber && existingUser.AvatarURL) {
-
-          const cookieStore = cookies();
-          const sid = cookieStore.get("sid");
-        
-          if (sid?.value) {
-            cookieStore.set("sid", sid.value, {
-              maxAge: 86400, // 24 houre
-              httpOnly: true,
-              secure: false,
-              path: "/",
-              sameSite: "lax",
-            });
-          }
-          
           token.phone = existingUser.PhoneNumber;
           token.picture = existingUser.AvatarURL;
         }
@@ -102,7 +87,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
   },
   session: { 
     strategy: "jwt",
-    maxAge: 86400, // 24 hour
+    maxAge: 259200, // 3 day
   },
   providers: [
     Credentials({

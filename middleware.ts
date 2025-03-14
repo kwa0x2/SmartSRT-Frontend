@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { apiAuthPrefix, publicRoutes } from "@/config/routes";
 import { routing } from "./i18n/routing";
+import { getMyCookieValue } from "@/hooks/get-my-cookie";
 
 export default auth((req): any => {
   const { nextUrl } = req;
@@ -25,6 +26,19 @@ export default auth((req): any => {
     return NextResponse.redirect(new URL(`/${locale}/`, nextUrl));
   }
 
+  const response = NextResponse.next();
+  const cookieString = getMyCookieValue();
+  if (cookieString) {
+    console.log(cookieString)
+    response.cookies.set("sid", cookieString, {
+      maxAge: 86400,
+      path: '/',
+      httpOnly: true,
+      secure: false,
+      sameSite: 'lax'
+    });
+  }
+
   const hasLocale = routing.locales.some(
     (loc) => pathname.startsWith(`/${loc}/`) || pathname === `/${loc}`
   );
@@ -42,7 +56,7 @@ export default auth((req): any => {
     return NextResponse.redirect(new URL(newPathname, req.url));
   }
 
-  return null;
+  return response;
 });
 
 export const config = {

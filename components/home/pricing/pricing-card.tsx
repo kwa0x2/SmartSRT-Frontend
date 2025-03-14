@@ -5,15 +5,25 @@ import { Check } from "lucide-react";
 import { PricingPlan } from "./pricing-data";
 import { usePricing } from "@/hooks/use-pricing";
 import { APP_ROUTES } from "@/constants/routes";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Suspense } from "react";
 
 interface PricingCardProps {
   plan: PricingPlan;
 }
 
-const PricingCard = ({ plan }: PricingCardProps) => {
-  const { isAuthenticated, isCurrentPlan, canUpgrade } = usePricing();
+const PricingCardContent = ({ plan }: PricingCardProps) => {
+  const { isAuthenticated, isCurrentPlan, canUpgrade, isLoading } = usePricing();
   
   const getButtonConfig = () => {
+    if (isLoading) {
+      return {
+        text: "",
+        disabled: true,
+        link: null
+      };
+    }
+
     if (!isAuthenticated) {
       return {
         text: "GET STARTED",
@@ -64,18 +74,51 @@ const PricingCard = ({ plan }: PricingCardProps) => {
         </ul>
       </div>
 
-      <Button
-        className="w-full mt-6 md:mt-8 bg-black uppercase hover:bg-black/90 h-9 md:h-11 text-sm md:text-base disabled:opacity-70"
-        asChild={!buttonConfig.disabled && !!buttonConfig.link}
-        disabled={buttonConfig.disabled}
-      >
-        {buttonConfig.link ? (
-          <Link href={buttonConfig.link}>{buttonConfig.text}</Link>
-        ) : (
-          buttonConfig.text
-        )}
-      </Button>
+      {isLoading ? (
+        <Skeleton className="w-full h-[36px] md:h-[44px] mt-6 md:mt-8" />
+      ) : (
+        <Button
+          className="w-full mt-6 md:mt-8 bg-black uppercase hover:bg-black/90 h-9 md:h-11 text-sm md:text-base disabled:opacity-70"
+          asChild={!buttonConfig.disabled && !!buttonConfig.link}
+          disabled={buttonConfig.disabled}
+        >
+          {buttonConfig.link ? (
+            <Link href={buttonConfig.link}>{buttonConfig.text}</Link>
+          ) : (
+            buttonConfig.text
+          )}
+        </Button>
+      )}
     </Card>
+  );
+};
+
+const PricingCard = (props: PricingCardProps) => {
+  return (
+    <Suspense fallback={
+      <Card className="py-6 px-3 md:p-8 flex flex-col">
+        <div className="flex-1">
+          <Skeleton className="w-24 h-7 mb-2" />
+          <Skeleton className="w-full h-4 mb-6" />
+          
+          <div className="mb-6 md:mb-8 mt-8 md:mt-10">
+            <Skeleton className="w-20 h-10" />
+          </div>
+
+          <div className="space-y-3 md:space-y-4">
+            {[1, 2, 3].map((_, index) => (
+              <div key={index} className="flex gap-2">
+                <Skeleton className="h-5 w-5 shrink-0" />
+                <Skeleton className="w-full h-4" />
+              </div>
+            ))}
+          </div>
+        </div>
+        <Skeleton className="w-full h-[36px] md:h-[44px] mt-6 md:mt-8" />
+      </Card>
+    }>
+      <PricingCardContent {...props} />
+    </Suspense>
   );
 };
 
