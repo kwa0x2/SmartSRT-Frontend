@@ -22,12 +22,17 @@ const SingleFileCard = ({ item }: { item: File }) => {
             {item?.heading}
           </p>
           <p className="text-sm font-normal text-default-600 dark:text-primary-foreground">
-            <span>{item?.date}</span> / <span>{item?.duration} minutes</span>
+            <span>{item?.date}</span> / <span>{item?.duration}</span>
           </p>
         </div>
 
         <div className="absolute top-3 right-3">
-          <Button size="icon" variant="outline" className="h-6 w-6">
+          <Button 
+            size="icon" 
+            variant="outline" 
+            className="h-6 w-6"
+            onClick={() => window.open(item.downloadUrl, '_blank')}
+          >
             <Icon icon="heroicons:arrow-down-tray" className="h-4 w-4" />
           </Button>
         </div>

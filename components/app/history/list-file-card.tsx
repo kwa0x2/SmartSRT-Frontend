@@ -50,7 +50,7 @@ const ListFileCard = ({ files }: { files: File[] }) => {
               </TableCell>
 
               <TableCell className="whitespace-nowrap">
-                {item?.duration} minutes
+                {item?.duration}
               </TableCell>
               
               <TableCell className="whitespace-nowrap">
@@ -63,6 +63,7 @@ const ListFileCard = ({ files }: { files: File[] }) => {
                     size="icon"
                     variant="outline"
                     className="h-7 w-7"
+                    onClick={() => window.open(item.downloadUrl, '_blank')}
                   >
                     <Icon
                       icon="heroicons:arrow-down-tray"
