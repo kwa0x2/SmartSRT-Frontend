@@ -159,6 +159,10 @@ const config = {
             transform: "scale3d(1, 1, 1)",
           },
         },
+        loading: {
+          '0%, 100%': { opacity: '0.2' },
+          '50%': { opacity: '0.8' },
+        },
       },
       boxShadow: {
         base: "0px 0px 1px rgba(40, 41, 61, 0.08), 0px 0.5px 2px rgba(96, 97, 112, 0.16)",
@@ -176,6 +180,11 @@ const config = {
         zoom: "zoom 1s ease-in-out infinite",
         "caret-blink": "caret-blink 1.25s ease-out infinite",
         tada: "tada 1.5s ease-in-out infinite",
+        loading: 'loading 1.4s ease-in-out infinite',
+      },
+      animationDelay: {
+        '0.2s': '0.2s',
+        '0.4s': '0.4s',
       },
     },
   },

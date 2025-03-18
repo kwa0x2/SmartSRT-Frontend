@@ -37,7 +37,7 @@ useEffect(() => {
     const fetchHistories = async () => {
       try {
         const histories = await findHistories();
-        const formattedFiles = histories.map((history) => ({
+        const formattedFiles = (histories || []).map((history) => ({
           id: history.ID,
           heading: history.FileName,
           date: format(new Date(history.CreatedAt), "d MMM yyyy"),
