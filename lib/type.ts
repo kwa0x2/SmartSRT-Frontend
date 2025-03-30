@@ -27,5 +27,5 @@ export type sidebarType = "classic" | "draggable" | "two-column" | "compact";
 export type navBarType = "floating" | "sticky" | "hidden" | "default";
 export type headerColorType = "default" | "coloured" | "transparent";
 
-export type userRole = "free" | "pro";
+export type roleType = "free" | "pro";
 export type authType = "google" | "github" | "credentials";

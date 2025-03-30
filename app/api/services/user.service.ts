@@ -1,7 +1,23 @@
 import { getMyCookie } from "@/hooks/get-my-cookie";
 import axios from "../axios";
+import { authType, roleType } from "@/lib/type";
 
-export const getLoggedInUserServer = async () => {
+export interface User {
+    ID: string;           // bson ObjectID
+    Name: string;
+    Email: string;
+    PhoneNumber: string;
+    Password?: string;    
+    AvatarURL?: string;   
+    Role: roleType;
+    AuthType?: authType;  
+    LastLogin?: string;   
+    CreatedAt: string;   
+    UpdatedAt: string;    
+    DeletedAt?: string;   
+}
+
+export const getLoggedInUserServer = async (): Promise<User> => {
   const query = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/me`, {
     headers: {
       Cookie: `${getMyCookie()}`,
@@ -9,11 +25,11 @@ export const getLoggedInUserServer = async () => {
   });
 
   const response = await query.json();
-  return response;
+  return response as User;
 };
 
 export const getLoggedInUser = async () => {
-  return await axios.get(`/user/me`);
+  return await axios.get<User>(`/user/me`);
 };
 
 export const CheckEmailExists = async (email: string) => {

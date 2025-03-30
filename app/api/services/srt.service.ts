@@ -1,8 +1,8 @@
-import axios, { MessageResponse } from "../axios";
+import axios from "../axios";
 
 export interface SRTHistory {
-  ID: string;
-  UserID: string;
+  ID: string; // bson ObjectID     
+  UserID: string; // bson ObjectID     
   FileName: string;
   S3URL: string;
   Duration: number;
