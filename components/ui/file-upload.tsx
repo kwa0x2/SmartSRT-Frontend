@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { IconUpload, IconTrash } from "@tabler/icons-react";
 import { useDropzone } from "react-dropzone";
+import { toast } from "sonner";
 
 const mainVariant = {
   initial: {
@@ -25,6 +26,8 @@ const secondaryVariant = {
   },
 };
 
+const MAX_FILE_SIZE_MB = 24;
+
 export const FileUpload = ({
   onChange,
 }: {
@@ -37,14 +40,16 @@ export const FileUpload = ({
   const handleFileChange = async (newFiles: File[]) => {
     if (newFiles.length > 0) {
       const videoFile = newFiles[0];
+      if (videoFile.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
+        toast.error('File size exceeds 24MB limit.');
+        return;
+      }
       const video = document.createElement('video');
-      video.preload = 'metadata';
-      
-      video.onloadedmetadata = () => {
-        setDuration(video.duration);
-      };
-
       video.src = URL.createObjectURL(videoFile);
+      video.onloadedmetadata = () => {
+        const duration = video.duration;
+        setDuration(duration);
+      };
       setFile(videoFile);
       onChange && onChange(videoFile);
     }
@@ -62,11 +67,12 @@ export const FileUpload = ({
     noClick: true,
     accept: {
       'video/mp4': ['.mp4'],
-      'video/quicktime': ['.mov'],
+      'audio/mpeg': ['.mp3'],
+      'audio/wav': ['.wav']
     },
     onDrop: handleFileChange,
-    onDropRejected: (error) => {
-      console.log(error);
+    onDropRejected: () => {
+      toast.error('Only .mp4, .mp3 and .wav files are accepted.');
     },
   });
 
@@ -88,14 +94,14 @@ export const FileUpload = ({
           type="file"
           onChange={(e) => handleFileChange(Array.from(e.target.files || []))}
           className="hidden"
-          accept=".mp4,.mov"
+          accept=".mp4,.mp3,.wav"
         />
         <div className="flex flex-col items-center justify-center">
           <p className="relative z-20 font-sans font-bold text-black text-base md:text-xl">
-            Upload video
+            Upload file
           </p>
           <p className="relative z-20 font-sans font-normal text-black text-sm md:text-lg mt-2 text-center">
-            Drag or drop your video here or click to upload
+            Drag or drop your file here (mp4, mp3, wav) or click to upload
           </p>
           <div className="relative w-full mt-10 max-w-xl mx-auto">
             {file ? (

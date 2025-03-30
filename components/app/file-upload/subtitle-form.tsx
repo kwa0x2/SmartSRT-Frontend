@@ -75,12 +75,12 @@ export function SubtitleForm({ file }: SubtitleFormProps) {
         data.consider_punctuation
       );
 
-      toast.success("SRT file generated successfully!")
+      toast.success(response.body.message)
       router.push(response.body.srt_url);
 
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error generating SRT:", error);
-      toast.error("Failed to generate SRT file. Please try again.");
+      toast.error(error.response?.data?.message || "An error occurred. Please try again later or contact support.");
     } finally {
       setIsLoading(false);
     }

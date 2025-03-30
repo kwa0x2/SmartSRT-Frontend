@@ -1,4 +1,4 @@
-import axios from "../axios";
+import axios, { MessageResponse } from "../axios";
 
 export interface SRTHistory {
   ID: string;
@@ -11,17 +11,6 @@ export interface SRTHistory {
   DeletedAt: string | null;
 }
 
-export interface LambdaBodyResponse {
-  message: string;
-  srt_url: string;
-  duration: number;
-}
-
-export interface GenerateSRTResponse {
-  status_code: number;
-  body: LambdaBodyResponse;
-}
-
 export const findHistories = async (): Promise<SRTHistory[]> => {
   return (await axios.get("/srt/histories")).data;
 };
@@ -31,7 +20,7 @@ export const generateSRT = async (
   words_per_line: number,
   punctuation: boolean,
   consider_punctuation: boolean
-): Promise<GenerateSRTResponse> => {
+): Promise<any> => {
   const formData = new FormData();
   formData.append("file", file);
   formData.append("words_per_line", words_per_line.toString());

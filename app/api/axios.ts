@@ -7,3 +7,7 @@ export default axios.create({
     'Content-Type': 'application/json',
   },
 });
+
+export interface MessageResponse {
+  message: string;
+}
