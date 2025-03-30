@@ -1,7 +1,7 @@
 import NextAuth, { User as NextAuthUser } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { cookies } from "next/headers";
-import { authType, userRole } from "./type";
+import { authType, roleType } from "./type";
 import { getLoggedInUserServer } from "@/app/api/services/user.service";
 
 interface User extends NextAuthUser {
@@ -11,7 +11,7 @@ interface User extends NextAuthUser {
   phone: string;
   image: string;
   auth_type: authType;
-  role: userRole;
+  role: roleType;
   error: string
 }
 
@@ -22,7 +22,7 @@ declare module "next-auth" {
   interface User {
     phone: string;
     auth_type: authType;
-    role: userRole;
+    role: roleType;
     error: string
   }
 }
@@ -49,7 +49,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         session.user.phone = token.phone as string;
         session.user.image = token.picture as string;
         session.user.auth_type = token.auth_type as authType;
-        session.user.role = token.role as userRole;
+        session.user.role = token.role as roleType;
         session.user.error = token.error as string;
       }
       return session;
@@ -73,10 +73,10 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
           };
         }
 
-
-        if (existingUser && existingUser.PhoneNumber && existingUser.AvatarURL) {
+        if (existingUser && existingUser.PhoneNumber && existingUser.AvatarURL && existingUser.Role) {
           token.phone = existingUser.PhoneNumber;
           token.picture = existingUser.AvatarURL;
+          token.role = existingUser.Role;
         }
 
         return token;
@@ -99,7 +99,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
           phone: credentials.phone as string,
           image: credentials.avatar as string,
           auth_type: credentials.auth_type as authType,
-          role: credentials.role as userRole,
+          role: credentials.role as roleType,
           error: '' as string
         };
       },

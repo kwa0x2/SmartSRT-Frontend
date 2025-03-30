@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { IconUpload, IconTrash } from "@tabler/icons-react";
 import { useDropzone } from "react-dropzone";
 import { toast } from "sonner";
+import { useAuth } from "@/hooks/use-auth";
 
 const mainVariant = {
   initial: {
@@ -36,10 +37,17 @@ export const FileUpload = ({
   const [file, setFile] = useState<File | null>(null);
   const [duration, setDuration] = useState<number>(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { session } = useAuth();
 
   const handleFileChange = async (newFiles: File[]) => {
     if (newFiles.length > 0) {
       const videoFile = newFiles[0];
+
+      if (videoFile.type === 'audio/wav' && session?.user?.role !== 'pro') {
+        toast.error('You need to upgrade to the Pro plan to upload WAV files.');
+        return;
+      }
+
       if (videoFile.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
         toast.error('File size exceeds 24MB limit.');
         return;
@@ -61,18 +69,21 @@ export const FileUpload = ({
     onChange && onChange(null);
   };
 
-
   const { getRootProps, isDragActive } = useDropzone({
     multiple: false,
     noClick: true,
     accept: {
       'video/mp4': ['.mp4'],
       'audio/mpeg': ['.mp3'],
-      'audio/wav': ['.wav']
+      ...(session?.user?.role === 'pro' ? { 'audio/wav': ['.wav'] } : {})
     },
     onDrop: handleFileChange,
     onDropRejected: () => {
-      toast.error('Only .mp4, .mp3 and .wav files are accepted.');
+      if (session?.user?.role !== 'pro') {
+        toast.error('You need to upgrade to the Pro plan to upload WAV files.');
+      } else {
+        toast.error('Only .mp4, .mp3 and .wav files are accepted.');
+      }
     },
   });
 

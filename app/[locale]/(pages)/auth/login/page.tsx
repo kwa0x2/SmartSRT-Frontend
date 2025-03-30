@@ -5,7 +5,8 @@ import Social from "@/components/auth/social";
 import AuthLayout from "@/components/auth/auth-layout";
 import { toast } from "sonner";
 import { useEffect } from "react";
-import { useSearchParams } from "next/navigation";
+import { getMyCookie } from "@/hooks/get-my-cookie";
+import Cookies from "js-cookie";
 
 const errorMessages = {
   invalid_state: "Invalid or expired state parameter. Please retry the Google authentication process.",
@@ -15,16 +16,15 @@ const errorMessages = {
 } as const;
 
 const LoginPage = () => {
-  const searchParams = useSearchParams();
-
   useEffect(() => {
-    if (!searchParams) return;
+    const errorCode = Cookies.get("error")
     
-    const code = searchParams.get('error');
-    if (code && errorMessages[code as keyof typeof errorMessages]) {
-      toast.error(errorMessages[code as keyof typeof errorMessages]);
+    if (errorCode && errorMessages[errorCode as keyof typeof errorMessages]) {
+      toast.error(errorMessages[errorCode as keyof typeof errorMessages]);
+      
+      Cookies.remove("error");
     }
-  }, [searchParams]);
+  }, []);
   
   return (
     <div className="flex w-full items-center overflow-hidden min-h-dvh h-dvh basis-full">

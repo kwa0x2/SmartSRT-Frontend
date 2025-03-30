@@ -29,7 +29,6 @@ export default auth((req): any => {
   const response = NextResponse.next();
   const cookieString = getMyCookieValue();
   if (cookieString) {
-    console.log(cookieString)
     response.cookies.set("sid", cookieString, {
       maxAge: 86400,
       path: '/',
