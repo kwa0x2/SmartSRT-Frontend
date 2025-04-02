@@ -30,12 +30,12 @@ export const otpSend = async (data: { phone_number: string }) => {
 };
 
 export const forgotPassword = async (email: string) => {
-  return await axios.post(`/auth/password/forgot`, { email });
+  return await axios.post(`/auth/account/password/forgot`, { email });
 }
 
 export const resetPassword = async (jwt: string, password: string) => {
   return await axios.put(
-    `/auth/password/reset`, 
+    `/auth/account/password/reset`, 
     { password }, 
     {
       headers: {
@@ -45,6 +45,20 @@ export const resetPassword = async (jwt: string, password: string) => {
   );
 }
 
+export const deleteAccountRequest = async () => {
+  return await axios.get(`/auth/account/delete/request`);
+}
+
+export const deleteAccount = async (jwt: string) => {
+  return await axios.delete(
+    `/auth/account`, 
+    {
+      headers: {
+        Authorization: `${jwt}`
+      }
+    }
+  );
+}
 
 
 

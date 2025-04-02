@@ -4,19 +4,8 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
 import { useAccountManagement } from "@/hooks/use-account-management";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
 import { startTransition } from "react";
-import { forgotPassword } from "@/app/api/services/auth.service";
+import { forgotPassword, deleteAccountRequest } from "@/app/api/services/auth.service";
 import { toast } from "sonner";
 import { useAuth } from "@/hooks/use-auth";
 
@@ -44,6 +33,19 @@ const AccountManagement = () => {
     });
   };
 
+  const handleDeleteAccount = () => {
+    startTransition(async () => {
+      try {
+        await deleteAccountRequest();
+        toast.success("Account deletion request sent successfully. Please check your email.");
+      } catch (err: any) {
+        toast.error(
+          err.response?.data?.message || "Failed to send account deletion request"
+        );
+      }
+    });
+  };
+
   return (
     <Card className="space-y-4 md:space-y-6">
       <h3 className="text-base md:text-lg font-semibold">Account Management</h3>
@@ -57,7 +59,7 @@ const AccountManagement = () => {
               </p>
             </div>
 
-            <button className=" text-black text-xs md:text-sm tracking-wide font-bold" onClick={onChange}>
+            <button className="text-black text-xs md:text-sm tracking-wide font-bold" onClick={onChange}>
               Update
             </button>
           </div>
@@ -72,33 +74,15 @@ const AccountManagement = () => {
               This action cannot be undone
             </p>
           </div>
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button
-                variant="outline"
-                color="destructive"
-                className="uppercase text-xs md:text-sm"
-                size="sm"
-              >
-                Delete Account
-              </Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent className="max-w-[90%] md:max-w-lg">
-              <AlertDialogHeader>
-                <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  This action cannot be undone. This will permanently delete
-                  your account and all associated data.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction className="bg-destructive hover:bg-destructive/90">
-                  Delete Account
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+          <Button
+            variant="outline"
+            color="destructive"
+            className="uppercase text-xs md:text-sm"
+            size="sm"
+            onClick={handleDeleteAccount}
+          >
+            Delete Account
+          </Button>
         </div>
       </div>
     </Card>
