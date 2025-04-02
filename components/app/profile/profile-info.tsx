@@ -11,7 +11,7 @@ const ProfileInfoSkeleton = () => {
     <Card>
       <div className="flex items-center gap-3 md:gap-4">
         <Skeleton className="w-[60px] h-[60px] md:w-[80px] md:h-[80px] rounded-full" />
-        <div>
+        <div className="flex-1">
           <Skeleton className="w-32 h-6 md:h-7 mb-2" />
           <Skeleton className="w-48 h-5 md:h-6" />
         </div>
@@ -20,27 +20,37 @@ const ProfileInfoSkeleton = () => {
   );
 };
 
-const ProfileInfoContent = () => {
+interface ProfileInfoContentProps {
+  email?: string;
+  name?: string;
+  image?: string;
+}
+
+const ProfileInfoContent = ({ email, name, image }: ProfileInfoContentProps) => {
   const { user, isLoading } = useCurrentUser();
 
-  if (isLoading || !user) {
+  if (isLoading || (!user && !email && !name)) {
     return <ProfileInfoSkeleton />;
   }
+
+  const displayEmail = email || user?.email || "undefined@autosrt.com";
+  const displayName = name || user?.name || "Undefined";
+  const displayImage = image || user?.image;
 
   return (
     <Card>
       <div className="flex items-center gap-3 md:gap-4">
         <Avatar
-          src={user.image}
-          name={user.name}
+          src={displayImage}
+          name={displayName}
           className="w-[60px] md:w-[80px]"
         />
-        <div>
+        <div className="flex-1 text-left">
           <h2 className="text-lg md:text-xl font-semibold capitalize">
-            {user.name || "Undefined"}
+            {displayName}
           </h2>
           <p className="text-sm md:text-base text-muted-foreground">
-            {user.email || "undefined@autosrt.com"}
+            {displayEmail}
           </p>
         </div>
       </div>
@@ -48,10 +58,16 @@ const ProfileInfoContent = () => {
   );
 };
 
-const ProfileInfo = () => {
+interface ProfileInfoProps {
+  email?: string;
+  name?: string;
+  image?: string;
+}
+
+const ProfileInfo = ({ email, name, image }: ProfileInfoProps) => {
   return (
     <Suspense fallback={<ProfileInfoSkeleton />}>
-      <ProfileInfoContent />
+      <ProfileInfoContent email={email} name={name} image={image} />
     </Suspense>
   );
 };

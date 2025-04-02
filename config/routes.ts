@@ -13,6 +13,9 @@ export const publicRoutes = [
   "/tr/auth/reset-password",
   "/en/auth/otp",
   "/tr/auth/otp",
+  "/en/auth/account/delete",
+  "/tr/auth/account/delete",
+
 ];
 
 
