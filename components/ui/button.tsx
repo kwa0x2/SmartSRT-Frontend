@@ -22,7 +22,7 @@ const buttonVariants = cva(
         default: "",
         outline: "border  border-default text-default bg-transparent hover:bg-black hover:text-default-foreground hover:ring-0 hover:ring-transparent",
         soft: "text-default bg-default/10 hover:bg-default  hover:text-default-foreground",
-        ghost: "text-default bg-transparent hover:bg-default  hover:text-default-foreground hover:ring-0 hover:ring-transparent hover:ring-offset-0",
+        ghost: "text-default bg-transparent ",
         shadow: "shadow-md"
       },
       shadow: {
