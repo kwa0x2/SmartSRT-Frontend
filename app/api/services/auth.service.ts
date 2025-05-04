@@ -22,8 +22,8 @@ export const logoutServer = async () => {
     },
   });
   const response = await query.json();
-  return response; 
-} 
+  return response;
+};
 
 export const otpSend = async (data: { phone_number: string }) => {
   return await axios.post("/auth/otp/send", data);
@@ -31,34 +31,28 @@ export const otpSend = async (data: { phone_number: string }) => {
 
 export const forgotPassword = async (email: string) => {
   return await axios.post(`/auth/account/password/forgot`, { email });
-}
+};
 
 export const resetPassword = async (jwt: string, password: string) => {
   return await axios.put(
-    `/auth/account/password/reset`, 
-    { password }, 
+    `/auth/account/password/reset`,
+    { password },
     {
       headers: {
-        Authorization: `${jwt}`
-      }
+        Authorization: `${jwt}`,
+      },
     }
   );
-}
+};
 
 export const deleteAccountRequest = async () => {
   return await axios.get(`/auth/account/delete/request`);
-}
+};
 
 export const deleteAccount = async (jwt: string) => {
-  return await axios.delete(
-    `/auth/account`, 
-    {
-      headers: {
-        Authorization: `${jwt}`
-      }
-    }
-  );
-}
-
-
-
+  return await axios.delete(`/auth/account`, {
+    headers: {
+      Authorization: `${jwt}`,
+    },
+  });
+};

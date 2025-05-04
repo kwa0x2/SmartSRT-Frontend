@@ -7,7 +7,16 @@ export async function GET() {
   const authJsToken = cookieStore.get('authjs.session-token');
 
   if (!sid || !authJsToken) {
-    return NextResponse.json({ isAuthenticated: false }, { status: 401 });
+    const response = NextResponse.json({ isAuthenticated: false }, { status: 401 });
+    
+    response.cookies.set('sid', '', {
+      expires: new Date(0),
+      path: '/',
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production'
+    });
+    
+    return response;
   }
 
   return NextResponse.json({ isAuthenticated: true });

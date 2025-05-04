@@ -38,7 +38,6 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
   events: {
     signOut() {
       const cookieStore = cookies();
-  
       cookieStore.delete("sid");
       cookieStore.delete("next-auth.session-token");
     }
@@ -66,6 +65,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 
       try {
         const existingUser = await getLoggedInUserServer();
+
         if (!existingUser.Email) {    
           return {
             ...token,
@@ -74,6 +74,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         }
 
         if (existingUser && existingUser.PhoneNumber && existingUser.AvatarURL && existingUser.Role) {
+          token.sub = existingUser.ID
           token.phone = existingUser.PhoneNumber;
           token.picture = existingUser.AvatarURL;
           token.role = existingUser.Role;

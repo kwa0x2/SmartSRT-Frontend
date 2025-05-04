@@ -11,6 +11,7 @@ import { getMyAuthToken } from "@/hooks/get-my-cookie-server";
 import UnauthorizedError from "@/components/partials/error/401";
 import Loader from "@/components/loader";
 import { jwtDecode } from "jwt-decode";
+import { logoutAction } from "@/action/auth-action";
 
 interface JWTClaims {
   name: string;
@@ -58,6 +59,7 @@ const DeleteAccountPage = () => {
         if (response.status === 200) {
           Cookies.remove('token');
           Cookies.remove('sid');
+          await logoutAction()
           toast.success("Your account has been successfully deleted.");
           router.push("/");
         }
