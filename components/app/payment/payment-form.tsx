@@ -19,7 +19,11 @@ import {
 import { FaPaypal } from "react-icons/fa";
 import { CardTypeDetector } from './card-type-detector';
 
-export function PaymentForm() {
+interface PaymentFormProps {
+  ptxn: string | null;
+}
+
+export function PaymentForm({ ptxn }: PaymentFormProps) {
   const [method, setMethod] = useState("card");
   const form = useForm<PaymentFormData>({
     resolver: zodResolver(paymentFormSchema),
@@ -277,7 +281,7 @@ export function PaymentForm() {
                         defaultValue={field.value}
                         
                         onChange={(country) => {
-                          field.onChange(country.alpha3);
+                          field.onChange(country.alpha2);
                         }}
                         slim={false}
                       />

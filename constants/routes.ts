@@ -9,7 +9,7 @@ export const APP_ROUTES = {
   },
   PROFILE: "/app/profile",
   SUBSCRIPTION: "/app/subscription",
-  CHECKOUT: "/app/checkout",
+  CHECKOUT: "/app/payment",
   DOCS: {
     API: "/docs/api"
   }
