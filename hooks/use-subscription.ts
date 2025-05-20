@@ -37,7 +37,6 @@ export const useSubscription = () => {
     return Math.min((usage / limit) * 100, 100);
   };
 
-
   useEffect(() => {
     const fetchUsage = async () => {
       try {
@@ -51,7 +50,7 @@ export const useSubscription = () => {
     };
 
     fetchUsage();
-  }, []);
+  }, [session?.user?.role]);
 
   const planDetails = getPlanDetails();
 

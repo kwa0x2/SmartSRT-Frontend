@@ -7,10 +7,6 @@ import { usePricing } from "@/hooks/use-pricing";
 import { APP_ROUTES } from "@/constants/routes";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Suspense } from "react";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
-import { createCheckout, createCustomer } from "@/app/api/services/payment.service";
-import { useRouter } from "@/i18n/routing";
 
 interface PricingCardProps {
   plan: PricingPlan;
@@ -18,12 +14,9 @@ interface PricingCardProps {
 
 const PricingCardContent = ({ plan }: PricingCardProps) => {
   const { isAuthenticated, isCurrentPlan, canUpgrade, isLoading } = usePricing();
-  const pathname = usePathname();
-  const [isCreatingCustomer, setIsCreatingCustomer] = useState(false);
-  const router = useRouter();
-
+  
   const getButtonConfig = () => {
-    if (isLoading || isCreatingCustomer) {
+    if (isLoading) {
       return {
         text: "",
         disabled: true,
@@ -50,32 +43,8 @@ const PricingCardContent = ({ plan }: PricingCardProps) => {
     return {
       text: canUpgrade() ? "UPGRADE" : "CHANGE PLAN",
       disabled: false,
-      link: "/app/payment"
+      link: APP_ROUTES.CHECKOUT
     };
-  };
-
-  const handleCheckout = async () => {
-    try {
-      setIsCreatingCustomer(true);
-      const response = await createCustomer();
-
-      let checkoutUrl: string;
-      
-      if (response.status == 200) {
-        const response = await createCheckout({
-          PlanID: "pri_01jsyss63ghcrjtx0tmhgyfxps"
-        });
-        
-        checkoutUrl = `${APP_ROUTES.CHECKOUT}?_ptxn=${response.data.transaction_id}&returnUrl=${pathname}`;
-        router.push(checkoutUrl);
-
-      }
-      console.log("error")
-    } catch (error) {
-      console.error("Error creating customer:", error);
-    } finally {
-      setIsCreatingCustomer(false);
-    }
   };
 
   const buttonConfig = getButtonConfig();
@@ -110,11 +79,10 @@ const PricingCardContent = ({ plan }: PricingCardProps) => {
       ) : (
         <Button
           className="w-full mt-6 md:mt-8 bg-black uppercase hover:bg-black/90 h-9 md:h-11 text-sm md:text-base disabled:opacity-70"
-          asChild={!buttonConfig.disabled && !!buttonConfig.link && buttonConfig.link !== "/app/payment"}
+          asChild={!buttonConfig.disabled && !!buttonConfig.link}
           disabled={buttonConfig.disabled}
-          onClick={buttonConfig.link === "/app/payment" ? handleCheckout : undefined}
         >
-          {buttonConfig.link && buttonConfig.link !== "/app/payment" ? (
+          {buttonConfig.link ? (
             <Link href={buttonConfig.link}>{buttonConfig.text}</Link>
           ) : (
             buttonConfig.text
