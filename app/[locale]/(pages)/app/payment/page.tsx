@@ -1,6 +1,5 @@
 "use client";
 
-import { PaymentForm } from "@/components/app/payment/payment-form";
 import { PaymentSummary } from "@/components/app/payment/payment-summary";
 import { ReturnButton } from "@/components/app/payment/return-button";
 import { UserInfo } from "@/components/app/payment/user-info";
@@ -47,6 +46,9 @@ export default function PaymentPage() {
           setPaddle(paddleInstance);
           paddleInstance.Checkout.open({
             items: [{ priceId: "pri_01jsyss63ghcrjtx0tmhgyfxps", quantity: 1 }],
+            customData: {
+              user_id: "68037c5cb8434977b8084a9e",
+            },
           });
         }
       });
@@ -58,21 +60,23 @@ export default function PaymentPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#f8fafc] to-[#e0e7ef] flex items-center justify-center">
-      <div className="w-full max-w-7xl mx-auto px-4">
-        <div className="bg-white rounded-xl shadow-lg p-8">
+    <div className="min-h-screen bg-gradient-to-br from-[#f8fafc] to-[#e0e7ef] py-8 md:py-12">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 md:p-8">
           <ReturnButton returnUrl={returnUrl} />
 
-          <div className="flex flex-col lg:flex-row gap-12 max-w-6xl mx-auto">
+          <div className="flex flex-col lg:flex-row gap-6 lg:gap-12 max-w-6xl mx-auto mt-6">
             <PaymentSummary checkoutData={checkoutData} />
-            <Card className="w-full md:w-1/2 shadow-lg border-2 border-muted bg-white/90">
-              <CardContent className="flex flex-col h-full">
-                <div className={"checkout-container"} />
+            <Card className="w-full lg:w-1/2 shadow-lg border-2 border-muted bg-white/90">
+              <CardContent className="flex flex-col h-full p-4 sm:p-6">
+                <div className="checkout-container" />
               </CardContent>
             </Card>
           </div>
 
-          <UserInfo />
+          <div className="mt-6">
+            <UserInfo />
+          </div>
         </div>
       </div>
     </div>
