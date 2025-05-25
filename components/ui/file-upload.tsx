@@ -78,11 +78,18 @@ export const FileUpload = ({
       ...(session?.user?.role === 'pro' ? { 'audio/wav': ['.wav'] } : {})
     },
     onDrop: handleFileChange,
-    onDropRejected: () => {
-      if (session?.user?.role !== 'pro') {
-        toast.error('You need to upgrade to the Pro plan to upload WAV files.');
+    onDropRejected: (fileRejections) => {
+      const file = fileRejections[0]?.file;
+      if (!file) return;
+      const isWav = file.type === 'audio/wav' || file.name.endsWith('.wav');
+      const isMp4 = file.type === 'video/mp4' || file.name.endsWith('.mp4');
+      const isMp3 = file.type === 'audio/mpeg' || file.name.endsWith('.mp3');
+      if (isWav && session?.user?.role !== 'pro') {
+        toast.error('You need to upgrade to the Pro plan to upload WAV files.'); 
+      } else if (!isMp4 && !isMp3 && !isWav) {
+        toast.error('This file type is not supported. Only mp4, mp3, and wav files are accepted.');
       } else {
-        toast.error('Only .mp4, .mp3 and .wav files are accepted.');
+        toast.error('An error occurred. Please try again later or contact support.');
       }
     },
   });
@@ -112,7 +119,9 @@ export const FileUpload = ({
             Upload file
           </p>
           <p className="relative z-20 font-sans font-normal text-black text-sm md:text-lg mt-2 text-center">
-            Drag or drop your file here (mp4, mp3, wav) or click to upload
+            {session?.user?.role === 'pro'
+              ? 'Drag or drop your file here (mp4, mp3, wav) or click to upload'
+              : 'Drag or drop your file here (mp4, mp3) or click to upload'}
           </p>
           <div className="relative w-full mt-10 max-w-xl mx-auto">
             {file ? (

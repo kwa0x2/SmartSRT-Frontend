@@ -1,5 +1,7 @@
+export type PlanName = "Free" | "Pro";
+
 export interface PricingPlan {
-    name: string;
+    name: PlanName;
     description: string;
     price: {
       monthly: number;

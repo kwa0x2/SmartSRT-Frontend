@@ -45,6 +45,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
   callbacks: {
     async session({ token, session }) {
       if (session.user) {
+        session.user.id = token.sub as string;
         session.user.phone = token.phone as string;
         session.user.image = token.picture as string;
         session.user.auth_type = token.auth_type as authType;

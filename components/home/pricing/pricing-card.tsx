@@ -2,25 +2,56 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "@/i18n/routing";
 import { Check } from "lucide-react";
-import { PricingPlan } from "./pricing-data";
+import { PricingPlan, PlanName } from "./pricing-data";
 import { usePricing } from "@/hooks/use-pricing";
 import { APP_ROUTES } from "@/constants/routes";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Suspense } from "react";
+import { usePathname } from "next/navigation";
+import { createCustomerPortalSession } from "@/app/api/services/paddle.service";
+import { toast } from "sonner";
+import { useState } from "react";
 
 interface PricingCardProps {
   plan: PricingPlan;
 }
 
+interface ButtonConfig {
+  text: string;
+  disabled: boolean;
+  link: string | null;
+  onClick: (() => Promise<void>) | null;
+}
+
 const PricingCardContent = ({ plan }: PricingCardProps) => {
   const { isAuthenticated, isCurrentPlan, canUpgrade, isLoading } = usePricing();
+  const pathname = usePathname();
+  const [loading, setLoading] = useState(false);
+
+  const handleCustomerPortalRedirect = async () => {
+    setLoading(true);
+    try {
+      const res = await createCustomerPortalSession();
+      if(res.status === 200) {
+        const url = res.data?.urls?.general?.overview;
+        if (url) {
+          window.open(url, "_blank");
+        }
+      }
+    } catch (error: any) {
+      toast.error(error.response.data.message);
+    } finally {
+      setLoading(false);
+    }
+  };
   
-  const getButtonConfig = () => {
+  const getButtonConfig = (): ButtonConfig => {
     if (isLoading) {
       return {
         text: "",
         disabled: true,
-        link: null
+        link: null,
+        onClick: null
       };
     }
 
@@ -28,7 +59,8 @@ const PricingCardContent = ({ plan }: PricingCardProps) => {
       return {
         text: "GET STARTED",
         disabled: false,
-        link: APP_ROUTES.AUTH.REGISTER
+        link: APP_ROUTES.AUTH.REGISTER,
+        onClick: null
       };
     }
 
@@ -36,14 +68,25 @@ const PricingCardContent = ({ plan }: PricingCardProps) => {
       return {
         text: "CURRENT PLAN",
         disabled: true,
-        link: null
+        link: null,
+        onClick: null
+      };
+    }
+
+    if (plan.name === "Free" && isAuthenticated) {
+      return {
+        text: "DOWNGRADE",
+        disabled: false,
+        link: null,
+        onClick: handleCustomerPortalRedirect
       };
     }
 
     return {
       text: canUpgrade() ? "UPGRADE" : "CHANGE PLAN",
       disabled: false,
-      link: APP_ROUTES.CHECKOUT
+      link: `${APP_ROUTES.CHECKOUT}?returnUrl=${encodeURIComponent(pathname || '/')}`,
+      onClick: null
     };
   };
 
@@ -78,9 +121,12 @@ const PricingCardContent = ({ plan }: PricingCardProps) => {
         <Skeleton className="w-full h-[36px] md:h-[44px] mt-6 md:mt-8" />
       ) : (
         <Button
-          className="w-full mt-6 md:mt-8 bg-black uppercase hover:bg-black/90 h-9 md:h-11 text-sm md:text-base disabled:opacity-70"
+          className={`w-full mt-6 md:mt-8 uppercase h-9 md:h-11 text-sm md:text-base disabled:opacity-70 ${
+            plan.name === "Free" && isAuthenticated && !isCurrentPlan(plan.name) ? "bg-red-700 hover:bg-red-800" : "bg-black hover:bg-black/90"
+          }`}
           asChild={!buttonConfig.disabled && !!buttonConfig.link}
-          disabled={buttonConfig.disabled}
+          disabled={buttonConfig.disabled || loading}
+          onClick={buttonConfig.onClick || undefined}
         >
           {buttonConfig.link ? (
             <Link href={buttonConfig.link}>{buttonConfig.text}</Link>
