@@ -14,6 +14,11 @@ export const MENU_ITEMS = [
     icon: "heroicons:code-bracket-square",
     href: "/app/api",
   },
+  {
+    name: "Home",
+    icon: "heroicons:home",
+    href: "/",
+  },
   
 ] as const;
 

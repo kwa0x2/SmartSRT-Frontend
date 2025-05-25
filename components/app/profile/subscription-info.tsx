@@ -7,6 +7,7 @@ import { useSubscription } from "@/hooks/use-subscription";
 import { APP_ROUTES } from "@/constants/routes";
 import { useState } from "react";
 import { createCustomerPortalSession } from "@/app/api/services/paddle.service";
+import { toast } from "sonner";
 
 interface SubscriptionInfoProps {
   hideManageButton?: boolean;
@@ -22,11 +23,17 @@ const SubscriptionInfo = ({
     setLoading(true);
     try {
       const res = await createCustomerPortalSession();
-      const data = res.data;
-      if (data?.urls?.general?.overview) {
-        window.open(data.urls.general.overview, "_blank");
+      if(res.status === 200) {
+        const url = res.data?.urls?.general?.overview;
+        if (url) {
+          window.open(url, "_blank");
+        }
       }
-    } finally {
+      
+    } catch (error: any) {
+        toast.error(error.response.data.message);
+    }
+    finally {
       setLoading(false);
     }
   };
@@ -52,7 +59,7 @@ const SubscriptionInfo = ({
             </Link>
           )}
 
-          {planDetails.name === "Pro Plan" && (
+          {planDetails.name === "Pro Plan" && hideManageButton && (
               <button
                 className="font-bold text-xs md:text-sm tracking-wide cursor-pointer"
                 disabled={loading}
@@ -60,7 +67,6 @@ const SubscriptionInfo = ({
               >
                 Customer Portal
               </button>
-        
           )}
         </div>
       </div>

@@ -9,14 +9,21 @@ import { useEffect, useState } from "react";
 import { initializePaddle, type Paddle } from "@paddle/paddle-js";
 import type { CheckoutEventsData } from "@paddle/paddle-js/types/checkout/events";
 import { Card, CardContent } from "@/components/ui/card";
+import { useAuth } from "@/hooks/use-auth";
 
 export default function PaymentPage() {
   const searchParams = useSearchParams();
   const returnUrl = searchParams?.get("returnUrl");
+  const { session } = useAuth();
   const [paddle, setPaddle] = useState<Paddle | null>(null);
   const [checkoutData, setCheckoutData] = useState<CheckoutEventsData | null>(
     null
   );
+
+  
+  if (!returnUrl || !session?.user?.email) {
+    return <UnauthorizedError />;
+  }
 
   useEffect(() => {
     if (returnUrl && !paddle?.Initialized) {
@@ -42,22 +49,22 @@ export default function PaymentPage() {
           },
         },
       }).then((paddleInstance) => {
-        if (paddleInstance) {
+        if (paddleInstance && session.user.email) {
           setPaddle(paddleInstance);
           paddleInstance.Checkout.open({
             items: [{ priceId: "pri_01jsyss63ghcrjtx0tmhgyfxps", quantity: 1 }],
             customData: {
-              user_id: "68037c5cb8434977b8084a9e",
+              user_id: session.user.id,
+            },
+            customer: {
+              email: session.user.email
             },
           });
         }
       });
     }
-  }, [returnUrl, paddle?.Initialized]);
+  }, [returnUrl, paddle?.Initialized, session?.user?.email]);
 
-  if (!returnUrl) {
-    return <UnauthorizedError />;
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#f8fafc] to-[#e0e7ef] py-8 md:py-12">
