@@ -1,7 +1,7 @@
-export type PlanName = "Free" | "Pro";
+import { planType } from "@/lib/type";
 
 export interface PricingPlan {
-    name: PlanName;
+    name: planType;
     description: string;
     price: {
       monthly: number;
@@ -11,7 +11,7 @@ export interface PricingPlan {
   
   export const pricingPlans: PricingPlan[] = [
     {
-      name: "Free",
+      name: "free",
       description: "Try our AI-powered subtitle generation with high-quality speech recognition for your files",
       price: { monthly: 0 },
       features: [
@@ -23,7 +23,7 @@ export interface PricingPlan {
       ],
     },
     {
-      name: "Pro",
+      name: "pro",
       description: "Unlock higher upload limits for professional content creators who need more time",
       price: { monthly: 4.99 },
       features: [

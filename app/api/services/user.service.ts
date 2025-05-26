@@ -1,6 +1,6 @@
 import { getMyCookie } from "@/hooks/get-my-cookie";
 import axios from "../axios";
-import { authType, roleType } from "@/lib/type";
+import { authType, planType } from "@/lib/type";
 
 export interface User {
     ID: string;           // bson ObjectID
@@ -9,7 +9,7 @@ export interface User {
     PhoneNumber: string;
     Password?: string;    
     AvatarURL?: string;   
-    Role: roleType;
+    Role: planType;
     AuthType?: authType;  
     LastLogin?: string;   
     CreatedAt: string;   

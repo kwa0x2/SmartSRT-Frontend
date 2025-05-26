@@ -2,29 +2,30 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Link } from "@/i18n/routing";
 import { Icon } from "@/components/ui/icon";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { cn } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import { loginAction } from "@/action/auth-action";
 import { toast } from "sonner";
 import { LoginFormData, loginSchema } from "@/schemas/login.schema";
 import { credentialsLogin } from "@/app/api/services/auth.service";
 import { APP_ROUTES } from "@/constants/routes";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 const LoginForm = () => {
   const [isPending, startTransition] = React.useTransition();
   const [passwordVisible, setPasswordVisible] = React.useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-  } = useForm<LoginFormData>({
+  const form = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     mode: "onChange",
     defaultValues: {
@@ -32,8 +33,6 @@ const LoginForm = () => {
       password: "",
     },
   });
-
-  const watchFields = watch(["email", "password"]);
 
   const onSubmit = async (data: LoginFormData) => {
     startTransition(async () => {
@@ -75,80 +74,84 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mt-2 2xl:mt-4 space-y-4">
-      <div className="space-y-2">
-        <Label htmlFor="email">Email</Label>
-        <Input
-          size="lg"
-          disabled={isPending}
-          {...register("email")}
-          type="email"
-          id="email"
-          autoComplete="email"
-          placeholder="example@email.com"
-          className={cn("text-black", {
-            "border-destructive": errors.email,
-            "border-success": !errors.email && watchFields[0],
-          })}
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="mt-2 2xl:mt-4 space-y-4">
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input
+                  size="lg"
+                  type="email"
+                  placeholder="example@email.com"
+                  disabled={isPending}
+                  autoComplete="email"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-        {errors.email && (
-          <p className="text-destructive text-sm">{errors.email.message}</p>
-        )}
-      </div>
 
-      <div className="space-y-2">
-        <Label htmlFor="password">Password</Label>
-        <div className="relative">
-          <Input
-            size="lg"
-            disabled={isPending}
-            {...register("password")}
-            type={passwordVisible ? "text" : "password"}
-            id="password"
-            autoComplete="current-password"
-            placeholder="••••••••"
-            className={cn("text-black", {
-              "border-destructive": errors.password,
-              "border-success": !errors.password && watchFields[1],
-            })}
-          />
-          <button
-            type="button"
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors"
-            onClick={() => setPasswordVisible(!passwordVisible)}
-            tabIndex={-1}
+        <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Password</FormLabel>
+              <FormControl>
+                <div className="relative">
+                  <Input
+                    size="lg"
+                    type={passwordVisible ? "text" : "password"}
+                    placeholder="••••••••"
+                    disabled={isPending}
+                    autoComplete="current-password"
+                    {...field}
+                  />
+                  <button
+                    type="button"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors"
+                    onClick={() => setPasswordVisible(!passwordVisible)}
+                    tabIndex={-1}
+                  >
+                    <Icon
+                      icon={passwordVisible ? "heroicons:eye-slash" : "heroicons:eye"}
+                      className="w-5 h-5"
+                    />
+                  </button>
+                </div>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <div className="flex justify-end">
+          <Link
+            href="/auth/forgot-password"
+            className="text-sm text-default-800 dark:text-default-400 leading-6 font-medium"
           >
-            <Icon
-              icon={passwordVisible ? "heroicons:eye-slash" : "heroicons:eye"}
-              className="w-5 h-5"
-            />
-          </button>
+            Forgot Password?
+          </Link>
         </div>
-        {errors.password && (
-          <p className="text-destructive text-sm">{errors.password.message}</p>
-        )}
-      </div>
 
-      <div className="flex justify-end">
-        <Link
-          href="/auth/forgot-password"
-          className="text-sm text-default-800 dark:text-default-400 leading-6 font-medium"
-        >
-          Forgot Password?
-        </Link>
-      </div>
-
-      <Button type="submit" fullWidth disabled={isPending} className="mt-6">
-        {isPending ? (
-          <>
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            Logging in...
-          </>
-        ) : (
-          "Login"
-        )}
-      </Button>
-    </form>
+        <Button type="submit" fullWidth disabled={isPending} className="mt-6">
+          {isPending ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Logging in...
+            </>
+          ) : (
+            "Login"
+          )}
+        </Button>
+      </form>
+    </Form>
   );
 };
 
