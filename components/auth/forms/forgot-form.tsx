@@ -1,33 +1,32 @@
 "use client";
 import React from "react";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { forgotPassword } from "@/app/api/services/auth.service";
 import { Loader2 } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { ForgotFormData, forgotSchema } from "@/schemas/password.schema";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 
 const ForgotPass = () => {
   const [isPending, startTransition] = React.useTransition();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-  } = useForm<ForgotFormData>({
+  const form = useForm<ForgotFormData>({
     resolver: zodResolver(forgotSchema),
     mode: "onChange",
     defaultValues: {
       email: "",
     },
   });
-
-  const email = watch("email");
 
   const onSubmit = (data: ForgotFormData) => {
     startTransition(async () => {
@@ -41,43 +40,43 @@ const ForgotPass = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <div className="space-y-2">
-        <Label htmlFor="email">Email</Label>
-        <Input
-          id="email"
-          type="email"
-          placeholder="Enter your email"
-          disabled={isPending}
-          {...register("email")}
-          className={cn("text-black text-sm", {
-            "border-destructive": errors.email,
-            "border-success": !errors.email && email,
-          })}
-  
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input
+                  type="email"
+                  placeholder="Enter your email"
+                  disabled={isPending}
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
-        {errors.email && (
-          <div className="text-destructive text-sm">
-            {errors.email.message}
-          </div>
-        )}
-      </div>
 
-      <Button 
-        type="submit" 
-        fullWidth 
-        disabled={isPending}
-      >
-        {isPending ? (
-          <>
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            Sending Recovery Email...
-          </>
-        ) : (
-          "Send Recovery Email"
-        )}
-      </Button>
-    </form>
+        <Button 
+          type="submit" 
+          fullWidth 
+          disabled={isPending}
+        >
+          {isPending ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Sending Recovery Email...
+            </>
+          ) : (
+            "Send Recovery Email"
+          )}
+        </Button>
+      </form>
+    </Form>
   );
 };
 

@@ -61,7 +61,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         type={type}
         className={cn(
           inputVariants({ color, size }),
-          className
+          className, "text-black text-sm"
         )}
         ref={ref}
         {...props}

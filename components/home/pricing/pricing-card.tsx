@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "@/i18n/routing";
 import { Check } from "lucide-react";
-import { PricingPlan, PlanName } from "./pricing-data";
+import { PricingPlan } from "./pricing-data";
 import { usePricing } from "@/hooks/use-pricing";
 import { APP_ROUTES } from "@/constants/routes";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -11,6 +11,7 @@ import { usePathname } from "next/navigation";
 import { createCustomerPortalSession } from "@/app/api/services/paddle.service";
 import { toast } from "sonner";
 import { useState } from "react";
+import { planType } from "@/lib/type";
 
 interface PricingCardProps {
   plan: PricingPlan;
@@ -73,7 +74,8 @@ const PricingCardContent = ({ plan }: PricingCardProps) => {
       };
     }
 
-    if (plan.name === "Free" && isAuthenticated) {
+    const freePlan: planType = "free";
+    if (plan.name.toLowerCase() === freePlan && isAuthenticated) {
       return {
         text: "DOWNGRADE",
         disabled: false,
@@ -122,7 +124,7 @@ const PricingCardContent = ({ plan }: PricingCardProps) => {
       ) : (
         <Button
           className={`w-full mt-6 md:mt-8 uppercase h-9 md:h-11 text-sm md:text-base disabled:opacity-70 ${
-            plan.name === "Free" && isAuthenticated && !isCurrentPlan(plan.name) ? "bg-red-700 hover:bg-red-800" : "bg-black hover:bg-black/90"
+            plan.name.toLowerCase() === "free" && isAuthenticated && !isCurrentPlan(plan.name) ? "bg-red-700 hover:bg-red-800" : "bg-black hover:bg-black/90"
           }`}
           asChild={!buttonConfig.disabled && !!buttonConfig.link}
           disabled={buttonConfig.disabled || loading}
