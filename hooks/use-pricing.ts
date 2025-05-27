@@ -4,7 +4,7 @@ export const usePricing = () => {
   const { data: session, status } = useSession();
   const isLoading = status === "loading";
   const isAuthenticated = !!session?.user;
-  const currentPlan = session?.user?.role || "";
+  const currentPlan = session?.user?.plan || "";
 
   const isCurrentPlan = (planName: string) => {
     return currentPlan.toLowerCase() === planName.toLowerCase();

@@ -43,7 +43,7 @@ export const FileUpload = ({
     if (newFiles.length > 0) {
       const videoFile = newFiles[0];
 
-      if (videoFile.type === 'audio/wav' && session?.user?.role !== 'pro') {
+      if (videoFile.type === 'audio/wav' && session?.user?.plan !== 'pro') {
         toast.error('You need to upgrade to the Pro plan to upload WAV files.');
         return;
       }
@@ -75,7 +75,7 @@ export const FileUpload = ({
     accept: {
       'video/mp4': ['.mp4'],
       'audio/mpeg': ['.mp3'],
-      ...(session?.user?.role === 'pro' ? { 'audio/wav': ['.wav'] } : {})
+      ...(session?.user?.plan === 'pro' ? { 'audio/wav': ['.wav'] } : {})
     },
     onDrop: handleFileChange,
     onDropRejected: (fileRejections) => {
@@ -84,7 +84,7 @@ export const FileUpload = ({
       const isWav = file.type === 'audio/wav' || file.name.endsWith('.wav');
       const isMp4 = file.type === 'video/mp4' || file.name.endsWith('.mp4');
       const isMp3 = file.type === 'audio/mpeg' || file.name.endsWith('.mp3');
-      if (isWav && session?.user?.role !== 'pro') {
+      if (isWav && session?.user?.plan !== 'pro') {
         toast.error('You need to upgrade to the Pro plan to upload WAV files.'); 
       } else if (!isMp4 && !isMp3 && !isWav) {
         toast.error('This file type is not supported. Only mp4, mp3, and wav files are accepted.');
@@ -119,7 +119,7 @@ export const FileUpload = ({
             Upload file
           </p>
           <p className="relative z-20 font-sans font-normal text-black text-sm md:text-lg mt-2 text-center">
-            {session?.user?.role === 'pro'
+            {session?.user?.plan === 'pro'
               ? 'Drag or drop your file here (mp4, mp3, wav) or click to upload'
               : 'Drag or drop your file here (mp4, mp3) or click to upload'}
           </p>

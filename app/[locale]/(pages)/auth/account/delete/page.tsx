@@ -56,7 +56,7 @@ const DeleteAccountPage = () => {
 
     
         const response = await deleteAccount(token);
-        if (response.status === 200) {
+        if (response.status === 204) {
           Cookies.remove('token');
           Cookies.remove('sid');
           await logoutAction()

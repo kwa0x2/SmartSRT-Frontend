@@ -97,7 +97,7 @@ const PricingCardContent = ({ plan }: PricingCardProps) => {
   return (
     <Card className="py-6 px-3 md:p-8 flex flex-col">
       <div className="flex-1">
-        <h3 className="text-lg md:text-xl font-bold mb-2">{plan.name}</h3>
+        <h3 className="text-lg md:text-xl font-bold mb-2 capitalize">{plan.name}</h3>
         <p className="text-sm text-neutral-600 mb-6">{plan.description}</p>
 
         <div className="mb-6 md:mb-8 mt-8 md:mt-10">
