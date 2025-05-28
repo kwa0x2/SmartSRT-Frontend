@@ -14,9 +14,9 @@ export const useSubscription = () => {
   const [usage, setUsage] = useState(0);
   
   const getPlanDetails = (): PlanDetails => {
-    const role = session?.user?.role || 'free';
+    const plan = session?.user?.plan || 'free';
     
-    switch (role) {
+    switch (plan) {
       case 'pro':
         return {
           name: "Pro Plan",
@@ -50,7 +50,7 @@ export const useSubscription = () => {
     };
 
     fetchUsage();
-  }, [session?.user?.role]);
+  }, [session?.user?.plan]);
 
   const planDetails = getPlanDetails();
 

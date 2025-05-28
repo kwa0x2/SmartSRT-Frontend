@@ -39,7 +39,7 @@ const LoginForm = () => {
       try {
         const result = await credentialsLogin(data);
         if (result.status === 200) {
-          const { ID, Name, Email, PhoneNumber, AvatarURL, AuthType, Role } =
+          const { ID, Name, Email, PhoneNumber, AvatarURL, AuthType, Plan } =
             result.data;
 
           const loginResult = await loginAction(
@@ -49,7 +49,7 @@ const LoginForm = () => {
             PhoneNumber,
             AvatarURL,
             AuthType,
-            Role
+            Plan
           );
 
           if (loginResult) {

@@ -24,7 +24,7 @@ const VerifyPage = () => {
           result.data.PhoneNumber,
           result.data.AvatarURL,
           result.data.AuthType,
-          result.data.Role,
+          result.data.Plan,
         );
         if (loginResult) {
           window.location.href = "/app";

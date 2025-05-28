@@ -11,7 +11,7 @@ interface User extends NextAuthUser {
   phone: string;
   image: string;
   auth_type: authType;
-  role: planType;
+  plan: planType;
   error: string
 }
 
@@ -22,7 +22,7 @@ declare module "next-auth" {
   interface User {
     phone: string;
     auth_type: authType;
-    role: planType;
+    plan: planType;
     error: string
   }
 }
@@ -49,7 +49,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         session.user.phone = token.phone as string;
         session.user.image = token.picture as string;
         session.user.auth_type = token.auth_type as authType;
-        session.user.role = token.role as planType;
+        session.user.plan = token.plan as planType;
         session.user.error = token.error as string;
       }
       return session;
@@ -58,7 +58,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       if(user) {
         token.phone = user.phone;
         token.auth_type = user.auth_type;
-        token.role = user.role;
+        token.plan = user.plan;
         token.error = user.error;
       }
       
@@ -74,10 +74,10 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
           };
         }
 
-        if (existingUser && existingUser.PhoneNumber && existingUser.Role) {
+        if (existingUser && existingUser.PhoneNumber && existingUser.Plan) {
           token.sub = existingUser.ID
           token.phone = existingUser.PhoneNumber;
-          token.role = existingUser.Role;
+          token.plan = existingUser.Plan;
         }
 
         return token;
@@ -100,7 +100,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
           phone: credentials.phone as string,
           image: credentials.avatar as string,
           auth_type: credentials.auth_type as authType,
-          role: credentials.role as planType,
+          plan: credentials.plan as planType,
           error: '' as string
         };
       },

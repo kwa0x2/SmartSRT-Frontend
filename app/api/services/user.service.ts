@@ -9,7 +9,7 @@ export interface User {
     PhoneNumber: string;
     Password?: string;    
     AvatarURL?: string;   
-    Role: planType;
+    Plan: planType;
     AuthType?: authType;  
     LastLogin?: string;   
     CreatedAt: string;   
