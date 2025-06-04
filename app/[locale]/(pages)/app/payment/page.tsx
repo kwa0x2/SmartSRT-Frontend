@@ -10,18 +10,23 @@ import { initializePaddle, type Paddle } from "@paddle/paddle-js";
 import type { CheckoutEventsData } from "@paddle/paddle-js/types/checkout/events";
 import { Card, CardContent } from "@/components/ui/card";
 import { useAuth } from "@/hooks/use-auth";
+import { toast } from "sonner";
 
 export default function PaymentPage() {
   const searchParams = useSearchParams();
   const returnUrl = searchParams?.get("returnUrl");
   const { session } = useAuth();
   const [paddle, setPaddle] = useState<Paddle | null>(null);
-  const [checkoutData, setCheckoutData] = useState<CheckoutEventsData | null>(
-    null
-  );
+  const [checkoutData, setCheckoutData] = useState<CheckoutEventsData | null>(null);
 
+  useEffect(() => {
+    if (session?.user?.plan === "pro") {
+      toast.error("You are already on the Pro plan");
+      window.location.href = returnUrl || "/app";
+    }
+  }, [session?.user?.plan, returnUrl]);
   
-  if (!returnUrl || !session?.user?.email) {
+  if (!returnUrl || !session?.user?.email || session?.user?.plan === "pro") {
     return <UnauthorizedError />;
   }
 
@@ -61,10 +66,12 @@ export default function PaymentPage() {
             },
           });
         }
+      }).catch((error) => {
+        console.error("Failed to initialize Paddle:", error);
+        toast.error("Failed to initialize payment system");
       });
     }
   }, [returnUrl, paddle?.Initialized, session?.user?.email]);
-
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#f8fafc] to-[#e0e7ef] py-8 md:py-12">
