@@ -29,7 +29,7 @@ export interface PricingPlan {
       features: [
         "100 minutes upload limit per month",
         "AI-powered automatic subtitle generation",
-        "Maximum 3 minutes per file",
+        "Maximum 5 minutes per file",
         "Support for MP4, MP3 and WAV files",
         "Support for 32+ languages",
       ],
