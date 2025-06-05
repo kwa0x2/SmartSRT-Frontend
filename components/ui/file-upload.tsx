@@ -28,6 +28,8 @@ const secondaryVariant = {
 };
 
 const MAX_FILE_SIZE_MB = 24;
+const MAX_DURATION_SECONDS = 30; 
+const MAX_DURATION_SECONDS_PRO = 300;
 
 export const FileUpload = ({
   onChange,
@@ -52,14 +54,22 @@ export const FileUpload = ({
         toast.error('File size exceeds 24MB limit.');
         return;
       }
+
       const video = document.createElement('video');
       video.src = URL.createObjectURL(videoFile);
       video.onloadedmetadata = () => {
         const duration = video.duration;
+        const maxDuration = session?.user?.plan === 'pro' ? MAX_DURATION_SECONDS_PRO : MAX_DURATION_SECONDS;
+        
+        if (duration > maxDuration) {
+          toast.error(`File duration exceeds the limit. Maximum duration is ${maxDuration} seconds for your plan.`);
+          return;
+        }
+        
         setDuration(duration);
+        setFile(videoFile);
+        onChange && onChange(videoFile);
       };
-      setFile(videoFile);
-      onChange && onChange(videoFile);
     }
   };
 
