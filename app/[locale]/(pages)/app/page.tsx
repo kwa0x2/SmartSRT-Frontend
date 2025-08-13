@@ -4,14 +4,14 @@ import { FileUploadDemo } from "@/components/app/file-upload";
 import { useAuth } from "@/hooks/use-auth";
 import { ProBadge } from "@/components/app/pro-badge";
 
-export default function App() {
-  const { session } = useAuth();
+export default function AppPage() {
+  const { session, isLoading } = useAuth();
   const isPro = session?.user?.plan === "pro";
 
   return (
-    <Layout>
-      {isPro && <ProBadge />}
-      <FileUploadDemo />
-    </Layout>
+      <Layout>
+        {!isLoading && isPro && <ProBadge />}
+        <FileUploadDemo />
+      </Layout>
   );
 }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ApiKey } from "@/components/app/api/types";
+import {ApiKey} from "@/types";
 
 export const useApiKeys = () => {
   const [apiKeys, setApiKeys] = useState<ApiKey[]>([]);

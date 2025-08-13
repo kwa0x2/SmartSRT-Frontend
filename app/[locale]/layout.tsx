@@ -3,7 +3,6 @@ import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import "./theme.css";
 import MountedProvider from "@/providers/mounted.provider";
-import { Toaster } from "@/components/ui/toaster";
 import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 import { notFound } from "next/navigation";
 const spaceGrotesk = Space_Grotesk({
@@ -26,39 +25,37 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({
-  children,
-  params,
-}: Readonly<{
+                                           children,
+                                           params,
+                                         }: Readonly<{
   children: React.ReactNode;
   params: { locale: string };
 }>) {
-  const { locale } = await params;
+  const { locale } = params;
 
   const messages = await getMessages();
   const direction = getLangDir(locale);
 
-  // Desteklenmeyen locale'ler için 404
   if (!locales.includes(locale as any)) {
     notFound();
   }
 
   return (
-    <html lang={locale} dir={direction}>
+      <html lang={locale} dir={direction}>
       <body className={`${spaceGrotesk.className} autosrt-app`}>
-        <NextIntlClientProvider messages={messages} locale={locale}>
-          <AuthProvider>
-            {/* <ThemeProvider attribute="class" defaultTheme="dark"> */}
-            <MountedProvider>
-              <DirectionProvider direction={direction}>
-                {children}
-              </DirectionProvider>
-            </MountedProvider>
-            <Toaster />
-            <SonnerToaster />
-            {/* </ThemeProvider> */}
-          </AuthProvider>
-        </NextIntlClientProvider>
+      <NextIntlClientProvider messages={messages} locale={locale}>
+        <AuthProvider>
+          {/* <ThemeProvider attribute="class" defaultTheme="dark"> */}
+          <MountedProvider>
+            <DirectionProvider direction={direction}>
+              {children}
+            </DirectionProvider>
+          </MountedProvider>
+          <SonnerToaster />
+          {/* </ThemeProvider> */}
+        </AuthProvider>
+      </NextIntlClientProvider>
       </body>
-    </html>
+      </html>
   );
 }

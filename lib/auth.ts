@@ -1,8 +1,8 @@
 import NextAuth, { User as NextAuthUser } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { cookies } from "next/headers";
-import { authType, planType } from "./type";
-import { getLoggedInUserServer } from "@/app/api/services/user.service";
+import { AuthType, PlanType } from "@/types";
+import { getLoggedInUserServer } from "@/app/api/services/user-server.service";
 
 interface User extends NextAuthUser {
   id: string;
@@ -10,8 +10,8 @@ interface User extends NextAuthUser {
   email: string;
   phone: string;
   image: string;
-  auth_type: authType;
-  plan: planType;
+  auth_type: AuthType;
+  plan: PlanType;
   error: string
 }
 
@@ -21,8 +21,8 @@ declare module "next-auth" {
   }
   interface User {
     phone: string;
-    auth_type: authType;
-    plan: planType;
+    auth_type: AuthType;
+    plan: PlanType;
     error: string
   }
 }
@@ -48,8 +48,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         session.user.id = token.sub as string;
         session.user.phone = token.phone as string;
         session.user.image = token.picture as string;
-        session.user.auth_type = token.auth_type as authType;
-        session.user.plan = token.plan as planType;
+        session.user.auth_type = token.auth_type as AuthType;
+        session.user.plan = token.plan as PlanType;
         session.user.error = token.error as string;
       }
       return session;
@@ -61,13 +61,13 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         token.plan = user.plan;
         token.error = user.error;
       }
-      
+
       if (!token.sub) return token;
 
       try {
         const existingUser = await getLoggedInUserServer();
 
-        if (!existingUser.Email) {    
+        if (!existingUser.Email) {
           return {
             ...token,
             error: "invalid-session",
@@ -86,7 +86,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       }
     },
   },
-  session: { 
+  session: {
     strategy: "jwt",
     maxAge: 259200, // 3 day
   },
@@ -99,8 +99,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
           email: credentials.email as string,
           phone: credentials.phone as string,
           image: credentials.avatar as string,
-          auth_type: credentials.auth_type as authType,
-          plan: credentials.plan as planType,
+          auth_type: credentials.auth_type as AuthType,
+          plan: credentials.plan as PlanType,
           error: '' as string
         };
       },

@@ -12,14 +12,15 @@ export interface SRTHistory {
 }
 
 export const findHistories = async (): Promise<SRTHistory[]> => {
-  return (await axios.get("/srt/histories")).data;
+  const response = await axios.get("/srt/histories");
+  return response.data || [];
 };
 
 export const generateSRT = async (
-  file: File,
-  words_per_line: number,
-  punctuation: boolean,
-  consider_punctuation: boolean
+    file: File,
+    words_per_line: number,
+    punctuation: boolean,
+    consider_punctuation: boolean
 ): Promise<any> => {
   const formData = new FormData();
   formData.append("file", file);

@@ -2,9 +2,11 @@
 
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/ui/button";
+import { LoadingButton } from "@/components/ui/loading-button";
 import { Link } from "@/i18n/routing";
 import { useSubscription } from "@/hooks/use-subscription";
-import { APP_ROUTES } from "@/constants/routes";
+import { APP_ROUTES } from "@/config/routes";
 import { useState } from "react";
 import { createCustomerPortalSession } from "@/app/api/services/paddle.service";
 import { toast } from "sonner";
@@ -14,9 +16,9 @@ interface SubscriptionInfoProps {
 }
 
 const SubscriptionInfo = ({
-  hideManageButton = false,
-}: SubscriptionInfoProps) => {
-  const { planDetails, usagePercentage } = useSubscription();
+                            hideManageButton = false,
+                          }: SubscriptionInfoProps) => {
+  const { planDetails, usagePercentage, isPro, isLoading } = useSubscription();
   const [loading, setLoading] = useState(false);
 
   const handleCustomerPortalRedirect = async () => {
@@ -27,11 +29,12 @@ const SubscriptionInfo = ({
         const url = res.data?.urls?.general?.overview;
         if (url) {
           window.open(url, "_blank");
+        } else {
+          toast.error("Customer portal URL not available");
         }
       }
-      
     } catch (error: any) {
-        toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || "An unexpected error occurred");
     }
     finally {
       setLoading(false);
@@ -39,48 +42,48 @@ const SubscriptionInfo = ({
   };
 
   return (
-    <Card className="space-y-4 md:space-y-6">
-      <h3 className="text-base md:text-lg font-semibold">Current Plan</h3>
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-0">
-        <div>
-          <p className="font-medium text-sm md:text-base">{planDetails.name}</p>
-          <p className="text-xs md:text-sm text-muted-foreground">
-            {planDetails.limit} minutes upload limit per month
-          </p>
+      <Card className="space-y-4 md:space-y-6">
+        <h3 className="text-base md:text-lg font-semibold">Current Plan</h3>
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-0">
+          <div>
+            <p className="font-medium text-sm md:text-base">{planDetails.name}</p>
+            <p className="text-xs md:text-sm text-muted-foreground">
+              {planDetails.limit} minutes upload limit per month
+            </p>
+          </div>
+
+          <div className="flex items-center gap-4">
+            {!hideManageButton && (
+                <Link
+                    className="font-bold text-xs md:text-sm tracking-wide cursor-pointer"
+                    href={APP_ROUTES.SUBSCRIPTION}
+                >
+                  Manage Subscription
+                </Link>
+            )}
+
+            {isPro && hideManageButton && (
+                <button
+                    className="font-bold text-xs md:text-sm tracking-wide cursor-pointer"
+                    disabled={loading}
+                    onClick={handleCustomerPortalRedirect}
+                >
+                  Customer Portal
+                </button>
+            )}
+          </div>
         </div>
 
-        <div className="flex items-center gap-4">
-          {!hideManageButton && (
-            <Link
-              className="font-bold text-xs md:text-sm tracking-wide cursor-pointer"
-              href={APP_ROUTES.SUBSCRIPTION}
-            >
-              Manage Subscription
-            </Link>
-          )}
-
-          {planDetails.name === "Pro Plan" && hideManageButton && (
-              <button
-                className="font-bold text-xs md:text-sm tracking-wide cursor-pointer"
-                disabled={loading}
-                onClick={handleCustomerPortalRedirect}
-              >
-                Customer Portal
-              </button>
-          )}
-        </div>
-      </div>
-
-      <div className="space-y-2">
-        <div className="flex justify-between text-xs md:text-sm">
-          <span>Monthly Usage</span>
-          <span>
-            {planDetails.usage}/{planDetails.limit} minutes
+        <div className="space-y-2">
+          <div className="flex justify-between text-xs md:text-sm">
+            <span>Monthly Usage</span>
+            <span>
+            {isLoading ? "-/-" : `${planDetails.usage}/${planDetails.limit}`} minutes
           </span>
+          </div>
+          <Progress value={isLoading ? 0 : usagePercentage} className={`h-2 md:h-3`} />
         </div>
-        <Progress value={usagePercentage} className={`h-2 md:h-3 `} />
-      </div>
-    </Card>
+      </Card>
   );
 };
 

@@ -51,8 +51,6 @@
     "next-auth": "^5.0.0-beta.25",
     "next-intl": "^3.19.1",
     "next-themes": "^0.3.0",
-    "nextra": "^2.13.4",
-    "nextra-theme-docs": "^2.13.4",
     "prismjs": "^1.30.0",
     "react": "^18",
     "react-circle-flags": "^0.0.23",

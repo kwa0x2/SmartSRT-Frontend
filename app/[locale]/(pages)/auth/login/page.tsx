@@ -5,7 +5,6 @@ import Social from "@/components/auth/social";
 import AuthLayout from "@/components/auth/auth-layout";
 import { toast } from "sonner";
 import { useEffect } from "react";
-import { getMyCookie } from "@/hooks/get-my-cookie";
 import Cookies from "js-cookie";
 
 const errorMessages = {
@@ -18,42 +17,42 @@ const errorMessages = {
 const LoginPage = () => {
   useEffect(() => {
     const errorCode = Cookies.get("error")
-    
+
     if (errorCode && errorMessages[errorCode as keyof typeof errorMessages]) {
       toast.error(errorMessages[errorCode as keyof typeof errorMessages]);
-      
+
       Cookies.remove("error");
     }
   }, []);
-  
+
   return (
-    <div className="flex w-full items-center overflow-hidden min-h-dvh h-dvh basis-full">
-      <div className="overflow-y-auto flex flex-wrap w-full h-dvh">
-        <AuthLayout
-          title="Login"
-          subtitle="Login to your account to start using AutoSRT"
-        >
-          <div className="max-w-[242px] mx-auto mt-2 w-full">
-            <Social locale="en" status="in" />
-          </div>
-          <div className="relative border-b border-opacity-[30%] border-b-[#000000] mt-2 pt-6">
-            <div className="absolute inline-block bg-white left-1/2 top-1/2 transform -translate-x-1/2 px-4 min-w-max text-sm text-default-500">
-              Or continue with
+      <div className="flex w-full items-center overflow-hidden h-dvh basis-full">
+        <div className="overflow-y-auto flex flex-wrap w-full h-dvh">
+          <AuthLayout
+              title="Login"
+              subtitle="Login to your account to start using AutoSRT"
+          >
+            <div className="max-w-[242px] mx-auto mt-2 w-full">
+              <Social status="in" />
             </div>
-          </div>
-          <LoginForm />
-          <div className="md:max-w-[345px] mt-6 mx-auto font-normal text-default-500 md:mt-6 text-sm">
-            Don't have an account?{" "}
-            <Link
-              href="/auth/register"
-              className="text-default-900 font-medium hover:underline"
-            >
-              Register
-            </Link>
-          </div>
-        </AuthLayout>
+            <div className="relative border-b border-opacity-[30%] border-b-[#000000] mt-2 pt-6">
+              <div className="absolute inline-block bg-white left-1/2 top-1/2 transform -translate-x-1/2 px-4 min-w-max text-sm text-default-500">
+                Or continue with
+              </div>
+            </div>
+            <LoginForm />
+            <div className="md:max-w-[345px] mt-6 mx-auto font-normal text-default-500 text-sm">
+              Don&#39;t have an account?{" "}
+              <Link
+                  href="/auth/register"
+                  className="text-default-900 font-medium hover:underline"
+              >
+                Register
+              </Link>
+            </div>
+          </AuthLayout>
+        </div>
       </div>
-    </div>
   );
 };
 

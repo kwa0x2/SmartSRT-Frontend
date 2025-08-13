@@ -6,10 +6,10 @@ export interface Usage {
     StartDate: string;     // Subscription start date, renews every 30 days
     MonthlyUsage: number;  // Usage duration for current period (minutes)
     TotalUsage: number;    // Total usage duration since registration (minutes)
-    CreatedAt: string;    
-    UpdatedAt: string;     
+    CreatedAt: string;
+    UpdatedAt: string;
 }
 
 export const getUsage = async () => {
-    return await axios.get<Usage>("/usage")
+    return axios.get<Usage>("/usage");
 }
