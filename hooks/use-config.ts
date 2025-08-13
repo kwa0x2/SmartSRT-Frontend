@@ -1,6 +1,6 @@
 import { useAtom } from "jotai"
 import { atomWithStorage } from "jotai/utils"
-import { layoutType, sidebarType, navBarType} from "@/lib/type"
+import { LayoutType, SidebarType, NavBarType} from "@/types"
 
 
 
@@ -8,14 +8,14 @@ export type Config = {
   collapsed: boolean
   theme: string
   skin: 'default' | 'bordered'
-  layout: layoutType
-  sidebar: sidebarType
+  layout: LayoutType
+  sidebar: SidebarType
   menuHidden: boolean,
   showSearchBar: boolean,
   showSwitcher: boolean
   topHeader: 'default' | 'links'
   contentWidth: 'wide' | 'boxed'
-  navbar: navBarType
+  navbar: NavBarType
   footer: 'sticky' | 'default' | 'hidden'
   isRtl: boolean
   subMenu: boolean

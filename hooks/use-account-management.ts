@@ -1,10 +1,10 @@
 import { useCurrentUser } from "./use-current-user";
-import { APP_ROUTES } from "@/constants/routes";
+import {APP_ROUTES} from "@/config";
 
 export const useAccountManagement = () => {
   const currentUser = useCurrentUser();
 
-  const canChangePassword = currentUser?.auth_type === 'credentials';
+  const canChangePassword = currentUser?.user?.auth_type === 'credentials';
 
   return {
     canChangePassword,

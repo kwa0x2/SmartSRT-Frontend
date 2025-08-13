@@ -1,16 +1,16 @@
 "use server";
 import { signIn, signOut } from "@/lib/auth";
 import { cookies } from "next/headers";
-import { logout, logoutServer } from "@/app/api/services/auth.service";
+import { logoutServer } from "@/app/api/services/user-server.service";
 
 export const loginAction = async (
-  id: string,
-  name: string,
-  email: string,
-  phone: string,
-  avatar: string,
-  auth_type: string,
-  plan: string
+    id: string,
+    name: string,
+    email: string,
+    phone: string,
+    avatar: string,
+    auth_type: string,
+    plan: string
 ) => {
   try {
     const result = await signIn("credentials", {
@@ -25,13 +25,11 @@ export const loginAction = async (
     });
 
     if (result?.error) {
-      console.error("signIn error:", result.error);
       return false;
     }
 
     return true;
   } catch (error) {
-    console.error("Login action error:", error);
     return false;
   }
 };
@@ -39,13 +37,12 @@ export const loginAction = async (
 export async function logoutAction() {
   try {
     await logoutServer();
-    
+
     const cookieStore = cookies();
     cookieStore.delete("sid");
-    
+
     return await signOut({ redirect: false });
   } catch (error) {
-    console.error("Logout action error:", error);
     const cookieStore = cookies();
     cookieStore.delete("sid");
     return await signOut({ redirect: false });

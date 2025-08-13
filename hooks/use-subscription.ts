@@ -12,6 +12,7 @@ interface PlanDetails {
 export const useSubscription = () => {
   const { session } = useAuth();
   const [usage, setUsage] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   
   const getPlanDetails = (): PlanDetails => {
     const plan = session?.user?.plan || 'free';
@@ -39,6 +40,7 @@ export const useSubscription = () => {
 
   useEffect(() => {
     const fetchUsage = async () => {
+      setIsLoading(true);
       try {
         const result = await getUsage();
         if (result && result.data && typeof result.data.MonthlyUsage === 'number') {
@@ -46,6 +48,8 @@ export const useSubscription = () => {
         }
       } catch (error: any) {
         toast.error(error.response?.data?.message || "An error occurred. Please try again later or contact support.");
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -53,9 +57,12 @@ export const useSubscription = () => {
   }, [session?.user?.plan]);
 
   const planDetails = getPlanDetails();
+  const isPro = session?.user?.plan === 'pro';
 
   return {
     planDetails,
     usagePercentage: getUsagePercentage(planDetails.usage, planDetails.limit),
+    isPro,
+    isLoading,
   };
 }; 
