@@ -5,7 +5,7 @@ import { toast } from "sonner";
 
 interface PlanDetails {
   name: string;
-  limit: number; 
+  limit: number;
   usage: number;
 }
 
@@ -13,16 +13,16 @@ export const useSubscription = () => {
   const { session } = useAuth();
   const [usage, setUsage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const getPlanDetails = (): PlanDetails => {
     const plan = session?.user?.plan || 'free';
-    
+
     switch (plan) {
       case 'pro':
         return {
           name: "Pro Plan",
           limit: 100,
-          usage: usage, 
+          usage: usage,
         };
       case 'free':
       default:

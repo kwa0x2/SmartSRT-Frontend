@@ -41,7 +41,7 @@ const PricingCardContent = ({ plan }: PricingCardProps) => {
         }
       }
     } catch (error: any) {
-      toast.error(error.response.data.message);
+      toast.error(error.response.data.message || "An error occurred. Please try again later or contact support.");
     } finally {
       setLoading(false);
     }

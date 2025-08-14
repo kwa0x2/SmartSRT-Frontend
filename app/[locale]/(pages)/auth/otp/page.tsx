@@ -11,7 +11,7 @@ import { register } from "@/app/api/services/auth.service";
 import { toast } from "sonner";
 import { useRouter } from "@/i18n/routing";
 import {InvalidTokenError, jwtDecode} from "jwt-decode";
-import Cookies from "js-cookie";
+import { getCookieServer } from "@/hooks/get-my-cookie-server";
 import AuthLayout from "@/components/auth/auth-layout";
 import { AuthType } from "@/types";
 import UnauthorizedError from "@/components/partials/error/401";
@@ -32,9 +32,13 @@ const OtpPage = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    const token = Cookies.get("token");
-    setIsLoading(false);
-    setToken(token);
+    const fetchToken = async () => {
+      const token = await getCookieServer("token");
+      setIsLoading(false);
+      setToken(token);
+    };
+    
+    fetchToken();
   }, []);
 
   if (isLoading) {
@@ -60,15 +64,14 @@ const OtpPage = () => {
       };
 
       await register(finalData);
-      Cookies.remove('token');
       toast.success("Account created successfully. Please login.");
       router.push(APP_ROUTES.AUTH.LOGIN);
     } catch (error: any) {
       if (error.name === InvalidTokenError) {
-        toast.error("Invalid token. Please try registering again.");
+        toast.error("Invalid token. Please try again or contact support.");
         router.push(APP_ROUTES.AUTH.REGISTER);
       } else {
-        toast.error(error.response?.data?.message || "Registration failed. Please try again later or contact support.");
+        toast.error(error.response?.data?.message || "An error occurred. Please try again later or contact support.");
       }
     } finally {
       setIsSubmitting(false);

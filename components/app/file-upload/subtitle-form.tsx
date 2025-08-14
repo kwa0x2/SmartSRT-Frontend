@@ -84,9 +84,8 @@ export function SubtitleForm({ file }: SubtitleFormProps) {
       if (srtUrl) {
         router.push(srtUrl);
       } else {
-        toast.error("SRT URL not found.");
+        toast.error("An error occurred. Please try again later or contact support.");
       }
-
     } catch (error: any) {
       toast.error(error.response?.data?.message || "An error occurred. Please try again later or contact support.");
     } finally {

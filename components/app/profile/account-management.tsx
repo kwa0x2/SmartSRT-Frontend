@@ -19,7 +19,7 @@ const AccountManagement = () => {
     setIsSending(true);
     try {
       if (!session?.user.email) {
-        toast.error("Failed to send new password setup email");
+        toast.error("Failed to send new password setup email. Please try again or contact support.");
       } else {
         await forgotPassword(session.user.email);
         toast.success(
@@ -28,7 +28,7 @@ const AccountManagement = () => {
       }
     } catch (err: any) {
       toast.error(
-          err.response?.data?.message || "Failed to send new password setup email"
+          err.response?.data?.message || "Failed to send new password setup email. Please try again or contact support."
       );
     } finally {
       setIsSending(false);

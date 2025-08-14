@@ -19,7 +19,7 @@ export default function Home() {
         const response = await fetch("/api/auth/check-auth");
         const data = await response.json();
         setAuthStatus(data.isAuthenticated);
-      } catch (error) {
+      } catch  {
         toast.error(
           "An error occurred. Please try again later or contact support."
         );

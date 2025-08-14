@@ -111,7 +111,7 @@ const OtpForm = ({ onSubmit, onBack, isSubmitting = false }: OtpFormProps) => {
       if (error.response?.status === 302) {
         toast.error("This phone number is already registered");
       } else {
-        toast.error("Failed to send verification code. Please try again");
+        toast.error("Failed to send verification code. Please try again or contact support.");
       }
     } finally {
       setIsLoading(false);

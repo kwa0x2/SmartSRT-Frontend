@@ -36,7 +36,7 @@ const ForgotPass = () => {
       toast.success("Recovery email sent successfully. Please check your inbox.");
       form.reset({ email: "" });
     } catch (err: any) {
-      toast.error(err.response?.data?.message || "Failed to send recovery email");
+      toast.error(err.response?.data?.message || "Failed to send recovery email. Please try again later or contact support.");
     } finally {
       setIsLoading(false);
     }

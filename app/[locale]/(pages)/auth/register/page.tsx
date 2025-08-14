@@ -37,9 +37,9 @@ const RegisterPage = () => {
       }
     } catch (error: any) {
       if (error.response?.status === 302) {
-        toast.error(`An account with this email already exists. Please try a different email`);
+        toast.error("An account with this email already exists. Please try a different email");
       } else {
-        toast.error(`An error occurred while registering. Please try again or contact support.`);
+        toast.error("An error occurred while registering. Please try again later or contact support.");
       }
     } finally {
       setIsSubmitting(false);
@@ -55,7 +55,7 @@ const RegisterPage = () => {
       toast.success("Account created successfully. Please login.");
       router.push(APP_ROUTES.AUTH.LOGIN);
     } catch (error: any) {
-      toast.error(error.response?.data?.message || "Registration failed. Please try again.");
+      toast.error(error.response?.data?.message || "An error occurred while registering. Please try again later or contact support.");
     } finally {
       setIsSubmitting(false);
     }
