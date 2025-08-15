@@ -9,12 +9,9 @@ import { useEffect } from "react";
 import { APP_ROUTES } from "@/config/routes";
 import { getLoggedInUser } from "@/app/api/services/user.service";
 import { toast } from "sonner";
-import { useRouter } from "@/i18n/routing";
 
 const VerifyPage = () => {
   const { theme } = useTheme();
-  const router = useRouter();
-
 
   useEffect(() => {
     let isCancelled = false;
@@ -37,7 +34,7 @@ const VerifyPage = () => {
           if (isCancelled) return;
 
           if (loginResult) {
-            router.push(APP_ROUTES.APP);
+            window.location.href = APP_ROUTES.APP;
           } else {
             toast.error(
                 "An error occurred. Please try again later or contact support."
@@ -55,7 +52,7 @@ const VerifyPage = () => {
     return () => {
       isCancelled = true;
     };
-  }, [router]);
+  }, []);
 
   return (
       <div className="min-h-screen overflow-y-auto flex justify-center items-center p-10">

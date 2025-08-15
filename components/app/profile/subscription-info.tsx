@@ -63,13 +63,15 @@ const SubscriptionInfo = ({
             )}
 
             {isPro && hideManageButton && (
-                <button
-                    className="font-bold text-xs md:text-sm tracking-wide cursor-pointer"
-                    disabled={loading}
+                <LoadingButton
+                    variant="link"
+                    className="text-black text-xs md:text-sm tracking-wide font-bold !p-0 h-auto no-underline hover:no-underline"
                     onClick={handleCustomerPortalRedirect}
+                    loading={loading}
+                    loadingText="Opening..."
                 >
                   Customer Portal
-                </button>
+                </LoadingButton>
             )}
           </div>
         </div>
