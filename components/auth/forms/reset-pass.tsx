@@ -51,7 +51,7 @@ const ResetPassword = ({ authToken }: ResetPasswordProps) => {
         router.push(APP_ROUTES.AUTH.LOGIN);
       }
     } catch (err: any) {
-      toast.error(err.response?.data?.message || "An error occurred while resetting your password. Please try again.");
+      toast.error(err.response?.data?.message || "An error occurred while resetting your password. Please try again or contact support.");
     } finally {
       setIsLoading(false);
     }

@@ -62,7 +62,7 @@ const ProfileInfoContent = () => {
       toast.success("Logged out successfully");
       router.push("/");
     } catch (error) {
-      toast.error("Failed to logout. Please try again.");
+      toast.error("Failed to logout. Please try again or contact support.");
     } finally {
       setIsLoggingOut(false);
     }

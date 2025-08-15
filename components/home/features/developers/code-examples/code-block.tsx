@@ -70,7 +70,7 @@ console.log(srtContent);`,
       toast.success("Code copied to clipboard!");
       setTimeout(() => setCopied(false), 2000);
     } catch (error) {
-      toast.error("Failed to copy code");
+      toast.error("Failed to copy code. Please try again or contact support.");
     }
   };
 

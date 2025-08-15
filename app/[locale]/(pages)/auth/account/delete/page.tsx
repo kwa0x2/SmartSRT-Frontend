@@ -8,7 +8,7 @@ import {deleteAccount} from "@/app/api/services/auth.service";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import ProfileInfo from "@/components/app/profile/profile-info";
-import Cookies from "js-cookie";
+import { getCookieServer } from "@/hooks/get-my-cookie-server";
 import UnauthorizedError from "@/components/partials/error/401";
 import Loader from "@/components/loader";
 import { jwtDecode } from "jwt-decode";
@@ -28,18 +28,22 @@ const DeleteAccountPage = () => {
   const [userInfo, setUserInfo] = useState<JWTClaims | null>(null);
 
   useEffect(() => {
-    const token = Cookies.get('token');
-    setIsLoading(false);
-    setToken(token);
+    const fetchToken = async () => {
+      const token = await getCookieServer("token");
+      setIsLoading(false);
+      setToken(token);
 
-    if (token) {
-      try {
-        const decoded = jwtDecode<JWTClaims>(token);
-        setUserInfo(decoded);
-      } catch {
-        toast.error("Invalid or expired session. Please log in again.");
+      if (token) {
+        try {
+          const decoded = jwtDecode<JWTClaims>(token);
+          setUserInfo(decoded);
+        } catch {
+          toast.error("Invalid or expired session. Please log in again.");
+        }
       }
-    }
+    };
+
+    fetchToken();
   }, []);
 
   if (isLoading) {
@@ -60,7 +64,7 @@ const DeleteAccountPage = () => {
         router.push(APP_ROUTES.HOME);
       }
     } catch (err: any) {
-      toast.error(err.response?.data?.message || "An error occurred while deleting your account. Please try again.");
+      toast.error(err.response?.data?.message || "An error occurred while deleting your account. Please try again later or contact support.");
     } finally {
       setIsDeleting(false);
     }

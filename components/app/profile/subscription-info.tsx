@@ -30,11 +30,11 @@ const SubscriptionInfo = ({
         if (url) {
           window.open(url, "_blank");
         } else {
-          toast.error("Customer portal URL not available");
+          toast.error("An error occurred. Please try again later or contact support.");
         }
       }
     } catch (error: any) {
-      toast.error(error.response?.data?.message || "An unexpected error occurred");
+      toast.error(error.response?.data?.message || "An error occurred. Please try again later or contact support.");
     }
     finally {
       setLoading(false);

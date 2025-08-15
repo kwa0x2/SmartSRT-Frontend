@@ -68,7 +68,7 @@ export default function PaymentPage() {
           });
         }
       }).catch(() => {
-        toast.error("Failed to initialize payment system");
+        toast.error("Failed to initialize payment system. Please try again later or contact support.");
       });
     }
   }, [returnUrl, paddle, session?.user?.email]);
@@ -98,7 +98,7 @@ export default function PaymentPage() {
             </div>
 
             <div className="mt-6">
-              <UserInfo />
+              <UserInfo email={session.user.email} />
             </div>
           </div>
         </div>

@@ -1,9 +1,7 @@
-import { useSession } from "next-auth/react";
+import { useAuth } from "./use-auth";
 
-export const usePricing = () => {
-  const { data: session, status } = useSession();
-  const isLoading = status === "loading";
-  const isAuthenticated = !!session?.user;
+export const  usePricing = () => {
+  const { session, isAuthenticated, isLoading } = useAuth();
   const currentPlan = session?.user?.plan || "";
 
   const isCurrentPlan = (planName: string) => {
