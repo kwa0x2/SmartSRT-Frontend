@@ -18,6 +18,7 @@ import { useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Suspense } from "react";
 import { useRouter } from "@/i18n/routing";
+
 import { toast } from "sonner";
 import { LoadingButton } from "@/components/ui/loading-button";
 
@@ -122,16 +123,17 @@ const ProfileInfoContent = () => {
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem
-                className="flex items-center gap-2 text-sm font-medium text-rose-900 focus:text-rose-900 focus:bg-rose-100 capitalize my-1 px-3">
-              <form
-                  action={handleLogout}
-                  className="w-full"
-              >
-                <button type="submit" className="w-full flex items-center gap-2">
+                className="flex items-center text-sm font-medium text-rose-900 focus:text-rose-900 focus:bg-rose-100 capitalize my-1 px-3">
+                <LoadingButton
+                    variant="link"
+                    className="w-full flex items-center gap-2 text-rose-900 !p-0 h-auto no-underline hover:no-underline justify-start text-sm font-medium"
+                    onClick={handleLogout}
+                    loading={isLoggingOut}
+                    loadingText="Logging out..."
+                >
                   <Icon icon="heroicons:power" className="w-4 h-4"/>
                   Log out
-                </button>
-              </form>
+                </LoadingButton>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

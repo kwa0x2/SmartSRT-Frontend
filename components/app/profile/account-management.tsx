@@ -1,7 +1,6 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { LoadingButton } from "@/components/ui/loading-button";
 import { useAccountManagement } from "@/hooks/use-account-management";
 import { useState } from "react";
@@ -65,8 +64,8 @@ const AccountManagement = () => {
                 </div>
 
                 <LoadingButton
-                    variant="ghost"
-                    className="text-black text-xs md:text-sm tracking-wide font-bold p-0 h-auto"
+                    variant="link"
+                    className="text-black text-xs md:text-sm tracking-wide font-bold !p-0 h-auto no-underline hover:no-underline"
                     onClick={onChange}
                     loading={isSending}
                     loadingText="Sending..."
