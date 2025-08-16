@@ -10,14 +10,14 @@ import { APP_ROUTES } from "@/config/routes";
 import { initializePaddle, type Paddle } from "@paddle/paddle-js";
 import type { CheckoutEventsData } from "@paddle/paddle-js/types/checkout/events";
 import { Card, CardContent } from "@/components/ui/card";
-import { useAuth } from "@/hooks/use-auth";
+import { useUser } from "@/hooks/use-user";
 import { toast } from "sonner";
 import Loader from "@/components/loader";
 
 export default function PaymentPage() {
   const searchParams = useSearchParams();
   const returnUrl = searchParams?.get("returnUrl");
-  const { session, isLoading } = useAuth();
+  const { session, isLoading } = useUser();
   const [paddle, setPaddle] = useState<Paddle | null>(null);
   const [checkoutData, setCheckoutData] = useState<CheckoutEventsData | null>(null);
 

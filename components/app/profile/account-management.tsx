@@ -2,15 +2,13 @@
 
 import { Card } from "@/components/ui/card";
 import { LoadingButton } from "@/components/ui/loading-button";
-import { useAccountManagement } from "@/hooks/use-account-management";
 import { useState } from "react";
 import { forgotPassword, deleteAccountRequest } from "@/app/api/services/auth.service";
 import { toast } from "sonner";
-import { useAuth } from "@/hooks/use-auth";
+import { useUser } from "@/hooks/use-user";
 
 const AccountManagement = () => {
-  const { canChangePassword } = useAccountManagement();
-  const { session } = useAuth();
+  const { canChangePassword, session } = useUser();
   const [isSending, setIsSending] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 

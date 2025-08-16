@@ -45,3 +45,8 @@ export const deleteAccount = async (jwt: string) => {
     },
   });
 };
+
+export const getCheckAuth = async () => {
+  const response = await fetch('/api/auth/check-auth');
+  return await response.json();
+};

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { apiAuthPrefix, publicRoutes } from "@/config/routes";
 import { routing } from "./i18n/routing";
-import { getMyCookieValue } from "@/hooks/get-my-cookie";
+import { getSIDCookieValue } from "@/hooks/get-my-cookie";
 
 export default auth((req): any => {
   const { nextUrl } = req;
@@ -27,7 +27,7 @@ export default auth((req): any => {
   }
 
   const response = NextResponse.next();
-  const cookieString = getMyCookieValue();
+  const cookieString = getSIDCookieValue(process.env.COOKIE_NAME as string);
   if (cookieString) {
     response.cookies.set("sid", cookieString, {
       maxAge: 86400,

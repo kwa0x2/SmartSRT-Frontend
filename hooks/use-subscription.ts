@@ -1,4 +1,4 @@
-import { useAuth } from "./use-auth";
+import { useUser } from "./use-user";
 import { getUsage } from "@/app/api/services/usage.service";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -10,14 +10,12 @@ interface PlanDetails {
 }
 
 export const useSubscription = () => {
-  const { session } = useAuth();
+  const { currentPlan, isPro } = useUser();
   const [usage, setUsage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
   const getPlanDetails = (): PlanDetails => {
-    const plan = session?.user?.plan || 'free';
-
-    switch (plan) {
+    switch (currentPlan) {
       case 'pro':
         return {
           name: "Pro Plan",
@@ -54,10 +52,9 @@ export const useSubscription = () => {
     };
 
     fetchUsage();
-  }, [session?.user?.plan]);
+  }, [currentPlan]);
 
   const planDetails = getPlanDetails();
-  const isPro = session?.user?.plan === 'pro';
 
   return {
     planDetails,
