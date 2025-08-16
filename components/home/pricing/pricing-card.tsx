@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Link } from "@/i18n/routing";
 import { Check } from "lucide-react";
 import { PricingPlan } from "./pricing-data";
-import { usePricing } from "@/hooks/use-pricing";
+import { useUser } from "@/hooks/use-user";
 import { APP_ROUTES } from "@/config/routes";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Suspense } from "react";
@@ -26,7 +26,7 @@ interface ButtonConfig {
 }
 
 const PricingCardContent = ({ plan }: PricingCardProps) => {
-  const { isAuthenticated, isCurrentPlan, canUpgrade, isLoading } = usePricing();
+  const { isAuthenticated, isCurrentPlan, canUpgrade, isLoading } = useUser();
   const pathname = usePathname();
   const [loading, setLoading] = useState(false);
 
@@ -48,15 +48,17 @@ const PricingCardContent = ({ plan }: PricingCardProps) => {
   };
 
   const getButtonConfig = (): ButtonConfig => {
+    // Show loading state during initial load
     if (isLoading) {
       return {
-        text: "",
+        text: "Loading...",
         disabled: true,
         link: null,
         onClick: null
       };
     }
 
+    // Only check authentication after loading is complete
     if (!isAuthenticated) {
       return {
         text: "GET STARTED",

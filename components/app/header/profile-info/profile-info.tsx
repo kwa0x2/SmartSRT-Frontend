@@ -13,7 +13,7 @@ import { logoutAction } from "@/action/auth-action";
 import { Inter } from "next/font/google";
 import { MENU_ITEMS } from "@/config/routes";
 import { Avatar } from "@/components/ui/avatar";
-import { useCurrentUser } from "@/hooks/use-current-user";
+import { useUser } from "@/hooks/use-user";
 import { useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Suspense } from "react";
@@ -37,7 +37,7 @@ const ProfileInfoSkeleton = () => {
 };
 
 const ProfileInfoContent = () => {
-  const { user, isLoading } = useCurrentUser();
+  const { user, isLoading } = useUser();
   const router = useRouter();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 

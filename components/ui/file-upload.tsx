@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { IconUpload, IconTrash } from "@tabler/icons-react";
 import { useDropzone } from "react-dropzone";
 import { toast } from "sonner";
-import { useAuth } from "@/hooks/use-auth";
+import { useUser } from "@/hooks/use-user";
 
 const mainVariant = {
   initial: {
@@ -39,7 +39,7 @@ export const FileUpload = ({
   const [file, setFile] = useState<File | null>(null);
   const [duration, setDuration] = useState<number>(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { session } = useAuth();
+  const { session } = useUser();
   const isPro = session?.user?.plan === 'pro';
 
   const handleFileChange = async (newFiles: File[]) => {

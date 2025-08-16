@@ -2,7 +2,7 @@
 
 import { Avatar } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
-import { useCurrentUser } from "@/hooks/use-current-user";
+import { useUser } from "@/hooks/use-user";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const ProfileInfoSkeleton = () => {
@@ -26,7 +26,7 @@ interface ProfileInfoContentProps {
 }
 
 const ProfileInfoContent = ({ email, name, image }: ProfileInfoContentProps) => {
-  const { user, isLoading } = useCurrentUser();
+  const { user, isLoading } = useUser();
 
   if (isLoading || (!user && !email && !name && !image)) {
     return <ProfileInfoSkeleton />;

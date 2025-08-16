@@ -2,7 +2,7 @@
 
 import { cookies } from "next/headers";
 
-export const getCookieServer = async (token: string) => {
+export const getCookieServer = async (cookieName: string) => {
     const cookieStore = cookies()
-    return cookieStore.get(token)?.value
+    return cookieStore.get(cookieName)?.value
 }
