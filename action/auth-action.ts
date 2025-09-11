@@ -10,7 +10,8 @@ export const loginAction = async (
     phone: string,
     avatar: string,
     auth_type: string,
-    plan: string
+    plan: string,
+    usage_limit: number
 ) => {
   try {
     const result = await signIn("credentials", {
@@ -21,6 +22,7 @@ export const loginAction = async (
       avatar,
       auth_type,
       plan,
+      usage_limit,
       redirect: false,
     });
 

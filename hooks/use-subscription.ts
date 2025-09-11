@@ -10,23 +10,25 @@ interface PlanDetails {
 }
 
 export const useSubscription = () => {
-  const { currentPlan, isPro } = useUser();
+  const { currentPlan, isPro, session } = useUser();
   const [usage, setUsage] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
   const getPlanDetails = (): PlanDetails => {
+    const limitInMinutes = session?.user?.usage_limit ? parseFloat((session.user.usage_limit / 60).toFixed(2)) : 0;
+    
     switch (currentPlan) {
       case 'pro':
         return {
           name: "Pro Plan",
-          limit: 100,
+          limit: limitInMinutes,
           usage: usage,
         };
       case 'free':
       default:
         return {
           name: "Free Plan",
-          limit: 10,
+          limit: limitInMinutes,
           usage: usage,
         };
     }

@@ -48,7 +48,6 @@ const PricingCardContent = ({ plan }: PricingCardProps) => {
   };
 
   const getButtonConfig = (): ButtonConfig => {
-    // Show loading state during initial load
     if (isLoading) {
       return {
         text: "Loading...",
@@ -58,7 +57,6 @@ const PricingCardContent = ({ plan }: PricingCardProps) => {
       };
     }
 
-    // Only check authentication after loading is complete
     if (!isAuthenticated) {
       return {
         text: "GET STARTED",

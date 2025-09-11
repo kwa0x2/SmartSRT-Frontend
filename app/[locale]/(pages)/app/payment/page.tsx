@@ -17,12 +17,17 @@ import Loader from "@/components/loader";
 export default function PaymentPage() {
   const searchParams = useSearchParams();
   const returnUrl = searchParams?.get("returnUrl");
-  const { session, isLoading } = useUser();
+  const { session, isLoading, isAuthenticated } = useUser();
+  const [mounted, setMounted] = useState(false);
   const [paddle, setPaddle] = useState<Paddle | null>(null);
   const [checkoutData, setCheckoutData] = useState<CheckoutEventsData | null>(null);
 
   const PADDLE_TOKEN = "test_79a0768363644a4a6a01ff87aa8";
   const PADDLE_PRICE_ID =  "pri_01jsyss63ghcrjtx0tmhgyfxps";
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (session?.user?.plan === "pro") {
@@ -32,7 +37,7 @@ export default function PaymentPage() {
   }, [session?.user?.plan, returnUrl]);
 
   useEffect(() => {
-    if (returnUrl && !paddle && session?.user?.email) {
+    if (mounted && returnUrl && !paddle && isAuthenticated && session?.user?.email) {
       initializePaddle({
         token: PADDLE_TOKEN,
         environment: "sandbox",
@@ -71,14 +76,14 @@ export default function PaymentPage() {
         toast.error("Failed to initialize payment system. Please try again later or contact support.");
       });
     }
-  }, [returnUrl, paddle, session?.user?.email]);
+  }, [mounted, returnUrl, paddle, isAuthenticated, session?.user?.email]);
 
 
   if (isLoading) {
     return <Loader />;
   }
 
-  if (!returnUrl || !session?.user?.email) {
+  if (!returnUrl || !isAuthenticated) {
     return <UnauthorizedError />;
   }
 
@@ -98,7 +103,7 @@ export default function PaymentPage() {
             </div>
 
             <div className="mt-6">
-              <UserInfo email={session.user.email} />
+              <UserInfo email={session?.user?.email || ""} />
             </div>
           </div>
         </div>

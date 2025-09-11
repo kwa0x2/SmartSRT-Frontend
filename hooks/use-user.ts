@@ -43,7 +43,7 @@ export const useUser = () => {
     }
   }, [status, mounted]);
 
-  const isLoading = status === "loading" || !mounted || isCheckingAuth;
+  const isLoading = status === "loading" || !mounted || (status === "authenticated" && isCheckingAuth);
   const isAuthenticated = status === "authenticated" && isFullyAuthenticated;
   const currentPlan = session?.user?.plan || "free";
   const isPro = isAuthenticated && currentPlan === "pro";
