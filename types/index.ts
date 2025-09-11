@@ -34,6 +34,11 @@ export type HeaderColorType = "default" | "coloured" | "transparent";
 export type PlanType = "free" | "pro";
 export type AuthType = "google" | "github" | "credentials";
 
+// Error Types
+export const ERROR_TYPES = {
+  USAGE_LIMIT_REACHED: "monthly usage limit reached",
+} as const;
+
 // AuthType enum for runtime usage
 export const AuthType = {
   google: "google",

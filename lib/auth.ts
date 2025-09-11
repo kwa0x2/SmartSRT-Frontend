@@ -12,6 +12,8 @@ interface User extends NextAuthUser {
   image: string;
   auth_type: AuthType;
   plan: PlanType;
+  usage_limit: number; 
+
   error: string
 }
 
@@ -23,6 +25,7 @@ declare module "next-auth" {
     phone: string;
     auth_type: AuthType;
     plan: PlanType;
+    usage_limit: number; 
     error: string
   }
 }
@@ -31,6 +34,10 @@ declare module "next-auth" {
 declare module "next-auth/jwt" {
   interface JWT {
     phone?: string;
+    auth_type?: AuthType;
+    plan?: PlanType;
+    usage_limit?: number;
+    error?: string;
   }
 }
 
@@ -50,6 +57,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         session.user.image = token.picture as string;
         session.user.auth_type = token.auth_type as AuthType;
         session.user.plan = token.plan as PlanType;
+        session.user.usage_limit = token.usage_limit as number;
         session.user.error = token.error as string;
       }
       return session;
@@ -59,6 +67,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
         token.phone = user.phone;
         token.auth_type = user.auth_type;
         token.plan = user.plan;
+        token.usage_limit = user.usage_limit;
         token.error = user.error;
       }
 
@@ -67,17 +76,18 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       try {
         const existingUser = await getLoggedInUserServer();
 
-        if (!existingUser.Email) {
+        if (!existingUser.user.Email) {
           return {
             ...token,
             error: "invalid-session",
           };
         }
 
-        if (existingUser && existingUser.PhoneNumber && existingUser.Plan) {
-          token.sub = existingUser.ID
-          token.phone = existingUser.PhoneNumber;
-          token.plan = existingUser.Plan;
+        if (existingUser && existingUser.user.PhoneNumber && existingUser.user.Plan) {
+          token.sub = existingUser.user.ID
+          token.phone = existingUser.user.PhoneNumber;
+          token.plan = existingUser.user.Plan;
+          token.usage_limit = existingUser.usage_limit;
         }
 
         return token;
@@ -101,7 +111,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
           image: credentials.avatar as string,
           auth_type: credentials.auth_type as AuthType,
           plan: credentials.plan as PlanType,
-          error: '' as string
+          error: '' as string,
+          usage_limit: credentials.usage_limit as number, 
         };
       },
     }),

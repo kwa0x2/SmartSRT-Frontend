@@ -1,6 +1,14 @@
 import axios from "../axios";
 import { AuthType, PlanType } from "@/types";
 
+export interface Usage {
+    ID: string;
+    UserID: string;
+    UsageLimit: number;
+    CreatedAt: string;
+    UpdatedAt: string;
+}
+
 export interface User {
     ID: string;           // bson ObjectID
     Name: string;
@@ -16,8 +24,13 @@ export interface User {
     DeletedAt?: string;
 }
 
+export interface UserWithUsage {
+    user: User;
+    usage_limit: Usage;
+}
+
 export const getLoggedInUser = async () => {
-    return axios.get<User>("/user/me");
+    return axios.get<UserWithUsage>("/user/me");
 };
 
 export const CheckEmailExists = async (email: string) => {

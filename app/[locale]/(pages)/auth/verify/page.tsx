@@ -23,13 +23,14 @@ const VerifyPage = () => {
 
         if (result.status === 200) {
           const loginResult = await loginAction(
-              result.data.ID,
-              result.data.Name,
-              result.data.Email,
-              result.data.PhoneNumber,
-              result.data.AvatarURL,
-              result.data.AuthType,
-              result.data.Plan,
+              result.data.user.ID,
+              result.data.user.Name,
+              result.data.user.Email,
+              result.data.user.PhoneNumber,
+              result.data.user.AvatarURL,
+              result.data.user.AuthType,
+              result.data.user.Plan,
+              result.data.usage_limit
           );
           if (isCancelled) return;
 
