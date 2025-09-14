@@ -1,15 +1,16 @@
 import { PlanType } from "@/types";
+import { getPriceData as paddleGetPriceData } from "@/app/api/services/paddle.service";
 
 export interface PricingPlan {
   name: PlanType;
   description: string;
   price: {
-    monthly: number;
+    monthly?: number;
   };
   features: string[];
 }
 
-export const pricingPlans: PricingPlan[] = [
+export const staticPricingPlans: PricingPlan[] = [
   {
     name: "free",
     description: "Try our AI-powered subtitle generation with high-quality speech recognition for your files",
@@ -25,7 +26,7 @@ export const pricingPlans: PricingPlan[] = [
   {
     name: "pro",
     description: "Unlock higher upload limits for professional content creators who need more time",
-    price: { monthly: 4.99 },
+    price: { monthly: undefined },
     features: [
       "100 minutes upload limit per month",
       "AI-powered automatic subtitle generation",
@@ -35,3 +36,21 @@ export const pricingPlans: PricingPlan[] = [
     ],
   },
 ];
+
+export const getPricingPlans = async (): Promise<PricingPlan[]> => {
+  try {
+    const proPriceResponse = await paddleGetPriceData("pri_01jsyss63ghcrjtx0tmhgyfxps");
+    const proPriceAmount = proPriceResponse.data.unit_price.amount;
+
+    return [
+      staticPricingPlans[0], 
+      {
+        ...staticPricingPlans[1],
+        price: { monthly: proPriceAmount }
+      }
+    ];
+  } catch (error) {
+    console.error('Error fetching pro price:', error);
+    return staticPricingPlans;
+  }
+};

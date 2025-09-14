@@ -14,8 +14,24 @@ interface PaymentSummaryProps {
 }
 
 export function PaymentSummary({ checkoutData }: PaymentSummaryProps) {
+  
   const totals = checkoutData?.recurring_totals;
-  const formatUSD = (n?: number) => (n != null ? `US$${n}` : "US$");
+  const currency = checkoutData?.currency_code;
+  let currencyText = "$";
+  if (currency) {
+    if (currency !== "USD") {
+      if (currency === "EUR") {
+        currencyText = "€";
+      } else if (currency === "GBP") {
+        currencyText = "£";
+      } else if (currency === "TRY") {
+        currencyText = "₺";
+      } else if (currency === "CAD") {
+        currencyText = "C$";
+      }
+    }
+  }
+  const formatUSD = (n?: number) => (n != null ? `${currency+currencyText+n}` : `${currency+currencyText}`);
 
   return (
       <Card className="w-full lg:w-1/2 shadow-lg border-2 border-muted bg-white/90 flex flex-col tracking-wider">
