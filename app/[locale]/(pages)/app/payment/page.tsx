@@ -43,6 +43,7 @@ export default function PaymentPage() {
         environment: "sandbox",
         eventCallback: (event) => {
           if (event.data && event.name) {
+            console.log(`Paddle Event: ${event.name}`, event.data);
             setCheckoutData(event.data);
           }
         },
