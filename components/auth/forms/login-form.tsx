@@ -40,7 +40,7 @@ const LoginForm = () => {
       const result = await credentialsLogin(data);
 
       if (result.status === 200) {
-        const { ID, Name, Email, PhoneNumber, AvatarURL, AuthType, Plan } =
+        const { ID, Name, Email, PhoneNumber, AvatarURL, AuthType, Plan, UsageLimit } =
             result.data;
 
         const loginResult = await loginAction(
@@ -50,7 +50,8 @@ const LoginForm = () => {
             PhoneNumber,
             AvatarURL,
             AuthType,
-            Plan
+            Plan,
+            UsageLimit
         );
 
         if (loginResult) {
