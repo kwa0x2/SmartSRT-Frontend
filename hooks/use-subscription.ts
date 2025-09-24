@@ -1,5 +1,6 @@
 import { useUser } from "./use-user";
 import { getUsage } from "@/app/api/services/usage.service";
+import { getRemainingDays } from "@/app/api/services/subscription.service";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -7,11 +8,13 @@ interface PlanDetails {
   name: string;
   limit: number;
   usage: number;
+  remainingDays?: number;
 }
 
 export const useSubscription = () => {
   const { currentPlan, isPro, session } = useUser();
   const [usage, setUsage] = useState(0);
+  const [remainingDays, setRemainingDays] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
   const getPlanDetails = (): PlanDetails => {
@@ -23,6 +26,7 @@ export const useSubscription = () => {
           name: "Pro Plan",
           limit: limitInMinutes,
           usage: usage,
+          remainingDays: remainingDays
         };
       case 'free':
       default:
@@ -39,12 +43,19 @@ export const useSubscription = () => {
   };
 
   useEffect(() => {
-    const fetchUsage = async () => {
+    const fetchData = async () => {
       setIsLoading(true);
       try {
-        const result = await getUsage();
-        if (result && result.data && typeof result.data.MonthlyUsage === 'number') {
-          setUsage(parseFloat((result.data.MonthlyUsage / 60).toFixed(2)));
+        const usageResult = await getUsage();
+        if (usageResult && usageResult.data && typeof usageResult.data.MonthlyUsage === 'number') {
+          setUsage(parseFloat((usageResult.data.MonthlyUsage / 60).toFixed(2)));
+        }
+
+        if (isPro) {
+          const remainingDaysResult = await getRemainingDays();
+          if (remainingDaysResult && remainingDaysResult.data && typeof remainingDaysResult.data.RemainingDays === 'number') {
+            setRemainingDays(remainingDaysResult.data.RemainingDays);
+          }
         }
       } catch (error: any) {
         toast.error(error.response?.data?.message || "An error occurred. Please try again later or contact support.");
@@ -53,8 +64,8 @@ export const useSubscription = () => {
       }
     };
 
-    fetchUsage();
-  }, [currentPlan]);
+    fetchData();
+  }, [currentPlan, isPro]);
 
   const planDetails = getPlanDetails();
 
