@@ -4,7 +4,7 @@ import { cookies } from 'next/headers';
 export async function GET() {
   const cookieStore = cookies();
   const authToken = cookieStore.get(process.env.COOKIE_NAME as string);
-  const authJsToken = cookieStore.get('authjs.session-token');
+  const authJsToken = cookieStore.get(process.env.AUTHJS_SESSION_TOKEN as string);
 
   if (!authToken || !authJsToken) {
     const response = NextResponse.json({ isAuthenticated: false }, { status: 401 });
