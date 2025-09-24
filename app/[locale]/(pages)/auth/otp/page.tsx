@@ -83,7 +83,7 @@ const OtpPage = () => {
         <div className="overflow-y-auto flex flex-wrap w-full h-dvh">
           <AuthLayout
               title="Register"
-              subtitle="Create an account to start using AutoSRT"
+              subtitle="Create an account to start using SmartSRT"
           >
             <OtpForm onSubmit={handleStepTwo} isSubmitting={isSubmitting} />
             <div className="md:max-w-[345px] mt-6 mx-auto text-sm text-default-500">

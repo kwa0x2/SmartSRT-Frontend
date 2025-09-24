@@ -22,9 +22,9 @@ const CodeBlock = () => {
   };
 
   const codeSnippets = {
-    python: `from autosrt import AutoSRT
+    python: `from smartsrt import SmartSRT
 
-client = AutoSRT(
+client = SmartSRT(
     api_key="YOUR_API_KEY"
 )
 
@@ -38,9 +38,9 @@ response = client.generate_srt(
 with open("subtitles.srt", "w") as f:
     f.write(response.text)`,
 
-    javascript: `import { AutoSRT } from 'autosrt';
+    javascript: `import { SmartSRT } from 'smartsrt';
 
-const client = new AutoSRT({
+const client = new SmartSRT({
   apiKey: 'YOUR_API_KEY'
 });
 
@@ -54,7 +54,7 @@ const response = await client.generateSrt({
 const srtContent = await response.text();
 console.log(srtContent);`,
 
-    curl: `curl -X POST "https://api.autosrt.com/v1/srt/generate" \\
+    curl: `curl -X POST "https://api.smartsrt.com/v1/srt/generate" \\
 -H "Authorization: Bearer YOUR_API_KEY" \\
 -H "Content-Type: application/json" \\
 -d '{

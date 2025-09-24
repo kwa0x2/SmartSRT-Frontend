@@ -1,6 +1,6 @@
 import React from 'react'
 type IconProps = React.HTMLAttributes<SVGElement>
-const AutoSRTLogo = (props: IconProps) => {
+const SmartSRTLogo = (props: IconProps) => {
     return (
         <>
             <svg
@@ -15,4 +15,4 @@ const AutoSRTLogo = (props: IconProps) => {
     )
 }
 
-export default AutoSRTLogo
+export default SmartSRTLogo

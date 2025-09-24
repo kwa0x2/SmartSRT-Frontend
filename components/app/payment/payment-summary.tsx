@@ -50,7 +50,7 @@ export function PaymentSummary({ checkoutData }: PaymentSummaryProps) {
           <Card className="my-4 sm:my-6 border px-3 sm:px-4 py-8 sm:py-12 flex flex-col items-center gap-3 sm:gap-4">
             <FaCrown className="w-12 h-12 sm:w-16 sm:h-16 text-yellow-600" />
             <div className="text-center">
-              <div className="font-medium text-lg sm:text-xl mb-1">AutoSRT Pro Plan Monthly</div>
+              <div className="font-medium text-lg sm:text-xl mb-1">SmartSRT Pro Plan Monthly</div>
               <div className="text-muted-foreground text-base sm:text-lg">{formatUSD(totals?.total)}/month </div>
             </div>
           </Card>

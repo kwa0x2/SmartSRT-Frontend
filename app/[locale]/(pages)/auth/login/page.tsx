@@ -30,7 +30,7 @@ const LoginPage = () => {
         <div className="overflow-y-auto flex flex-wrap w-full h-dvh">
           <AuthLayout
               title="Login"
-              subtitle="Login to your account to start using AutoSRT"
+              subtitle="Login to your account to start using SmartSRT"
           >
             <div className="max-w-[242px] mx-auto mt-2 w-full">
               <Social status="in" />

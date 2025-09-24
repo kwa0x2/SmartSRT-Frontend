@@ -13,7 +13,7 @@ export default auth((req): any => {
   
   if (isApiAuthRoute || isPublicRoute) return null;
 
-  const hasSidCookie = req.cookies.has("sid");
+  const hasSidCookie = req.cookies.has(process.env.COOKIE_NAME as string);
   const hasAuthJsToken = req.cookies.has("authjs.session-token");
   const isLoggedIn = !!req.auth;
 
@@ -29,7 +29,7 @@ export default auth((req): any => {
   const response = NextResponse.next();
   const cookieString = getSIDCookieValue(process.env.COOKIE_NAME as string);
   if (cookieString) {
-    response.cookies.set("sid", cookieString, {
+    response.cookies.set(process.env.COOKIE_NAME as string, cookieString, {
       maxAge: 86400,
       path: '/',
       httpOnly: true,

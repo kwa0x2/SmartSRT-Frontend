@@ -66,7 +66,7 @@ const RegisterPage = () => {
         <div className="overflow-y-auto flex flex-wrap w-full h-dvh">
           <AuthLayout
               title="Register"
-              subtitle="Create an account to start using AutoSRT"
+              subtitle="Create an account to start using SmartSRT"
           >
             {step === 1 ? (
                 <>
