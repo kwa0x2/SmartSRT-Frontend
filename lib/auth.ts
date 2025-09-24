@@ -46,7 +46,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     signOut() {
       const cookieStore = cookies();
       cookieStore.delete(process.env.COOKIE_NAME as string);
-      cookieStore.delete("next-auth.session-token");
+      cookieStore.delete(process.env.AUTHJS_SESSION_TOKEN as string);
     }
   },
   callbacks: {
