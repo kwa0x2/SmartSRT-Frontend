@@ -15,7 +15,7 @@ const FooterTop = () => {
       >
         <Image
           src="/images/logo/black.png"
-          alt="AutoSRT Logo"
+          alt="SmartSRT Logo"
           width={200}
           height={100}
           className="w-24 md:w-32 pb-4 md:pb-0"

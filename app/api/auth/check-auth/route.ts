@@ -3,13 +3,13 @@ import { cookies } from 'next/headers';
 
 export async function GET() {
   const cookieStore = cookies();
-  const sid = cookieStore.get('sid');
+  const authToken = cookieStore.get(process.env.COOKIE_NAME as string);
   const authJsToken = cookieStore.get('authjs.session-token');
 
-  if (!sid || !authJsToken) {
+  if (!authToken || !authJsToken) {
     const response = NextResponse.json({ isAuthenticated: false }, { status: 401 });
     
-    response.cookies.set('sid', '', {
+    response.cookies.set(process.env.COOKIE_NAME as string, '', {
       expires: new Date(0),
       path: '/',
       httpOnly: true,

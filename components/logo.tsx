@@ -1,6 +1,6 @@
 'use client'
 import React from "react";
-import AutoSRTLogo from "./autosrt-logo";
+import SmartSRTLogo from "./smartsrt-logo";
 import { Link } from '@/i18n/routing';
 import { useConfig } from "@/hooks/use-config";
 import { useMenuHoverConfig } from "@/hooks/use-menu-hover";
@@ -16,7 +16,7 @@ const Logo = () => {
 
     if (config.sidebar === 'compact') {
         return <Link href="/dashboard/analytics" className="flex gap-2 items-center   justify-center    ">
-            <AutoSRTLogo className="  text-default-900 h-8 w-8 [&>path:nth-child(3)]:text-background [&>path:nth-child(2)]:text-background" />
+            <SmartSRTLogo className="  text-default-900 h-8 w-8 [&>path:nth-child(3)]:text-background [&>path:nth-child(2)]:text-background" />
 
         </Link>
     }
@@ -24,10 +24,10 @@ const Logo = () => {
 
     return (
         <Link href="/dashboard/analytics" className="flex gap-2 items-center    ">
-            <AutoSRTLogo className="  text-default-900 h-8 w-8 [&>path:nth-child(3)]:text-background [&>path:nth-child(2)]:text-background" />
+            <SmartSRTLogo className="  text-default-900 h-8 w-8 [&>path:nth-child(3)]:text-background [&>path:nth-child(2)]:text-background" />
             {(!config?.collapsed || hovered) && (
                 <h1 className="text-xl font-semibold text-default-900 ">
-                    AutoSRT
+                    SmartSRT
                 </h1>
             )}
         </Link>

@@ -4,7 +4,7 @@ const Footer = () => {
     return (
       <footer className="py-4">
         <div className="text-center text-sm text-gray-500">
-          Copyright © {currentYear} AutoSRT, All rights reserved
+          Copyright © {currentYear} SmartSRT, All rights reserved
         </div>
       </footer>
     );

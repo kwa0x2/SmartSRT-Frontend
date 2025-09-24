@@ -20,7 +20,7 @@ import { locales } from "@/config";
 
 
 export const metadata: Metadata = {
-  title: "AutoSRT",
+  title: "SmartSRT - AI Powered Subtitle Generator",
   description: "Created by kwa0x2",
 };
 
@@ -42,7 +42,7 @@ export default async function RootLayout({
 
   return (
       <html lang={locale} dir={direction}>
-      <body className={`${spaceGrotesk.className} autosrt-app`}>
+      <body className={`${spaceGrotesk.className} smartsrt-app`}>
       <NextIntlClientProvider messages={messages} locale={locale}>
         <AuthProvider>
           {/* <ThemeProvider attribute="class" defaultTheme="dark"> */}

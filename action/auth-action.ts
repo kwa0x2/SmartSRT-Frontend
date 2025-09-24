@@ -41,12 +41,12 @@ export async function logoutAction() {
     await logoutServer();
 
     const cookieStore = cookies();
-    cookieStore.delete("sid");
+    cookieStore.delete(process.env.COOKIE_NAME as string);
 
     return await signOut({ redirect: false });
   } catch (error) {
     const cookieStore = cookies();
-    cookieStore.delete("sid");
+    cookieStore.delete(process.env.COOKIE_NAME as string);
     return await signOut({ redirect: false });
   }
 }

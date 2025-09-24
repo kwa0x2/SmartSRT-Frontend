@@ -165,32 +165,32 @@
 }
 
 /* vector map */
-.autosrt-app-vmap path {
+.smartsrt-app-vmap path {
   @apply fill-[#6794DC];
 }
 
-.autosrt-app-vmap .svg-map__location[aria-checked="true"] {
+.smartsrt-app-vmap .svg-map__location[aria-checked="true"] {
   @apply fill-primary;
 }
 
-.autosrt-app-codeVmapInfo path {
+.smartsrt-app-codeVmapInfo path {
   @apply fill-info;
 }
 
-.autosrt-app-codeVmapInfo path .svg-map__location[aria-checked="true"] {
+.smartsrt-app-codeVmapInfo path .svg-map__location[aria-checked="true"] {
   @apply fill-info;
 }
-.autosrt-app-codeVmapWarning path {
+.smartsrt-app-codeVmapWarning path {
   @apply fill-warning;
 }
-.autosrt-app-codeVmapWarning path  .svg-map__location[aria-checked="true"] {
+.smartsrt-app-codeVmapWarning path  .svg-map__location[aria-checked="true"] {
     @apply fill-warning;
 }
-.autosrt-app-codeVmapSuccess path {
+.smartsrt-app-codeVmapSuccess path {
   @apply fill-success;
 
 }
-.autosrt-app-codeVmapSuccess path .svg-map__location[aria-checked="true"]  {
+.smartsrt-app-codeVmapSuccess path .svg-map__location[aria-checked="true"]  {
     @apply fill-success;
 }
 
@@ -283,257 +283,257 @@
 }
 
 /* calendar */
-.autosrt-app-calendar .fc-toolbar-chunk button {
+.smartsrt-app-calendar .fc-toolbar-chunk button {
   @apply h-12 px-5;
 }
 
-.autosrt-app-calendar .fc-toolbar-chunk button.fc-prev-button {
+.smartsrt-app-calendar .fc-toolbar-chunk button.fc-prev-button {
   @apply text-default-600;
 }
 
-.autosrt-app-calendar .fc-toolbar-chunk button.fc-next-button {
+.smartsrt-app-calendar .fc-toolbar-chunk button.fc-next-button {
   @apply text-default-600;
 }
 
-.autosrt-app-calendar .fc-button {
+.smartsrt-app-calendar .fc-button {
   @apply h-12 px-5;
 }
 
-.autosrt-app-calendar .fc .fc-button-primary {
+.smartsrt-app-calendar .fc .fc-button-primary {
   @apply bg-transparent hover:bg-primary border border-default-200 dark:border-default-300 dark:hover:bg-default-50 dark:hover:text-foreground text-default-700 capitalize;
 }
 
-.autosrt-app-calendar .fc .fc-button-primary.fc-button-active {
+.smartsrt-app-calendar .fc .fc-button-primary.fc-button-active {
   @apply border-none;
 }
 
-.autosrt-app-calendar .fc .fc-button-primary:not(:disabled):active,
-.autosrt-app-calendar .fc .fc-button-primary:not(:disabled).fc-button-active,
-.autosrt-app-calendar .fc .fc-button-primary:hover {
+.smartsrt-app-calendar .fc .fc-button-primary:not(:disabled):active,
+.smartsrt-app-calendar .fc .fc-button-primary:not(:disabled).fc-button-active,
+.smartsrt-app-calendar .fc .fc-button-primary:hover {
   @apply bg-default text-default-foreground dark:bg-default-50 dark:text-foreground;
 }
 
-.autosrt-app-calendar .fc .fc-button-primary:disabled {
+.smartsrt-app-calendar .fc .fc-button-primary:disabled {
   @apply bg-transparent border border-default-200 cursor-not-allowed hover:text-default-800;
 }
 
-.autosrt-app-calendar .fc-today-button {
+.smartsrt-app-calendar .fc-today-button {
   @apply hover:text-primary-foreground;
 }
 
-.autosrt-app-calendar .fc .fc-button-primary:focus {
+.smartsrt-app-calendar .fc .fc-button-primary:focus {
   box-shadow: none !important;
 }
 
-.autosrt-app-calendar .fc-theme-standard .fc-scrollgrid {
+.smartsrt-app-calendar .fc-theme-standard .fc-scrollgrid {
   @apply border-default-100 dark:border-default-300;
 }
 
-.autosrt-app-calendar .fc-theme-standard td,
-.autosrt-app-calendar .fc-theme-standard th {
+.smartsrt-app-calendar .fc-theme-standard td,
+.smartsrt-app-calendar .fc-theme-standard th {
   @apply border-default-100 dark:border-default-300;
 }
 
-.autosrt-app-calendar .fc-col-header-cell .fc-scrollgrid-sync-inner {
+.smartsrt-app-calendar .fc-col-header-cell .fc-scrollgrid-sync-inner {
   @apply bg-default-50 dark:bg-default-300 text-xs text-default-600 font-normal py-3;
 }
 
-.autosrt-app-calendar .fc-col-header-cell {
+.smartsrt-app-calendar .fc-col-header-cell {
   @apply border-none;
 }
 
-.autosrt-app-calendar .fc-daygrid-day-top {
+.smartsrt-app-calendar .fc-daygrid-day-top {
   @apply text-sm px-3 py-2 text-default-900 font-normal;
 }
 
-.autosrt-app-calendar .fc-h-event .fc-event-main-frame {
+.smartsrt-app-calendar .fc-h-event .fc-event-main-frame {
   @apply flex justify-center items-center text-center w-max mx-auto;
 }
 
-.autosrt-app-calendar .fc-event-time {
+.smartsrt-app-calendar .fc-event-time {
   @apply text-sm font-normal flex-none text-primary-foreground;
 }
 
-.autosrt-app-calendar .fc-timegrid-event .fc-event-main {
+.smartsrt-app-calendar .fc-timegrid-event .fc-event-main {
   @apply p-0 flex justify-center items-center gap-1;
 }
 
-.autosrt-app-calendar .fc-event-title {
+.smartsrt-app-calendar .fc-event-title {
   @apply text-sm font-light;
 }
 
-.autosrt-app-calendar .fc-timegrid-col-events .fc-event-title {
+.smartsrt-app-calendar .fc-timegrid-col-events .fc-event-title {
   @apply pt-4;
 }
 
-.autosrt-app-calendar .fc .fc-toolbar-title {
+.smartsrt-app-calendar .fc .fc-toolbar-title {
   @apply text-lg font-normal text-default-600;
 }
 
-.autosrt-app .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+.smartsrt-app .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
   @apply p-1;
 }
 
-.autosrt-app-calendar .fc-theme-standard .fc-list {
+.smartsrt-app-calendar .fc-theme-standard .fc-list {
   @apply border border-default-200;
 }
 
-.autosrt-app-calendar .fc-daygrid-event-dot {
+.smartsrt-app-calendar .fc-daygrid-event-dot {
   @apply hidden;
 }
 
-.autosrt-app-calendar .fc .fc-list-sticky .fc-list-day>* {
+.smartsrt-app-calendar .fc .fc-list-sticky .fc-list-day>* {
   @apply bg-default-50;
 }
 
-.autosrt-app-calendar .fc-timegrid-col-events .fc-event-title {
+.smartsrt-app-calendar .fc-timegrid-col-events .fc-event-title {
   @apply pt-0;
 }
 
-.autosrt-app-calendar .fc-timegrid-event-harness>.fc-timegrid-event {
+.smartsrt-app-calendar .fc-timegrid-event-harness>.fc-timegrid-event {
   @apply static;
 }
 
 @media (max-width: 981px) {
 
-  .autosrt-app-calendar .fc-button-group,
-  .autosrt-app-calendar .fc .fc-toolbar {
+  .smartsrt-app-calendar .fc-button-group,
+  .smartsrt-app-calendar .fc .fc-toolbar {
     display: block !important;
   }
 
-  .autosrt-app-calendar .fc .fc-toolbar {
+  .smartsrt-app-calendar .fc .fc-toolbar {
     @apply space-y-4;
   }
 
-  .autosrt-app-calendar .fc-toolbar-chunk {
+  .smartsrt-app-calendar .fc-toolbar-chunk {
     @apply space-y-4;
   }
 
-  .autosrt-app-calendar .fc .fc-button {
+  .smartsrt-app-calendar .fc .fc-button {
     padding: 0.4em 0.65em !important;
   }
 }
 
-.autosrt-app-calendar .fc .fc-timegrid-axis-cushion,
-.autosrt-app-calendar .fc .fc-timegrid-slot-label-cushion {
+.smartsrt-app-calendar .fc .fc-timegrid-axis-cushion,
+.smartsrt-app-calendar .fc .fc-timegrid-slot-label-cushion {
   @apply dark:text-default-300;
 }
 
-.autosrt-app-calendar .fc .fc-list-event:hover td {
+.smartsrt-app-calendar .fc .fc-list-event:hover td {
   @apply bg-inherit;
 }
 
-.autosrt-app-calendar .fc .fc-list-event-dot {
+.smartsrt-app-calendar .fc .fc-list-event-dot {
   @apply hidden;
 }
 
-.autosrt-app-calendar .fc-direction-ltr .fc-list-day-text,
-.autosrt-app-calendar .fc-direction-rtl .fc-list-day-side-text,
-.autosrt-app-calendar .fc-direction-ltr .fc-list-day-side-text,
-.autosrt-app-calendar .fc-direction-rtl .fc-list-day-text {
+.smartsrt-app-calendar .fc-direction-ltr .fc-list-day-text,
+.smartsrt-app-calendar .fc-direction-rtl .fc-list-day-side-text,
+.smartsrt-app-calendar .fc-direction-ltr .fc-list-day-side-text,
+.smartsrt-app-calendar .fc-direction-rtl .fc-list-day-text {
   @apply text-base font-medium text-default-600;
 }
 
-.autosrt-app-calendar .primary {
+.smartsrt-app-calendar .primary {
   @apply bg-primary border-none text-primary-foreground text-center px-2 font-medium text-sm;
 }
 
-.autosrt-app-calendar .secondary {
+.smartsrt-app-calendar .secondary {
   @apply bg-secondary border-none text-primary-foreground text-center px-2 font-medium text-sm;
 }
 
-.autosrt-app-calendar .danger {
+.smartsrt-app-calendar .danger {
   @apply bg-destructive border-none text-primary-foreground text-center px-2 font-medium text-sm;
 }
 
-.autosrt-app-calendar .destructive {
+.smartsrt-app-calendar .destructive {
   @apply bg-destructive border-none text-primary-foreground text-center px-2 font-medium text-sm;
 }
 
-.autosrt-app-calendar .info {
+.smartsrt-app-calendar .info {
   @apply bg-info border-none text-primary-foreground text-center px-2 font-medium text-sm;
 }
 
-.autosrt-app-calendar .warning {
+.smartsrt-app-calendar .warning {
   @apply bg-warning border-none text-primary-foreground text-center px-2 font-medium text-sm;
 }
 
-.autosrt-app-calendar .success {
+.smartsrt-app-calendar .success {
   @apply bg-success border-none text-primary-foreground text-center px-2 font-medium text-sm;
 }
 
-.autosrt-app-calendar .dark  {
+.smartsrt-app-calendar .dark  {
   @apply bg-card-foreground border-none text-primary-foreground px-2 font-medium text-sm;
 }
 
 
 /* react select */
 
- .autosrt-app .react-select .react-select.is-invalid .select__control {
+ .smartsrt-app .react-select .react-select.is-invalid .select__control {
   border-color: none !important;
 }
 
-.autosrt-app .react-select .select__control {
+.smartsrt-app .react-select .select__control {
   @apply bg-background min-h-8 border border-default-200 focus:border-default;
 }
 
-.autosrt-app .react-select .select__single-value {
+.smartsrt-app .react-select .select__single-value {
   @apply text-sm font-medium text-default-800;
 }
 
-.autosrt-app .react-select .select__menu {
+.smartsrt-app .react-select .select__menu {
   @apply bg-background;
 }
 
-.autosrt-app .react-select .select__placeholder {
+.smartsrt-app .react-select .select__placeholder {
   @apply text-default-500;
 }
 
-.autosrt-app .react-select .select__menu .select__option {
+.smartsrt-app .react-select .select__menu .select__option {
   @apply  hover:bg-default/10;
 }
 
-.autosrt-app .react-select .select__menu .select__option.select__option--is-selected {
+.smartsrt-app .react-select .select__menu .select__option.select__option--is-selected {
   @apply bg-default dark:bg-default-200;
 }
 
-.autosrt-app .react-select.is-invalid .select__control {
+.smartsrt-app .react-select.is-invalid .select__control {
   border-color: none !important;
 }
 
-.autosrt-app .react-select .has-error .select__control {
+.smartsrt-app .react-select .has-error .select__control {
   @apply border-destructive;
 }
 
-.autosrt-app .react-select .react-select__control .select__input {
+.smartsrt-app .react-select .react-select__control .select__input {
   @apply text-default-500;
 }
 
-.autosrt-app .react-select .react-select__control.select__control--is-disabled {
+.smartsrt-app .react-select .react-select__control.select__control--is-disabled {
   @apply cursor-not-allowed;
 }
 
-.autosrt-app .react-select .react-select__control .select__indicator-separator {
+.smartsrt-app .react-select .react-select__control .select__indicator-separator {
   @apply bg-default-50 text-default-800 placeholder:text-opacity-60;
 }
 
-.autosrt-app .react-select .react-select__control .select__indicator svg {
+.smartsrt-app .react-select .react-select__control .select__indicator svg {
   @apply cursor-pointer text-default-600;
 }
 
-.autosrt-app .react-select .has-error .react-select__control .select__indicator svg {
+.smartsrt-app .react-select .has-error .react-select__control .select__indicator svg {
   @apply text-destructive;
 }
 
-.autosrt-app .react-select .select__multi-value__label {
+.smartsrt-app .react-select .select__multi-value__label {
   @apply text-xs bg-default  text-default-foreground rounded-none ltr:rounded-l rtl:rounded-r;
 }
 
-.autosrt-app .react-select .select__multi-value__remove {
+.smartsrt-app .react-select .select__multi-value__remove {
   @apply bg-default rounded-none ltr:rounded-r rtl:rounded-l;
 }
 
-.autosrt-app .react-select .select__multi-value__remove svg {
+.smartsrt-app .react-select .select__multi-value__remove svg {
   @apply fill-default-foreground;
 }
 

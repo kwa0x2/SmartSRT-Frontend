@@ -13,7 +13,7 @@ const Header = () => {
               <Link href={APP_ROUTES.APP} className="text-xl font-extrabold">
                 <Image
                     src="/images/logo/black.png"
-                    alt="AutoSRT Logo"
+                    alt="SmartSRT Logo"
                     width={200}
                     height={100}
                     className="w-28"

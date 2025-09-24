@@ -104,7 +104,7 @@ const ProfileInfoContent = () => {
                   {user.name || "Undefined"}
                 </div>
                 <div className="text-xs text-gray-500">
-                  {user.email || "undefined@autosrt.com"}
+                  {user.email || "undefined@smartsrt.com"}
                 </div>
               </div>
             </DropdownMenuLabel>
