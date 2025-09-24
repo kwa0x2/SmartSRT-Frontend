@@ -14,7 +14,7 @@ export default function Subscription() {
         <SubscriptionInfo hideManageButton={true} />
         <div className="pt-10">
           <PricingHeader />
-          <PricingCards/>
+          <PricingCards/> 
         </div>
       </div>
     </Layout>

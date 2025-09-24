@@ -54,6 +54,11 @@ const SubscriptionInfo = ({
           <p className="text-xs md:text-sm text-muted-foreground">
             {planDetails.limit} minutes upload limit per month
           </p>
+          {isPro && planDetails.remainingDays !== undefined && !isLoading && (
+            <p className="text-xs text-orange-600 font-medium mt-1">
+              {planDetails.remainingDays} days remaining
+            </p>
+          )}
         </div>
 
         <div className="flex items-center gap-4">
