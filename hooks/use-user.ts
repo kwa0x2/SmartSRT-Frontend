@@ -23,7 +23,7 @@ export const useUser = () => {
 
       setIsCheckingAuth(true);
       try {
-        const sidCookie = await getCookieServer(process.env.COOKIE_NAME as string);
+        const sidCookie = await getCookieServer("sid");
         if (!sidCookie) {
           setIsFullyAuthenticated(false);
           return;
