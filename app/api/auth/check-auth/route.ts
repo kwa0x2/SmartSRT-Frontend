@@ -3,19 +3,26 @@ import { cookies } from 'next/headers';
 
 export async function GET() {
   const cookieStore = cookies();
-  const authToken = cookieStore.get(process.env.COOKIE_NAME as string);
-  const authJsToken = cookieStore.get(process.env.AUTHJS_SESSION_TOKEN as string);
+  const cookieName = process.env.COOKIE_NAME;
+  const authJsTokenName = process.env.AUTHJS_SESSION_TOKEN;
+
+  if (!cookieName || !authJsTokenName) {
+    return NextResponse.json({ isAuthenticated: false, error: 'Missing environment variables' }, { status: 500 });
+  }
+
+  const authToken = cookieStore.get(cookieName);
+  const authJsToken = cookieStore.get(authJsTokenName);
 
   if (!authToken || !authJsToken) {
     const response = NextResponse.json({ isAuthenticated: false }, { status: 401 });
-    
-    response.cookies.set(process.env.COOKIE_NAME as string, '', {
+
+    response.cookies.set(cookieName, '', {
       expires: new Date(0),
       path: '/',
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production'
     });
-    
+
     return response;
   }
 
