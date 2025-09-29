@@ -26,7 +26,7 @@ export const staticPricingPlans: PricingPlan[] = [
   {
     name: "pro",
     description: "Unlock higher upload limits for professional content creators who need more time",
-    price: { monthly: undefined },
+    price: { monthly: 0 },
     features: [
       "100 minutes upload limit per month",
       "AI-powered automatic subtitle generation",

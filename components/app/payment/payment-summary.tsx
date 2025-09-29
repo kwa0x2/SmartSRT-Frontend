@@ -31,7 +31,7 @@ export function PaymentSummary({ checkoutData }: PaymentSummaryProps) {
       }
     }
   }
-  const formatUSD = (n?: number) => (n != null ? `${currency+currencyText+n}` : `${currency+currencyText}`);
+  const formatUSD = (n?: number) => `${currency || 'USD'}${currencyText}${n ?? 0}`;
 
   return (
       <Card className="w-full lg:w-1/2 shadow-lg border-2 border-muted bg-white/90 flex flex-col tracking-wider">
