@@ -85,10 +85,13 @@ export function SubtitleForm({ file }: SubtitleFormProps) {
           router.push(srtUrl);
         } else {
           toast.error(
-            "An error occurred. Please try again later or contact support."
+            response.body.message
           );
         }
-      } 
+      } else if (response.status_code == 202) {
+        toast.success(response.body.message);
+      }
+        
     } catch (error: any) {
       if (error.response?.data?.body?.message === ERROR_TYPES.USAGE_LIMIT_REACHED) {
         toast.error("You have reached your monthly usage limit.");
