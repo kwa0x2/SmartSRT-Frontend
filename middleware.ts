@@ -27,16 +27,17 @@ export default auth((req): any => {
   }
 
   const response = NextResponse.next();
-  // const cookieString = getSIDCookieValue(process.env.COOKIE_NAME as string);
-  // if (cookieString) {
-  //   response.cookies.set(process.env.COOKIE_NAME as string, cookieString, {
-  //     maxAge: 86400,
-  //     path: '/',
-  //     httpOnly: true,
-  //     secure: false,
-  //     sameSite: 'lax'
-  //   });
-  // }
+  const cookieString = getSIDCookieValue(process.env.COOKIE_NAME as string);
+  if (cookieString) {
+    response.cookies.set(process.env.COOKIE_NAME as string, cookieString, {
+      maxAge: 86400,
+      path: '/',
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      domain: process.env.NODE_ENV === 'production' ? process.env.DOMAIN_NAME : 'localhost',
+      sameSite: 'lax'
+    });
+  }
 
   const hasLocale = routing.locales.some(
     (loc) => pathname.startsWith(`/${loc}/`) || pathname === `/${loc}`
