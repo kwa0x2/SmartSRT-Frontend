@@ -55,12 +55,20 @@ const MobileMenu = ({isAuthenticated}: MobileMenuProps) => {
           </nav>
 
           <div className="pt-4 mt-auto items-center flex flex-col space-y-4">
-            <Link href={APP_ROUTES.AUTH.LOGIN} className="font-bold text-sm tracking-wide">
-              Login
-            </Link>
-            <Button className="w-full bg-black uppercase" asChild>
-              <Link href={APP_ROUTES.AUTH.REGISTER}>Get Started Free</Link>
-            </Button>
+            {isAuthenticated ? (
+                <Button className="w-full bg-black uppercase" asChild>
+                  <Link href={APP_ROUTES.APP}>Go to App</Link>
+                </Button>
+            ) : (
+                <>
+                  <Link href={APP_ROUTES.AUTH.LOGIN} className="font-bold text-sm tracking-wide">
+                    Login
+                  </Link>
+                  <Button className="w-full bg-black uppercase" asChild>
+                    <Link href={APP_ROUTES.AUTH.REGISTER}>Get Started Free</Link>
+                  </Button>
+                </>
+            )}
           </div>
         </SheetContent>
       </Sheet>
