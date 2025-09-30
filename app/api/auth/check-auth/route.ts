@@ -20,6 +20,7 @@ export async function GET() {
       expires: new Date(0),
       path: '/',
       httpOnly: true,
+      domain: process.env.NODE_ENV === 'production' ? process.env.DOMAIN_NAME : 'localhost',
       secure: process.env.NODE_ENV === 'production'
     });
 
