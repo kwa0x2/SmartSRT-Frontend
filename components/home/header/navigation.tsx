@@ -24,7 +24,7 @@ const Navigation = () => {
           </ScrollLink>
         </NavigationMenuItem>
 
-        <NavigationMenuItem>
+        {/* <NavigationMenuItem>
           <ScrollLink
             to="developers"
             spy={true}
@@ -35,7 +35,7 @@ const Navigation = () => {
           >
             API
           </ScrollLink>
-        </NavigationMenuItem>
+        </NavigationMenuItem> */}
 
         <NavigationMenuItem>
           <ScrollLink

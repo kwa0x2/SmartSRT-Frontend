@@ -31,7 +31,7 @@ const MobileMenu = ({isAuthenticated}: MobileMenuProps) => {
               >
                 Pricing
               </ScrollLink>
-              <ScrollLink
+              {/* <ScrollLink
                   to="developers"
                   spy={true}
                   smooth={true}
@@ -40,7 +40,7 @@ const MobileMenu = ({isAuthenticated}: MobileMenuProps) => {
                   className="block px-2 py-1 text-lg font-semibold"
               >
                 API
-              </ScrollLink>
+              </ScrollLink> */}
               <ScrollLink
                   to="contact"
                   spy={true}
