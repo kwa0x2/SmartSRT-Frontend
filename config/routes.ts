@@ -38,11 +38,11 @@ export const MENU_ITEMS = [
     icon: "heroicons:credit-card",
     href: APP_ROUTES.SUBSCRIPTION,
   },
-  {
-    name: "API",
-    icon: "heroicons:code-bracket-square",
-    href: APP_ROUTES.API.MANAGEMENT,
-  },
+  // {
+  //   name: "API",
+  //   icon: "heroicons:code-bracket-square",
+  //   href: APP_ROUTES.API.MANAGEMENT,
+  // },
 
   {
     name: "Home",

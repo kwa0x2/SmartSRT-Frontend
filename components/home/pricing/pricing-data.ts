@@ -10,13 +10,20 @@ export interface PricingPlan {
   features: string[];
 }
 
+const freeUploadLimitMinutes = Math.floor(
+  Number(process.env.NEXT_PUBLIC_FREE_UPLOAD_LIMIT_SECONDS || 600) / 60
+);
+const proUploadLimitMinutes = Math.floor(
+  Number(process.env.NEXT_PUBLIC_PRO_UPLOAD_LIMIT_SECONDS || 4500) / 60
+);
+
 export const staticPricingPlans: PricingPlan[] = [
   {
     name: "free",
     description: "Try our AI-powered subtitle generation with high-quality speech recognition for your files",
     price: { monthly: 0 },
     features: [
-      "10 minutes upload limit per month",
+      `${freeUploadLimitMinutes} minutes upload limit per month`,
       "AI-powered automatic subtitle generation",
       "Maximum 30 seconds per file",
       "Support for MP4 and MP3 files",
@@ -28,7 +35,7 @@ export const staticPricingPlans: PricingPlan[] = [
     description: "Unlock higher upload limits for professional content creators who need more time",
     price: { monthly: 0 },
     features: [
-      "100 minutes upload limit per month",
+      `${proUploadLimitMinutes} minutes upload limit per month`,
       "AI-powered automatic subtitle generation",
       "Maximum 5 minutes per file",
       "Support for MP4, MP3 and WAV files",

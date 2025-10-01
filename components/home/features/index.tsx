@@ -9,7 +9,7 @@ const Features = ({isAuthenticated}: FeaturesProps) => {
   return (
     <>
       <Creators isAuthenticated={isAuthenticated}/>
-      <Developers isAuthenticated={isAuthenticated}/>
+      {/* <Developers isAuthenticated={isAuthenticated}/> */}
     </>
   );
 };
