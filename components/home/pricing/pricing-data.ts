@@ -46,7 +46,7 @@ export const staticPricingPlans: PricingPlan[] = [
 
 export const getPricingPlans = async (): Promise<PricingPlan[]> => {
   try {
-    const proPriceResponse = await paddleGetPriceData(process.env.PADDLE_PRICE_ID as string);
+    const proPriceResponse = await paddleGetPriceData(process.env.NEXT_PUBLIC_PADDLE_PRICE_ID as string);
     const proPriceAmount = proPriceResponse.data.unit_price.amount;
 
     return [
