@@ -69,4 +69,10 @@ export const publicRoutes = [
   "/tr/auth/otp",
   "/en/auth/account/delete",
   "/tr/auth/account/delete",
+  "/en/terms",
+  "/tr/terms",
+  "/en/privacy",
+  "/tr/privacy",
+  "/en/refund",
+  "/tr/refund",
 ];
