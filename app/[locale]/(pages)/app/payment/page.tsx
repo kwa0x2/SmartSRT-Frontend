@@ -22,9 +22,6 @@ export default function PaymentPage() {
   const [paddle, setPaddle] = useState<Paddle | null>(null);
   const [checkoutData, setCheckoutData] = useState<CheckoutEventsData | null>(null);
 
-  const PADDLE_TOKEN = "test_79a0768363644a4a6a01ff87aa8";
-  const PADDLE_PRICE_ID =  "pri_01jsyss63ghcrjtx0tmhgyfxps";
-
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -39,7 +36,7 @@ export default function PaymentPage() {
   useEffect(() => {
     if (mounted && returnUrl && !paddle && isAuthenticated && session?.user?.email) {
       initializePaddle({
-        token: PADDLE_TOKEN,
+        token: process.env.PADDLE_TOKEN as string,
         environment: "sandbox",
         eventCallback: (event) => {
           if (event.data && event.name) {
@@ -64,7 +61,7 @@ export default function PaymentPage() {
         if (paddleInstance && session.user.email) {
           setPaddle(paddleInstance);
           paddleInstance.Checkout.open({
-            items: [{ priceId: PADDLE_PRICE_ID, quantity: 1 }],
+            items: [{ priceId: process.env.PADDLE_PRICE_ID as string, quantity: 1 }],
             customData: {
               user_id: session.user.id,
             },

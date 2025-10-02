@@ -1,36 +1,57 @@
+"use client";
+
 import Navigation from "./navigation";
 import AuthButtons from "./auth-buttons";
 import MobileMenu from "./mobile-menu";
 import Image from "next/image";
 import { Link as ScrollLink } from "react-scroll";
+import { Link } from "@/i18n/routing";
+import { usePathname } from "next/navigation";
 
 interface HeaderProps {
   isAuthenticated: boolean
 }
 
 const Header = ({isAuthenticated}: HeaderProps) => {
+  const pathname = usePathname();
+  const isHomePage = pathname === "/" || pathname === "/en" || pathname === "/tr";
+
   return (
     <header className="sticky top-0 w-full z-50 bg-background/80 backdrop-blur-sm">
       <div className="px-4 md:px-64 mx-auto">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
-            <ScrollLink
-              to="hero"
-              spy={true}
-              smooth={true}
-              offset={-100}
-              duration={500}
-              className="text-xl font-extrabold cursor-pointer"
-            >
-              <Image
-                src="/images/logo/black.png"
-                alt=""
-                width={200}
-                height={100}
-                className="w-28"
-              />
-            </ScrollLink>
+            {isHomePage ? (
+              <ScrollLink
+                to="hero"
+                spy={true}
+                smooth={true}
+                offset={-100}
+                duration={500}
+                className="text-xl font-extrabold cursor-pointer"
+              >
+                <Image
+                  src="/images/logo/black.png"
+                  alt=""
+
+                  width={200}
+                  height={100}
+                  className="w-28"
+                />
+              </ScrollLink>
+            ) : (
+              <Link href="/" className="text-xl font-extrabold cursor-pointer">
+                <Image
+                  src="/images/logo/black.png"
+                  alt=""
+
+                  width={200}
+                  height={100}
+                  className="w-28"
+                />
+              </Link>
+            )}
           </div>
 
           {/* Center Navigation - Desktop */}
