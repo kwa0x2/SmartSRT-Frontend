@@ -1,0 +1,20 @@
+<svg width="1200" height="600" viewBox="0 0 1200 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g opacity="0.7">
+    <path d="M0 250 Q 300 150, 600 250 T 1200 250" stroke="#000000" stroke-width="1.5" fill="none"/>
+    <path d="M0 260 Q 300 160, 600 260 T 1200 260" stroke="#000000" stroke-width="1.5" fill="none"/>
+    <path d="M0 270 Q 300 170, 600 270 T 1200 270" stroke="#000000" stroke-width="1.5" fill="none"/>
+    <path d="M0 280 Q 300 180, 600 280 T 1200 280" stroke="#000000" stroke-width="1.5" fill="none"/>
+    <path d="M0 290 Q 300 190, 600 290 T 1200 290" stroke="#000000" stroke-width="1.5" fill="none"/>
+    <path d="M0 300 Q 300 200, 600 300 T 1200 300" stroke="#000000" stroke-width="1.5" fill="none"/>
+    <path d="M0 310 Q 300 210, 600 310 T 1200 310" stroke="#000000" stroke-width="1.5" fill="none"/>
+    <path d="M0 320 Q 300 220, 600 320 T 1200 320" stroke="#000000" stroke-width="1.5" fill="none"/>
+    <path d="M0 330 Q 300 230, 600 330 T 1200 330" stroke="#000000" stroke-width="1.5" fill="none"/>
+    <path d="M0 340 Q 300 240, 600 340 T 1200 340" stroke="#000000" stroke-width="1.5" fill="none"/>
+    <path d="M0 350 Q 300 250, 600 350 T 1200 350" stroke="#000000" stroke-width="1.5" fill="none"/>
+    <path d="M0 360 Q 300 260, 600 360 T 1200 360" stroke="#000000" stroke-width="1.5" fill="none"/>
+    <path d="M0 370 Q 300 270, 600 370 T 1200 370" stroke="#000000" stroke-width="1.5" fill="none"/>
+    <path d="M0 380 Q 300 280, 600 380 T 1200 380" stroke="#000000" stroke-width="1.5" fill="none"/>
+    <path d="M0 390 Q 300 290, 600 390 T 1200 390" stroke="#000000" stroke-width="1.5" fill="none"/>
+    <path d="M0 400 Q 300 300, 600 400 T 1200 400" stroke="#000000" stroke-width="1.5" fill="none"/>
+  </g>
+</svg>
