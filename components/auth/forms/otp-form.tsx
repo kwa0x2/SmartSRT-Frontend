@@ -13,7 +13,7 @@ import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 import { useState, useEffect } from "react";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
-import { registerSchema, RegisterStepTwoData } from "@/schemas/register.schema";
+import { getRegisterSchema, RegisterStepTwoData } from "@/schemas/register.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { otpSend } from "@/app/api/services/auth.service";
 import { parsePhoneNumber, CountryCode } from "libphonenumber-js";
@@ -28,6 +28,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { useTranslations } from "next-intl";
 
 interface OtpFormProps {
   onSubmit: (data: RegisterStepTwoData) => void;
@@ -36,6 +37,8 @@ interface OtpFormProps {
 }
 
 const OtpForm = ({ onSubmit, onBack, isSubmitting = false }: OtpFormProps) => {
+  const t = useTranslations('Auth.register.form');
+  const tValidation = useTranslations('Auth.register.validation');
   const [phoneNumber, setPhoneNumber] = useState("");
   const [otpValue, setOtpValue] = useState("");
   const [isCodeSent, setIsCodeSent] = useState(false);
@@ -46,7 +49,7 @@ const OtpForm = ({ onSubmit, onBack, isSubmitting = false }: OtpFormProps) => {
 
   const form = useForm<RegisterStepTwoData>({
     resolver: zodResolver(
-        registerSchema.pick({
+        getRegisterSchema(tValidation).pick({
           phone_number: true,
           otp: true,
         })
@@ -76,20 +79,20 @@ const OtpForm = ({ onSubmit, onBack, isSubmitting = false }: OtpFormProps) => {
   const validatePhoneNumber = (phone: string, country?: string): boolean => {
     try {
       if (!phone) {
-        setPhoneError("Phone number is required");
+        setPhoneError(t('phoneRequired'));
         return false;
       }
 
       const parsedNumber = parsePhoneNumber(phone, country as CountryCode);
       if (!parsedNumber?.isValid()) {
-        setPhoneError("Please enter a valid phone number");
+        setPhoneError(t('phoneInvalid'));
         return false;
       }
 
       setPhoneError("");
       return true;
     } catch {
-      setPhoneError("Please enter a valid phone number");
+      setPhoneError(t('phoneInvalid'));
       return false;
     }
   };
@@ -105,13 +108,13 @@ const OtpForm = ({ onSubmit, onBack, isSubmitting = false }: OtpFormProps) => {
         setIsCodeSent(true);
         setCanResend(false);
         setTimer(30);
-        toast.success("Verification code sent successfully");
+        toast.success(t('codeSent'));
       }
     } catch (error: any) {
       if (error.response?.status === 302) {
-        toast.error("This phone number is already registered");
+        toast.error(t('phoneExists'));
       } else {
-        toast.error("Failed to send verification code. Please try again or contact support.");
+        toast.error(t('codeSendError'));
       }
     } finally {
       setIsLoading(false);
@@ -129,7 +132,7 @@ const OtpForm = ({ onSubmit, onBack, isSubmitting = false }: OtpFormProps) => {
               name="phone_number"
               render={() => (
                   <FormItem>
-                    <FormLabel>Phone Number</FormLabel>
+                    <FormLabel>{t('phoneNumber')}</FormLabel>
                     <FormControl>
                       <div className="flex space-x-2">
                         <PhoneInput
@@ -148,9 +151,9 @@ const OtpForm = ({ onSubmit, onBack, isSubmitting = false }: OtpFormProps) => {
                           {isLoading ? (
                               <Loader2 className="h-4 w-4 animate-spin" />
                           ) : !canResend ? (
-                              `Resend (${timer}s)`
+                              t('resend', { seconds: timer })
                           ) : (
-                              "Send Code"
+                              t('sendCode')
                           )}
                         </Button>
                       </div>
@@ -165,7 +168,7 @@ const OtpForm = ({ onSubmit, onBack, isSubmitting = false }: OtpFormProps) => {
               name="otp"
               render={() => (
                   <FormItem>
-                    <FormLabel>Verification Code</FormLabel>
+                    <FormLabel>{t('verificationCode')}</FormLabel>
                     <FormControl>
                       <div className="flex justify-center">
                         <InputOTP
@@ -202,7 +205,7 @@ const OtpForm = ({ onSubmit, onBack, isSubmitting = false }: OtpFormProps) => {
                     disabled={isSubmitting}
                 >
                   <ArrowLeft className="h-4 w-4" />
-                  Back
+                  {t('back')}
                 </Button>
             )}
 
@@ -210,9 +213,9 @@ const OtpForm = ({ onSubmit, onBack, isSubmitting = false }: OtpFormProps) => {
                 type="submit"
                 className={`flex-1 ${!onBack ? "w-full" : ""}`}
                 loading={isSubmitting}
-                loadingText="Creating Account..."
+                loadingText={t('creatingAccountLoading')}
             >
-              Create Account
+              {t('createAccount')}
             </LoadingButton>
           </div>
         </form>

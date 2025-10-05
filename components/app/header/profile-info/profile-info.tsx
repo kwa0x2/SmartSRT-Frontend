@@ -1,3 +1,4 @@
+"use client";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,6 +22,7 @@ import { useRouter } from "@/i18n/routing";
 
 import { toast } from "sonner";
 import { LoadingButton } from "@/components/ui/loading-button";
+import { useTranslations } from "next-intl";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -40,6 +42,8 @@ const ProfileInfoContent = () => {
   const { user, isLoading } = useUser();
   const router = useRouter();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const t = useTranslations("App.header.profile");
+  const tMenu = useTranslations("App.header.menu");
 
   useEffect(() => {
     const checkAndLogout = async () => {
@@ -60,10 +64,10 @@ const ProfileInfoContent = () => {
     setIsLoggingOut(true);
     try {
       await logoutAction();
-      toast.success("Logged out successfully");
+      toast.success(t("logoutSuccess"));
       router.push("/");
     } catch (error) {
-      toast.error("Failed to logout. Please try again or contact support.");
+      toast.error(t("logoutError"));
     } finally {
       setIsLoggingOut(false);
     }
@@ -86,7 +90,7 @@ const ProfileInfoContent = () => {
               <div className="hidden md:flex items-center gap-3">
                 <Avatar src={user.image} name={user.name} />
                 <div className="text-sm font-medium capitalize">
-                  {user.name || "Undefined"}
+                  {user.name || t("undefined")}
                 </div>
                 <Icon icon="heroicons-outline:chevron-down" className="w-4 h-4" />
               </div>
@@ -101,7 +105,7 @@ const ProfileInfoContent = () => {
               <Avatar src={user.image} name={user.name} />
               <div>
                 <div className="text-sm font-bold text-black capitalize">
-                  {user.name || "Undefined"}
+                  {user.name || t("undefined")}
                 </div>
                 <div className="text-xs text-gray-500">
                   {user.email || "undefined@smartsrt.com"}
@@ -109,17 +113,20 @@ const ProfileInfoContent = () => {
               </div>
             </DropdownMenuLabel>
             <DropdownMenuGroup>
-              {MENU_ITEMS.map((item, index) => (
+              {MENU_ITEMS.map((item, index) => {
+                const menuKey = item.name.toLowerCase() as keyof typeof tMenu;
+                return (
                   <Link
                       href={item.href}
                       key={`info-menu-${index}`}
                   >
                     <DropdownMenuItem className="flex items-center gap-2 text-sm font-medium text-default-600 px-3 py-1.5">
                       <Icon icon={item.icon} className="w-4 h-4" />
-                      {item.name}
+                      {tMenu(menuKey)}
                     </DropdownMenuItem>
                   </Link>
-              ))}
+                );
+              })}
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem
@@ -129,10 +136,10 @@ const ProfileInfoContent = () => {
                     className="w-full flex items-center gap-2 text-rose-900 !p-0 h-auto no-underline hover:no-underline justify-start text-sm font-medium"
                     onClick={handleLogout}
                     loading={isLoggingOut}
-                    loadingText="Logging out..."
+                    loadingText={t("loggingOut")}
                 >
                   <Icon icon="heroicons:power" className="w-4 h-4"/>
-                  Log out
+                  {t("logout")}
                 </LoadingButton>
             </DropdownMenuItem>
           </DropdownMenuContent>

@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Link as ScrollLink } from "react-scroll";
@@ -6,8 +8,11 @@ import {
   NavigationMenuItem,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu"
+import { useTranslations } from "next-intl";
 
 const Navigation = () => {
+  const t = useTranslations('Header.navigation');
+
   return (
     <NavigationMenu>
       <NavigationMenuList className="hidden md:flex space-x-6 text-sm uppercase tracking-wide font-bold">
@@ -20,7 +25,7 @@ const Navigation = () => {
             duration={500}
             className="cursor-pointer"
           >
-            Pricing
+            {t('pricing')}
           </ScrollLink>
         </NavigationMenuItem>
 
@@ -46,7 +51,7 @@ const Navigation = () => {
             duration={500}
             className="cursor-pointer"
           >
-            Contact Us
+            {t('contact')}
           </ScrollLink>
         </NavigationMenuItem>
       </NavigationMenuList>

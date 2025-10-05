@@ -17,6 +17,7 @@ import { getMessages } from "next-intl/server";
 import DirectionProvider from "@/providers/direction-provider";
 import AuthProvider from "@/providers/auth.provider";
 import { locales } from "@/config";
+import LocaleCookieSync from "@/components/locale-cookie-sync";
 
 
 export const metadata: Metadata = {
@@ -27,13 +28,13 @@ export const metadata: Metadata = {
 export default async function RootLayout({
                                            children,
                                            params,
-                                         }: Readonly<{
+                                         }: {
   children: React.ReactNode;
-  params: { locale: string };
-}>) {
-  const { locale } = params;
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
 
-  const messages = await getMessages();
+  const messages = await getMessages({ locale });
   const direction = getLangDir(locale);
 
   if (!locales.includes(locale as any)) {
@@ -44,6 +45,7 @@ export default async function RootLayout({
       <html lang={locale} dir={direction}>
       <body className={`${spaceGrotesk.className} smartsrt-app`}>
       <NextIntlClientProvider messages={messages} locale={locale}>
+        <LocaleCookieSync />
         <AuthProvider>
           {/* <ThemeProvider attribute="class" defaultTheme="dark"> */}
           <MountedProvider>

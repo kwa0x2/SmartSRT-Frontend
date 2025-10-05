@@ -1,9 +1,12 @@
+"use client";
 import { Badge } from "@/components/ui/badge";
 import { IconCrown } from "@tabler/icons-react";
 import { useSubscription } from "@/hooks/use-subscription";
+import { useTranslations } from "next-intl";
 
 export const ProBadge = () => {
   const { planDetails, isLoading } = useSubscription();
+  const t = useTranslations("App.proBadge");
 
   return (
     <div className="flex items-center justify-center mb-6">
@@ -14,8 +17,8 @@ export const ProBadge = () => {
         <IconCrown className="text-yellow-300" />
         <span className="font-semibold">
           {isLoading || !planDetails.remainingDays
-            ? "Pro Plan"
-            : `Pro Plan (${planDetails.remainingDays} days left)`
+            ? t("plan")
+            : `${t("plan")} ${t("daysLeft", { days: planDetails.remainingDays })}`
           }
         </span>
       </Badge>

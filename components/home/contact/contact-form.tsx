@@ -1,8 +1,10 @@
+"use client";
+
 import { Card } from "@/components/ui/card";
 import { LoadingButton } from "@/components/ui/loading-button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ContactFormValues, contactSchema } from "@/schemas/contact.schema";
+import { ContactFormValues, getContactSchema } from "@/schemas/contact.schema";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import React, { useState } from "react";
@@ -10,9 +12,12 @@ import { cn } from "@/lib/utils";
 import { Textarea } from "@/components/ui/textarea";
 import { createContact } from "@/app/api/services/contact.service";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 const ContactForm = () => {
   const [isPending, setIsPending] = useState(false);
+  const t = useTranslations('Contact.form');
+  const tValidation = useTranslations('Contact.validation');
 
   const {
     register,
@@ -21,7 +26,7 @@ const ContactForm = () => {
     watch,
     reset,
   } = useForm<ContactFormValues>({
-    resolver: zodResolver(contactSchema),
+    resolver: zodResolver(getContactSchema(tValidation)),
     mode: "onChange",
     defaultValues: {
       first_name: "",
@@ -39,16 +44,14 @@ const ContactForm = () => {
     try {
       const result = await createContact(data);
       if (result.status === 200) {
-        toast.success("Message sent successfully!");
+        toast.success(t('success'));
         reset();
       }
     } catch (error: any) {
       if (error.response?.data?.message) {
         toast.error(error.response.data.message);
       } else {
-        toast.error(
-            "An error occurred. Please try again later or contact support."
-        );
+        toast.error(t('error'));
       }
     } finally {
       setIsPending(false);
@@ -64,11 +67,11 @@ const ContactForm = () => {
                   htmlFor="first_name"
                   className="text-[15px] text-black  font-medium"
               >
-                First Name
+                {t('firstName')}
               </Label>
               <Input
                   id="first_name"
-                  placeholder="Enter your first name"
+                  placeholder={t('firstNamePlaceholder')}
                   disabled={isPending}
                   {...register("first_name")}
                   size="lg"
@@ -90,11 +93,11 @@ const ContactForm = () => {
                   htmlFor="last_name"
                   className="text-[15px] text-black  font-medium"
               >
-                Last Name
+                {t('lastName')}
               </Label>
               <Input
                   id="last_name"
-                  placeholder="Enter your last name"
+                  placeholder={t('lastNamePlaceholder')}
                   disabled={isPending}
                   {...register("last_name")}
                   size="lg"
@@ -117,11 +120,11 @@ const ContactForm = () => {
                 htmlFor="email"
                 className="text-[15px] text-black  font-medium"
             >
-              Email
+              {t('email')}
             </Label>
             <Input
                 id="email"
-                placeholder="Enter your email"
+                placeholder={t('emailPlaceholder')}
                 disabled={isPending}
                 {...register("email")}
                 size="lg"
@@ -141,11 +144,11 @@ const ContactForm = () => {
                 htmlFor="message"
                 className="text-[15px] text-black  font-medium"
             >
-              Message
+              {t('message')}
             </Label>
             <Textarea
                 id="message"
-                placeholder="Enter your message"
+                placeholder={t('messagePlaceholder')}
                 disabled={isPending}
                 {...register("message")}
                 autoComplete="message"
@@ -161,10 +164,10 @@ const ContactForm = () => {
           <LoadingButton
               type="submit"
               loading={isPending}
-              loadingText="Sending Message..."
+              loadingText={t('sending')}
               className="w-full bg-black uppercase hover:bg-black/90 text-sm md:text-base h-9 md:h-11 px-4 md:px-8"
           >
-            Send Message
+            {t('submit')}
           </LoadingButton>
         </form>
       </Card>

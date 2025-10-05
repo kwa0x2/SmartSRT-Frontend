@@ -9,7 +9,7 @@ import { resetPassword } from "@/app/api/services/auth.service";
 import { useRouter } from "@/i18n/routing";
 import {
   ResetPasswordFormData,
-  resetPasswordSchema,
+  getResetPasswordSchema,
 } from "@/schemas/password.schema";
 import Cookies from "js-cookie";
 import { APP_ROUTES } from "@/config/routes";
@@ -21,6 +21,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { useTranslations } from "next-intl";
 
 interface ResetPasswordProps {
   authToken: string;
@@ -29,9 +30,11 @@ interface ResetPasswordProps {
 const ResetPassword = ({ authToken }: ResetPasswordProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = React.useState(false);
+  const t = useTranslations("Auth.resetPassword.form");
+  const tValidation = useTranslations("Auth.resetPassword.validation");
 
   const form = useForm<ResetPasswordFormData>({
-    resolver: zodResolver(resetPasswordSchema),
+    resolver: zodResolver(getResetPasswordSchema(tValidation)),
     mode: "onChange",
     defaultValues: {
       password: "",
@@ -47,11 +50,11 @@ const ResetPassword = ({ authToken }: ResetPasswordProps) => {
       const response = await resetPassword(authToken, data.password);
 
       if (response.status === 200) {
-        toast.success("Password has been reset successfully");
+        toast.success(t("success"));
         router.push(APP_ROUTES.AUTH.LOGIN);
       }
     } catch (err: any) {
-      toast.error(err.response?.data?.message || "An error occurred while resetting your password. Please try again or contact support.");
+      toast.error(err.response?.data?.message || t("error"));
     } finally {
       setIsLoading(false);
     }
@@ -65,10 +68,10 @@ const ResetPassword = ({ authToken }: ResetPasswordProps) => {
               name="password"
               render={({ field }) => (
                   <FormItem>
-                    <FormLabel>New Password</FormLabel>
+                    <FormLabel>{t("password")}</FormLabel>
                     <FormControl>
                       <PasswordInput
-                          placeholder="Enter new password"
+                          placeholder={t("passwordPlaceholder")}
                           disabled={isLoading}
                           autoComplete="new-password"
                           {...field}
@@ -84,10 +87,10 @@ const ResetPassword = ({ authToken }: ResetPasswordProps) => {
               name="confirmPassword"
               render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Confirm Password</FormLabel>
+                    <FormLabel>{t("confirmPassword")}</FormLabel>
                     <FormControl>
                       <PasswordInput
-                          placeholder="Confirm new password"
+                          placeholder={t("confirmPasswordPlaceholder")}
                           disabled={isLoading}
                           autoComplete="new-password"
                           {...field}
@@ -102,10 +105,10 @@ const ResetPassword = ({ authToken }: ResetPasswordProps) => {
               type="submit"
               fullWidth
               loading={isLoading}
-              loadingText="Updating Password..."
+              loadingText={t("updating")}
               className="mt-6"
           >
-            Update Password
+            {t("submit")}
           </LoadingButton>
         </form>
       </Form>

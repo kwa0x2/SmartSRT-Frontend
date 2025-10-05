@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { forgotPassword } from "@/app/api/services/auth.service";
-import { ForgotFormData, forgotSchema } from "@/schemas/password.schema";
+import { ForgotFormData, getForgotSchema } from "@/schemas/password.schema";
 import {
   Form,
   FormControl,
@@ -15,12 +15,15 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useTranslations } from "next-intl";
 
 const ForgotPass = () => {
   const [isLoading, setIsLoading] = React.useState(false);
+  const t = useTranslations("Auth.forgotPassword.form");
+  const tValidation = useTranslations("Auth.forgotPassword.validation");
 
   const form = useForm<ForgotFormData>({
-    resolver: zodResolver(forgotSchema),
+    resolver: zodResolver(getForgotSchema(tValidation)),
     mode: "onChange",
     defaultValues: {
       email: "",
@@ -33,10 +36,10 @@ const ForgotPass = () => {
       setIsLoading(true);
       const email = data.email.trim().toLowerCase();
       await forgotPassword(email);
-      toast.success("Recovery email sent successfully. Please check your inbox.");
+      toast.success(t("success"));
       form.reset({ email: "" });
     } catch (err: any) {
-      toast.error(err.response?.data?.message || "Failed to send recovery email. Please try again later or contact support.");
+      toast.error(err.response?.data?.message || t("error"));
     } finally {
       setIsLoading(false);
     }
@@ -50,11 +53,11 @@ const ForgotPass = () => {
               name="email"
               render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>{t("email")}</FormLabel>
                     <FormControl>
                       <Input
                           type="email"
-                          placeholder="Enter your email"
+                          placeholder={t("emailPlaceholder")}
                           disabled={isLoading}
                           autoComplete="email"
                           {...field}
@@ -69,9 +72,9 @@ const ForgotPass = () => {
               type="submit"
               fullWidth
               loading={isLoading}
-              loadingText="Sending Recovery Email..."
+              loadingText={t("sending")}
           >
-            Send Recovery Email
+            {t("submit")}
           </LoadingButton>
         </form>
       </Form>

@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { LoadingButton } from "@/components/ui/loading-button";
 import { Card } from "@/components/ui/card";
@@ -13,6 +15,7 @@ import { createCustomerPortalSession } from "@/app/api/services/paddle.service";
 import { toast } from "sonner";
 import { useState } from "react";
 import { PlanType } from "@/types";
+import { useTranslations } from "next-intl";
 
 interface PricingCardProps {
   plan: PricingPlan;
@@ -29,6 +32,7 @@ const PricingCardContent = ({ plan }: PricingCardProps) => {
   const { isAuthenticated, isCurrentPlan, canUpgrade, isLoading } = useUser();
   const pathname = usePathname();
   const [loading, setLoading] = useState(false);
+  const t = useTranslations('Pricing.buttons');
 
   const handleCustomerPortalRedirect = async () => {
     setLoading(true);
@@ -50,7 +54,7 @@ const PricingCardContent = ({ plan }: PricingCardProps) => {
   const getButtonConfig = (): ButtonConfig => {
     if (isLoading) {
       return {
-        text: "Loading...",
+        text: t('loading'),
         disabled: true,
         link: null,
         onClick: null
@@ -59,7 +63,7 @@ const PricingCardContent = ({ plan }: PricingCardProps) => {
 
     if (!isAuthenticated) {
       return {
-        text: "GET STARTED",
+        text: t('getStarted'),
         disabled: false,
         link: APP_ROUTES.AUTH.REGISTER,
         onClick: null
@@ -68,7 +72,7 @@ const PricingCardContent = ({ plan }: PricingCardProps) => {
 
     if (isCurrentPlan(plan.name)) {
       return {
-        text: "CURRENT PLAN",
+        text: t('currentPlan'),
         disabled: true,
         link: null,
         onClick: null
@@ -78,7 +82,7 @@ const PricingCardContent = ({ plan }: PricingCardProps) => {
     const freePlan: PlanType = "free";
     if (plan.name.toLowerCase() === freePlan && isAuthenticated) {
       return {
-        text: "DOWNGRADE",
+        text: t('downgrade'),
         disabled: false,
         link: null,
         onClick: handleCustomerPortalRedirect
@@ -86,7 +90,7 @@ const PricingCardContent = ({ plan }: PricingCardProps) => {
     }
 
     return {
-      text: canUpgrade() ? "UPGRADE" : "CHANGE PLAN",
+      text: canUpgrade() ? t('upgrade') : t('changePlan'),
       disabled: false,
       link: `${APP_ROUTES.CHECKOUT}?returnUrl=${encodeURIComponent(pathname || '/')}`,
       onClick: null
@@ -129,7 +133,7 @@ const PricingCardContent = ({ plan }: PricingCardProps) => {
                 }`}
                 disabled={buttonConfig.disabled}
                 loading={loading}
-                loadingText="Processing..."
+                loadingText={t('processing')}
                 onClick={buttonConfig.onClick}
             >
               {buttonConfig.text}

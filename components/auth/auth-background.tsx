@@ -1,7 +1,11 @@
+"use client";
 import { Link } from "@/i18n/routing";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const AuthBackground = () => {
+  const t = useTranslations("Auth.background");
+
   return (
     <div
       className="lg:block hidden flex-1 overflow-hidden bg-cover bg-no-repeat bg-center relative"
@@ -11,8 +15,8 @@ const AuthBackground = () => {
     >
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
         <div className="text-[40px] leading-[48px] text-white max-w-[525px] mx-auto pb-6">
-          Smart SRT Creation for{" "}
-          <span className="text-white font-bold ms-1">Short Videos!</span>
+          {t("title")}{" "}
+          <span className="text-white font-bold ms-1">{t("subtitle")}</span>
         </div>
       </div>
 

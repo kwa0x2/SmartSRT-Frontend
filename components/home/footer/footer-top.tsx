@@ -1,7 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import { Link as ScrollLink } from "react-scroll";
+import { useTranslations } from "next-intl";
 
 const FooterTop = () => {
+  const t = useTranslations('Footer');
+
   return (
     <div className="flex flex-col md:flex-row items-center justify-between py-6 md:py-8 gap-4 md:gap-0">
       {/* Logo */}
@@ -24,7 +29,7 @@ const FooterTop = () => {
 
       {/* Slogan */}
       <div className="text-base md:text-lg font-bold tracking-tight text-center md:text-left">
-        Smart SRT Creation for Short Videos
+        {t('slogan')}
       </div>
     </div>
   );

@@ -12,6 +12,7 @@ import { useRouter } from "@/i18n/routing";
 import { APP_ROUTES } from "@/config/routes";
 import { register } from "@/app/api/services/auth.service";
 import AuthLayout from "@/components/auth/auth-layout";
+import { useTranslations } from "next-intl";
 
 const RegisterPage = () => {
   const [step, setStep] = useState<1 | 2>(1);
@@ -26,6 +27,8 @@ const RegisterPage = () => {
   });
   const router = useRouter();
 
+  const t = useTranslations('Auth.register');
+
   const handleStepOne = async (data: RegisterStepOneData) => {
     if (isSubmitting) return;
     setIsSubmitting(true);
@@ -37,9 +40,9 @@ const RegisterPage = () => {
       }
     } catch (error: any) {
       if (error.response?.status === 302) {
-        toast.error("An account with this email already exists. Please try a different email");
+        toast.error(t('form.emailExists'));
       } else {
-        toast.error("An error occurred while registering. Please try again later or contact support.");
+        toast.error(t('form.registerError'));
       }
     } finally {
       setIsSubmitting(false);
@@ -52,10 +55,10 @@ const RegisterPage = () => {
     try {
       const finalData: RegisterFormData = { ...formData, ...data };
       await register(finalData);
-      toast.success("Account created successfully. Please login.");
+      toast.success(t('form.accountCreated'));
       router.push(APP_ROUTES.AUTH.LOGIN);
     } catch (error: any) {
-      toast.error(error.response?.data?.message || "An error occurred while registering. Please try again later or contact support.");
+      toast.error(error.response?.data?.message || t('form.registerError'));
     } finally {
       setIsSubmitting(false);
     }
@@ -65,8 +68,8 @@ const RegisterPage = () => {
       <div className="flex w-full items-center overflow-hidden h-dvh basis-full">
         <div className="overflow-y-auto flex flex-wrap w-full h-dvh">
           <AuthLayout
-              title="Register"
-              subtitle="Create an account to start using SmartSRT"
+              title={t('title')}
+              subtitle={t('subtitle')}
           >
             {step === 1 ? (
                 <>
@@ -75,7 +78,7 @@ const RegisterPage = () => {
                   </div>
                   <div className="relative border-b border-opacity-[30%] border-b-[#000000] mt-2 pt-6">
                     <div className="absolute inline-block bg-white left-1/2 top-1/2 transform -translate-x-1/2 px-4 min-w-max text-sm text-default-500">
-                      Or continue with
+                      {t('orContinueWith')}
                     </div>
                   </div>
                   <RegForm
@@ -96,12 +99,12 @@ const RegisterPage = () => {
                 />
             )}
             <div className="md:max-w-[345px] mt-6 mx-auto text-sm text-default-500">
-              Already Registered?{" "}
+              {t('alreadyRegistered')}{" "}
               <Link
                   href={APP_ROUTES.AUTH.LOGIN}
                   className="text-default-900 font-medium hover:underline"
               >
-                Login
+                {t('login')}
               </Link>
             </div>
           </AuthLayout>

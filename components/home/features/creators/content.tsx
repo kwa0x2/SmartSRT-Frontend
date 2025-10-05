@@ -1,25 +1,28 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
 import { APP_ROUTES } from "@/config/routes";
 import { Link as ScrollLink } from "react-scroll";
+import { useTranslations } from "next-intl";
 
 interface CreatorsContentProps {
     isAuthenticated: boolean;
 }
 
 const CreatorsContent = ({ isAuthenticated }: CreatorsContentProps) => {
+    const t = useTranslations('Features');
+
     return (
         <div className="flex flex-col justify-center">
             <h2 className="text-lg font-semibold text-neutral-400 uppercase tracking-wider">
-                Creators
+                {t('title')}
             </h2>
             <h3 className="text-3xl md:text-5xl font-bold leading-tight lg:leading-[1.15]">
-                Enhance your videos with multilingual subtitles
+                {t('heading')}
             </h3>
             <p className="mt-2 text-base md:text-lg lg:leading-[1.4]">
-                Create professional subtitles in multiple languages instantly. Our AI
-                technology helps you reach a global audience by automatically generating
-                accurate SRT files in various languages.
+                {t('description')}
             </p>
             <div className="mt-6 flex space-x-6 items-center uppercase">
                 <Button
@@ -28,9 +31,9 @@ const CreatorsContent = ({ isAuthenticated }: CreatorsContentProps) => {
                     asChild
                 >
                     {isAuthenticated ? (
-                        <Link href={APP_ROUTES.APP}>Go to App</Link>
+                        <Link href={APP_ROUTES.APP}>{t('goToApp')}</Link>
                     ) : (
-                        <Link href={APP_ROUTES.AUTH.REGISTER}>Get Started Free</Link>
+                        <Link href={APP_ROUTES.AUTH.REGISTER}>{t('getStarted')}</Link>
                     )}
                 </Button>
                 <ScrollLink
@@ -42,7 +45,7 @@ const CreatorsContent = ({ isAuthenticated }: CreatorsContentProps) => {
                     className="font-bold text-sm tracking-wide cursor-pointer"
                     tabIndex={0}
                 >
-                    Pricing
+                    {t('pricing')}
                 </ScrollLink>
             </div>
         </div>
