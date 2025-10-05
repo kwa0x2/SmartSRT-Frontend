@@ -10,6 +10,7 @@ import { APP_ROUTES } from "@/config/routes";
 import { useState } from "react";
 import { createCustomerPortalSession } from "@/app/api/services/paddle.service";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 interface SubscriptionInfoProps {
   hideManageButton?: boolean;
@@ -20,6 +21,7 @@ const SubscriptionInfo = ({
 }: SubscriptionInfoProps) => {
   const { planDetails, usagePercentage, isPro, isLoading } = useSubscription();
   const [loading, setLoading] = useState(false);
+  const t = useTranslations("App.profile.subscription");
 
   const handleCustomerPortalRedirect = async () => {
     setLoading(true);
@@ -30,15 +32,12 @@ const SubscriptionInfo = ({
         if (url) {
           window.open(url, "_blank");
         } else {
-          toast.error(
-            "An error occurred. Please try again later or contact support."
-          );
+          toast.error(t("error"));
         }
       }
     } catch (error: any) {
       toast.error(
-        error.response?.data?.message ||
-          "An error occurred. Please try again later or contact support."
+        error.response?.data?.message || t("error")
       );
     } finally {
       setLoading(false);
@@ -47,16 +46,16 @@ const SubscriptionInfo = ({
 
   return (
     <Card className="space-y-4 md:space-y-6">
-      <h3 className="text-base md:text-lg font-semibold">Current Plan</h3>
+      <h3 className="text-base md:text-lg font-semibold">{t("title")}</h3>
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-0">
         <div>
           <p className="font-medium text-sm md:text-base">{planDetails.name}</p>
           <p className="text-xs md:text-sm text-muted-foreground">
-            {planDetails.limit} minutes upload limit per month
+            {t("limit", { limit: planDetails.limit })}
           </p>
           {isPro && planDetails.remainingDays !== undefined && !isLoading && (
             <p className="text-xs text-orange-600 font-medium mt-1">
-              {planDetails.remainingDays} days remaining
+              {t("daysRemaining", { days: planDetails.remainingDays })}
             </p>
           )}
         </div>
@@ -67,7 +66,7 @@ const SubscriptionInfo = ({
               className="font-bold text-xs md:text-sm tracking-wide cursor-pointer"
               href={APP_ROUTES.SUBSCRIPTION}
             >
-              Manage Subscription
+              {t("manageSubscription")}
             </Link>
           )}
 
@@ -77,9 +76,9 @@ const SubscriptionInfo = ({
               className="text-black text-xs md:text-sm tracking-wide font-bold !p-0 h-auto no-underline hover:no-underline"
               onClick={handleCustomerPortalRedirect}
               loading={loading}
-              loadingText="Opening..."
+              loadingText={t("opening")}
             >
-              Customer Portal
+              {t("customerPortal")}
             </LoadingButton>
           )}
         </div>
@@ -87,10 +86,10 @@ const SubscriptionInfo = ({
 
       <div className="space-y-2">
         <div className="flex justify-between text-xs md:text-sm">
-          <span>Monthly Usage</span>
+          <span>{t("monthlyUsage")}</span>
           <span>
-            {isLoading ? "-/-" : `${planDetails.usage}/${planDetails.limit}`}{" "}
-            minutes
+            {isLoading ? "-/-" : t("usage", { usage: planDetails.usage, limit: planDetails.limit })}{" "}
+            {t("minutes")}
           </span>
         </div>
         <Progress

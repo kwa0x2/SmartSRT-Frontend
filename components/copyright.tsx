@@ -1,7 +1,10 @@
+"use client";
+import { useTranslations } from "next-intl";
 
 const Copyright = () => {
+    const t = useTranslations("Footer");
     const currentYear = new Date().getFullYear();
-  return <>Copyright {currentYear}, SmartSRT All Rights Reserved.</>;
+  return <>{t("copyright", { year: currentYear })}</>;
 };
 
 export default Copyright;

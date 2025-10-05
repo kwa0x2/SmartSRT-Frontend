@@ -6,15 +6,18 @@ import AuthLayout from "@/components/auth/auth-layout";
 import { toast } from "sonner";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
-
-const errorMessages = {
-  invalid_state: "Invalid or expired state parameter. Please retry the Google authentication process.",
-  server_error: "An error occurred. Please try again later or contact support.",
-  exists_github: "An account with this email already exists. Please log in using Github.",
-  exists_credentials: "An account with this email already exists. Please log in using Credentials.",
-} as const;
+import { useTranslations } from "next-intl";
 
 const LoginPage = () => {
+  const t = useTranslations('Auth.login');
+
+  const errorMessages = {
+    invalid_state: t('errors.invalid_state'),
+    server_error: t('errors.server_error'),
+    exists_github: t('errors.exists_github'),
+    exists_credentials: t('errors.exists_credentials'),
+  } as const;
+
   useEffect(() => {
     const errorCode = Cookies.get("error")
 
@@ -23,31 +26,31 @@ const LoginPage = () => {
 
       Cookies.remove("error");
     }
-  }, []);
+  }, [errorMessages]);
 
   return (
       <div className="flex w-full items-center overflow-hidden h-dvh basis-full">
         <div className="overflow-y-auto flex flex-wrap w-full h-dvh">
           <AuthLayout
-              title="Login"
-              subtitle="Login to your account to start using SmartSRT"
+              title={t('title')}
+              subtitle={t('subtitle')}
           >
             <div className="max-w-[242px] mx-auto mt-2 w-full">
               <Social status="in" />
             </div>
             <div className="relative border-b border-opacity-[30%] border-b-[#000000] mt-2 pt-6">
               <div className="absolute inline-block bg-white left-1/2 top-1/2 transform -translate-x-1/2 px-4 min-w-max text-sm text-default-500">
-                Or continue with
+                {t('orContinueWith')}
               </div>
             </div>
             <LoginForm />
             <div className="md:max-w-[345px] mt-6 mx-auto font-normal text-default-500 text-sm">
-              Don&#39;t have an account?{" "}
+              {t('dontHaveAccount')}{" "}
               <Link
                   href="/auth/register"
                   className="text-default-900 font-medium hover:underline"
               >
-                Register
+                {t('register')}
               </Link>
             </div>
           </AuthLayout>

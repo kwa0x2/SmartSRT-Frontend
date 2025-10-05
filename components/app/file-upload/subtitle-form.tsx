@@ -27,11 +27,13 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ERROR_TYPES } from "@/types";
+import { useTranslations } from "next-intl";
 
 const LoadingDots = () => {
+  const t = useTranslations("App.subtitleForm");
   return (
     <span className="inline-flex items-center">
-      Generating
+      {t("generating")}
       <span className="animate-[loading_1.4s_ease-in-out_infinite] ml-1">
         .
       </span>
@@ -52,6 +54,7 @@ interface SubtitleFormProps {
 export function SubtitleForm({ file }: SubtitleFormProps) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const t = useTranslations("App.subtitleForm");
 
   const form = useForm<SubtitleFormValues>({
     resolver: zodResolver(subtitleFormSchema),
@@ -77,7 +80,7 @@ export function SubtitleForm({ file }: SubtitleFormProps) {
       );
 
       const payload = (response as any)?.body ?? response;
-      const message = payload?.message ?? "SRT generated successfully";
+      const message = payload?.message ?? t("srtSuccess");
       const srtUrl = payload?.srt_url as string | undefined;
       if (response.status_code == 200) {
         toast.success(message);
@@ -91,12 +94,12 @@ export function SubtitleForm({ file }: SubtitleFormProps) {
       } else if (response.status_code == 202) {
         toast.success(response.body.message);
       }
-        
+
     } catch (error: any) {
       if (error.response?.data?.body?.message === ERROR_TYPES.USAGE_LIMIT_REACHED) {
-        toast.error("You have reached your monthly usage limit.");
+        toast.error(t("usageLimitReached"));
       } else {
-        toast.error(error.response?.data?.body?.message || "An error occurred. Please try again later or contact support.");
+        toast.error(error.response?.data?.body?.message || t("error"));
       }
     } finally {
       setIsLoading(false);
@@ -123,12 +126,12 @@ export function SubtitleForm({ file }: SubtitleFormProps) {
             }
           >
             <SelectTrigger className="w-full md:w-[180px] border-2">
-              <SelectValue placeholder="Words per line" />
+              <SelectValue placeholder={t("wordsPerLine")} />
             </SelectTrigger>
             <SelectContent>
               {[1, 2, 3, 4, 5].map((num) => (
                 <SelectItem key={num} value={String(num)}>
-                  {num} words per line
+                  {t("wordsPerLineOption", { count: num })}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -148,7 +151,7 @@ export function SubtitleForm({ file }: SubtitleFormProps) {
                 }}
                 className="border-2 border-gray-300 data-[state=checked]:border-none"
               />
-              <label className="text-sm">Include punctuation</label>
+              <label className="text-sm">{t("includePunctuation")}</label>
             </div>
             <TooltipProvider delayDuration={250}>
               <Tooltip>
@@ -157,8 +160,7 @@ export function SubtitleForm({ file }: SubtitleFormProps) {
                 </TooltipTrigger>
                 <TooltipContent>
                   <p className="max-w-xs">
-                    When enabled, punctuation marks (.,!?) will be included in
-                    the generated SRT file.
+                    {t("punctuationTooltip")}
                   </p>
                 </TooltipContent>
               </Tooltip>
@@ -176,7 +178,7 @@ export function SubtitleForm({ file }: SubtitleFormProps) {
                 disabled={!watchPunctuation}
               />
               <label className="text-sm">
-                Consider punctuation in line breaks
+                {t("considerPunctuation")}
               </label>
             </div>
             <TooltipProvider delayDuration={250}>
@@ -186,9 +188,7 @@ export function SubtitleForm({ file }: SubtitleFormProps) {
                 </TooltipTrigger>
                 <TooltipContent>
                   <p className="max-w-xs">
-                    When enabled, punctuation marks will be considered when
-                    breaking lines. This helps maintain natural reading flow and
-                    proper sentence structure.
+                    {t("considerPunctuationTooltip")}
                   </p>
                 </TooltipContent>
               </Tooltip>
@@ -202,9 +202,9 @@ export function SubtitleForm({ file }: SubtitleFormProps) {
         className="w-full mt-6 md:mt-8 bg-black uppercase hover:bg-black/90 h-9 md:h-11 text-sm md:text-base"
         disabled={!file}
         loading={isLoading}
-        loadingText="Generating..."
+        loadingText={t("generatingButton")}
       >
-        Generate SRT File
+        {t("generateButton")}
       </LoadingButton>
     </form>
   );

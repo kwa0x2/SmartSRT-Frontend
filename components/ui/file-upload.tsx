@@ -1,3 +1,4 @@
+"use client";
 import { cn } from "@/lib/utils";
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
@@ -5,6 +6,7 @@ import { IconUpload, IconTrash } from "@tabler/icons-react";
 import { useDropzone } from "react-dropzone";
 import { toast } from "sonner";
 import { useUser } from "@/hooks/use-user";
+import { useTranslations } from "next-intl";
 
 const mainVariant = {
   initial: {
@@ -41,18 +43,19 @@ export const FileUpload = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { session } = useUser();
   const isPro = session?.user?.plan === 'pro';
+  const t = useTranslations("App.fileUpload");
 
   const handleFileChange = async (newFiles: File[]) => {
     if (newFiles.length > 0) {
       const videoFile = newFiles[0];
 
       if (videoFile.type === 'audio/wav' && !isPro) {
-        toast.error('You need to upgrade to the Pro plan to upload WAV files.');
+        toast.error(t("errors.upgradeForWav"));
         return;
       }
 
       if (videoFile.size > MAX_FILE_SIZE_MB * 1024 * 1024) {
-        toast.error('File size exceeds 24MB limit.');
+        toast.error(t("errors.fileSizeExceeds"));
         return;
       }
 
@@ -66,7 +69,7 @@ export const FileUpload = ({
           const mediaDuration = (mediaEl as HTMLMediaElement).duration;
           const maxDuration = isPro ? MAX_DURATION_SECONDS_PRO : MAX_DURATION_SECONDS;
           if (mediaDuration > maxDuration) {
-            toast.error(`File duration exceeds the limit. Maximum duration is ${maxDuration} seconds for your plan.`);
+            toast.error(t("errors.durationExceeds", { maxDuration }));
             return;
           }
           setDuration(mediaDuration);
@@ -78,7 +81,7 @@ export const FileUpload = ({
       };
       mediaEl.onerror = () => {
         URL.revokeObjectURL(objectUrl);
-        toast.error('Failed to read media metadata. Please try a different file.');
+        toast.error(t("errors.metadataFailed"));
       };
     }
   };
@@ -105,11 +108,11 @@ export const FileUpload = ({
       const isMp4 = file.type === 'video/mp4' || file.name.endsWith('.mp4');
       const isMp3 = file.type === 'audio/mpeg' || file.name.endsWith('.mp3');
       if (isWav && !isPro) {
-        toast.error('You need to upgrade to the Pro plan to upload WAV files.');
+        toast.error(t("errors.upgradeForWav"));
       } else if (!isMp4 && !isMp3 && !isWav) {
-        toast.error('This file type is not supported. Only mp4, mp3, and wav files are accepted.');
+        toast.error(t("errors.fileTypeNotSupported"));
       } else {
-        toast.error('An error occurred. Please try again later or contact support.');
+        toast.error(t("errors.genericError"));
       }
     },
   });
@@ -136,12 +139,12 @@ export const FileUpload = ({
           />
           <div className="flex flex-col items-center justify-center">
             <p className="relative z-20 font-sans font-bold text-black text-base md:text-xl">
-              Upload file
+              {t("title")}
             </p>
             <p className="relative z-20 font-sans font-normal text-black text-sm md:text-lg mt-2 text-center">
               {session?.user?.plan === 'pro'
-                  ? 'Drag or drop your file here (mp4, mp3, wav) or click to upload'
-                  : 'Drag or drop your file here (mp4, mp3) or click to upload'}
+                  ? t("dragDropPro")
+                  : t("dragDropFree")}
             </p>
             <div className="relative w-full mt-10 max-w-xl mx-auto">
               {file ? (
@@ -179,7 +182,7 @@ export const FileUpload = ({
                           layout
                           className="text-xs md:text-sm px-1.5 py-0.5 rounded-md bg-black/50"
                       >
-                        Duration: {formatDuration(duration)}
+                        {t("duration")}: {formatDuration(duration)}
                       </motion.p>
                       <motion.p
                           initial={{ opacity: 0 }}
@@ -213,13 +216,13 @@ export const FileUpload = ({
                               animate={{ opacity: 1 }}
                               className="text-white flex flex-col items-center"
                           >
-                            Drop it
+                            {t("dropIt")}
                             <IconUpload className="h-4 w-4 text-white" />
                           </motion.p>
                       ) : (
                           <motion.div className="text-white flex flex-col items-center gap-2">
                             <IconUpload className="h-4 w-4 text-white" />
-                            <span className="text-xs text-center">Click or drag file</span>
+                            <span className="text-xs text-center">{t("clickOrDrag")}</span>
                           </motion.div>
                       )}
                     </motion.div>

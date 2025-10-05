@@ -1,20 +1,23 @@
 import { z } from "zod";
 
-export const forgotSchema = z.object({
-  email: z.string().email("Please enter a valid email address"),
-});
-
-export type ForgotFormData = z.infer<typeof forgotSchema>;
-
-
-export const resetPasswordSchema = z
-  .object({
-    password: z.string().min(8, "Password must be at least 8 characters"),
-    confirmPassword: z.string(),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ["confirmPassword"],
+export const getForgotSchema = (t: (key: string) => string) => {
+  return z.object({
+    email: z.string().email(t("emailInvalid")),
   });
+};
 
-  export type ResetPasswordFormData = z.infer<typeof resetPasswordSchema>;
+export type ForgotFormData = z.infer<ReturnType<typeof getForgotSchema>>;
+
+export const getResetPasswordSchema = (t: (key: string) => string) => {
+  return z
+    .object({
+      password: z.string().min(8, t("passwordMin")),
+      confirmPassword: z.string(),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+      message: t("passwordMatch"),
+      path: ["confirmPassword"],
+    });
+};
+
+export type ResetPasswordFormData = z.infer<ReturnType<typeof getResetPasswordSchema>>;

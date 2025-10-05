@@ -3,9 +3,11 @@
 import Layout from "@/components/home/layout";
 import Loader from "@/components/loader";
 import { useCheckAuth } from "@/hooks/use-check-auth";
+import { useTranslations } from "next-intl";
 
 export default function Refund() {
   const { isLoading, isAuthenticated } = useCheckAuth();
+  const t = useTranslations("Refund");
 
   if (isLoading) {
     return <Loader />;
@@ -18,10 +20,10 @@ export default function Refund() {
           {/* Header */}
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold text-gray-900 mb-3">
-              Refund Policy
+              {t("title")}
             </h1>
             <p className="text-gray-600">
-              Last updated: January 1, 2025
+              {t("lastUpdated")}
             </p>
           </div>
 
@@ -30,71 +32,59 @@ export default function Refund() {
             {/* Section 1 */}
             <section>
               <h2 className="text-2xl font-semibold text-gray-900 mb-4 pb-2 border-b-2 border-black">
-                1. Our Commitment to Satisfaction
+                {t("section1.title")}
               </h2>
               <p className="text-gray-700 leading-relaxed">
-                At SmartSRT, we strive to deliver exceptional subtitle generation services. This Refund Policy
-                outlines the circumstances under which refunds are available and explains the process for
-                requesting them. We aim to be fair, transparent, and responsive to our users' concerns.
+                {t("section1.content")}
               </p>
             </section>
 
             {/* Section 2 */}
             <section>
               <h2 className="text-2xl font-semibold text-gray-900 mb-4 pb-2 border-b-2 border-black">
-                2. Subscription Cancellation & Refunds
+                {t("section2.title")}
               </h2>
 
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-3">2.1 Subscription Cancellation</h3>
+                  <h3 className="text-lg font-semibold text-gray-800 mb-3">{t("section2.subsection1.title")}</h3>
                   <ul className="space-y-2 text-gray-700 ml-6">
-                    <li className="flex items-start">
-                      <span className="mr-2">•</span>
-                      <span>You may cancel your subscription at any time through account settings</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="mr-2">•</span>
-                      <span>Cancellation is effective immediately, but access continues until the end of your current billing period</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="mr-2">•</span>
-                      <span>Auto-renewal is automatically disabled upon cancellation</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="mr-2">•</span>
-                      <span>No refunds are provided for unused time within the current billing period</span>
-                    </li>
+                    {(t.raw("section2.subsection1.items") as string[]).map((item: string, index: number) => (
+                      <li key={index} className="flex items-start">
+                        <span className="mr-2">•</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
                   </ul>
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-3">2.2 Subscription Refund Eligibility</h3>
-                  <p className="text-gray-700 mb-3">Subscription refunds may be granted in the following cases:</p>
+                  <h3 className="text-lg font-semibold text-gray-800 mb-3">{t("section2.subsection2.title")}</h3>
+                  <p className="text-gray-700 mb-3">{t("section2.subsection2.intro")}</p>
 
                   <div className="space-y-3">
                     <div className="border border-black/40 p-4 rounded-lg">
-                      <h4 className="font-semibold text-gray-800 mb-1">14-Day Money-Back Guarantee</h4>
+                      <h4 className="font-semibold text-gray-800 mb-1">{t("section2.subsection2.moneyBack.title")}</h4>
                       <p className="text-sm text-gray-600">
-                        Full refund available within 14 days of initial subscription purchase (new subscribers only)
+                        {t("section2.subsection2.moneyBack.description")}
                       </p>
                     </div>
                     <div className="border border-black/40 p-4 rounded-lg">
-                      <h4 className="font-semibold text-gray-800 mb-1">Platform Technical Issues</h4>
+                      <h4 className="font-semibold text-gray-800 mb-1">{t("section2.subsection2.technicalIssues.title")}</h4>
                       <p className="text-sm text-gray-600">
-                        Serious technical problems preventing normal service usage that cannot be resolved by our support team
+                        {t("section2.subsection2.technicalIssues.description")}
                       </p>
                     </div>
                     <div className="border border-black/40 p-4 rounded-lg">
-                      <h4 className="font-semibold text-gray-800 mb-1">Extended Service Outage</h4>
+                      <h4 className="font-semibold text-gray-800 mb-1">{t("section2.subsection2.serviceOutage.title")}</h4>
                       <p className="text-sm text-gray-600">
-                        When cumulative service downtime exceeds 20% of your billing period
+                        {t("section2.subsection2.serviceOutage.description")}
                       </p>
                     </div>
                     <div className="border border-black/40 p-4 rounded-lg">
-                      <h4 className="font-semibold text-gray-800 mb-1">Unauthorized Payment</h4>
+                      <h4 className="font-semibold text-gray-800 mb-1">{t("section2.subsection2.unauthorizedPayment.title")}</h4>
                       <p className="text-sm text-gray-600">
-                        Charges made without your authorization or duplicate billing errors
+                        {t("section2.subsection2.unauthorizedPayment.description")}
                       </p>
                     </div>
                   </div>
@@ -105,51 +95,31 @@ export default function Refund() {
             {/* Section 3 */}
             <section>
               <h2 className="text-2xl font-semibold text-gray-900 mb-4 pb-2 border-b-2 border-black">
-                3. Credit Purchase Refunds
+                {t("section3.title")}
               </h2>
 
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-3">3.1 Eligible for Refund</h3>
+                  <h3 className="text-lg font-semibold text-gray-800 mb-3">{t("section3.subsection1.title")}</h3>
                   <ul className="space-y-2 text-gray-700 ml-6">
-                    <li className="flex items-start">
-                      <span className="text-green-500 mr-2">✓</span>
-                      <span>Request submitted within 14 days of credit purchase</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-green-500 mr-2">✓</span>
-                      <span>More than 50% of purchased credits remain unused</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-green-500 mr-2">✓</span>
-                      <span>Technical errors preventing credit usage</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-green-500 mr-2">✓</span>
-                      <span>Double charges or payment processing errors</span>
-                    </li>
+                    {(t.raw("section3.subsection1.items") as string[]).map((item: string, index: number) => (
+                      <li key={index} className="flex items-start">
+                        <span className="text-green-500 mr-2">✓</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
                   </ul>
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-3">3.2 Not Eligible for Refund</h3>
+                  <h3 className="text-lg font-semibold text-gray-800 mb-3">{t("section3.subsection2.title")}</h3>
                   <ul className="space-y-2 text-gray-700 ml-6">
-                    <li className="flex items-start">
-                      <span className="text-red-500 mr-2">✕</span>
-                      <span>More than 50% of credits have been consumed</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-red-500 mr-2">✕</span>
-                      <span>Request made after the 14-day window</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-red-500 mr-2">✕</span>
-                      <span>User error or dissatisfaction with subtitle quality (quality issues should be reported for improvement)</span>
-                    </li>
-                    <li className="flex items-start">
-                      <span className="text-red-500 mr-2">✕</span>
-                      <span>Promotional or bonus credits</span>
-                    </li>
+                    {(t.raw("section3.subsection2.items") as string[]).map((item: string, index: number) => (
+                      <li key={index} className="flex items-start">
+                        <span className="text-red-500 mr-2">✕</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </div>
@@ -158,55 +128,53 @@ export default function Refund() {
             {/* Section 4 */}
             <section>
               <h2 className="text-2xl font-semibold text-gray-900 mb-4 pb-2 border-b-2 border-black">
-                4. How to Request a Refund
+                {t("section4.title")}
               </h2>
 
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-3">4.1 Submitting Your Request</h3>
-                  <p className="text-gray-700 mb-3">To request a refund, contact us with the following information:</p>
+                  <h3 className="text-lg font-semibold text-gray-800 mb-3">{t("section4.subsection1.title")}</h3>
+                  <p className="text-gray-700 mb-3">{t("section4.subsection1.intro")}</p>
 
                   <div className="border border-black/40 p-6 rounded-lg space-y-3">
                     <p className="text-gray-700">
-                      <span className="font-semibold">Email:</span>{" "}
+                      <span className="font-semibold">{t("section4.subsection1.email")}</span>{" "}
                       <a href="mailto:refunds@smartsrt.com" className="text-black/80 hover:text-black underline">
                         refunds@smartsrt.com
                       </a>
                     </p>
                     <p className="text-gray-700">
-                      <span className="font-semibold">Subject Line:</span> "Refund Request - [Your Username]"
+                      <span className="font-semibold">{t("section4.subsection1.subject")}</span> {t("section4.subsection1.subjectText")}
                     </p>
                     <div>
-                      <p className="font-semibold text-gray-700 mb-2">Required Information:</p>
+                      <p className="font-semibold text-gray-700 mb-2">{t("section4.subsection1.requiredInfo")}</p>
                       <ul className="space-y-1 text-sm text-gray-600 ml-6">
-                        <li>• Account email address</li>
-                        <li>• Detailed reason for refund request</li>
-                        <li>• Payment reference number (from Paddle)</li>
-                        <li>• Transaction date and amount</li>
-                        <li>• Any supporting documentation (for technical issues)</li>
+                        {(t.raw("section4.subsection1.requiredItems") as string[]).map((item: string, index: number) => (
+                          <li key={index}>• {item}</li>
+                        ))}
                       </ul>
                     </div>
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-3">4.2 Refund Review Timeline</h3>
+                  <h3 className="text-lg font-semibold text-gray-800 mb-3">{t("section4.subsection2.title")}</h3>
                   <div className="space-y-3">
                     <div className="flex items-center justify-between py-3 border-b border-gray-200">
-                      <span className="font-medium text-gray-800">Initial Response</span>
-                      <span className="text-gray-600">24-48 hours</span>
+                      <span className="font-medium text-gray-800">{t("section4.subsection2.initialResponse")}</span>
+                      <span className="text-gray-600">{t("section4.subsection2.initialResponseTime")}</span>
                     </div>
                     <div className="flex items-center justify-between py-3 border-b border-gray-200">
-                      <span className="font-medium text-gray-800">Review & Decision</span>
-                      <span className="text-gray-600">3-5 business days</span>
+                      <span className="font-medium text-gray-800">{t("section4.subsection2.reviewDecision")}</span>
+                      <span className="text-gray-600">{t("section4.subsection2.reviewDecisionTime")}</span>
                     </div>
                     <div className="flex items-center justify-between py-3 border-b border-gray-200">
-                      <span className="font-medium text-gray-800">Refund Processing (if approved)</span>
-                      <span className="text-gray-600">5-10 business days</span>
+                      <span className="font-medium text-gray-800">{t("section4.subsection2.refundProcessing")}</span>
+                      <span className="text-gray-600">{t("section4.subsection2.refundProcessingTime")}</span>
                     </div>
                     <div className="flex items-center justify-between py-3">
-                      <span className="font-medium text-gray-800">Email Updates</span>
-                      <span className="text-gray-600">At every stage</span>
+                      <span className="font-medium text-gray-800">{t("section4.subsection2.emailUpdates")}</span>
+                      <span className="text-gray-600">{t("section4.subsection2.emailUpdatesTime")}</span>
                     </div>
                   </div>
                 </div>
@@ -216,25 +184,25 @@ export default function Refund() {
             {/* Section 5 */}
             <section>
               <h2 className="text-2xl font-semibold text-gray-900 mb-4 pb-2 border-b-2 border-black">
-                5. Refund Processing Methods
+                {t("section5.title")}
               </h2>
-              <p className="text-gray-700 mb-4">Approved refunds are processed through the following methods:</p>
+              <p className="text-gray-700 mb-4">{t("section5.intro")}</p>
 
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="border border-black/40 p-4 rounded-lg">
-                  <h3 className="font-semibold text-gray-800 mb-2">Credit/Debit Card</h3>
-                  <p className="text-sm text-gray-600 mb-1">Refund to original payment card</p>
-                  <p className="text-xs text-gray-500">Processing time: 5-10 business days</p>
+                  <h3 className="font-semibold text-gray-800 mb-2">{t("section5.creditCard.title")}</h3>
+                  <p className="text-sm text-gray-600 mb-1">{t("section5.creditCard.description")}</p>
+                  <p className="text-xs text-gray-500">{t("section5.creditCard.processingTime")}</p>
                 </div>
                 <div className="border border-black/40 p-4 rounded-lg">
-                  <h3 className="font-semibold text-gray-800 mb-2">PayPal</h3>
-                  <p className="text-sm text-gray-600 mb-1">Direct refund to PayPal account</p>
-                  <p className="text-xs text-gray-500">Processing time: 3-5 business days</p>
+                  <h3 className="font-semibold text-gray-800 mb-2">{t("section5.paypal.title")}</h3>
+                  <p className="text-sm text-gray-600 mb-1">{t("section5.paypal.description")}</p>
+                  <p className="text-xs text-gray-500">{t("section5.paypal.processingTime")}</p>
                 </div>
                 <div className="border border-black/40 p-4 rounded-lg">
-                  <h3 className="font-semibold text-gray-800 mb-2">Bank Transfer</h3>
-                  <p className="text-sm text-gray-600 mb-1">Direct bank transfer (special cases)</p>
-                  <p className="text-xs text-gray-500">Processing time: 7-14 business days</p>
+                  <h3 className="font-semibold text-gray-800 mb-2">{t("section5.bankTransfer.title")}</h3>
+                  <p className="text-sm text-gray-600 mb-1">{t("section5.bankTransfer.description")}</p>
+                  <p className="text-xs text-gray-500">{t("section5.bankTransfer.processingTime")}</p>
                 </div>
               </div>
             </section>
@@ -242,41 +210,43 @@ export default function Refund() {
             {/* Section 6 */}
             <section>
               <h2 className="text-2xl font-semibold text-gray-900 mb-4 pb-2 border-b-2 border-black">
-                6. Special Circumstances
+                {t("section6.title")}
               </h2>
 
               <div className="space-y-4">
                 <div className="border-l-4 border-black pl-4 py-2">
-                  <h3 className="font-semibold text-gray-800 mb-2">6.1 Technical Service Issues</h3>
+                  <h3 className="font-semibold text-gray-800 mb-2">{t("section6.subsection1.title")}</h3>
                   <p className="text-sm text-gray-700 mb-2">
-                    When platform-related technical problems prevent you from using our service:
+                    {t("section6.subsection1.intro")}
                   </p>
                   <ul className="space-y-1 text-sm text-gray-600 ml-4">
-                    <li>• Full refund for persistent, unresolvable issues</li>
+                    {(t.raw("section6.subsection1.items") as string[]).map((item: string, index: number) => (
+                      <li key={index}>• {item}</li>
+                    ))}
                   </ul>
                 </div>
 
                 <div className="border-l-4 border-black pl-4 py-2">
-                  <h3 className="font-semibold text-gray-800 mb-2">6.2 Subtitle Quality Concerns</h3>
+                  <h3 className="font-semibold text-gray-800 mb-2">{t("section6.subsection2.title")}</h3>
                   <p className="text-sm text-gray-700 mb-2">
-                    If you experience consistent subtitle quality issues:
+                    {t("section6.subsection2.intro")}
                   </p>
                   <ul className="space-y-1 text-sm text-gray-600 ml-4">
-                    <li>• Feedback and support for first 3 subtitle generations</li>
-                    <li>• Credit refund for recurring AI accuracy problems</li>
-                    <li>• Free regeneration after system improvements</li>
+                    {(t.raw("section6.subsection2.items") as string[]).map((item: string, index: number) => (
+                      <li key={index}>• {item}</li>
+                    ))}
                   </ul>
                 </div>
 
                 <div className="border-l-4 border-black pl-4 py-2">
-                  <h3 className="font-semibold text-gray-800 mb-2">6.3 Security Breaches</h3>
+                  <h3 className="font-semibold text-gray-800 mb-2">{t("section6.subsection3.title")}</h3>
                   <p className="text-sm text-gray-700 mb-2">
-                    In the event of account security compromise:
+                    {t("section6.subsection3.intro")}
                   </p>
                   <ul className="space-y-1 text-sm text-gray-600 ml-4">
-                    <li>• Full refund for unauthorized charges</li>
-                    <li>• Enhanced account security measures</li>
-                    <li>• Investigation and preventive action</li>
+                    {(t.raw("section6.subsection3.items") as string[]).map((item: string, index: number) => (
+                      <li key={index}>• {item}</li>
+                    ))}
                   </ul>
                 </div>
               </div>
@@ -285,36 +255,18 @@ export default function Refund() {
             {/* Section 7 */}
             <section>
               <h2 className="text-2xl font-semibold text-gray-900 mb-4 pb-2 border-b-2 border-black">
-                7. Non-Refundable Situations
+                {t("section7.title")}
               </h2>
-              <p className="text-gray-700 mb-4">Refunds are not available in the following cases:</p>
+              <p className="text-gray-700 mb-4">{t("section7.intro")}</p>
 
               <div className="bg-red-50 border border-red-200 rounded-lg p-6">
                 <ul className="space-y-2 text-gray-700">
-                  <li className="flex items-start">
-                    <span className="text-red-500 mr-2 font-bold">✕</span>
-                    <span>Violations of our Terms of Service</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-red-500 mr-2 font-bold">✕</span>
-                    <span>Providing false or misleading information</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-red-500 mr-2 font-bold">✕</span>
-                    <span>Abuse or misuse of the service</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-red-500 mr-2 font-bold">✕</span>
-                    <span>Requests outside the applicable refund timeframe</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-red-500 mr-2 font-bold">✕</span>
-                    <span>User error or lack of technical knowledge</span>
-                  </li>
-                  <li className="flex items-start">
-                    <span className="text-red-500 mr-2 font-bold">✕</span>
-                    <span>Third-party factors or market conditions beyond our control</span>
-                  </li>
+                  {(t.raw("section7.items") as string[]).map((item: string, index: number) => (
+                    <li key={index} className="flex items-start">
+                      <span className="text-red-500 mr-2 font-bold">✕</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
             </section>
@@ -322,62 +274,56 @@ export default function Refund() {
             {/* Section 8 */}
             <section>
               <h2 className="text-2xl font-semibold text-gray-900 mb-4 pb-2 border-b-2 border-black">
-                8. Partial Refunds
+                {t("section8.title")}
               </h2>
               <p className="text-gray-700 mb-4">
-                In certain situations, partial refunds may be offered at our discretion:
+                {t("section8.intro")}
               </p>
               <ul className="space-y-2 text-gray-700 ml-6">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>When a portion of the service has been successfully utilized</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>For technical issues affecting specific timeframes</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>In cases of partial service dissatisfaction</span>
-                </li>
+                {(t.raw("section8.items") as string[]).map((item: string, index: number) => (
+                  <li key={index} className="flex items-start">
+                    <span className="mr-2">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
               </ul>
             </section>
 
             {/* Section 9 */}
             <section>
               <h2 className="text-2xl font-semibold text-gray-900 mb-4 pb-2 border-b-2 border-black">
-                9. Appeals Process
+                {t("section9.title")}
               </h2>
               <p className="text-gray-700 mb-4">
-                If your refund request is denied, you have the right to appeal:
+                {t("section9.intro")}
               </p>
               <div className=" p-6 rounded-lg space-y-3">
                 <div className="flex items-start">
                   <span className="font-bold mr-3">1.</span>
                   <div>
-                    <p className="font-semibold text-gray-800">Submit an Appeal</p>
-                    <p className="text-sm text-gray-600">Within 14 days of the initial decision</p>
+                    <p className="font-semibold text-gray-800">{t("section9.step1.title")}</p>
+                    <p className="text-sm text-gray-600">{t("section9.step1.description")}</p>
                   </div>
                 </div>
                 <div className="flex items-start">
                   <span className="font-bold mr-3">2.</span>
                   <div>
-                    <p className="font-semibold text-gray-800">Provide Additional Evidence</p>
-                    <p className="text-sm text-gray-600">Include any new documentation or clarifications</p>
+                    <p className="font-semibold text-gray-800">{t("section9.step2.title")}</p>
+                    <p className="text-sm text-gray-600">{t("section9.step2.description")}</p>
                   </div>
                 </div>
                 <div className="flex items-start">
                   <span className="font-bold mr-3">3.</span>
                   <div>
-                    <p className="font-semibold text-gray-800">Escalation</p>
-                    <p className="text-sm text-gray-600">Request review by senior management</p>
+                    <p className="font-semibold text-gray-800">{t("section9.step3.title")}</p>
+                    <p className="text-sm text-gray-600">{t("section9.step3.description")}</p>
                   </div>
                 </div>
                 <div className="flex items-start">
                   <span className="font-bold mr-3">4.</span>
                   <div>
-                    <p className="font-semibold text-gray-800">Consumer Protection</p>
-                    <p className="text-sm text-gray-600">Contact consumer arbitration services if unresolved</p>
+                    <p className="font-semibold text-gray-800">{t("section9.step4.title")}</p>
+                    <p className="text-sm text-gray-600">{t("section9.step4.description")}</p>
                   </div>
                 </div>
               </div>
@@ -386,19 +332,19 @@ export default function Refund() {
             {/* Section 10 */}
             <section>
               <h2 className="text-2xl font-semibold text-gray-900 mb-4 pb-2 border-b-2 border-black">
-                10. Pro-Rata Refund Calculation
+                {t("section10.title")}
               </h2>
               <p className="text-gray-700 mb-4">
-                For subscription refunds, we calculate pro-rata refunds as follows:
+                {t("section10.intro")}
               </p>
               <div className="border border-black/40 rounded-lg p-6">
                 <p className="font-mono text-sm text-gray-800 mb-3">
-                  Refund Amount = (Remaining Days ÷ Billing Period Days) × Subscription Fee
+                  {t("section10.formula")}
                 </p>
                 <div className="space-y-2 text-sm text-gray-700">
-                  <p>• Minimum 1-day fee will be deducted</p>
-                  <p>• Payment processing fees are non-refundable</p>
-                  <p>• Calculations are based on calendar days</p>
+                  {(t.raw("section10.notes") as string[]).map((note: string, index: number) => (
+                    <p key={index}>• {note}</p>
+                  ))}
                 </div>
               </div>
             </section>
@@ -406,60 +352,50 @@ export default function Refund() {
             {/* Section 11 */}
             <section>
               <h2 className="text-2xl font-semibold text-gray-900 mb-4 pb-2 border-b-2 border-black">
-                11. Payment Processor Policies
+                {t("section11.title")}
               </h2>
               <p className="text-gray-700 mb-3">
-                Since payments are processed through Paddle:
+                {t("section11.intro")}
               </p>
               <ul className="space-y-2 text-gray-700 ml-6">
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Refunds are also subject to Paddle's policies and terms</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Transaction fees are determined by Paddle and may not be refundable</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>International payment refunds may require additional processing time</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="mr-2">•</span>
-                  <span>Currency exchange rate fluctuations may affect refund amounts</span>
-                </li>
+                {(t.raw("section11.items") as string[]).map((item: string, index: number) => (
+                  <li key={index} className="flex items-start">
+                    <span className="mr-2">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
               </ul>
             </section>
 
             {/* Section 12 */}
             <section>
               <h2 className="text-2xl font-semibold text-gray-900 mb-4 pb-2 border-b-2 border-black">
-                12. Contact Information
+                {t("section12.title")}
               </h2>
               <p className="text-gray-700 mb-4">
-                For refund inquiries and cancellation support:
+                {t("section12.intro")}
               </p>
               <div className="border border-black/40 p-6 rounded-lg space-y-2">
                 <p className="text-gray-700">
-                  <span className="font-semibold">Email:</span>{" "}
+                  <span className="font-semibold">{t("section12.email")}</span>{" "}
                   <a href="mailto:refunds@smartsrt.com" className="text-black/80 hover:text-black underline">
                     refunds@smartsrt.com
                   </a>
                 </p>
                 <p className="text-gray-700">
-                  <span className="font-semibold">Support Email:</span>{" "}
+                  <span className="font-semibold">{t("section12.supportEmail")}</span>{" "}
                   <a href="mailto:support@smartsrt.com" className="text-black/80 hover:text-black underline">
                     support@smartsrt.com
                   </a>
                 </p>
                 <p className="text-gray-700">
-                  <span className="font-semibold">Response Time:</span> 24-48 hours
+                  <span className="font-semibold">{t("section12.responseTime")}</span> {t("section12.responseTimeText")}
                 </p>
                 <p className="text-gray-700">
-                  <span className="font-semibold">Business Hours:</span> Monday-Friday, 9:00 AM - 6:00 PM
+                  <span className="font-semibold">{t("section12.businessHours")}</span> {t("section12.businessHoursText")}
                 </p>
                 <p className="text-gray-700">
-                  <span className="font-semibold">Languages:</span> English support available
+                  <span className="font-semibold">{t("section12.languages")}</span> {t("section12.languagesText")}
                 </p>
               </div>
             </section>
@@ -467,12 +403,10 @@ export default function Refund() {
             {/* Section 13 */}
             <section>
               <h2 className="text-2xl font-semibold text-gray-900 mb-4 pb-2 border-b-2 border-black">
-                13. Effective Date
+                {t("section13.title")}
               </h2>
               <p className="text-gray-700 leading-relaxed">
-                This Refund Policy becomes effective upon your purchase of SmartSRT services. We may update
-                this policy periodically, and material changes will be communicated via email or platform
-                notification in advance.
+                {t("section13.content")}
               </p>
             </section>
           </div>
@@ -480,7 +414,7 @@ export default function Refund() {
           {/* Footer note */}
           <div className="mt-8 text-center text-sm text-gray-500">
             <p>
-              By purchasing SmartSRT services, you acknowledge that you have read and agree to this Refund Policy.
+              {t("footerNote")}
             </p>
           </div>
         </div>

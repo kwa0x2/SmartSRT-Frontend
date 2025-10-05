@@ -6,26 +6,26 @@ import { useState } from "react";
 import { forgotPassword, deleteAccountRequest } from "@/app/api/services/auth.service";
 import { toast } from "sonner";
 import { useUser } from "@/hooks/use-user";
+import { useTranslations } from "next-intl";
 
 const AccountManagement = () => {
   const { canChangePassword, session } = useUser();
   const [isSending, setIsSending] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const t = useTranslations("App.profile.account");
 
   const onChange = async () => {
     setIsSending(true);
     try {
       if (!session?.user.email) {
-        toast.error("Failed to send new password setup email. Please try again or contact support.");
+        toast.error(t("passwordEmailError"));
       } else {
         await forgotPassword(session.user.email);
-        toast.success(
-            "New password setup email sent successfully. Please check your inbox."
-        );
+        toast.success(t("passwordEmailSuccess"));
       }
     } catch (err: any) {
       toast.error(
-          err.response?.data?.message || "Failed to send new password setup email. Please try again or contact support."
+          err.response?.data?.message || t("passwordEmailError")
       );
     } finally {
       setIsSending(false);
@@ -36,12 +36,10 @@ const AccountManagement = () => {
     setIsDeleting(true);
     try {
       await deleteAccountRequest();
-      toast.success(
-          "Account deletion request sent successfully. Please check your email."
-      );
+      toast.success(t("deleteSuccess"));
     } catch (err: any) {
       toast.error(
-          err.response?.data?.message || "Failed to send account deletion request"
+          err.response?.data?.message || t("deleteError")
       );
     } finally {
       setIsDeleting(false);
@@ -50,14 +48,14 @@ const AccountManagement = () => {
 
   return (
       <Card className="space-y-4 md:space-y-6">
-        <h3 className="text-base md:text-lg font-semibold">Account Management</h3>
+        <h3 className="text-base md:text-lg font-semibold">{t("title")}</h3>
 
         <div className="space-y-6 md:space-y-8">
           {canChangePassword && (
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 md:gap-0">
                 <div>
                   <p className="font-medium text-sm md:text-base">
-                    Change Password
+                    {t("changePassword")}
                   </p>
                 </div>
 
@@ -66,9 +64,9 @@ const AccountManagement = () => {
                     className="text-black text-xs md:text-sm tracking-wide font-bold !p-0 h-auto no-underline hover:no-underline"
                     onClick={onChange}
                     loading={isSending}
-                    loadingText="Sending..."
+                    loadingText={t("sending")}
                 >
-                  Update
+                  {t("update")}
                 </LoadingButton>
               </div>
           )}
@@ -76,10 +74,10 @@ const AccountManagement = () => {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 md:gap-0">
             <div>
               <p className="font-medium text-sm md:text-base text-destructive">
-                Delete Account
+                {t("deleteAccount")}
               </p>
               <p className="text-xs md:text-sm text-muted-foreground">
-                This action cannot be undone
+                {t("deleteWarning")}
               </p>
             </div>
             <LoadingButton
@@ -89,9 +87,9 @@ const AccountManagement = () => {
                 size="sm"
                 onClick={handleDeleteAccount}
                 loading={isDeleting}
-                loadingText="Processing..."
+                loadingText={t("processing")}
             >
-              Delete Account
+              {t("deleteAccount")}
             </LoadingButton>
           </div>
         </div>

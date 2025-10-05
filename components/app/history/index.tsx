@@ -12,6 +12,7 @@ import { format } from "date-fns";
 import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
 import { LoadingButton } from "@/components/ui/loading-button";
+import { useTranslations } from "next-intl";
 
 export type File = {
   id: string;
@@ -23,6 +24,7 @@ export type File = {
 };
 
 const HistoryFileList = () => {
+  const t = useTranslations("App.profile.history");
   const [fileView, setFileView] = useState<"grid" | "list">("grid");
   const [searchQuery, setSearchQuery] = useState("");
   const [files, setFiles] = useState<File[]>([]);
@@ -32,10 +34,10 @@ const HistoryFileList = () => {
 
   const formatDuration = (seconds: number): string => {
     if (seconds < 60) {
-      return `${Math.round(seconds)} seconds`;
+      return t("duration.seconds", { count: Math.round(seconds) });
     }
     const minutes = (seconds / 60).toFixed(2);
-    return `${minutes} minutes`;
+    return t("duration.minutes", { count: minutes });
   };
 
   const fetchHistories = async (isRetry = false) => {
@@ -57,7 +59,7 @@ const HistoryFileList = () => {
       }));
       setFiles(formattedFiles);
     } catch (error: any) {
-      const errorMessage = error.response?.data?.message || "An error occurred while retrieving SRT file history. Please try again or contact support.";
+      const errorMessage = error.response?.data?.message || t("error");
       setError(errorMessage);
       toast.error(errorMessage);
     } finally {
@@ -87,10 +89,10 @@ const HistoryFileList = () => {
           <div className="flex flex-wrap justify-between gap-4">
             <div className="flex-1 space-y-1">
               <div className="text-xl md:text-2xl font-bold whitespace-nowrap">
-                SRT Files History
+                {t("title")}
               </div>
               <div className="text-sm md:text-base text-muted-foreground whitespace-nowrap">
-                {totalFiles} files, {totalMinutes.toFixed(1)} minutes total
+                {t("summary", { count: totalFiles, minutes: totalMinutes.toFixed(1) })}
               </div>
             </div>
 
@@ -128,7 +130,7 @@ const HistoryFileList = () => {
               <div className="relative">
                 <Search className="w-5 h-5 absolute top-1/2 -translate-y-1/2 ltr:left-2 rtl:right-2 text-default-400" />
                 <Input
-                    placeholder="Search SRT files"
+                    placeholder={t("searchPlaceholder")}
                     className="ltr:pl-7 rtl:pr-8 text-sm border border-black/30 text-black"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
@@ -151,15 +153,15 @@ const HistoryFileList = () => {
                 <LoadingButton
                     onClick={() => fetchHistories(true)}
                     loading={isRetrying}
-                    loadingText="Retrying..."
+                    loadingText={t("retrying")}
                     variant="outline"
                     size="sm"
                 >
-                  Retry
+                  {t("retry")}
                 </LoadingButton>
               </div>
           ) : filteredFiles.length === 0 ? (
-              <div className="text-sm text-muted-foreground">No files found</div>
+              <div className="text-sm text-muted-foreground">{t("noFiles")}</div>
           ) : fileView === "grid" ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredFiles.map((item) => (

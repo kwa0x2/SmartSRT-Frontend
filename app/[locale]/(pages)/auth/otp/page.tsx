@@ -17,6 +17,7 @@ import { AuthType } from "@/types";
 import UnauthorizedError from "@/components/partials/error/401";
 import { useEffect, useState } from "react";
 import Loader from "@/components/loader";
+import { useTranslations } from "next-intl";
 
 interface JWTClaims {
   name: string;
@@ -49,6 +50,9 @@ const OtpPage = () => {
     return <UnauthorizedError />;
   }
 
+  const t = useTranslations('Auth.register');
+  const tVerify = useTranslations('Auth.verify');
+
   const handleStepTwo = async (data: RegisterStepTwoData) => {
     if (isSubmitting) return;
     setIsSubmitting(true);
@@ -64,14 +68,14 @@ const OtpPage = () => {
       };
 
       await register(finalData);
-      toast.success("Account created successfully. Please login.");
+      toast.success(t('form.accountCreated'));
       router.push(APP_ROUTES.AUTH.LOGIN);
     } catch (error: any) {
       if (error.name === InvalidTokenError) {
-        toast.error("Invalid token. Please try again or contact support.");
+        toast.error(tVerify('invalidToken'));
         router.push(APP_ROUTES.AUTH.REGISTER);
       } else {
-        toast.error(error.response?.data?.message || "An error occurred. Please try again later or contact support.");
+        toast.error(error.response?.data?.message || tVerify('error'));
       }
     } finally {
       setIsSubmitting(false);
@@ -82,17 +86,17 @@ const OtpPage = () => {
       <div className="flex w-full items-center overflow-hidden h-dvh basis-full">
         <div className="overflow-y-auto flex flex-wrap w-full h-dvh">
           <AuthLayout
-              title="Register"
-              subtitle="Create an account to start using SmartSRT"
+              title={t('title')}
+              subtitle={t('subtitle')}
           >
             <OtpForm onSubmit={handleStepTwo} isSubmitting={isSubmitting} />
             <div className="md:max-w-[345px] mt-6 mx-auto text-sm text-default-500">
-              Already Registered?{" "}
+              {t('alreadyRegistered')}{" "}
               <Link
                   href={APP_ROUTES.AUTH.LOGIN}
                   className="text-default-900 font-medium hover:underline"
               >
-                Login
+                {t('login')}
               </Link>
             </div>
           </AuthLayout>

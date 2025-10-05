@@ -1,12 +1,16 @@
 "use client";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 interface SocialProps {
     status: string;
 }
 
 const Social = ({ status }: SocialProps) => {
-    const actionText = status === "up" ? "Register" : "Login";
+    const t = useTranslations("Auth.social");
+    const tLogin = useTranslations("Auth.login");
+    const tRegister = useTranslations("Auth.register");
+    const actionText = status === "up" ? tRegister("title") : tLogin("title");
 
     const handleGoogleLogin = () => {
         window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/google/login`;
@@ -30,7 +34,7 @@ const Social = ({ status }: SocialProps) => {
                     alt="Google Logo"
                 />
                 <span className="text-sm font-medium hover:underline">
-          {actionText} with Google
+          {t("withGoogle", { action: actionText })}
         </span>
             </button>
 
@@ -46,7 +50,7 @@ const Social = ({ status }: SocialProps) => {
                     alt="GitHub Logo"
                 />
                 <span className="text-sm font-medium hover:underline">
-          {actionText} with GitHub
+          {t("withGithub", { action: actionText })}
         </span>
             </button>
         </div>

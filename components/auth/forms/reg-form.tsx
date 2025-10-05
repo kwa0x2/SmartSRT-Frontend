@@ -3,7 +3,7 @@
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password-input";
 import { LoadingButton } from "@/components/ui/loading-button";
-import { registerSchema, RegisterStepOneData } from "@/schemas/register.schema";
+import { getRegisterSchema, RegisterStepOneData } from "@/schemas/register.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import {
@@ -14,6 +14,7 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
+import { useTranslations } from "next-intl";
 
 interface RegFormProps {
     onSubmit: (data: RegisterStepOneData) => void;
@@ -26,9 +27,12 @@ interface RegFormProps {
 }
 
 const RegForm = ({ onSubmit, initialData, isSubmitting = false }: RegFormProps) => {
+    const t = useTranslations('Auth.register.form');
+    const tValidation = useTranslations('Auth.register.validation');
+
     const form = useForm<RegisterStepOneData>({
         resolver: zodResolver(
-            registerSchema.pick({
+            getRegisterSchema(tValidation).pick({
                 name: true,
                 email: true,
                 password: true,
@@ -46,10 +50,10 @@ const RegForm = ({ onSubmit, initialData, isSubmitting = false }: RegFormProps) 
                     name="name"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Full Name</FormLabel>
+                            <FormLabel>{t('fullName')}</FormLabel>
                             <FormControl>
                                 <Input
-                                    placeholder="John Doe"
+                                    placeholder={t('fullNamePlaceholder')}
                                     disabled={isSubmitting}
                                     size="lg"
                                     autoComplete="name"
@@ -66,11 +70,11 @@ const RegForm = ({ onSubmit, initialData, isSubmitting = false }: RegFormProps) 
                     name="email"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Email</FormLabel>
+                            <FormLabel>{t('email')}</FormLabel>
                             <FormControl>
                                 <Input
                                     type="email"
-                                    placeholder="example@email.com"
+                                    placeholder={t('emailPlaceholder')}
                                     disabled={isSubmitting}
                                     size="lg"
                                     autoComplete="email"
@@ -87,10 +91,10 @@ const RegForm = ({ onSubmit, initialData, isSubmitting = false }: RegFormProps) 
                     name="password"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Password</FormLabel>
+                            <FormLabel>{t('password')}</FormLabel>
                             <FormControl>
                                 <PasswordInput
-                                    placeholder="••••••••"
+                                    placeholder={t('passwordPlaceholder')}
                                     disabled={isSubmitting}
                                     size="lg"
                                     autoComplete="new-password"
@@ -105,10 +109,10 @@ const RegForm = ({ onSubmit, initialData, isSubmitting = false }: RegFormProps) 
                 <LoadingButton
                     type="submit"
                     loading={isSubmitting}
-                    loadingText="Creating account..."
+                    loadingText={t('creatingAccount')}
                     className="mt-6 w-full"
                 >
-                    Continue
+                    {t('continueButton')}
                 </LoadingButton>
             </form>
         </Form>

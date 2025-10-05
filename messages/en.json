@@ -1,6 +1,903 @@
 {
   "Index": {
     "title": "Hello world!"
+  },
+  "Hero": {
+    "title": "Create high-quality SRT files quickly with AI-powered technology",
+    "description": "Save time by automatically generating high-quality, perfectly timed subtitles.",
+    "getStarted": "Get Started Free",
+    "goToApp": "Go to App"
+  },
+  "Features": {
+    "title": "Creators",
+    "heading": "Enhance your videos with multilingual subtitles",
+    "description": "Create professional subtitles in multiple languages instantly. Our AI technology helps you reach a global audience by automatically generating accurate SRT files in various languages.",
+    "getStarted": "Get Started Free",
+    "goToApp": "Go to App",
+    "pricing": "Pricing",
+    "steps": {
+      "upload": {
+        "title": "Upload Short Video",
+        "description": "Support for MP4, MOV up to 5 minutes"
+      },
+      "processing": {
+        "title": "AI Processing",
+        "description": "Automatic speech recognition & timing"
+      },
+      "download": {
+        "title": "Download SRT File",
+        "description": "Ready to use in video editors"
+      }
+    }
+  },
+  "Pricing": {
+    "heading": "Pricing",
+    "description": "Choose the perfect plan for your subtitle generation needs",
+    "plans": {
+      "free": {
+        "name": "Free",
+        "description": "Try our AI-powered subtitle generation with high-quality speech recognition for your files",
+        "features": {
+          "uploadLimit": "{minutes} minutes upload limit per month",
+          "aiPowered": "AI-powered automatic subtitle generation",
+          "maxDuration": "Maximum 30 seconds per file",
+          "fileSupport": "Support for MP4 and MP3 files",
+          "languageSupport": "Support for 32+ languages"
+        }
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Unlock higher upload limits for professional content creators who need more time",
+        "features": {
+          "uploadLimit": "{minutes} minutes upload limit per month",
+          "aiPowered": "AI-powered automatic subtitle generation",
+          "maxDuration": "Maximum 5 minutes per file",
+          "fileSupport": "Support for MP4, MP3 and WAV files",
+          "languageSupport": "Support for 32+ languages"
+        }
+      }
+    },
+    "buttons": {
+      "getStarted": "GET STARTED",
+      "currentPlan": "CURRENT PLAN",
+      "upgrade": "UPGRADE",
+      "changePlan": "CHANGE PLAN",
+      "downgrade": "DOWNGRADE",
+      "loading": "Loading...",
+      "processing": "Processing..."
+    }
+  },
+  "Contact": {
+    "heading": "Contact Us",
+    "description": "Have questions? We're here to help. Send us a message and we'll respond as soon as possible.",
+    "form": {
+      "firstName": "First Name",
+      "firstNamePlaceholder": "Enter your first name",
+      "lastName": "Last Name",
+      "lastNamePlaceholder": "Enter your last name",
+      "email": "Email",
+      "emailPlaceholder": "Enter your email",
+      "message": "Message",
+      "messagePlaceholder": "Enter your message",
+      "submit": "Send Message",
+      "sending": "Sending Message...",
+      "success": "Message sent successfully!",
+      "error": "An error occurred. Please try again later or contact support."
+    },
+    "validation": {
+      "firstNameMin": "First name must be at least 2 characters",
+      "lastNameMin": "Last name must be at least 2 characters",
+      "emailInvalid": "Please enter a valid email address",
+      "messageMin": "Message must be at least 10 characters"
+    }
+  },
+  "Header": {
+    "navigation": {
+      "pricing": "Pricing",
+      "contact": "Contact Us"
+    },
+    "auth": {
+      "login": "Login",
+      "getStarted": "Get Started Free",
+      "goToApp": "Go to App"
+    }
+  },
+  "Footer": {
+    "slogan": "Smart SRT Creation for Short Videos",
+    "links": {
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "refund": "Refund"
+    },
+    "languages": {
+      "english": "English",
+      "turkish": "Turkish"
+    },
+    "copyright": "Copyright {year}, SmartSRT All Rights Reserved."
+  },
+  "Auth": {
+    "background": {
+      "title": "Smart SRT Creation for",
+      "subtitle": "Short Videos!"
+    },
+    "social": {
+      "withGoogle": "{action} with Google",
+      "withGithub": "{action} with GitHub"
+    },
+    "login": {
+      "title": "Login",
+      "subtitle": "Login to your account to start using SmartSRT",
+      "orContinueWith": "Or continue with",
+      "dontHaveAccount": "Don't have an account?",
+      "register": "Register",
+      "form": {
+        "email": "Email",
+        "emailPlaceholder": "example@email.com",
+        "password": "Password",
+        "passwordPlaceholder": "••••••••",
+        "forgotPassword": "Forgot Password?",
+        "loginButton": "Login",
+        "loggingIn": "Logging in...",
+        "loginSuccess": "Login successful!",
+        "loginError": "An error occurred while logging. Please try again."
+      },
+      "validation": {
+        "emailInvalid": "Please enter a valid email address",
+        "passwordMin": "Password must be at least 8 characters"
+      },
+      "errors": {
+        "invalid_state": "Invalid or expired state parameter. Please retry the Google authentication process.",
+        "server_error": "An error occurred. Please try again later or contact support.",
+        "exists_github": "An account with this email already exists. Please log in using Github.",
+        "exists_credentials": "An account with this email already exists. Please log in using Credentials."
+      }
+    },
+    "register": {
+      "title": "Register",
+      "subtitle": "Create an account to start using SmartSRT",
+      "orContinueWith": "Or continue with",
+      "alreadyRegistered": "Already Registered?",
+      "login": "Login",
+      "form": {
+        "fullName": "Full Name",
+        "fullNamePlaceholder": "John Doe",
+        "email": "Email",
+        "emailPlaceholder": "example@email.com",
+        "password": "Password",
+        "passwordPlaceholder": "••••••••",
+        "phoneNumber": "Phone Number",
+        "verificationCode": "Verification Code",
+        "sendCode": "Send Code",
+        "resend": "Resend ({seconds}s)",
+        "continueButton": "Continue",
+        "creatingAccount": "Creating account...",
+        "createAccount": "Create Account",
+        "creatingAccountLoading": "Creating Account...",
+        "back": "Back",
+        "accountCreated": "Account created successfully. Please login.",
+        "emailExists": "An account with this email already exists. Please try a different email",
+        "phoneExists": "This phone number is already registered",
+        "phoneRequired": "Phone number is required",
+        "phoneInvalid": "Please enter a valid phone number",
+        "codeSent": "Verification code sent successfully",
+        "codeSendError": "Failed to send verification code. Please try again or contact support.",
+        "registerError": "An error occurred while registering. Please try again later or contact support."
+      },
+      "validation": {
+        "nameMin": "Name must be at least 2 characters",
+        "emailInvalid": "Please enter a valid email address",
+        "passwordMin": "Password must be at least 8 characters",
+        "phoneMin": "Please enter a valid phone number",
+        "otpLength": "OTP code must be 4 digits"
+      }
+    },
+    "verify": {
+      "title": "Logging You In",
+      "subtitle": "Hang tight! We're completing your login process.",
+      "redirectMessage": "You'll be redirected shortly.",
+      "error": "An error occurred. Please try again later or contact support.",
+      "invalidToken": "Invalid token. Please try again or contact support."
+    },
+    "forgotPassword": {
+      "title": "Forgot Your Password?",
+      "subtitle": "Enter your Email and instructions will be sent to you!",
+      "forgetIt": "Forget It,",
+      "sendBack": "Send me Back",
+      "toLogin": "to The Login",
+      "form": {
+        "email": "Email",
+        "emailPlaceholder": "Enter your email",
+        "submit": "Send Recovery Email",
+        "sending": "Sending Recovery Email...",
+        "success": "Recovery email sent successfully. Please check your inbox.",
+        "error": "Failed to send recovery email. Please try again later or contact support."
+      },
+      "validation": {
+        "emailInvalid": "Please enter a valid email address"
+      }
+    },
+    "resetPassword": {
+      "title": "Set Your New Password",
+      "subtitle": "Please enter your new password below",
+      "dontUpdate": "Don't want to update it?",
+      "goToLogin": "Go to login",
+      "form": {
+        "password": "New Password",
+        "passwordPlaceholder": "Enter new password",
+        "confirmPassword": "Confirm Password",
+        "confirmPasswordPlaceholder": "Confirm new password",
+        "submit": "Update Password",
+        "updating": "Updating Password...",
+        "success": "Password has been reset successfully",
+        "error": "An error occurred while resetting your password. Please try again or contact support."
+      },
+      "validation": {
+        "passwordMin": "Password must be at least 8 characters",
+        "passwordMatch": "Passwords don't match"
+      }
+    },
+    "deleteAccount": {
+      "title": "Are you sure you want to delete this account?",
+      "subtitle": "This action cannot be undone",
+      "confirmButton": "Yes, Delete Account",
+      "cancelButton": "No, Cancel",
+      "deleting": "Deleting...",
+      "success": "Your account has been successfully deleted.",
+      "error": "An error occurred while deleting your account. Please try again later or contact support.",
+      "invalidSession": "Invalid or expired session. Please log in again."
+    }
+  },
+  "Privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: January 1, 2025",
+    "footerNote": "By using SmartSRT, you acknowledge that you have read and understood this Privacy Policy.",
+    "section1": {
+      "title": "1. Introduction",
+      "content": "At SmartSRT, your privacy is our top priority. This Privacy Policy outlines how we collect, use, process, and protect your personal information when you use our AI-powered subtitle generation platform. We are committed to transparency and ensuring your data rights are respected."
+    },
+    "section2": {
+      "title": "2. Data Controller Information",
+      "provider": "Service Provider:",
+      "providerName": "SmartSRT",
+      "contactEmail": "Contact Email:",
+      "website": "Website:"
+    },
+    "section3": {
+      "title": "3. Personal Data We Collect",
+      "subsection1": {
+        "title": "3.1 Account Information",
+        "items": [
+          "Full name and email address",
+          "Encrypted password",
+          "Profile picture (optional)",
+          "Third-party authentication data (Google, if applicable)"
+        ]
+      },
+      "subsection2": {
+        "title": "3.2 Content and Media Files",
+        "items": [
+          "Uploaded video files and audio content",
+          "Generated subtitles and transcriptions",
+          "File metadata (size, format, upload date)",
+          "Translation settings"
+        ]
+      },
+      "subsection3": {
+        "title": "3.3 Subscription and Payment Data",
+        "items": [
+          "Subscription plan and status",
+          "Usage history",
+          "Payment processor customer ID (Paddle)",
+          "Billing dates and transaction history"
+        ]
+      },
+      "subsection4": {
+        "title": "3.4 Usage and Technical Data",
+        "items": [
+          "Platform interaction logs and feature usage",
+          "Login timestamps and session information",
+          "Device information and browser type",
+          "IP address and approximate location"
+        ]
+      }
+    },
+    "section4": {
+      "title": "4. How We Collect Data",
+      "items": [
+        "Information you provide directly during registration and platform use",
+        "Automated collection during video uploads and subtitle processing",
+        "Third-party authentication providers (Google OAuth, with your consent)",
+        "Payment processor integration (Paddle)",
+        "Cookies and similar tracking technologies"
+      ]
+    },
+    "section5": {
+      "title": "5. Purpose and Legal Basis for Processing",
+      "subsection1": {
+        "title": "5.1 Service Delivery",
+        "legalBasis": "(Contractual Obligation)",
+        "items": [
+          "Account creation and authentication",
+          "AI-powered subtitle generation and translation",
+          "Video processing and transcription services"
+        ]
+      },
+      "subsection2": {
+        "title": "5.2 Billing and Payments",
+        "legalBasis": "(Contractual Obligation)",
+        "items": [
+          "Processing subscription fees and credit purchases",
+          "Invoice generation and payment verification",
+          "Managing refunds and cancellations"
+        ]
+      },
+      "subsection3": {
+        "title": "5.3 Customer Support",
+        "legalBasis": "(Legitimate Interest)",
+        "items": [
+          "Responding to support inquiries and technical issues",
+          "Improving platform features and user experience",
+          "Troubleshooting and resolving service problems"
+        ]
+      },
+      "subsection4": {
+        "title": "5.4 Legal Compliance",
+        "legalBasis": "(Legal Obligation)",
+        "items": [
+          "Maintaining tax and accounting records",
+          "Responding to legal requests and court orders",
+          "Fraud prevention and security monitoring"
+        ]
+      }
+    },
+    "section6": {
+      "title": "6. Data Sharing and Third Parties",
+      "intro": "We do not sell your personal data to third parties. We only share data in the following circumstances:",
+      "aiProviders": {
+        "title": "AI Service Providers",
+        "description": "Video content and audio is processed by AI providers (OpenAI, Anthropic, or similar) for subtitle generation. This data is used only for processing and is not stored permanently by these providers."
+      },
+      "paymentProcessor": {
+        "title": "Payment Processor",
+        "description": "Billing information is processed through Paddle for subscription management and payment processing."
+      },
+      "authServices": {
+        "title": "Authentication Services",
+        "description": "If you use Google sign-in, authentication data is shared with Google (with your explicit consent)."
+      },
+      "legalRequirements": {
+        "title": "Legal Requirements",
+        "description": "We may disclose data when required by law, court order, or to protect our legal rights."
+      }
+    },
+    "section7": {
+      "title": "7. Data Retention Periods",
+      "accountInfo": "Account Information",
+      "accountInfoPeriod": "Until account deletion",
+      "videoContent": "Video and Subtitle Content",
+      "videoContentPeriod": "Until deleted by user",
+      "paymentRecords": "Payment Records",
+      "paymentRecordsPeriod": "10 years (legal requirement)",
+      "usageLogs": "Usage Logs",
+      "usageLogsPeriod": "2 years",
+      "supportComms": "Support Communications",
+      "supportCommsPeriod": "3 years"
+    },
+    "section8": {
+      "title": "8. Data Security Measures",
+      "intro": "We implement industry-standard security measures to protect your personal data:",
+      "encryption": {
+        "title": "Encryption",
+        "description": "SSL/TLS encryption for all data transmission"
+      },
+      "passwordProtection": {
+        "title": "Password Protection",
+        "description": "Hashed and salted password storage"
+      },
+      "accessControl": {
+        "title": "Access Control",
+        "description": "Strict authorization and authentication protocols"
+      },
+      "dataBackup": {
+        "title": "Data Backup",
+        "description": "Regular backups and disaster recovery systems"
+      },
+      "securityUpdates": {
+        "title": "Security Updates",
+        "description": "Continuous monitoring and patching"
+      },
+      "secureInfrastructure": {
+        "title": "Secure Infrastructure",
+        "description": "Enterprise-grade cloud hosting"
+      }
+    },
+    "section9": {
+      "title": "9. Your Privacy Rights",
+      "intro": "Under applicable data protection laws (including GDPR), you have the following rights:",
+      "rightToAccess": {
+        "title": "Right to Access",
+        "description": "Request a copy of all personal data we hold about you"
+      },
+      "rightToRectification": {
+        "title": "Right to Rectification",
+        "description": "Request correction of inaccurate or incomplete data"
+      },
+      "rightToErasure": {
+        "title": "Right to Erasure",
+        "description": "Request deletion of your personal data (right to be forgotten)"
+      },
+      "rightToObject": {
+        "title": "Right to Object",
+        "description": "Object to processing of your data for specific purposes"
+      },
+      "rightToDataPortability": {
+        "title": "Right to Data Portability",
+        "description": "Receive your data in a structured, machine-readable format"
+      },
+      "rightToRestrictProcessing": {
+        "title": "Right to Restrict Processing",
+        "description": "Request limitation of how we process your data"
+      }
+    },
+    "section10": {
+      "title": "10. Cookies and Tracking",
+      "intro": "We use cookies and similar technologies to improve your experience:",
+      "essentialCookies": {
+        "title": "Essential Cookies",
+        "description": "Required for core functionality like authentication and security"
+      },
+      "functionalCookies": {
+        "title": "Functional Cookies",
+        "description": "Remember your preferences such as language and theme settings"
+      },
+      "analyticsCookies": {
+        "title": "Analytics Cookies",
+        "description": "Help us understand usage patterns to improve our service (anonymized)"
+      }
+    },
+    "section11": {
+      "title": "11. International Data Transfers",
+      "intro": "Your data may be transferred and processed outside your country of residence for the following purposes:",
+      "items": [
+        "Payment processing through Paddle (EU-compliant)",
+        "AI processing services (with appropriate safeguards)",
+        "Cloud infrastructure services (GDPR-compliant providers)"
+      ],
+      "outro": "All international transfers are conducted in accordance with applicable data protection laws."
+    },
+    "section12": {
+      "title": "12. Children's Privacy",
+      "content": "SmartSRT is not intended for users under 18 years of age. We do not knowingly collect personal information from children. If we discover that we have inadvertently collected data from a minor, we will promptly delete it from our systems."
+    },
+    "section13": {
+      "title": "13. Data Breach Notification",
+      "content": "In the event of a data security breach that may affect your rights, we will notify relevant supervisory authorities and affected users within the legally required timeframe (typically 72 hours). You will receive clear information about the nature of the breach and recommended protective measures."
+    },
+    "section14": {
+      "title": "14. Contact and Data Requests",
+      "intro": "To exercise your privacy rights or submit data-related inquiries:",
+      "email": "Email:",
+      "subjectLine": "Subject Line:",
+      "subjectLineText": "\"Privacy Request - [Your Request Type]\"",
+      "responseTime": "Response Time:",
+      "responseTimeText": "Within 30 days of receipt"
+    },
+    "section15": {
+      "title": "15. Policy Updates",
+      "content": "We may update this Privacy Policy periodically to reflect changes in our practices or legal requirements. Material changes will be communicated via email or prominent platform notification. The \"Last updated\" date at the top of this policy indicates when changes were last made. Continued use of SmartSRT after updates constitutes acceptance of the revised policy."
+    }
+  },
+  "Refund": {
+    "title": "Refund Policy",
+    "lastUpdated": "Last updated: January 1, 2025",
+    "footerNote": "By purchasing SmartSRT services, you acknowledge that you have read and agree to this Refund Policy.",
+    "section1": {
+      "title": "1. Our Commitment to Satisfaction",
+      "content": "At SmartSRT, we strive to deliver exceptional subtitle generation services. This Refund Policy outlines the circumstances under which refunds are available and explains the process for requesting them. We aim to be fair, transparent, and responsive to our users' concerns."
+    },
+    "section2": {
+      "title": "2. Subscription Cancellation & Refunds",
+      "subsection1": {
+        "title": "2.1 Subscription Cancellation",
+        "items": [
+          "You may cancel your subscription at any time through account settings",
+          "Cancellation is effective immediately, but access continues until the end of your current billing period",
+          "Auto-renewal is automatically disabled upon cancellation",
+          "No refunds are provided for unused time within the current billing period"
+        ]
+      },
+      "subsection2": {
+        "title": "2.2 Subscription Refund Eligibility",
+        "intro": "Subscription refunds may be granted in the following cases:",
+        "moneyBack": {
+          "title": "14-Day Money-Back Guarantee",
+          "description": "Full refund available within 14 days of initial subscription purchase (new subscribers only)"
+        },
+        "technicalIssues": {
+          "title": "Platform Technical Issues",
+          "description": "Serious technical problems preventing normal service usage that cannot be resolved by our support team"
+        },
+        "serviceOutage": {
+          "title": "Extended Service Outage",
+          "description": "When cumulative service downtime exceeds 20% of your billing period"
+        },
+        "unauthorizedPayment": {
+          "title": "Unauthorized Payment",
+          "description": "Charges made without your authorization or duplicate billing errors"
+        }
+      }
+    },
+    "section3": {
+      "title": "3. Credit Purchase Refunds",
+      "subsection1": {
+        "title": "3.1 Eligible for Refund",
+        "items": [
+          "Request submitted within 14 days of credit purchase",
+          "More than 50% of purchased credits remain unused",
+          "Technical errors preventing credit usage",
+          "Double charges or payment processing errors"
+        ]
+      },
+      "subsection2": {
+        "title": "3.2 Not Eligible for Refund",
+        "items": [
+          "More than 50% of credits have been consumed",
+          "Request made after the 14-day window",
+          "User error or dissatisfaction with subtitle quality (quality issues should be reported for improvement)",
+          "Promotional or bonus credits"
+        ]
+      }
+    },
+    "section4": {
+      "title": "4. How to Request a Refund",
+      "subsection1": {
+        "title": "4.1 Submitting Your Request",
+        "intro": "To request a refund, contact us with the following information:",
+        "email": "Email:",
+        "subject": "Subject Line:",
+        "subjectText": "\"Refund Request - [Your Username]\"",
+        "requiredInfo": "Required Information:",
+        "requiredItems": [
+          "Account email address",
+          "Detailed reason for refund request",
+          "Payment reference number (from Paddle)",
+          "Transaction date and amount",
+          "Any supporting documentation (for technical issues)"
+        ]
+      },
+      "subsection2": {
+        "title": "4.2 Refund Review Timeline",
+        "initialResponse": "Initial Response",
+        "initialResponseTime": "24-48 hours",
+        "reviewDecision": "Review & Decision",
+        "reviewDecisionTime": "3-5 business days",
+        "refundProcessing": "Refund Processing (if approved)",
+        "refundProcessingTime": "5-10 business days",
+        "emailUpdates": "Email Updates",
+        "emailUpdatesTime": "At every stage"
+      }
+    },
+    "section5": {
+      "title": "5. Refund Processing Methods",
+      "intro": "Approved refunds are processed through the following methods:",
+      "creditCard": {
+        "title": "Credit/Debit Card",
+        "description": "Refund to original payment card",
+        "processingTime": "Processing time: 5-10 business days"
+      },
+      "paypal": {
+        "title": "PayPal",
+        "description": "Direct refund to PayPal account",
+        "processingTime": "Processing time: 3-5 business days"
+      },
+      "bankTransfer": {
+        "title": "Bank Transfer",
+        "description": "Direct bank transfer (special cases)",
+        "processingTime": "Processing time: 7-14 business days"
+      }
+    },
+    "section6": {
+      "title": "6. Special Circumstances",
+      "subsection1": {
+        "title": "6.1 Technical Service Issues",
+        "intro": "When platform-related technical problems prevent you from using our service:",
+        "items": [
+          "Full refund for persistent, unresolvable issues"
+        ]
+      },
+      "subsection2": {
+        "title": "6.2 Subtitle Quality Concerns",
+        "intro": "If you experience consistent subtitle quality issues:",
+        "items": [
+          "Feedback and support for first 3 subtitle generations",
+          "Credit refund for recurring AI accuracy problems",
+          "Free regeneration after system improvements"
+        ]
+      },
+      "subsection3": {
+        "title": "6.3 Security Breaches",
+        "intro": "In the event of account security compromise:",
+        "items": [
+          "Full refund for unauthorized charges",
+          "Enhanced account security measures",
+          "Investigation and preventive action"
+        ]
+      }
+    },
+    "section7": {
+      "title": "7. Non-Refundable Situations",
+      "intro": "Refunds are not available in the following cases:",
+      "items": [
+        "Violations of our Terms of Service",
+        "Providing false or misleading information",
+        "Abuse or misuse of the service",
+        "Requests outside the applicable refund timeframe",
+        "User error or lack of technical knowledge",
+        "Third-party factors or market conditions beyond our control"
+      ]
+    },
+    "section8": {
+      "title": "8. Partial Refunds",
+      "intro": "In certain situations, partial refunds may be offered at our discretion:",
+      "items": [
+        "When a portion of the service has been successfully utilized",
+        "For technical issues affecting specific timeframes",
+        "In cases of partial service dissatisfaction"
+      ]
+    },
+    "section9": {
+      "title": "9. Appeals Process",
+      "intro": "If your refund request is denied, you have the right to appeal:",
+      "step1": {
+        "title": "Submit an Appeal",
+        "description": "Within 14 days of the initial decision"
+      },
+      "step2": {
+        "title": "Provide Additional Evidence",
+        "description": "Include any new documentation or clarifications"
+      },
+      "step3": {
+        "title": "Escalation",
+        "description": "Request review by senior management"
+      },
+      "step4": {
+        "title": "Consumer Protection",
+        "description": "Contact consumer arbitration services if unresolved"
+      }
+    },
+    "section10": {
+      "title": "10. Pro-Rata Refund Calculation",
+      "intro": "For subscription refunds, we calculate pro-rata refunds as follows:",
+      "formula": "Refund Amount = (Remaining Days ÷ Billing Period Days) × Subscription Fee",
+      "notes": [
+        "Minimum 1-day fee will be deducted",
+        "Payment processing fees are non-refundable",
+        "Calculations are based on calendar days"
+      ]
+    },
+    "section11": {
+      "title": "11. Payment Processor Policies",
+      "intro": "Since payments are processed through Paddle:",
+      "items": [
+        "Refunds are also subject to Paddle's policies and terms",
+        "Transaction fees are determined by Paddle and may not be refundable",
+        "International payment refunds may require additional processing time",
+        "Currency exchange rate fluctuations may affect refund amounts"
+      ]
+    },
+    "section12": {
+      "title": "12. Contact Information",
+      "intro": "For refund inquiries and cancellation support:",
+      "email": "Email:",
+      "supportEmail": "Support Email:",
+      "responseTime": "Response Time:",
+      "responseTimeText": "24-48 hours",
+      "businessHours": "Business Hours:",
+      "businessHoursText": "Monday-Friday, 9:00 AM - 6:00 PM",
+      "languages": "Languages:",
+      "languagesText": "English support available"
+    },
+    "section13": {
+      "title": "13. Effective Date",
+      "content": "This Refund Policy becomes effective upon your purchase of SmartSRT services. We may update this policy periodically, and material changes will be communicated via email or platform notification in advance."
+    }
+  },
+  "Terms": {
+    "title": "Terms of Service",
+    "lastUpdated": "Last updated: January 1, 2025",
+    "footerNote": "By using SmartSRT, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.",
+    "section1": {
+      "title": "1. About Our Service",
+      "content": "SmartSRT is an AI-powered subtitle generation platform that automatically creates, translates, and synchronizes subtitles for your video content. We operate as a Software as a Service (SaaS) platform, providing cloud-based subtitle processing and management tools."
+    },
+    "section2": {
+      "title": "2. Acceptance of Terms",
+      "intro": "By accessing or using SmartSRT, you acknowledge and agree to:",
+      "items": [
+        "Be at least 18 years of age or have consent from a legal guardian",
+        "Provide accurate and up-to-date account information",
+        "Maintain the security and confidentiality of your account credentials",
+        "Use the service in compliance with all applicable laws and regulations"
+      ]
+    },
+    "section3": {
+      "title": "3. Account Responsibilities",
+      "content": "You are solely responsible for maintaining the confidentiality of your account and password. Any activities conducted through your account are your responsibility. Please notify us immediately if you suspect unauthorized access to your account."
+    },
+    "section4": {
+      "title": "4. Subscription & Payment",
+      "intro": "SmartSRT offers a single subscription plan. All payments are securely processed through our payment provider (Paddle). Fees are billed in USD on a monthly basis.",
+      "items": [
+        "Subscriptions automatically renew unless canceled",
+        "Service access continues until the end of your current billing cycle after cancellation",
+        "Price changes will not affect active subscribers during their current billing period"
+      ]
+    },
+    "section5": {
+      "title": "5. Cancellation & Refunds",
+      "content": "You may cancel your subscription at any time through your account settings. Upon cancellation, you will retain access to all features until the end of your current billing period."
+    },
+    "section6": {
+      "title": "6. Intellectual Property",
+      "content": "The SmartSRT platform, including all software, designs, logos, and content, is protected by intellectual property rights. Content you create using SmartSRT (including generated subtitles) belongs to you. We process your content solely for the purpose of providing our services and do not claim ownership of your materials."
+    },
+    "section7": {
+      "title": "7. Privacy & Data Processing",
+      "intro": "We collect and process your personal data exclusively to deliver our services. Your video content and audio data may be shared with AI service providers (such as OpenAI, Anthropic, or similar) for subtitle generation and translation purposes.",
+      "items": [
+        "Data is processed only for service delivery and is not permanently stored by AI providers",
+        "We do not sell your personal information to third parties",
+        "For comprehensive details, please review our Privacy Policy"
+      ]
+    },
+    "section8": {
+      "title": "8. Service Limitations",
+      "content": "SmartSRT is provided on an \"as is\" basis. While we strive for accuracy, AI-generated subtitles may contain errors and should be reviewed before publication. We are not liable for damages resulting from service interruptions, data loss, inaccurate translations, or technical issues beyond our reasonable control."
+    },
+    "section9": {
+      "title": "9. Prohibited Activities",
+      "intro": "Users may not:",
+      "items": [
+        "Upload content that infringes on intellectual property rights",
+        "Attempt to bypass usage limits or access restrictions",
+        "Use the service to generate harmful, illegal, or offensive content",
+        "Share account credentials or access with unauthorized parties"
+      ]
+    },
+    "section10": {
+      "title": "10. Service Modifications",
+      "content": "SmartSRT reserves the right to modify service features, pricing structures, and terms of service at any time. Material changes will be communicated in advance via email or platform notification. Continued use of the service after changes take effect constitutes acceptance of the updated terms."
+    },
+    "section11": {
+      "title": "11. Account Termination",
+      "content": "We reserve the right to suspend or terminate accounts that violate these terms without prior notice. Users may delete their accounts at any time through account settings or by submitting a data deletion request to our support team."
+    },
+    "section12": {
+      "title": "12. Governing Law",
+      "content": "These terms are governed by and construed in accordance with applicable laws. Any disputes arising from these terms or use of the service shall be resolved through appropriate legal channels."
+    },
+    "section13": {
+      "title": "13. Contact Information",
+      "intro": "For questions, concerns, or support regarding these terms, please contact us at:",
+      "email": "support@smartsrt.com"
+    },
+    "section14": {
+      "title": "14. Effective Date",
+      "content": "These terms become effective upon your first use of SmartSRT and remain in effect until your account is deleted or terminated."
+    }
+  },
+  "App": {
+    "proBadge": {
+      "plan": "Pro Plan",
+      "daysLeft": "({days} days left)"
+    },
+    "freeBadge": {
+      "text": "Free Plan • Go Pro"
+    },
+    "fileUpload": {
+      "title": "Upload file",
+      "dragDropPro": "Drag or drop your file here (mp4, mp3, wav) or click to upload",
+      "dragDropFree": "Drag or drop your file here (mp4, mp3) or click to upload",
+      "dropIt": "Drop it",
+      "clickOrDrag": "Click or drag file",
+      "duration": "Duration",
+      "errors": {
+        "upgradeForWav": "You need to upgrade to the Pro plan to upload WAV files.",
+        "fileSizeExceeds": "File size exceeds 24MB limit.",
+        "durationExceeds": "File duration exceeds the limit. Maximum duration is {maxDuration} seconds for your plan.",
+        "metadataFailed": "Failed to read media metadata. Please try a different file.",
+        "fileTypeNotSupported": "This file type is not supported. Only mp4, mp3, and wav files are accepted.",
+        "genericError": "An error occurred. Please try again later or contact support."
+      }
+    },
+    "subtitleForm": {
+      "generating": "Generating",
+      "wordsPerLine": "Words per line",
+      "wordsPerLineOption": "{count} words per line",
+      "includePunctuation": "Include punctuation",
+      "punctuationTooltip": "When enabled, punctuation marks (.,!?) will be included in the generated SRT file.",
+      "considerPunctuation": "Consider punctuation in line breaks",
+      "considerPunctuationTooltip": "When enabled, punctuation marks will be considered when breaking lines. This helps maintain natural reading flow and proper sentence structure.",
+      "generatingButton": "Generating...",
+      "generateButton": "Generate SRT File",
+      "usageLimitReached": "You have reached your monthly usage limit.",
+      "srtSuccess": "SRT generated successfully",
+      "error": "An error occurred. Please try again later or contact support."
+    },
+    "footer": {
+      "copyright": "Copyright © {year} SmartSRT, All rights reserved"
+    },
+    "header": {
+      "profile": {
+        "undefined": "Undefined",
+        "logoutSuccess": "Logged out successfully",
+        "logoutError": "Failed to logout. Please try again or contact support.",
+        "loggingOut": "Logging out...",
+        "logout": "Log out"
+      },
+      "menu": {
+        "profile": "Profile",
+        "app": "App",
+        "subscription": "Subscription",
+        "api": "API",
+        "home": "Home"
+      }
+    },
+    "profile": {
+      "header": {
+        "title": "Profile Settings",
+        "subtitle": "Manage and update your account settings"
+      },
+      "subscription": {
+        "title": "Current Plan",
+        "limit": "{limit} minutes upload limit per month",
+        "daysRemaining": "{days} days remaining",
+        "manageSubscription": "Manage Subscription",
+        "customerPortal": "Customer Portal",
+        "opening": "Opening...",
+        "monthlyUsage": "Monthly Usage",
+        "minutes": "minutes",
+        "usage": "{usage}/{limit}",
+        "error": "An error occurred. Please try again later or contact support."
+      },
+      "account": {
+        "title": "Account Management",
+        "changePassword": "Change Password",
+        "update": "Update",
+        "sending": "Sending...",
+        "deleteAccount": "Delete Account",
+        "deleteWarning": "This action cannot be undone",
+        "processing": "Processing...",
+        "passwordEmailSuccess": "New password setup email sent successfully. Please check your inbox.",
+        "passwordEmailError": "Failed to send new password setup email. Please try again or contact support.",
+        "deleteSuccess": "Account deletion request sent successfully. Please check your email.",
+        "deleteError": "Failed to send account deletion request"
+      },
+      "history": {
+        "title": "SRT Files History",
+        "summary": "{count} files, {minutes} minutes total",
+        "searchPlaceholder": "Search SRT files",
+        "retrying": "Retrying...",
+        "retry": "Retry",
+        "noFiles": "No files found",
+        "error": "An error occurred while retrieving SRT file history. Please try again or contact support.",
+        "table": {
+          "fileName": "File Name",
+          "duration": "Duration",
+          "uploadDate": "Upload Date",
+          "action": "Action"
+        },
+        "duration": {
+          "seconds": "{count} seconds",
+          "minutes": "{count} minutes"
+        }
+      }
+    },
+    "subscription": {
+      "header": {
+        "title": "Subscription",
+        "subtitle": "Manage your subscription and billing information"
+      }
+    }
   }
 }
-  

@@ -13,6 +13,7 @@ import UnauthorizedError from "@/components/partials/error/401";
 import Loader from "@/components/loader";
 import { jwtDecode } from "jwt-decode";
 import { logoutAction } from "@/action/auth-action";
+import { useTranslations } from "next-intl";
 
 interface JWTClaims {
   name: string;
@@ -22,6 +23,7 @@ interface JWTClaims {
 
 const DeleteAccountPage = () => {
   const router = useRouter();
+  const t = useTranslations("Auth.deleteAccount");
   const [token, setToken] = useState<string | undefined>();
   const [isLoading, setIsLoading] = React.useState(true);
   const [isDeleting, setIsDeleting] = React.useState(false);
@@ -38,13 +40,13 @@ const DeleteAccountPage = () => {
           const decoded = jwtDecode<JWTClaims>(token);
           setUserInfo(decoded);
         } catch {
-          toast.error("Invalid or expired session. Please log in again.");
+          toast.error(t("invalidSession"));
         }
       }
     };
 
     fetchToken();
-  }, []);
+  }, [t]);
 
   if (isLoading) {
     return <Loader />;
@@ -60,11 +62,11 @@ const DeleteAccountPage = () => {
 
       if (response.status === 204) {
         await logoutAction()
-        toast.success("Your account has been successfully deleted.");
+        toast.success(t("success"));
         router.push(APP_ROUTES.HOME);
       }
     } catch (err: any) {
-      toast.error(err.response?.data?.message || "An error occurred while deleting your account. Please try again later or contact support.");
+      toast.error(err.response?.data?.message || t("error"));
     } finally {
       setIsDeleting(false);
     }
@@ -76,10 +78,10 @@ const DeleteAccountPage = () => {
         <div className="w-full max-w-xl flex flex-col items-center">
           <div className="text-center">
             <div className="text-xl md:text-2xl lg:text-3xl font-semibold text-default-900">
-              Are you sure you want to delete this account?
+              {t("title")}
             </div>
             <div className="text-black text-md mt-3 md:text-lg">
-              This action cannot be undone
+              {t("subtitle")}
             </div>
             <div className="mt-5 flex justify-center">
               <ProfileInfo
@@ -95,16 +97,16 @@ const DeleteAccountPage = () => {
                   className="bg-destructive text-white hover:bg-destructive/90 uppercase h-9 md:h-11 text-sm md:text-base"
                   onClick={onSubmit}
                   loading={isDeleting}
-                  loadingText="Deleting..."
+                  loadingText={t("deleting")}
               >
-                Yes, Delete Account
+                {t("confirmButton")}
               </LoadingButton>
 
               <Button
                   className="bg-black uppercase hover:bg-black/90 h-9 md:h-11 text-sm md:text-base"
                   onClick={() => router.push(APP_ROUTES.HOME)}
               >
-                No, Cancel
+                {t("cancelButton")}
               </Button>
             </div>
           </div>

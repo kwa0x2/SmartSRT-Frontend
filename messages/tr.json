@@ -1,0 +1,904 @@
+{
+  "Index": {
+    "title": "Merhaba dünya!"
+  },
+  "Hero": {
+    "title": "Yapay zeka destekli teknoloji ile hızlıca yüksek kaliteli SRT dosyaları oluşturun",
+    "description": "Yüksek kaliteli, mükemmel zamanlanmış altyazıları otomatik olarak oluşturarak zaman kazanın.",
+    "getStarted": "Ücretsiz Başla",
+    "goToApp": "Uygulamaya Git"
+  },
+  "Features": {
+    "title": "İçerik Üreticileri",
+    "heading": "Videolarınızı çok dilli altyazılarla zenginleştirin",
+    "description": "Anında birden fazla dilde profesyonel altyazılar oluşturun. Yapay zeka teknolojimiz, çeşitli dillerde doğru SRT dosyalarını otomatik olarak oluşturarak küresel bir kitleye ulaşmanıza yardımcı olur.",
+    "getStarted": "Ücretsiz Başla",
+    "goToApp": "Uygulamaya Git",
+    "pricing": "Fiyatlandırma",
+    "steps": {
+      "upload": {
+        "title": "Kısa Video Yükle",
+        "description": "MP4, MOV desteği, 5 dakikaya kadar"
+      },
+      "processing": {
+        "title": "Yapay Zeka İşleme",
+        "description": "Otomatik konuşma tanıma ve zamanlama"
+      },
+      "download": {
+        "title": "SRT Dosyasını İndir",
+        "description": "Video editörlerinde kullanıma hazır"
+      }
+    }
+  },
+  "Pricing": {
+    "heading": "Fiyatlandırma",
+    "description": "Altyazı oluşturma ihtiyaçlarınız için mükemmel planı seçin",
+    "plans": {
+      "free": {
+        "name": "Ücretsiz",
+        "description": "Dosyalarınız için yüksek kaliteli konuşma tanıma özellikli yapay zeka destekli altyazı oluşturma hizmetimizi deneyin",
+        "features": {
+          "uploadLimit": "Ayda {minutes} dakika yükleme limiti",
+          "aiPowered": "Yapay zeka destekli otomatik altyazı oluşturma",
+          "maxDuration": "Dosya başına maksimum 30 saniye",
+          "fileSupport": "MP4 ve MP3 dosya desteği",
+          "languageSupport": "32+ dil desteği"
+        }
+      },
+      "pro": {
+        "name": "Pro",
+        "description": "Daha fazla süreye ihtiyaç duyan profesyonel içerik üreticileri için daha yüksek yükleme limitleri",
+        "features": {
+          "uploadLimit": "Ayda {minutes} dakika yükleme limiti",
+          "aiPowered": "Yapay zeka destekli otomatik altyazı oluşturma",
+          "maxDuration": "Dosya başına maksimum 5 dakika",
+          "fileSupport": "MP4, MP3 ve WAV dosya desteği",
+          "languageSupport": "32+ dil desteği"
+        }
+      }
+    },
+    "buttons": {
+      "getStarted": "BAŞLA",
+      "currentPlan": "MEVCUT PLAN",
+      "upgrade": "YÜKSELTİ",
+      "changePlan": "PLAN DEĞİŞTİR",
+      "downgrade": "DÜŞÜR",
+      "loading": "Yükleniyor...",
+      "processing": "İşleniyor..."
+    }
+  },
+  "Contact": {
+    "heading": "Bize Ulaşın",
+    "description": "Sorularınız mı var? Yardım için buradayız. Bize bir mesaj gönderin, en kısa sürede cevap vereceğiz.",
+    "form": {
+      "firstName": "Ad",
+      "firstNamePlaceholder": "Adınızı girin",
+      "lastName": "Soyad",
+      "lastNamePlaceholder": "Soyadınızı girin",
+      "email": "E-posta",
+      "emailPlaceholder": "E-postanızı girin",
+      "message": "Mesaj",
+      "messagePlaceholder": "Mesajınızı girin",
+      "submit": "Mesaj Gönder",
+      "sending": "Mesaj Gönderiliyor...",
+      "success": "Mesaj başarıyla gönderildi!",
+      "error": "Bir hata oluştu. Lütfen daha sonra tekrar deneyin veya destek ekibiyle iletişime geçin."
+    },
+    "validation": {
+      "firstNameMin": "Ad en az 2 karakter olmalıdır",
+      "lastNameMin": "Soyad en az 2 karakter olmalıdır",
+      "emailInvalid": "Lütfen geçerli bir e-posta adresi girin",
+      "messageMin": "Mesaj en az 10 karakter olmalıdır"
+    }
+  },
+  "Header": {
+    "navigation": {
+      "pricing": "Fiyatlandırma",
+      "contact": "Bize Ulaşın"
+    },
+    "auth": {
+      "login": "Giriş Yap",
+      "getStarted": "Ücretsiz Başla",
+      "goToApp": "Uygulamaya Git"
+    }
+  },
+  "Footer": {
+    "slogan": "Kısa Videolar için Akıllı SRT Oluşturma",
+    "links": {
+      "privacy": "Gizlilik",
+      "terms": "Şartlar",
+      "refund": "İade"
+    },
+    "languages": {
+      "english": "İngilizce",
+      "turkish": "Türkçe"
+    },
+    "copyright": "Telif Hakkı {year}, SmartSRT Tüm Hakları Saklıdır."
+  },
+  "Auth": {
+    "background": {
+      "title": "Kısa Videolar için",
+      "subtitle": "Akıllı SRT Oluşturma!"
+    },
+    "social": {
+      "withGoogle": "Google ile {action}",
+      "withGithub": "GitHub ile {action}"
+    },
+    "login": {
+      "title": "Giriş Yap",
+      "subtitle": "SmartSRT kullanmaya başlamak için hesabınıza giriş yapın",
+      "orContinueWith": "Veya şununla devam et",
+      "dontHaveAccount": "Hesabınız yok mu?",
+      "register": "Kayıt Ol",
+      "form": {
+        "email": "E-posta",
+        "emailPlaceholder": "ornek@email.com",
+        "password": "Şifre",
+        "passwordPlaceholder": "••••••••",
+        "forgotPassword": "Şifremi Unuttum?",
+        "loginButton": "Giriş Yap",
+        "loggingIn": "Giriş yapılıyor...",
+        "loginSuccess": "Giriş başarılı!",
+        "loginError": "Giriş yapılırken bir hata oluştu. Lütfen tekrar deneyin."
+      },
+      "validation": {
+        "emailInvalid": "Lütfen geçerli bir e-posta adresi girin",
+        "passwordMin": "Şifre en az 8 karakter olmalıdır"
+      },
+      "errors": {
+        "invalid_state": "Geçersiz veya süresi dolmuş durum parametresi. Lütfen Google kimlik doğrulamasını tekrar deneyin.",
+        "server_error": "Bir hata oluştu. Lütfen daha sonra tekrar deneyin veya destek ekibiyle iletişime geçin.",
+        "exists_github": "Bu e-posta adresiyle zaten bir hesap var. Lütfen Github kullanarak giriş yapın.",
+        "exists_credentials": "Bu e-posta adresiyle zaten bir hesap var. Lütfen kimlik bilgilerinizi kullanarak giriş yapın."
+      }
+    },
+    "register": {
+      "title": "Kayıt Ol",
+      "subtitle": "SmartSRT kullanmaya başlamak için hesap oluşturun",
+      "orContinueWith": "Veya şununla devam et",
+      "alreadyRegistered": "Zaten kayıtlı mısınız?",
+      "login": "Giriş Yap",
+      "form": {
+        "fullName": "Ad Soyad",
+        "fullNamePlaceholder": "Ahmet Yılmaz",
+        "email": "E-posta",
+        "emailPlaceholder": "ornek@email.com",
+        "password": "Şifre",
+        "passwordPlaceholder": "••••••••",
+        "phoneNumber": "Telefon Numarası",
+        "verificationCode": "Doğrulama Kodu",
+        "sendCode": "Kod Gönder",
+        "resend": "Tekrar Gönder ({seconds}s)",
+        "continueButton": "Devam Et",
+        "creatingAccount": "Hesap oluşturuluyor...",
+        "createAccount": "Hesap Oluştur",
+        "creatingAccountLoading": "Hesap Oluşturuluyor...",
+        "back": "Geri",
+        "accountCreated": "Hesap başarıyla oluşturuldu. Lütfen giriş yapın.",
+        "emailExists": "Bu e-posta adresiyle zaten bir hesap var. Lütfen farklı bir e-posta deneyin",
+        "phoneExists": "Bu telefon numarası zaten kayıtlı",
+        "phoneRequired": "Telefon numarası gerekli",
+        "phoneInvalid": "Lütfen geçerli bir telefon numarası girin",
+        "codeSent": "Doğrulama kodu başarıyla gönderildi",
+        "codeSendError": "Doğrulama kodu gönderilemedi. Lütfen tekrar deneyin veya destek ekibiyle iletişime geçin.",
+        "registerError": "Kayıt olurken bir hata oluştu. Lütfen daha sonra tekrar deneyin veya destek ekibiyle iletişime geçin."
+      },
+      "validation": {
+        "nameMin": "Ad en az 2 karakter olmalıdır",
+        "emailInvalid": "Lütfen geçerli bir e-posta adresi girin",
+        "passwordMin": "Şifre en az 8 karakter olmalıdır",
+        "phoneMin": "Lütfen geçerli bir telefon numarası girin",
+        "otpLength": "Doğrulama kodu 4 haneli olmalıdır"
+      }
+    },
+    "verify": {
+      "title": "Giriş Yapılıyor",
+      "subtitle": "Sabırlı olun! Giriş işleminizi tamamlıyoruz.",
+      "redirectMessage": "Kısa süre içinde yönlendirileceksiniz.",
+      "error": "Bir hata oluştu. Lütfen daha sonra tekrar deneyin veya destek ekibiyle iletişime geçin.",
+      "invalidToken": "Geçersiz token. Lütfen tekrar deneyin veya destek ekibiyle iletişime geçin."
+    },
+    "forgotPassword": {
+      "title": "Şifrenizi mi Unuttunuz?",
+      "subtitle": "E-posta adresinizi girin, size talimatlar gönderelim!",
+      "forgetIt": "Boşver,",
+      "sendBack": "Geri Dön",
+      "toLogin": "Giriş Sayfasına",
+      "form": {
+        "email": "E-posta",
+        "emailPlaceholder": "E-postanızı girin",
+        "submit": "Kurtarma E-postası Gönder",
+        "sending": "Kurtarma E-postası Gönderiliyor...",
+        "success": "Kurtarma e-postası başarıyla gönderildi. Lütfen gelen kutunuzu kontrol edin.",
+        "error": "Kurtarma e-postası gönderilemedi. Lütfen daha sonra tekrar deneyin veya destek ekibiyle iletişime geçin."
+      },
+      "validation": {
+        "emailInvalid": "Lütfen geçerli bir e-posta adresi girin"
+      }
+    },
+    "resetPassword": {
+      "title": "Yeni Şifrenizi Belirleyin",
+      "subtitle": "Lütfen aşağıya yeni şifrenizi girin",
+      "dontUpdate": "Güncellemek istemiyor musunuz?",
+      "goToLogin": "Giriş sayfasına git",
+      "form": {
+        "password": "Yeni Şifre",
+        "passwordPlaceholder": "Yeni şifre girin",
+        "confirmPassword": "Şifre Onayı",
+        "confirmPasswordPlaceholder": "Yeni şifreyi onaylayın",
+        "submit": "Şifreyi Güncelle",
+        "updating": "Şifre Güncelleniyor...",
+        "success": "Şifre başarıyla sıfırlandı",
+        "error": "Şifrenizi sıfırlarken bir hata oluştu. Lütfen tekrar deneyin veya destek ekibiyle iletişime geçin."
+      },
+      "validation": {
+        "passwordMin": "Şifre en az 8 karakter olmalıdır",
+        "passwordMatch": "Şifreler eşleşmiyor"
+      }
+    },
+    "deleteAccount": {
+      "title": "Bu hesabı silmek istediğinizden emin misiniz?",
+      "subtitle": "Bu işlem geri alınamaz",
+      "confirmButton": "Evet, Hesabı Sil",
+      "cancelButton": "Hayır, İptal Et",
+      "deleting": "Siliniyor...",
+      "success": "Hesabınız başarıyla silindi.",
+      "error": "Hesabınız silinirken bir hata oluştu. Lütfen daha sonra tekrar deneyin veya destek ekibiyle iletişime geçin.",
+      "invalidSession": "Geçersiz veya süresi dolmuş oturum. Lütfen tekrar giriş yapın."
+    }
+  },
+  "Privacy": {
+    "title": "Gizlilik Politikası",
+    "lastUpdated": "Son güncelleme: 1 Ocak 2025",
+    "footerNote": "SmartSRT'yi kullanarak, bu Gizlilik Politikasını okuduğunuzu ve anladığınızı kabul etmiş olursunuz.",
+    "section1": {
+      "title": "1. Giriş",
+      "content": "SmartSRT'de gizliliğiniz en önemli önceliğimizdir. Bu Gizlilik Politikası, yapay zeka destekli altyazı oluşturma platformumuzu kullandığınızda kişisel bilgilerinizi nasıl topladığımızı, kullandığımızı, işlediğimizi ve koruduğumuzu açıklamaktadır. Şeffaflık ve veri haklarınızın korunması konusunda kararlıyız."
+    },
+    "section2": {
+      "title": "2. Veri Sorumlusu Bilgileri",
+      "provider": "Hizmet Sağlayıcı:",
+      "providerName": "SmartSRT",
+      "contactEmail": "İletişim E-postası:",
+      "website": "Web Sitesi:"
+    },
+    "section3": {
+      "title": "3. Topladığımız Kişisel Veriler",
+      "subsection1": {
+        "title": "3.1 Hesap Bilgileri",
+        "items": [
+          "Ad soyad ve e-posta adresi",
+          "Şifrelenmiş parola",
+          "Profil resmi (isteğe bağlı)",
+          "Üçüncü taraf kimlik doğrulama verileri (uygulanabiliyorsa Google)"
+        ]
+      },
+      "subsection2": {
+        "title": "3.2 İçerik ve Medya Dosyaları",
+        "items": [
+          "Yüklenen video dosyaları ve ses içeriği",
+          "Oluşturulan altyazılar ve transkriptler",
+          "Dosya meta verileri (boyut, format, yükleme tarihi)",
+          "Çeviri ayarları"
+        ]
+      },
+      "subsection3": {
+        "title": "3.3 Abonelik ve Ödeme Verileri",
+        "items": [
+          "Abonelik planı ve durumu",
+          "Kullanım geçmişi",
+          "Ödeme işlemcisi müşteri kimliği (Paddle)",
+          "Fatura tarihleri ve işlem geçmişi"
+        ]
+      },
+      "subsection4": {
+        "title": "3.4 Kullanım ve Teknik Veriler",
+        "items": [
+          "Platform etkileşim günlükleri ve özellik kullanımı",
+          "Giriş zaman damgaları ve oturum bilgileri",
+          "Cihaz bilgileri ve tarayıcı türü",
+          "IP adresi ve yaklaşık konum"
+        ]
+      }
+    },
+    "section4": {
+      "title": "4. Verileri Nasıl Topluyoruz",
+      "items": [
+        "Kayıt ve platform kullanımı sırasında doğrudan sağladığınız bilgiler",
+        "Video yüklemeleri ve altyazı işleme sırasında otomatik toplama",
+        "Üçüncü taraf kimlik doğrulama sağlayıcıları (Google OAuth, rızanızla)",
+        "Ödeme işlemcisi entegrasyonu (Paddle)",
+        "Çerezler ve benzer izleme teknolojileri"
+      ]
+    },
+    "section5": {
+      "title": "5. İşleme Amacı ve Hukuki Dayanağı",
+      "subsection1": {
+        "title": "5.1 Hizmet Sunumu",
+        "legalBasis": "(Sözleşmesel Yükümlülük)",
+        "items": [
+          "Hesap oluşturma ve kimlik doğrulama",
+          "Yapay zeka destekli altyazı oluşturma ve çeviri",
+          "Video işleme ve transkript hizmetleri"
+        ]
+      },
+      "subsection2": {
+        "title": "5.2 Faturalandırma ve Ödemeler",
+        "legalBasis": "(Sözleşmesel Yükümlülük)",
+        "items": [
+          "Abonelik ücretleri ve kredi alımlarının işlenmesi",
+          "Fatura oluşturma ve ödeme doğrulama",
+          "İade ve iptallerin yönetimi"
+        ]
+      },
+      "subsection3": {
+        "title": "5.3 Müşteri Desteği",
+        "legalBasis": "(Meşru Menfaat)",
+        "items": [
+          "Destek taleplerine ve teknik sorunlara yanıt verme",
+          "Platform özelliklerini ve kullanıcı deneyimini iyileştirme",
+          "Hizmet sorunlarını giderme ve çözme"
+        ]
+      },
+      "subsection4": {
+        "title": "5.4 Yasal Uyumluluk",
+        "legalBasis": "(Yasal Yükümlülük)",
+        "items": [
+          "Vergi ve muhasebe kayıtlarını tutma",
+          "Yasal taleplere ve mahkeme kararlarına yanıt verme",
+          "Dolandırıcılık önleme ve güvenlik izleme"
+        ]
+      }
+    },
+    "section6": {
+      "title": "6. Veri Paylaşımı ve Üçüncü Taraflar",
+      "intro": "Kişisel verilerinizi üçüncü taraflara satmıyoruz. Verileri yalnızca aşağıdaki durumlarda paylaşırız:",
+      "aiProviders": {
+        "title": "Yapay Zeka Hizmet Sağlayıcıları",
+        "description": "Video içeriği ve ses, altyazı oluşturma için yapay zeka sağlayıcıları (OpenAI, Anthropic veya benzer) tarafından işlenir. Bu veriler yalnızca işleme için kullanılır ve bu sağlayıcılar tarafından kalıcı olarak saklanmaz."
+      },
+      "paymentProcessor": {
+        "title": "Ödeme İşlemcisi",
+        "description": "Fatura bilgileri, abonelik yönetimi ve ödeme işleme için Paddle üzerinden işlenir."
+      },
+      "authServices": {
+        "title": "Kimlik Doğrulama Hizmetleri",
+        "description": "Google ile oturum açma kullanırsanız, kimlik doğrulama verileri Google ile paylaşılır (açık rızanızla)."
+      },
+      "legalRequirements": {
+        "title": "Yasal Gereklilikler",
+        "description": "Yasal olarak gerekli olduğunda, mahkeme kararıyla veya yasal haklarımızı korumak için verileri ifşa edebiliriz."
+      }
+    },
+    "section7": {
+      "title": "7. Veri Saklama Süreleri",
+      "accountInfo": "Hesap Bilgileri",
+      "accountInfoPeriod": "Hesap silinene kadar",
+      "videoContent": "Video ve Altyazı İçeriği",
+      "videoContentPeriod": "Kullanıcı tarafından silinene kadar",
+      "paymentRecords": "Ödeme Kayıtları",
+      "paymentRecordsPeriod": "10 yıl (yasal gereklilik)",
+      "usageLogs": "Kullanım Günlükleri",
+      "usageLogsPeriod": "2 yıl",
+      "supportComms": "Destek İletişimleri",
+      "supportCommsPeriod": "3 yıl"
+    },
+    "section8": {
+      "title": "8. Veri Güvenliği Önlemleri",
+      "intro": "Kişisel verilerinizi korumak için endüstri standartı güvenlik önlemleri uyguluyoruz:",
+      "encryption": {
+        "title": "Şifreleme",
+        "description": "Tüm veri iletimi için SSL/TLS şifrelemesi"
+      },
+      "passwordProtection": {
+        "title": "Parola Koruması",
+        "description": "Hash ve salt uygulanmış parola depolama"
+      },
+      "accessControl": {
+        "title": "Erişim Kontrolü",
+        "description": "Sıkı yetkilendirme ve kimlik doğrulama protokolleri"
+      },
+      "dataBackup": {
+        "title": "Veri Yedekleme",
+        "description": "Düzenli yedeklemeler ve felaket kurtarma sistemleri"
+      },
+      "securityUpdates": {
+        "title": "Güvenlik Güncellemeleri",
+        "description": "Sürekli izleme ve güncelleme"
+      },
+      "secureInfrastructure": {
+        "title": "Güvenli Altyapı",
+        "description": "Kurumsal düzeyde bulut barındırma"
+      }
+    },
+    "section9": {
+      "title": "9. Gizlilik Haklarınız",
+      "intro": "Geçerli veri koruma yasaları (GDPR dahil) kapsamında aşağıdaki haklara sahipsiniz:",
+      "rightToAccess": {
+        "title": "Erişim Hakkı",
+        "description": "Hakkınızda tuttuğumuz tüm kişisel verilerin bir kopyasını talep etme"
+      },
+      "rightToRectification": {
+        "title": "Düzeltme Hakkı",
+        "description": "Yanlış veya eksik verilerin düzeltilmesini talep etme"
+      },
+      "rightToErasure": {
+        "title": "Silme Hakkı",
+        "description": "Kişisel verilerinizin silinmesini talep etme (unutulma hakkı)"
+      },
+      "rightToObject": {
+        "title": "İtiraz Hakkı",
+        "description": "Verilerinizin belirli amaçlarla işlenmesine itiraz etme"
+      },
+      "rightToDataPortability": {
+        "title": "Veri Taşınabilirliği Hakkı",
+        "description": "Verilerinizi yapılandırılmış, makine tarafından okunabilir formatta alma"
+      },
+      "rightToRestrictProcessing": {
+        "title": "İşlemeyi Kısıtlama Hakkı",
+        "description": "Verilerinizi nasıl işlediğimizin sınırlandırılmasını talep etme"
+      }
+    },
+    "section10": {
+      "title": "10. Çerezler ve İzleme",
+      "intro": "Deneyiminizi iyileştirmek için çerezler ve benzer teknolojiler kullanıyoruz:",
+      "essentialCookies": {
+        "title": "Temel Çerezler",
+        "description": "Kimlik doğrulama ve güvenlik gibi temel işlevler için gerekli"
+      },
+      "functionalCookies": {
+        "title": "İşlevsel Çerezler",
+        "description": "Dil ve tema ayarları gibi tercihlerinizi hatırlar"
+      },
+      "analyticsCookies": {
+        "title": "Analitik Çerezler",
+        "description": "Hizmetimizi iyileştirmek için kullanım desenlerini anlamamıza yardımcı olur (anonimleştirilmiş)"
+      }
+    },
+    "section11": {
+      "title": "11. Uluslararası Veri Transferleri",
+      "intro": "Verileriniz aşağıdaki amaçlar için ikamet ülkeniz dışında aktarılabilir ve işlenebilir:",
+      "items": [
+        "Paddle üzerinden ödeme işleme (AB uyumlu)",
+        "Yapay zeka işleme hizmetleri (uygun güvencelerle)",
+        "Bulut altyapı hizmetleri (GDPR uyumlu sağlayıcılar)"
+      ],
+      "outro": "Tüm uluslararası transferler geçerli veri koruma yasalarına uygun olarak gerçekleştirilir."
+    },
+    "section12": {
+      "title": "12. Çocukların Gizliliği",
+      "content": "SmartSRT, 18 yaş altındaki kullanıcılar için tasarlanmamıştır. Çocuklardan bilerek kişisel bilgi toplamıyoruz. Yanlışlıkla bir küçükten veri topladığımızı tespit edersek, bunu derhal sistemlerimizden sileriz."
+    },
+    "section13": {
+      "title": "13. Veri İhlali Bildirimi",
+      "content": "Haklarınızı etkileyebilecek bir veri güvenliği ihlali durumunda, ilgili denetim makamlarını ve etkilenen kullanıcıları yasal olarak gerekli süre içinde (genellikle 72 saat) bilgilendireceğiz. İhlalin niteliği ve önerilen koruyucu önlemler hakkında açık bilgi alacaksınız."
+    },
+    "section14": {
+      "title": "14. İletişim ve Veri Talepleri",
+      "intro": "Gizlilik haklarınızı kullanmak veya veriyle ilgili sorular sormak için:",
+      "email": "E-posta:",
+      "subjectLine": "Konu Satırı:",
+      "subjectLineText": "\"Gizlilik Talebi - [Talep Türünüz]\"",
+      "responseTime": "Yanıt Süresi:",
+      "responseTimeText": "Alındıktan sonra 30 gün içinde"
+    },
+    "section15": {
+      "title": "15. Politika Güncellemeleri",
+      "content": "Bu Gizlilik Politikasını, uygulamalarımızdaki veya yasal gerekliliklerdeki değişiklikleri yansıtmak için periyodik olarak güncelleyebiliriz. Önemli değişiklikler e-posta veya belirgin platform bildirimi yoluyla iletilecektir. Bu politikanın üstündeki \"Son güncelleme\" tarihi, değişikliklerin en son ne zaman yapıldığını gösterir. Güncellemelerden sonra SmartSRT'nin kullanılmaya devam edilmesi, revize edilmiş politikanın kabulü anlamına gelir."
+    }
+  },
+  "Refund": {
+    "title": "İade Politikası",
+    "lastUpdated": "Son güncelleme: 1 Ocak 2025",
+    "footerNote": "SmartSRT hizmetlerini satın alarak, bu İade Politikasını okuduğunuzu ve kabul ettiğinizi beyan etmiş olursunuz.",
+    "section1": {
+      "title": "1. Memnuniyete Bağlılığımız",
+      "content": "SmartSRT'de olağanüstü altyazı oluşturma hizmetleri sunmaya çalışıyoruz. Bu İade Politikası, iadelerin hangi durumlarda mümkün olduğunu ve talep sürecini açıklar. Adil, şeffaf ve kullanıcılarımızın endişelerine duyarlı olmayı hedefliyoruz."
+    },
+    "section2": {
+      "title": "2. Abonelik İptali ve İadeler",
+      "subsection1": {
+        "title": "2.1 Abonelik İptali",
+        "items": [
+          "Hesap ayarlarından istediğiniz zaman aboneliğinizi iptal edebilirsiniz",
+          "İptal hemen geçerli olur, ancak erişim mevcut fatura döneminizin sonuna kadar devam eder",
+          "Otomatik yenileme iptal edildiğinde otomatik olarak devre dışı bırakılır",
+          "Mevcut fatura dönemindeki kullanılmayan süre için iade yapılmaz"
+        ]
+      },
+      "subsection2": {
+        "title": "2.2 Abonelik İade Uygunluğu",
+        "intro": "Abonelik iadeleri aşağıdaki durumlarda verilebilir:",
+        "moneyBack": {
+          "title": "14 Günlük Para İade Garantisi",
+          "description": "İlk abonelik satın alımından sonraki 14 gün içinde tam iade (yalnızca yeni aboneler için)"
+        },
+        "technicalIssues": {
+          "title": "Platform Teknik Sorunları",
+          "description": "Destek ekibimiz tarafından çözülemeyen ve normal hizmet kullanımını engelleyen ciddi teknik sorunlar"
+        },
+        "serviceOutage": {
+          "title": "Uzun Süreli Hizmet Kesintisi",
+          "description": "Toplam hizmet kesinti süresinin fatura döneminizin %20'sini aşması durumunda"
+        },
+        "unauthorizedPayment": {
+          "title": "Yetkisiz Ödeme",
+          "description": "Yetkiniz olmadan yapılan ödemeler veya çift faturalandırma hataları"
+        }
+      }
+    },
+    "section3": {
+      "title": "3. Kredi Satın Alma İadeleri",
+      "subsection1": {
+        "title": "3.1 İade İçin Uygun Olanlar",
+        "items": [
+          "Kredi satın alımından sonraki 14 gün içinde talep edilmesi",
+          "Satın alınan kredilerin %50'sinden fazlasının kullanılmamış olması",
+          "Kredi kullanımını engelleyen teknik hatalar",
+          "Çift ödeme veya ödeme işleme hataları"
+        ]
+      },
+      "subsection2": {
+        "title": "3.2 İade İçin Uygun Olmayanlar",
+        "items": [
+          "Kredilerin %50'sinden fazlası tüketilmiş",
+          "14 günlük süre geçtikten sonra yapılan talepler",
+          "Kullanıcı hatası veya altyazı kalitesinden memnuniyetsizlik (kalite sorunları iyileştirme için bildirilmelidir)",
+          "Promosyon veya bonus krediler"
+        ]
+      }
+    },
+    "section4": {
+      "title": "4. İade Nasıl Talep Edilir",
+      "subsection1": {
+        "title": "4.1 Talebinizi Gönderme",
+        "intro": "İade talebinde bulunmak için aşağıdaki bilgilerle bizimle iletişime geçin:",
+        "email": "E-posta:",
+        "subject": "Konu Satırı:",
+        "subjectText": "\"İade Talebi - [Kullanıcı Adınız]\"",
+        "requiredInfo": "Gerekli Bilgiler:",
+        "requiredItems": [
+          "Hesap e-posta adresi",
+          "İade talebi için detaylı açıklama",
+          "Ödeme referans numarası (Paddle'dan)",
+          "İşlem tarihi ve tutarı",
+          "Destekleyici belgeler (teknik sorunlar için)"
+        ]
+      },
+      "subsection2": {
+        "title": "4.2 İade İnceleme Zaman Çizelgesi",
+        "initialResponse": "İlk Yanıt",
+        "initialResponseTime": "24-48 saat",
+        "reviewDecision": "İnceleme ve Karar",
+        "reviewDecisionTime": "3-5 iş günü",
+        "refundProcessing": "İade İşleme (onaylanırsa)",
+        "refundProcessingTime": "5-10 iş günü",
+        "emailUpdates": "E-posta Güncellemeleri",
+        "emailUpdatesTime": "Her aşamada"
+      }
+    },
+    "section5": {
+      "title": "5. İade İşleme Yöntemleri",
+      "intro": "Onaylanan iadeler aşağıdaki yöntemlerle işlenir:",
+      "creditCard": {
+        "title": "Kredi/Banka Kartı",
+        "description": "Orijinal ödeme kartına iade",
+        "processingTime": "İşlem süresi: 5-10 iş günü"
+      },
+      "paypal": {
+        "title": "PayPal",
+        "description": "PayPal hesabına doğrudan iade",
+        "processingTime": "İşlem süresi: 3-5 iş günü"
+      },
+      "bankTransfer": {
+        "title": "Banka Havalesi",
+        "description": "Doğrudan banka havalesi (özel durumlar)",
+        "processingTime": "İşlem süresi: 7-14 iş günü"
+      }
+    },
+    "section6": {
+      "title": "6. Özel Durumlar",
+      "subsection1": {
+        "title": "6.1 Teknik Hizmet Sorunları",
+        "intro": "Platformla ilgili teknik sorunlar hizmeti kullanmanızı engellediğinde:",
+        "items": [
+          "Kalıcı, çözülemeyen sorunlar için tam iade"
+        ]
+      },
+      "subsection2": {
+        "title": "6.2 Altyazı Kalitesi Endişeleri",
+        "intro": "Sürekli altyazı kalitesi sorunları yaşıyorsanız:",
+        "items": [
+          "İlk 3 altyazı oluşturma için geri bildirim ve destek",
+          "Tekrarlayan yapay zeka doğruluk sorunları için kredi iadesi",
+          "Sistem iyileştirmelerinden sonra ücretsiz yeniden oluşturma"
+        ]
+      },
+      "subsection3": {
+        "title": "6.3 Güvenlik İhlalleri",
+        "intro": "Hesap güvenliği ihlali durumunda:",
+        "items": [
+          "Yetkisiz ödemeler için tam iade",
+          "Gelişmiş hesap güvenlik önlemleri",
+          "Soruşturma ve önleyici eylem"
+        ]
+      }
+    },
+    "section7": {
+      "title": "7. İade Yapılamayan Durumlar",
+      "intro": "Aşağıdaki durumlarda iade yapılamaz:",
+      "items": [
+        "Hizmet Şartlarımızın ihlali",
+        "Yanlış veya yanıltıcı bilgi sağlama",
+        "Hizmetin kötüye kullanımı veya suistimali",
+        "Geçerli iade süresinin dışında yapılan talepler",
+        "Kullanıcı hatası veya teknik bilgi eksikliği",
+        "Kontrolümüz dışındaki üçüncü taraf faktörleri veya piyasa koşulları"
+      ]
+    },
+    "section8": {
+      "title": "8. Kısmi İadeler",
+      "intro": "Belirli durumlarda, takdirimize bağlı olarak kısmi iadeler sunulabilir:",
+      "items": [
+        "Hizmetin bir kısmı başarıyla kullanıldığında",
+        "Belirli zaman dilimlerini etkileyen teknik sorunlar için",
+        "Kısmi hizmet memnuniyetsizliği durumlarında"
+      ]
+    },
+    "section9": {
+      "title": "9. İtiraz Süreci",
+      "intro": "İade talebiniz reddedilirse, itiraz etme hakkınız vardır:",
+      "step1": {
+        "title": "İtiraz Gönderin",
+        "description": "İlk karardan sonraki 14 gün içinde"
+      },
+      "step2": {
+        "title": "Ek Kanıt Sağlayın",
+        "description": "Yeni belgeler veya açıklamalar ekleyin"
+      },
+      "step3": {
+        "title": "Eskalasyon",
+        "description": "Üst yönetim tarafından inceleme talep edin"
+      },
+      "step4": {
+        "title": "Tüketici Koruması",
+        "description": "Çözülemezse tüketici tahkim hizmetlerine başvurun"
+      }
+    },
+    "section10": {
+      "title": "10. Orantılı İade Hesaplaması",
+      "intro": "Abonelik iadeleri için, orantılı iadeleri şu şekilde hesaplıyoruz:",
+      "formula": "İade Tutarı = (Kalan Günler ÷ Fatura Dönemi Günleri) × Abonelik Ücreti",
+      "notes": [
+        "Minimum 1 günlük ücret düşülecektir",
+        "Ödeme işleme ücretleri iade edilemez",
+        "Hesaplamalar takvim günlerine göre yapılır"
+      ]
+    },
+    "section11": {
+      "title": "11. Ödeme İşlemcisi Politikaları",
+      "intro": "Ödemeler Paddle üzerinden işlendiğinden:",
+      "items": [
+        "İadeler ayrıca Paddle'ın politika ve şartlarına tabidir",
+        "İşlem ücretleri Paddle tarafından belirlenir ve iade edilemeyebilir",
+        "Uluslararası ödeme iadeleri ek işlem süresi gerektirebilir",
+        "Döviz kuru dalgalanmaları iade tutarlarını etkileyebilir"
+      ]
+    },
+    "section12": {
+      "title": "12. İletişim Bilgileri",
+      "intro": "İade sorguları ve iptal desteği için:",
+      "email": "E-posta:",
+      "supportEmail": "Destek E-postası:",
+      "responseTime": "Yanıt Süresi:",
+      "responseTimeText": "24-48 saat",
+      "businessHours": "Çalışma Saatleri:",
+      "businessHoursText": "Pazartesi-Cuma, 09:00 - 18:00",
+      "languages": "Diller:",
+      "languagesText": "İngilizce destek mevcut"
+    },
+    "section13": {
+      "title": "13. Yürürlük Tarihi",
+      "content": "Bu İade Politikası, SmartSRT hizmetlerini satın aldığınızda yürürlüğe girer. Bu politikayı periyodik olarak güncelleyebiliriz ve önemli değişiklikler önceden e-posta veya platform bildirimi yoluyla iletilecektir."
+    }
+  }
+  ,
+  "Terms": {
+    "title": "Hizmet Şartları",
+    "lastUpdated": "Son güncelleme: 1 Ocak 2025",
+    "footerNote": "SmartSRT'yi kullanarak, bu Hizmet Şartlarını okuduğunuzu, anladığınızı ve bağlı kalmayı kabul ettiğinizi beyan edersiniz.",
+    "section1": {
+      "title": "1. Hizmetimiz Hakkında",
+      "content": "SmartSRT, videolarınız için altyazıları otomatik olarak oluşturan, çeviren ve senkronize eden yapay zeka destekli bir altyazı oluşturma platformudur. Yazılım Hizmeti (SaaS) modeliyle çalışır ve bulut tabanlı altyazı işleme ve yönetim araçları sunar."
+    },
+    "section2": {
+      "title": "2. Şartların Kabulü",
+      "intro": "SmartSRT'ye erişerek veya kullanarak aşağıdakileri kabul etmiş sayılırsınız:",
+      "items": [
+        "En az 18 yaşında olmak veya yasal veli iznine sahip olmak",
+        "Doğru ve güncel hesap bilgileri sağlamak",
+        "Hesap bilgilerinizin güvenliğini ve gizliliğini korumak",
+        "Hizmeti tüm geçerli yasa ve düzenlemelere uygun şekilde kullanmak"
+      ]
+    },
+    "section3": {
+      "title": "3. Hesap Sorumlulukları",
+      "content": "Hesabınızın ve parolanızın gizliliğini korumaktan yalnızca siz sorumlusunuz. Hesabınız üzerinden gerçekleştirilen tüm işlemlerden siz sorumlu olursunuz. Hesabınıza yetkisiz erişim olduğundan şüphelenirseniz lütfen bizi derhal bilgilendiriniz."
+    },
+    "section4": {
+      "title": "4. Abonelik ve Ödeme",
+      "intro": "SmartSRT tek bir abonelik planı sunar. Tüm ödemeler ödeme sağlayıcımız (Paddle) üzerinden güvenli şekilde işlenir. Ücretler aylık olarak USD cinsinden faturalandırılır.",
+      "items": [
+        "Abonelikler iptal edilmedikçe otomatik olarak yenilenir",
+        "İptal sonrası hizmet erişimi, mevcut faturalama döneminin sonuna kadar devam eder",
+        "Fiyat değişiklikleri, geçerli fatura dönemi boyunca aktif aboneleri etkilemez"
+      ]
+    },
+    "section5": {
+      "title": "5. İptal ve İadeler",
+      "content": "Aboneliğinizi istediğiniz zaman hesap ayarları üzerinden iptal edebilirsiniz. İptal sonrasında, mevcut fatura döneminizin sonuna kadar tüm özelliklere erişiminiz devam eder."
+    },
+    "section6": {
+      "title": "6. Fikri Mülkiyet",
+      "content": "SmartSRT platformu; yazılım, tasarımlar, logolar ve içerikler dahil olmak üzere fikri mülkiyet haklarıyla korunur. SmartSRT kullanarak oluşturduğunuz içerikler (oluşturulan altyazılar dahil) size aittir. İçeriğinizi yalnızca hizmetlerimizi sunmak amacıyla işleriz ve materyalleriniz üzerinde mülkiyet iddiasında bulunmayız."
+    },
+    "section7": {
+      "title": "7. Gizlilik ve Veri İşleme",
+      "intro": "Kişisel verilerinizi yalnızca hizmeti sunmak amacıyla toplar ve işleriz. Video ve ses içeriğiniz, altyazı oluşturma ve çeviri amacıyla yapay zeka hizmet sağlayıcıları (OpenAI, Anthropic veya benzeri) ile paylaşılabilir.",
+      "items": [
+        "Veriler yalnızca hizmet sunumu için işlenir ve yapay zeka sağlayıcıları tarafından kalıcı olarak saklanmaz",
+        "Kişisel bilgilerinizi üçüncü taraflara satmayız",
+        "Ayrıntılı bilgiler için lütfen Gizlilik Politikamızı inceleyin"
+      ]
+    },
+    "section8": {
+      "title": "8. Hizmet Sınırlamaları",
+      "content": "SmartSRT, 'olduğu gibi' sunulur. Doğruluk için çaba göstersek de, yapay zeka tarafından oluşturulan altyazılar hatalar içerebilir ve yayınlanmadan önce gözden geçirilmelidir. Makul kontrolümüz dışındaki hizmet kesintileri, veri kaybı, hatalı çeviriler veya teknik sorunlardan kaynaklanan zararlardan sorumlu değiliz."
+    },
+    "section9": {
+      "title": "9. Yasaklı Faaliyetler",
+      "intro": "Kullanıcılar aşağıdakileri yapamaz:",
+      "items": [
+        "Fikri mülkiyet haklarını ihlal eden içerik yüklemek",
+        "Kullanım limitlerini veya erişim kısıtlamalarını aşmaya çalışmak",
+        "Zararlı, yasa dışı veya saldırgan içerik üretmek için hizmeti kullanmak",
+        "Hesap kimlik bilgilerini veya erişimi yetkisiz kişilerle paylaşmak"
+      ]
+    },
+    "section10": {
+      "title": "10. Hizmette Değişiklikler",
+      "content": "SmartSRT, hizmet özelliklerini, fiyatlandırma yapılarını ve hizmet şartlarını dilediği zaman değiştirme hakkını saklı tutar. Önemli değişiklikler önceden e-posta veya platform bildirimiyle iletilir. Değişikliklerden sonra hizmetin kullanılmaya devam edilmesi, güncellenmiş şartların kabulü anlamına gelir."
+    },
+    "section11": {
+      "title": "11. Hesap Sonlandırma",
+      "content": "Bu şartları ihlal eden hesapları önceden bildirimde bulunmaksızın askıya alma veya sonlandırma hakkını saklı tutarız. Kullanıcılar hesap ayarları üzerinden veya destek ekibimize veri silme talebi göndererek hesaplarını diledikleri zaman silebilir."
+    },
+    "section12": {
+      "title": "12. Geçerli Hukuk",
+      "content": "Bu şartlar, geçerli hukuk kurallarına uygun şekilde yönetilir ve yorumlanır. Bu şartlardan veya hizmetin kullanımından doğan uyuşmazlıklar, ilgili yasal merciler nezdinde çözümlenir."
+    },
+    "section13": {
+      "title": "13. İletişim Bilgileri",
+      "intro": "Bu şartlarla ilgili soru, endişe veya destek talepleriniz için bizimle şu kanaldan iletişime geçebilirsiniz:",
+      "email": "support@smartsrt.com"
+    },
+    "section14": {
+      "title": "14. Yürürlük Tarihi",
+      "content": "Bu şartlar, SmartSRT'yi ilk kez kullanmanızla birlikte yürürlüğe girer ve hesabınız silinene veya sonlandırılana kadar yürürlükte kalır."
+    }
+  },
+  "App": {
+    "proBadge": {
+      "plan": "Pro Plan",
+      "daysLeft": "({days} gün kaldı)"
+    },
+    "freeBadge": {
+      "text": "Ücretsiz Plan • Pro'ya Geç"
+    },
+    "fileUpload": {
+      "title": "Dosya yükle",
+      "dragDropPro": "Dosyanızı buraya sürükleyin (mp4, mp3, wav) veya yüklemek için tıklayın",
+      "dragDropFree": "Dosyanızı buraya sürükleyin (mp4, mp3) veya yüklemek için tıklayın",
+      "dropIt": "Bırak",
+      "clickOrDrag": "Tıkla veya dosya sürükle",
+      "duration": "Süre",
+      "errors": {
+        "upgradeForWav": "WAV dosyaları yüklemek için Pro plana yükseltme yapmanız gerekiyor.",
+        "fileSizeExceeds": "Dosya boyutu 24MB limitini aşıyor.",
+        "durationExceeds": "Dosya süresi limiti aşıyor. Planınız için maksimum süre {maxDuration} saniyedir.",
+        "metadataFailed": "Medya meta verileri okunamadı. Lütfen farklı bir dosya deneyin.",
+        "fileTypeNotSupported": "Bu dosya türü desteklenmiyor. Sadece mp4, mp3 ve wav dosyaları kabul edilir.",
+        "genericError": "Bir hata oluştu. Lütfen daha sonra tekrar deneyin veya destek ekibiyle iletişime geçin."
+      }
+    },
+    "subtitleForm": {
+      "generating": "Oluşturuluyor",
+      "wordsPerLine": "Satır başına kelime",
+      "wordsPerLineOption": "Satır başına {count} kelime",
+      "includePunctuation": "Noktalama işaretleri dahil et",
+      "punctuationTooltip": "Etkinleştirildiğinde, noktalama işaretleri (.,!?) oluşturulan SRT dosyasına dahil edilecektir.",
+      "considerPunctuation": "Satır kırılmalarında noktalama işaretlerini dikkate al",
+      "considerPunctuationTooltip": "Etkinleştirildiğinde, satırları bölerken noktalama işaretleri dikkate alınacaktır. Bu, doğal okuma akışını ve doğru cümle yapısını korumanıza yardımcı olur.",
+      "generatingButton": "Oluşturuluyor...",
+      "generateButton": "SRT Dosyası Oluştur",
+      "usageLimitReached": "Aylık kullanım limitinize ulaştınız.",
+      "srtSuccess": "SRT başarıyla oluşturuldu",
+      "error": "Bir hata oluştu. Lütfen daha sonra tekrar deneyin veya destek ekibiyle iletişime geçin."
+    },
+    "footer": {
+      "copyright": "Telif Hakkı © {year} SmartSRT, Tüm hakları saklıdır"
+    },
+    "header": {
+      "profile": {
+        "undefined": "Tanımsız",
+        "logoutSuccess": "Başarıyla çıkış yapıldı",
+        "logoutError": "Çıkış yapılamadı. Lütfen tekrar deneyin veya destek ekibiyle iletişime geçin.",
+        "loggingOut": "Çıkış yapılıyor...",
+        "logout": "Çıkış yap"
+      },
+      "menu": {
+        "profile": "Profil",
+        "app": "Uygulama",
+        "subscription": "Abonelik",
+        "api": "API",
+        "home": "Ana Sayfa"
+      }
+    },
+    "profile": {
+      "header": {
+        "title": "Profil Ayarları",
+        "subtitle": "Hesap ayarlarınızı yönetin ve güncelleyin"
+      },
+      "subscription": {
+        "title": "Mevcut Plan",
+        "limit": "Ayda {limit} dakika yükleme limiti",
+        "daysRemaining": "{days} gün kaldı",
+        "manageSubscription": "Aboneliği Yönet",
+        "customerPortal": "Müşteri Portalı",
+        "opening": "Açılıyor...",
+        "monthlyUsage": "Aylık Kullanım",
+        "minutes": "dakika",
+        "usage": "{usage}/{limit}",
+        "error": "Bir hata oluştu. Lütfen daha sonra tekrar deneyin veya destek ekibiyle iletişime geçin."
+      },
+      "account": {
+        "title": "Hesap Yönetimi",
+        "changePassword": "Şifre Değiştir",
+        "update": "Güncelle",
+        "sending": "Gönderiliyor...",
+        "deleteAccount": "Hesabı Sil",
+        "deleteWarning": "Bu işlem geri alınamaz",
+        "processing": "İşleniyor...",
+        "passwordEmailSuccess": "Yeni şifre kurulum e-postası başarıyla gönderildi. Lütfen gelen kutunuzu kontrol edin.",
+        "passwordEmailError": "Yeni şifre kurulum e-postası gönderilemedi. Lütfen tekrar deneyin veya destek ekibiyle iletişime geçin.",
+        "deleteSuccess": "Hesap silme talebi başarıyla gönderildi. Lütfen e-postanızı kontrol edin.",
+        "deleteError": "Hesap silme talebi gönderilemedi"
+      },
+      "history": {
+        "title": "SRT Dosyaları Geçmişi",
+        "summary": "{count} dosya, toplamda {minutes} dakika",
+        "searchPlaceholder": "SRT dosyalarını ara",
+        "retrying": "Yeniden deneniyor...",
+        "retry": "Tekrar Dene",
+        "noFiles": "Dosya bulunamadı",
+        "error": "SRT dosya geçmişi alınırken bir hata oluştu. Lütfen tekrar deneyin veya destek ekibiyle iletişime geçin.",
+        "table": {
+          "fileName": "Dosya Adı",
+          "duration": "Süre",
+          "uploadDate": "Yükleme Tarihi",
+          "action": "İşlem"
+        },
+        "duration": {
+          "seconds": "{count} saniye",
+          "minutes": "{count} dakika"
+        }
+      }
+    },
+    "subscription": {
+      "header": {
+        "title": "Abonelik",
+        "subtitle": "Abonelik ve fatura bilgilerinizi yönetin"
+      }
+    }
+  }
+}

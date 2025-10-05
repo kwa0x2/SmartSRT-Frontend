@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginAction } from "@/action/auth-action";
 import { toast } from "sonner";
-import { LoginFormData, loginSchema } from "@/schemas/login.schema";
+import { LoginFormData, getLoginSchema } from "@/schemas/login.schema";
 import {credentialsLogin} from "@/app/api/services/auth.service";
 import { APP_ROUTES } from "@/config/routes";
 import {
@@ -19,13 +19,16 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { useTranslations } from "next-intl";
 
 const LoginForm = () => {
   const [isPending, setIsPending] = useState(false);
   const router = useRouter();
+  const t = useTranslations('Auth.login.form');
+  const tValidation = useTranslations('Auth.login.validation');
 
   const form = useForm<LoginFormData>({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(getLoginSchema(tValidation)),
     mode: "onChange",
     defaultValues: {
       email: "",
@@ -56,16 +59,14 @@ const LoginForm = () => {
 
         if (loginResult) {
           form.reset();
-          toast.success("Login successful!");
+          toast.success(t('loginSuccess'));
           router.push(APP_ROUTES.APP);
         } else {
-          toast.error(
-              "An error occurred. Please try again later or contact support."
-          );
+          toast.error(t('loginError'));
         }
       }
     } catch (err: any) {
-      toast.error(err.response?.data?.message || "An error occurred while logging. Please try again.");
+      toast.error(err.response?.data?.message || t('loginError'));
     } finally {
       setIsPending(false);
     }
@@ -80,12 +81,12 @@ const LoginForm = () => {
               name="email"
               render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel>{t('email')}</FormLabel>
                     <FormControl>
                       <Input
                           size="lg"
                           type="email"
-                          placeholder="example@email.com"
+                          placeholder={t('emailPlaceholder')}
                           disabled={isPending}
                           autoComplete="email"
                           {...field}
@@ -101,11 +102,11 @@ const LoginForm = () => {
               name="password"
               render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel>{t('password')}</FormLabel>
                     <FormControl>
                       <PasswordInput
                           size="lg"
-                          placeholder="••••••••"
+                          placeholder={t('passwordPlaceholder')}
                           disabled={isPending}
                           autoComplete="current-password"
                           {...field}
@@ -121,17 +122,17 @@ const LoginForm = () => {
                 href="/auth/forgot-password"
                 className="text-sm text-default-800 dark:text-default-400 leading-6 font-medium"
             >
-              Forgot Password?
+              {t('forgotPassword')}
             </Link>
           </div>
 
           <LoadingButton
               type="submit"
               loading={isPending}
-              loadingText="Logging in..."
+              loadingText={t('loggingIn')}
               className="mt-6 w-full"
           >
-            Login
+            {t('loginButton')}
           </LoadingButton>
         </form>
       </Form>

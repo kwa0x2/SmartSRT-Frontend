@@ -10,12 +10,39 @@ export interface PricingPlan {
   features: string[];
 }
 
-const freeUploadLimitMinutes = Math.floor(
+export const freeUploadLimitMinutes = Math.floor(
   Number(process.env.NEXT_PUBLIC_FREE_UPLOAD_LIMIT_SECONDS || 600) / 60
 );
-const proUploadLimitMinutes = Math.floor(
+export const proUploadLimitMinutes = Math.floor(
   Number(process.env.NEXT_PUBLIC_PRO_UPLOAD_LIMIT_SECONDS || 4500) / 60
 );
+
+export const getStaticPricingPlans = (t: any): PricingPlan[] => [
+  {
+    name: "free",
+    description: t('plans.free.description'),
+    price: { monthly: 0 },
+    features: [
+      t('plans.free.features.uploadLimit', { minutes: freeUploadLimitMinutes }),
+      t('plans.free.features.aiPowered'),
+      t('plans.free.features.maxDuration'),
+      t('plans.free.features.fileSupport'),
+      t('plans.free.features.languageSupport'),
+    ],
+  },
+  {
+    name: "pro",
+    description: t('plans.pro.description'),
+    price: { monthly: 0 },
+    features: [
+      t('plans.pro.features.uploadLimit', { minutes: proUploadLimitMinutes }),
+      t('plans.pro.features.aiPowered'),
+      t('plans.pro.features.maxDuration'),
+      t('plans.pro.features.fileSupport'),
+      t('plans.pro.features.languageSupport'),
+    ],
+  },
+];
 
 export const staticPricingPlans: PricingPlan[] = [
   {
@@ -50,14 +77,13 @@ export const getPricingPlans = async (): Promise<PricingPlan[]> => {
     const proPriceAmount = proPriceResponse.data.unit_price.amount;
 
     return [
-      staticPricingPlans[0], 
+      staticPricingPlans[0],
       {
         ...staticPricingPlans[1],
         price: { monthly: proPriceAmount }
       }
     ];
   } catch (error) {
-    console.error('Error fetching pro price:', error);
     return staticPricingPlans;
   }
 };

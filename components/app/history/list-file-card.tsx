@@ -14,17 +14,19 @@ import {
 import srt from "@/public/images/files/srt.png";
 import Image from "next/image";
 import { type File } from "@/components/app/history";
+import { useTranslations } from "next-intl";
 
 const ListFileCard = ({ files }: { files: File[] }) => {
+  const t = useTranslations("App.profile.history");
   return (
     <div className="w-full h-[calc(100vh-180px)] overflow-auto no-scrollbar p-6">
       <Table>
         <TableHeader className="bg-background sticky top-0">
           <TableRow>
-            <TableHead className="w-[50%] font-semibold">File Name</TableHead>
-            <TableHead className="w-[20%] whitespace-nowrap">Duration</TableHead>
-            <TableHead className="w-[20%] whitespace-nowrap">Upload Date</TableHead>
-            <TableHead className="w-[10%] text-end">Action</TableHead>
+            <TableHead className="w-[50%] font-semibold">{t("table.fileName")}</TableHead>
+            <TableHead className="w-[20%] whitespace-nowrap">{t("table.duration")}</TableHead>
+            <TableHead className="w-[20%] whitespace-nowrap">{t("table.uploadDate")}</TableHead>
+            <TableHead className="w-[10%] text-end">{t("table.action")}</TableHead>
           </TableRow>
         </TableHeader>
 
