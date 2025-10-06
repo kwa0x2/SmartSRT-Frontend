@@ -33,6 +33,7 @@ const PricingCardContent = ({ plan }: PricingCardProps) => {
   const pathname = usePathname();
   const [loading, setLoading] = useState(false);
   const t = useTranslations('Pricing.buttons');
+  const tCommon = useTranslations('Pricing');
 
   const handleCustomerPortalRedirect = async () => {
     setLoading(true);
@@ -110,7 +111,7 @@ const PricingCardContent = ({ plan }: PricingCardProps) => {
             <span className="text-3xl md:text-4xl font-bold">
               ${plan.price.monthly}
             </span>
-              <span className="text-neutral-500 mb-1">/mo</span>
+              <span className="text-neutral-500 mb-1">/{tCommon('perMonth')}</span>
             </div>
           </div>
 

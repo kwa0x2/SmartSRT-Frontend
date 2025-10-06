@@ -15,21 +15,22 @@ const PricingCards = () => {
     const fetchPricing = async () => {
       try {
         const plans = await getPricingPlans();
+        const staticPlansData = getStaticPricingPlans(t);
         const translatedPlans = plans.map((plan, index) => ({
           ...plan,
-          description: staticPlans[index].description,
-          features: staticPlans[index].features,
+          description: staticPlansData[index].description,
+          features: staticPlansData[index].features,
         }));
         setPricingPlans(translatedPlans);
       } catch (error) {
-        setPricingPlans(staticPlans);
+        setPricingPlans(getStaticPricingPlans(t));
       } finally {
         setLoading(false);
       }
     };
 
     fetchPricing();
-  }, [staticPlans]);
+  }, [t]);
 
   return (
     <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
