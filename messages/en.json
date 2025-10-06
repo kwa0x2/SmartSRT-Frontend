@@ -33,6 +33,7 @@
   "Pricing": {
     "heading": "Pricing",
     "description": "Choose the perfect plan for your subtitle generation needs",
+    "perMonth": "mo",
     "plans": {
       "free": {
         "name": "Free",

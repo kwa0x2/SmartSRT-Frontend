@@ -33,6 +33,7 @@
   "Pricing": {
     "heading": "Fiyatlandırma",
     "description": "Altyazı oluşturma ihtiyaçlarınız için mükemmel planı seçin",
+    "perMonth": "ay",
     "plans": {
       "free": {
         "name": "Ücretsiz",
