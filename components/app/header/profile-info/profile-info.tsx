@@ -52,7 +52,7 @@ const ProfileInfoContent = () => {
           await logoutAction();
           window.location.replace("/");
         } catch (error) {
-          console.error('Auto logout failed:', error);
+          toast.error(t("logoutError"));
         }
       }
     };

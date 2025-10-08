@@ -3,7 +3,14 @@
 import Layout from "@/components/home/layout";
 import Loader from "@/components/loader";
 import { useCheckAuth } from "@/hooks/use-check-auth";
+import { Metadata } from "next";
 import { useTranslations } from "next-intl";
+
+export const metedata: Metadata = { 
+  title: "Privacy Policy - SmartSRT",
+  description: "Read SmartSRT's Privacy Policy to understand how we collect, use, and protect your personal data while providing our AI-powered subtitle generation services.",
+  keywords: "Privacy Policy, Data Protection, User Privacy, SmartSRT, AI Subtitle Generator, Personal Data, GDPR, CCPA",
+}
 
 export default function Privacy() {
   const { isLoading, isAuthenticated } = useCheckAuth();
