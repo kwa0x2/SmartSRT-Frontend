@@ -2,6 +2,61 @@
   "Index": {
     "title": "Merhaba dünya!"
   },
+  "Metadata": {
+    "default": "SmartSRT - Yapay Zeka Destekli Altyazı Oluşturucu",
+    "description": "İleri düzey yapay zeka teknolojisi ile videolarınız için otomatik olarak doğru altyazılar oluşturun. Hızlı, güvenilir ve çok dilli altyazı oluşturma.",
+    "keywords": "altyazı oluşturucu, yapay zeka altyazı, otomatik altyazı, video altyazısı, SRT oluşturucu, başlık oluşturucu, çok dilli altyazılar, SmartSRT, yapay zeka destekli transkripsiyon",
+    "pages": {
+      "home": {
+        "title": "Ana Sayfa",
+        "description": "İleri düzey yapay zeka teknolojisi ile videolarınız için otomatik olarak doğru altyazılar oluşturun"
+      },
+      "app": {
+        "title": "Uygulama",
+        "description": "Videolarınızı yükleyin ve yapay zeka ile profesyonel SRT altyazıları oluşturun"
+      },
+      "profile": {
+        "title": "Profil",
+        "description": "Hesap ayarlarınızı yönetin ve SRT dosya geçmişinizi görüntüleyin"
+      },
+      "subscription": {
+        "title": "Abonelik",
+        "description": "Abonelik ve fatura bilgilerinizi yönetin"
+      },
+      "api": {
+        "title": "API",
+        "description": "SmartSRT API belgelerine erişin ve API anahtarlarınızı yönetin"
+      },
+      "login": {
+        "title": "Giriş Yap",
+        "description": "SmartSRT hesabınıza giriş yapın"
+      },
+      "register": {
+        "title": "Kayıt Ol",
+        "description": "Yeni bir SmartSRT hesabı oluşturun"
+      },
+      "forgotPassword": {
+        "title": "Şifremi Unuttum",
+        "description": "SmartSRT hesap şifrenizi sıfırlayın"
+      },
+      "resetPassword": {
+        "title": "Şifre Sıfırla",
+        "description": "Yeni şifrenizi belirleyin"
+      },
+      "privacy": {
+        "title": "Gizlilik Politikası",
+        "description": "Gizlilik politikamızı okuyun ve verilerinizi nasıl koruduğumuzu öğrenin"
+      },
+      "terms": {
+        "title": "Hizmet Şartları",
+        "description": "Hizmet şartlarımızı okuyun"
+      },
+      "refund": {
+        "title": "İade Politikası",
+        "description": "İade politikamızı okuyun"
+      }
+    }
+  },
   "Hero": {
     "title": "Yapay zeka destekli teknoloji ile hızlıca yüksek kaliteli SRT dosyaları oluşturun",
     "description": "Yüksek kaliteli, mükemmel zamanlanmış altyazıları otomatik olarak oluşturarak zaman kazanın.",

@@ -20,10 +20,63 @@ import { locales } from "@/config";
 import LocaleCookieSync from "@/components/locale-cookie-sync";
 
 
-export const metadata: Metadata = {
-  title: "SmartSRT - AI Powered Subtitle Generator",
-  description: "Created by kwa0x2",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const messages = await getMessages({ locale });
+  const t = messages.Metadata as any;
+
+  return {
+    title: {
+      default: t?.default || "SmartSRT - AI Powered Subtitle Generator",
+      template: "%s - SmartSRT",
+    },
+    description: t?.description || "Generate accurate subtitles for your videos automatically using advanced AI technology. Fast, reliable, and multilingual subtitle generation by kwa0x2.",
+    keywords: t?.keywords || "subtitle generator, AI subtitles, automatic subtitles, video subtitles, SRT generator, caption generator, multilingual subtitles, SmartSRT, AI-powered transcription",
+    authors: [{ name: "SmartSRT" }],
+    creator: "kwa0x2",
+    publisher: "SmartSRT",
+    metadataBase: new URL("https://smartsrt.com"),
+    openGraph: {
+      type: "website",
+      locale: locale === 'tr' ? 'tr_TR' : 'en_US',
+      url: "https://smartsrt.com",
+      siteName: "SmartSRT",
+      title: t?.default || "SmartSRT - AI Powered Subtitle Generator",
+      description: t?.description || "Generate accurate subtitles for your videos automatically using advanced AI technology. Fast, reliable, and multilingual subtitle generation.",
+      images: [
+        {
+          url: "https://smartsrt.com/opengraph-image.png",
+          width: 1200,
+          height: 630,
+          alt: t?.default || "SmartSRT - AI Powered Subtitle Generator",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t?.default || "SmartSRT - AI Powered Subtitle Generator",
+      description: t?.description || "Generate accurate subtitles for your videos automatically using advanced AI technology. Fast, reliable, and multilingual subtitle generation.",
+      images: ["https://smartsrt.com/opengraph-image.png"],
+      creator: "@kwa0x2",
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
+  };
+}
+
 
 export default async function RootLayout({
                                            children,

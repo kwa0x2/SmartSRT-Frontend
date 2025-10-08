@@ -2,6 +2,61 @@
   "Index": {
     "title": "Hello world!"
   },
+  "Metadata": {
+    "default": "SmartSRT - AI Powered Subtitle Generator",
+    "description": "Generate accurate subtitles for your videos automatically using advanced AI technology. Fast, reliable, and multilingual subtitle generation.",
+    "keywords": "subtitle generator, AI subtitles, automatic subtitles, video subtitles, SRT generator, caption generator, multilingual subtitles, SmartSRT, AI-powered transcription",
+    "pages": {
+      "home": {
+        "title": "Home",
+        "description": "Generate accurate subtitles for your videos automatically using advanced AI technology"
+      },
+      "app": {
+        "title": "App",
+        "description": "Upload your videos and generate professional SRT subtitles with AI"
+      },
+      "profile": {
+        "title": "Profile",
+        "description": "Manage your account settings and view your SRT file history"
+      },
+      "subscription": {
+        "title": "Subscription",
+        "description": "Manage your subscription and billing information"
+      },
+      "api": {
+        "title": "API",
+        "description": "Access SmartSRT API documentation and manage your API keys"
+      },
+      "login": {
+        "title": "Login",
+        "description": "Login to your SmartSRT account"
+      },
+      "register": {
+        "title": "Register",
+        "description": "Create a new SmartSRT account"
+      },
+      "forgotPassword": {
+        "title": "Forgot Password",
+        "description": "Reset your SmartSRT account password"
+      },
+      "resetPassword": {
+        "title": "Reset Password",
+        "description": "Set your new password"
+      },
+      "privacy": {
+        "title": "Privacy Policy",
+        "description": "Read our privacy policy and learn how we protect your data"
+      },
+      "terms": {
+        "title": "Terms of Service",
+        "description": "Read our terms of service"
+      },
+      "refund": {
+        "title": "Refund Policy",
+        "description": "Read our refund policy"
+      }
+    }
+  },
   "Hero": {
     "title": "Create high-quality SRT files quickly with AI-powered technology",
     "description": "Save time by automatically generating high-quality, perfectly timed subtitles.",
