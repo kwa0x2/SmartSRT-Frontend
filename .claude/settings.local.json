@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Bash(del use-auth.ts)"
+      "Bash(del use-auth.ts)",
+      "Read(//c/Users/alper/Desktop/Projects/taskpricer_web/app/[lang]/**)",
+      "Read(//c/Users/alper/Desktop/Projects/taskpricer_web/**)",
+      "Bash(ls:*)"
     ],
     "deny": [],
     "ask": []
