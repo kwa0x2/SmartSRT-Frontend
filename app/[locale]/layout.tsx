@@ -32,7 +32,7 @@ export async function generateMetadata({
   return {
     title: {
       default: t?.default || "SmartSRT - AI Powered Subtitle Generator",
-      template: "2 - SmartSRT",
+      template: "%s - SmartSRT",
     },
     description: t?.description || "Generate accurate subtitles for your videos automatically using advanced AI technology. Fast, reliable, and multilingual subtitle generation by kwa0x2.",
     keywords: t?.keywords || "subtitle generator, AI subtitles, automatic subtitles, video subtitles, SRT generator, caption generator, multilingual subtitles, SmartSRT, AI-powered transcription",
