@@ -12,8 +12,7 @@ export async function generateMetadata({
   const t = messages.Metadata as any;
 
   return {
-    title: t?.pages?.subscription?.title || "Subscription",
-    description: t?.pages?.subscription?.description || "Manage your subscription and billing information",
+    title: `${t?.pages?.subscription?.title || "Subscription"} - SmartSRT`,
   };
 }
 

@@ -12,11 +12,11 @@ export async function generateMetadata({
   const t = messages.Metadata as any;
 
   return {
-    title: t?.pages?.app?.title || "App",
+    title: `${t?.pages?.profile?.title || "Profile"} - SmartSRT`,
   };
 }
 
-export default function AppLayout({
+export default function ProfileLayout({
   children,
 }: {
   children: ReactNode;
