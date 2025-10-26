@@ -12,7 +12,7 @@ export async function generateMetadata({
   const t = messages.Metadata as any;
 
   return {
-    title: t?.pages?.app?.title || "App",
+    title: t?.pages?.app?.title || "Application",
   };
 }
 
