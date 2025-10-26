@@ -39,7 +39,7 @@ export async function generateMetadata({
     authors: [{ name: "SmartSRT" }],
     creator: "kwa0x2",
     publisher: "SmartSRT",
-    metadataBase: new URL("https://smartsrt.com"),
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://smartsrt.com"),
     openGraph: {
       type: "website",
       locale: locale === 'tr' ? 'tr_TR' : 'en_US',
