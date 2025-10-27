@@ -32,13 +32,16 @@ const OtpPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const t = useTranslations('Auth.register');
+  const tVerify = useTranslations('Auth.verify');
+
   useEffect(() => {
     const fetchToken = async () => {
       const token = await getCookieServer("token");
       setIsLoading(false);
       setToken(token);
     };
-    
+
     fetchToken();
   }, []);
 
@@ -49,9 +52,6 @@ const OtpPage = () => {
   if (!token) {
     return <UnauthorizedError />;
   }
-
-  const t = useTranslations('Auth.register');
-  const tVerify = useTranslations('Auth.verify');
 
   const handleStepTwo = async (data: RegisterStepTwoData) => {
     if (isSubmitting) return;
