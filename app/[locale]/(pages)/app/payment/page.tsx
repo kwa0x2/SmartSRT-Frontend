@@ -36,8 +36,8 @@ export default function PaymentPage() {
   useEffect(() => {
     if (mounted && returnUrl && !paddle && isAuthenticated && session?.user?.email) {
       initializePaddle({
-        token: "live_2d00feac42fa12f65ae766f1eac",
-        environment: "sandbox",
+        token: process.env.NEXT_PUBLIC_PADDLE_TOKEN as string,
+        environment: process.env.NEXT_PUBLIC_PADDLE_ENVIRONMENT as string === "sandbox" ? "sandbox" : "production",
         eventCallback: (event) => {
           if (event.data && event.name) {
             setCheckoutData(event.data);
