@@ -37,7 +37,7 @@ export default function PaymentPage() {
     if (mounted && returnUrl && !paddle && isAuthenticated && session?.user?.email) {
       initializePaddle({
         token: process.env.NEXT_PUBLIC_PADDLE_TOKEN as string,
-        environment: "sandbox",
+        environment: process.env.NEXT_PUBLIC_PADDLE_ENVIRONMENT as string === "sandbox" ? "sandbox" : "production",
         eventCallback: (event) => {
           if (event.data && event.name) {
             setCheckoutData(event.data);
