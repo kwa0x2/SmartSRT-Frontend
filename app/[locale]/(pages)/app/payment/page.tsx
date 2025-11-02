@@ -59,6 +59,7 @@ export default function PaymentPage() {
       }).then((paddleInstance) => {
         if (paddleInstance && session.user.email) {
           setPaddle(paddleInstance);
+          console.log("Opening Paddle checkout for user:", session.user.id);
           paddleInstance.Checkout.open({
             items: [{ priceId: process.env.NEXT_PUBLIC_PADDLE_PRICE_ID as string, quantity: 1 }],
             customData: {
